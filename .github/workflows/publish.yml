@@ -20,13 +20,13 @@ jobs:
           dotnet-version: 8.x.x
  
       - name: Restore dependencies
-        run: dotnet restore src/SnowyRiver.WPF.sln
+        run: dotnet restore src/SnowyRiver.sln
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore src/SnowyRiver.WPF.sln
+        run: dotnet build --configuration Release --no-restore src/SnowyRiver.sln
     
       - name: Create the package
-        run: dotnet pack --output artifacts src/SnowyRiver.WPF.sln 
+        run: dotnet pack --output artifacts src/SnowyRiver.sln 
    
       - name: Publish the package to Github Packages
         run: dotnet nuget push artifacts/*.nupkg  --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}} --skip-duplicate

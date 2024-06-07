@@ -19,13 +19,7 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.x.x
-
-      - name: Remove Examples
-        run: dotnet sln **/*.sln remove (ls -r Examples/**/*.csproj)
-
-      - name: Remove Tests
-        run: dotnet sln **/*.sln remove (ls -r Tests/**/*.csproj)
-
+ 
       - name: Restore dependencies
         run: dotnet restore **/*.sln
 

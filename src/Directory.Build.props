@@ -5,8 +5,8 @@
     <Product>SnowyRiver</Product>
     <Copyright>Copyright 2024 (c) Libawai.com</Copyright>
     <ProjectUrl>https://github.com/zhuzixian/SnowyRiver</ProjectUrl>
-    <License>MIT<License>
-   <LangVersion>latest</LangVersion>
+
+    <LangVersion>latest</LangVersion> 
   </PropertyGroup>
 
 </Project>

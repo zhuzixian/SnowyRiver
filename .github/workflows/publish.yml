@@ -5,7 +5,6 @@ on:
     tags:
       - 'v*.*.*'
 
-
 jobs:
   publish:
     runs-on: windows-latest
@@ -21,13 +20,13 @@ jobs:
           dotnet-version: 8.x.x
  
       - name: Restore dependencies
-        run: dotnet restore **/*.csproj
+        run: dotnet restore src/SnowyRiver.WPF.sln
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore **/*.sln
+        run: dotnet build --configuration Release --no-restore src/SnowyRiver.WPF.sln
     
       - name: Create the package
-        run: dotnet pack -c Release **/*.sln
+        run: dotnet pack --output artifacts src/SnowyRiver.WPF.sln 
    
       - name: Publish the package to Github Packages
-        run: dotnet nuget push bin/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}} --skip-duplicate
+        run: dotnet nuget push artifacts/*.nupkg  --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}} --skip-duplicate

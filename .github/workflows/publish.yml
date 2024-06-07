@@ -21,7 +21,7 @@ jobs:
           dotnet-version: 8.x.x
  
       - name: Restore dependencies
-        run: dotnet restore **/*.sln
+        run: dotnet restore **/*.csproj
 
       - name: Build
         run: dotnet build --configuration Release --no-restore **/*.sln

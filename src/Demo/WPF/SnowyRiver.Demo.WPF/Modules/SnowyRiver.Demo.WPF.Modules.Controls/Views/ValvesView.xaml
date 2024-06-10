@@ -9,6 +9,7 @@
             <Setter Property="Margin" Value="32"/>
             <Setter Property="Height" Value="200"/>
             <Setter Property="Width" Value="200"/>
+            <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="BlockBrush" Value="{DynamicResource MaterialDesign.Brush.Primary.Light.Foreground}" />
             <Setter Property="UnblockBrush" Value="{DynamicResource MaterialDesign.Brush.Primary}"/>
         </Style>

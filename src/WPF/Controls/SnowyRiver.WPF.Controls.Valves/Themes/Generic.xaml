@@ -3,17 +3,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:SnowyRiver.WPF.Controls.Valves"
     xmlns:converters="clr-namespace:SnowyRiver.WPF.Controls.Valves.Converters">
-
+    <Style x:Key="ChannelBox" TargetType="Border">
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=controls:Valve}}"/>
+        <Setter Property="SnapsToDevicePixels" Value="{Binding SnapsToDevicePixels, RelativeSource={RelativeSource AncestorType=controls:Valve}}"/>
+    </Style>
+    <converters:ActualWidthToTrianglePointsConverter x:Key="ActualWidthToTrianglePointsConverter"/>
     <Style TargetType="{x:Type controls:ThreePortsValve}">
-        <Style.Resources>
-            <converters:ActualWidthToTrianglePointsConverter x:Key="ActualWidthToTrianglePointsConverter"/>
-            <Style x:Key="ChannelBox" TargetType="Border">
-                <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                <Setter Property="VerticalAlignment" Value="Stretch"/>
-                <Setter Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=controls:Valve}}"/>
-                <Setter Property="SnapsToDevicePixels" Value="{Binding SnapsToDevicePixels, RelativeSource={RelativeSource AncestorType=controls:Valve}}"/>
-            </Style>
-        </Style.Resources>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:Valve}">
@@ -64,7 +61,8 @@
                                     </MultiBinding>
                                 </Polygon.Points>
                             </Polygon>
-                            <Polygon x:Name="BottomTriangle" Fill="{TemplateBinding BlockBrush}">
+                            <Polygon x:Name="BottomTriangle" Stroke="{TemplateBinding BorderBrush}"
+                                     StrokeThickness="1">
                                 <Polygon.Points>
                                     <MultiBinding  Converter="{StaticResource ActualWidthToTrianglePointsConverter}"
                                                    ConverterParameter="{x:Static Dock.Bottom}">
@@ -101,18 +99,6 @@
     </Style>
 
     <Style TargetType="{x:Type controls:FivePortsValve}">
-        <Style.Resources>
-            <converters:ActualWidthToTrianglePointsConverter x:Key="ActualWidthToTrianglePointsConverter"/>
-            <Style x:Key="ChannelBox" TargetType="Border">
-                <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                <Setter Property="VerticalAlignment" Value="Stretch"/>
-                <Setter Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=controls:Valve}}"/>
-                <!--
-                <Setter Property="Background" Value="{Binding UnblockBrush, RelativeSource={RelativeSource AncestorType=controls:Valve}}"/>
-                -->
-                <Setter Property="SnapsToDevicePixels" Value="{Binding SnapsToDevicePixels, RelativeSource={RelativeSource AncestorType=controls:Valve}}"/>
-            </Style>
-        </Style.Resources>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:Valve}">
@@ -130,19 +116,21 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Border x:Name="TopBox" Grid.Column="2" Grid.Row="0"  Style="{StaticResource ChannelBox}" 
-                            BorderThickness="0, 0, 0, 0"  Background="{TemplateBinding UnblockBrush}"/>
+                            BorderThickness="1, 1, 1, 0"  Background="{TemplateBinding UnblockBrush}"
+                            BorderBrush="{TemplateBinding BorderBrush}"/>
                         <Border x:Name="LeftBox" Grid.Column="0" Grid.Row="1" Style="{StaticResource ChannelBox}"
-                            BorderThickness="0, 0, 0, 0"/>
+                            BorderThickness="1, 1, 0, 1"
+                            BorderBrush="{TemplateBinding BorderBrush}"/>
                         <Border x:Name="CenterBox" Grid.Column="2" Grid.Row="1" Style="{StaticResource ChannelBox}"
                                 BorderThickness="0, 0, 0, 0" Background="{TemplateBinding UnblockBrush}"/>
                         <Border x:Name="RightBox" Grid.Column="4" Grid.Row="1" Style="{StaticResource ChannelBox}"
-                            BorderThickness="0, 0, 0, 0"/>
+                            BorderThickness="0, 1, 1, 1"/>
                         <Border x:Name="BottomLeftBox" Grid.Column="1" Grid.Row="2" Style="{StaticResource ChannelBox}"
                                 BorderThickness="0, 0, 0, 0"/>
                         <Border x:Name="BottomRightBox" Grid.Column="3" Grid.Row="2" Style="{StaticResource ChannelBox}"
                                 BorderThickness="0, 0, 0, 0"/>
                         <Grid x:Name="StartGate" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <Polygon x:Name="StartTopTriangle"  Fill="{TemplateBinding UnblockBrush}">
+                            <Polygon x:Name="StartTopTriangle"  Stroke="{TemplateBinding BorderBrush}" StrokeThickness="1">
                                 <Polygon.Points>
                                     <MultiBinding  Converter="{StaticResource ActualWidthToTrianglePointsConverter}"
                                                ConverterParameter="{x:Static Dock.Top}">
@@ -180,7 +168,7 @@
                             </Polygon>
                         </Grid>
                         <Grid x:Name="EndGate" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <Polygon x:Name="EndTopTriangle"  Fill="{TemplateBinding UnblockBrush}">
+                            <Polygon x:Name="EndTopTriangle" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="1">
                                 <Polygon.Points>
                                     <MultiBinding  Converter="{StaticResource ActualWidthToTrianglePointsConverter}"
                        ConverterParameter="{x:Static Dock.Top}">
@@ -235,14 +223,16 @@
                             <Setter TargetName="RightTriangle" Property="Fill" Value="{Binding UnblockBrush, RelativeSource={RelativeSource AncestorType=controls:Valve}}"/>
                             -->
                         </Trigger>
-                        <!--
                         <Trigger Property="State" Value="Open">
-                            <Setter TargetName="LeftBox" Property="Background" Value="{Binding UnblockBrush, RelativeSource={RelativeSource AncestorType=controls:Valve}}"/>
-                            <Setter TargetName="LeftTriangle" Property="Fill" Value="{Binding UnblockBrush, RelativeSource={RelativeSource AncestorType=controls:Valve}}"/>
                             <Setter TargetName="RightBox" Property="Background" Value="{Binding BlockBrush, RelativeSource={RelativeSource AncestorType=controls:Valve}}"/>
-                            <Setter TargetName="RightTriangle" Property="Fill" Value="{Binding BlockBrush, RelativeSource={RelativeSource AncestorType=controls:Valve}}"/>
+                            <Setter TargetName="BottomRightBox" Property="Background" Value="{Binding BlockBrush, RelativeSource={RelativeSource AncestorType=controls:Valve}}"/>
+                            <Setter TargetName="BottomLeftBox" Property="Background" Value="{Binding UnblockBrush, RelativeSource={RelativeSource AncestorType=controls:Valve}}"/>
+
+                            <Setter TargetName="EndRightTriangle" Property="Fill" Value="{Binding BlockBrush, RelativeSource={RelativeSource AncestorType=controls:Valve}}"/>
+                            <Setter TargetName="EndBottomTriangle" Property="Fill" Value="{Binding BlockBrush, RelativeSource={RelativeSource AncestorType=controls:Valve}}"/>
+
+                            <Setter TargetName="StartBottomTriangle" Property="Fill" Value="{Binding UnblockBrush, RelativeSource={RelativeSource AncestorType=controls:Valve}}"/>
                         </Trigger>
-                        -->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

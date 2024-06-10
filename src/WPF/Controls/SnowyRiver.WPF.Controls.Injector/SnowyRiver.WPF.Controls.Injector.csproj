@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Version>1.0.0-Alpha.1</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MathConverter" Version="2.2.1" />
+  </ItemGroup>
+
+</Project>

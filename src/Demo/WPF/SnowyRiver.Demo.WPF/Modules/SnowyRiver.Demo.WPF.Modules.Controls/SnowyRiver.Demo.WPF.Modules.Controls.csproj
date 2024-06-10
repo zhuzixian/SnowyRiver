@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Version></Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\WPF\Controls\SnowyRiver.WPF.Controls.Injector\SnowyRiver.WPF.Controls.Injector.csproj" />
+    <ProjectReference Include="..\..\..\..\..\WPF\Controls\SnowyRiver.WPF.Controls.Valves\SnowyRiver.WPF.Controls.Valves.csproj" />
+    <ProjectReference Include="..\..\SnowyRiver.Demo.WPF.Core\SnowyRiver.Demo.WPF.Core.csproj" />
+    <ProjectReference Include="..\..\Services\SnowyRiver.Demo.WPF.Services.Interfaces\SnowyRiver.Demo.WPF.Services.Interfaces.csproj" />
+  </ItemGroup>
+</Project>

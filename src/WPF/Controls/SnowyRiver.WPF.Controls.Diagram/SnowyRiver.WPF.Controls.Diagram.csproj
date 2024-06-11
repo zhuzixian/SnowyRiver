@@ -8,4 +8,12 @@
     <Version>1.0.0-Alpha.1</Version>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Controls\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AIStudio.Wpf.DiagramDesigner" Version="1.1.7" />
+  </ItemGroup>
+
 </Project>

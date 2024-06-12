@@ -8,4 +8,8 @@
     <Version>1.0.0-Alpha.1</Version>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SnowyRiver.WPF.Controls.Diagram\SnowyRiver.WPF.Controls.Diagram.csproj" />
+  </ItemGroup>
+
 </Project>

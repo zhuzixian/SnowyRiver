@@ -5,6 +5,7 @@
              xmlns:injector="clr-namespace:SnowyRiver.WPF.Controls.Injector;assembly=SnowyRiver.WPF.Controls.Injector"
              xmlns:valves="clr-namespace:SnowyRiver.WPF.Controls.Valves;assembly=SnowyRiver.WPF.Controls.Valves"
              xmlns:math="http://hexinnovation.com/math"
+             xmlns:dd="https://gitee.com/akwkevin/aistudio.-wpf.-diagram"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <UserControl.Resources>
         <math:MathConverter x:Key="MathConverter"/>
@@ -45,6 +46,8 @@
         <Style TargetType="valves:ThreePortsValve" BasedOn="{StaticResource Valve}"/>
         <Style TargetType="valves:FivePortsValve" BasedOn="{StaticResource Valve}"/>
     </UserControl.Resources>
+    <dd:DiagramControl DataContext="{Binding DiagramVm}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+    <!--
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -134,4 +137,5 @@
             </StackPanel>
         </Grid>
     </Grid>
+    -->
 </UserControl>

@@ -12,6 +12,7 @@
     <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\WPF\Controls\SnowyRiver.WPF.Controls.Diagram\SnowyRiver.WPF.Controls.Diagram.csproj" />
     <ProjectReference Include="..\Modules\SnowyRiver.Demo.WPF.Modules.Controls\SnowyRiver.Demo.WPF.Modules.Controls.csproj" />
     <ProjectReference Include="..\SnowyRiver.Demo.WPF.Core\SnowyRiver.Demo.WPF.Core.csproj" />
     <ProjectReference Include="..\Services\SnowyRiver.Demo.WPF.Services.Interfaces\SnowyRiver.Demo.WPF.Services.Interfaces.csproj" />

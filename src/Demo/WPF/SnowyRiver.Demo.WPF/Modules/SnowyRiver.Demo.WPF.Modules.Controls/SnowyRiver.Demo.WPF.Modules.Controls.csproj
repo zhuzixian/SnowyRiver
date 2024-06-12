@@ -8,6 +8,7 @@
     <PackageReference Include="Prism.Wpf" Version="8.1.97" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\WPF\Controls\SnowyRiver.WPF.Controls.Diagram\SnowyRiver.WPF.Controls.Diagram.csproj" />
     <ProjectReference Include="..\..\..\..\..\WPF\Controls\SnowyRiver.WPF.Controls.Injector\SnowyRiver.WPF.Controls.Injector.csproj" />
     <ProjectReference Include="..\..\..\..\..\WPF\Controls\SnowyRiver.WPF.Controls.Valves\SnowyRiver.WPF.Controls.Valves.csproj" />
     <ProjectReference Include="..\..\SnowyRiver.Demo.WPF.Core\SnowyRiver.Demo.WPF.Core.csproj" />

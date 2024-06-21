@@ -4,7 +4,7 @@
     <Authors>Shady Joo</Authors>
     <Product>SnowyRiver</Product>
     <Copyright>Copyright 2024 (c) Libawai.com</Copyright>
-    <ProjectUrl>https://github.com/zhuzixian/SnowyRiver</ProjectUrl>
+    <PackageProjectUrl>https://github.com/zhuzixian/SnowyRiver</PackageProjectUrl>
 
     <LangVersion>latest</LangVersion> 
   </PropertyGroup>

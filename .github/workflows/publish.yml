@@ -17,6 +17,9 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.x.x
+
+      - name: Remove Demo
+        run: dotnet sln src/SnowyRiver.sln remove Demo
  
       - name: Restore dependencies
         run: dotnet restore src/SnowyRiver.sln

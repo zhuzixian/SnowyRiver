@@ -1,4 +1,4 @@
-﻿namespace Strawberry.Application.Contracts;
+﻿namespace SnowyRiver.Application.Contracts.Dtos;
 public interface IHasTotalCount
 {
     /// <summary>

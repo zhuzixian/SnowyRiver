@@ -1,8 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Strawberry.Application.Contracts;
+﻿namespace SnowyRiver.Application.Contracts.Dtos;
 public class PagedResultRequestDto:LimitedResultRequestDto
 {
-    [Range(0, int.MaxValue)]
     public virtual int SkipCount { get; set; }
 }

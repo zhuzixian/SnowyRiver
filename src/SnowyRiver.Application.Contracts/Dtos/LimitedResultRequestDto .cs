@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Strawberry.Application.Contracts;
+﻿namespace SnowyRiver.Application.Contracts.Dtos;
 public class LimitedResultRequestDto
 {
     /// <summary>
@@ -18,7 +16,6 @@ public class LimitedResultRequestDto
     /// Maximum result count should be returned.
     /// This is generally used to limit result count on paging.
     /// </summary>
-    [Range(1, int.MaxValue)]
     public virtual int MaxResultCount { get; set; } = DefaultMaxResultCount;
 
 }

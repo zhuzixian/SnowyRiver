@@ -1,4 +1,4 @@
-﻿namespace Strawberry.Application.Contracts;
+﻿namespace SnowyRiver.Application.Contracts.Dtos;
 
 public class PagedResultDto<T>:ListResultDto<T>,IPagedResult<T>
 {

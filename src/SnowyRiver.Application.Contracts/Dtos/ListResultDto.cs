@@ -1,4 +1,4 @@
-﻿namespace Strawberry.Application.Contracts;
+﻿namespace SnowyRiver.Application.Contracts.Dtos;
 public class ListResultDto<T> : IListResult<T>
 {
     /// <inheritdoc />

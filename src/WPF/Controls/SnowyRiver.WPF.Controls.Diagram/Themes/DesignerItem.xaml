@@ -3,7 +3,7 @@
                     xmlns:diagram="clr-namespace:SnowyRiver.WPF.Controls.Diagram">
     <DataTemplate DataType="{x:Type diagram:ContentDesignerItemViewModel}">
         <Grid IsHitTestVisible="False">
-            <ContentPresenter Style="{Binding ContentStyle}"/>
+            <ContentPresenter Content="{Binding Content}"/>
         </Grid>
     </DataTemplate>
 </ResourceDictionary>

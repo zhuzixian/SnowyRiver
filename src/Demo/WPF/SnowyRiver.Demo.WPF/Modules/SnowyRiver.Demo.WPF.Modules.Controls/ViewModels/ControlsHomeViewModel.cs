@@ -1,4 +1,6 @@
 ﻿using System.Drawing;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using AIStudio.Wpf.DiagramDesigner;
 using Prism.Mvvm;
@@ -18,14 +20,22 @@ public class ControlsHomeViewModel : RegionViewModelBase
         DiagramVm.ColorViewModel.FillColor.Color = Colors.Orange;
 
         var threePortsValve = new ThreePortsValve();
+        var threePortsValue2 = new ThreePortsValve();
 
         var valve = new ContentDesignerItemViewModel(DiagramVm)
         {
-            ContentStyle = new ThreePortsValve(),
+            Content = threePortsValve,
             Left = 300, Top = 200,
         };
-        DiagramVm.Add(valve);
 
+        var valve2 = new ContentDesignerItemViewModel(DiagramVm)
+        {
+            Content = threePortsValue2,
+            Left = 600,
+            Top = 200,
+        };
+        DiagramVm.Add(valve);
+        DiagramVm.Add(valve2);
 
     }
 

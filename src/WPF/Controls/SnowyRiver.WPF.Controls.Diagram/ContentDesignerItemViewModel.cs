@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using AIStudio.Wpf.DiagramDesigner;
 using AIStudio.Wpf.DiagramDesigner.Models;
 
@@ -24,10 +25,10 @@ public class ContentDesignerItemViewModel : DesignerItemViewModelBase
     {
     }
 
-    private Style _contentStyle;
-    public Style ContentStyle
+    private Control _content;
+    public Control Content
     {
-        get => _contentStyle;
-        set => SetProperty(ref _contentStyle, value);
+        get => _content;
+        set => SetProperty(ref _content, value);
     }
 }

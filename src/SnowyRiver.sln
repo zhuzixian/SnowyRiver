@@ -37,6 +37,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnowyRiver.Demo.WPF.Modules
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.WPF.Controls.Diagram", "WPF\Controls\SnowyRiver.WPF.Controls.Diagram\SnowyRiver.WPF.Controls.Diagram.csproj", "{2A18C794-11AC-4A55-91C5-7A6CDAA37CD9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.Application.Contracts", "SnowyRiver.Application.Contracts\SnowyRiver.Application.Contracts.csproj", "{1B0A60A2-6A81-4238-9730-F62B75C7C5AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -39,7 +39,7 @@ public class DialogVieModel : BindableBase, IDialogHostAware
         Close(new DialogResult(ButtonResult.OK));
     }
 
-    void Close(DialogResult result)
+    protected void Close(DialogResult result)
     {
         DialogHost.Close(IdentifierName, result);
     }

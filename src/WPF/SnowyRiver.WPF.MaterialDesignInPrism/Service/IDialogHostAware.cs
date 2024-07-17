@@ -23,7 +23,7 @@ namespace SnowyRiver.WPF.MaterialDesignInPrism.Service
         /// <summary>
         /// 确认
         /// </summary>
-        DelegateCommand SaveCommand { get; }
+        DelegateCommand ConfirmCommand { get; }
 
         /// <summary>
         /// 取消

@@ -34,7 +34,7 @@ public class DialogVieModel : BindableBase, IDialogHostAware
         Close(new DialogResult(ButtonResult.Cancel));
     }
 
-    public virtual void Save()
+    public virtual void Confirm()
     {
         Close(new DialogResult(ButtonResult.OK));
     }

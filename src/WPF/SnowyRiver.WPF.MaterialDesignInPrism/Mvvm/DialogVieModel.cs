@@ -9,7 +9,7 @@ public class DialogVieModel : BindableBase, IDialogHostAware
 {
     public DialogVieModel()
     {
-        ConfirmCommand = new DelegateCommand(Save);
+        ConfirmCommand = new DelegateCommand(Confirm);
         CancelCommand = new DelegateCommand(Cancel);
     }
     public string IdentifierName { get; set; }

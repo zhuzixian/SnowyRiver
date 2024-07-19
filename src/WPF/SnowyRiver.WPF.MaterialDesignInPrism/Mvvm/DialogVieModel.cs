@@ -7,11 +7,8 @@ using SnowyRiver.WPF.MaterialDesignInPrism.Service;
 namespace SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 public class DialogVieModel : BindableBase, IDialogHostAware,IDialogAware
 {
-    public DialogVieModel(string identifierName, DelegateCommand confirmCommand, DelegateCommand cancelCommand)
+    public DialogVieModel()
     {
-        IdentifierName = identifierName;
-        _confirmCommand = confirmCommand;
-        _cancelCommand = cancelCommand;
         ConfirmCommand = new DelegateCommand(Confirm);
         CancelCommand = new DelegateCommand(Cancel);
     }

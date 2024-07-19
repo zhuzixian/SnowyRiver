@@ -60,6 +60,11 @@ public class DialogVieModel : BindableBase, IDialogHostAware,IDialogAware
         await OnDialogOpenedAsync(parameters);
     }
 
+    protected void RaiseRequestClose(IDialogResult dialogResult)
+    {
+        RequestClose?.Invoke(dialogResult);
+    }
+
     public virtual string Title => "";
     public event Action<IDialogResult>? RequestClose;
 }

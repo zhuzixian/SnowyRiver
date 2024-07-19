@@ -5,10 +5,13 @@ using Prism.Services.Dialogs;
 using SnowyRiver.WPF.MaterialDesignInPrism.Service;
 
 namespace SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
-public class DialogVieModel : BindableBase, IDialogHostAware
+public class DialogVieModel : BindableBase, IDialogHostAware,IDialogAware
 {
-    public DialogVieModel()
+    public DialogVieModel(string identifierName, DelegateCommand confirmCommand, DelegateCommand cancelCommand)
     {
+        IdentifierName = identifierName;
+        _confirmCommand = confirmCommand;
+        _cancelCommand = cancelCommand;
         ConfirmCommand = new DelegateCommand(Confirm);
         CancelCommand = new DelegateCommand(Cancel);
     }
@@ -48,4 +51,18 @@ public class DialogVieModel : BindableBase, IDialogHostAware
     {
         return Task.FromResult(true);
     }
+
+    public virtual bool CanCloseDialog() => true;
+
+    public void OnDialogClosed()
+    {
+    }
+
+    public async void OnDialogOpened(IDialogParameters parameters)
+    {
+        await OnDialogOpenedAsync(parameters);
+    }
+
+    public virtual string Title => "";
+    public event Action<IDialogResult>? RequestClose;
 }

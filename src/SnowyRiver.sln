@@ -37,7 +37,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnowyRiver.WPF.Controls.Dia
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnowyRiver.Application.Contracts", "SnowyRiver.Application.Contracts\SnowyRiver.Application.Contracts.csproj", "{1B0A60A2-6A81-4238-9730-F62B75C7C5AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.WPF.MaterialDesignInPrism", "WPF\SnowyRiver.WPF.MaterialDesignInPrism\SnowyRiver.WPF.MaterialDesignInPrism.csproj", "{603F320A-8C31-4845-AEA2-A7300FC2E648}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnowyRiver.WPF.MaterialDesignInPrism", "WPF\SnowyRiver.WPF.MaterialDesignInPrism\SnowyRiver.WPF.MaterialDesignInPrism.csproj", "{603F320A-8C31-4845-AEA2-A7300FC2E648}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnowyRiver.WPF.MarkupExtension", "WPF\SnowyRiver.WPF.MarkupExtension\SnowyRiver.WPF.MarkupExtension.csproj", "{9500F43A-B47F-4187-948F-96E3B6CC042C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,6 +91,10 @@ Global
 		{603F320A-8C31-4845-AEA2-A7300FC2E648}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{603F320A-8C31-4845-AEA2-A7300FC2E648}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{603F320A-8C31-4845-AEA2-A7300FC2E648}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9500F43A-B47F-4187-948F-96E3B6CC042C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9500F43A-B47F-4187-948F-96E3B6CC042C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9500F43A-B47F-4187-948F-96E3B6CC042C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9500F43A-B47F-4187-948F-96E3B6CC042C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,6 +115,7 @@ Global
 		{48AE8DE6-21CD-47D4-9CC3-A1E98C0C3032} = {E3CDBF13-2AAB-4651-9E9E-7029CD881D35}
 		{2A18C794-11AC-4A55-91C5-7A6CDAA37CD9} = {90CF93C1-87A1-436E-AD91-83E65A905673}
 		{603F320A-8C31-4845-AEA2-A7300FC2E648} = {3B2886EE-1186-4C50-B616-1304A9C129FB}
+		{9500F43A-B47F-4187-948F-96E3B6CC042C} = {3B2886EE-1186-4C50-B616-1304A9C129FB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E75A6A63-872F-41A5-80C6-C3FA93CCA7AC}

@@ -1,11 +1,11 @@
-﻿using MaterialDesignThemes.Wpf;
+﻿using FullApp1.Core.Mvvm;
+using MaterialDesignThemes.Wpf;
 using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using SnowyRiver.WPF.MaterialDesignInPrism.Service;
 
 namespace SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
-public class DialogVieModel : BindableBase, IDialogHostAware,IDialogAware
+public class DialogVieModel : ViewModelBase, IDialogHostAware,IDialogAware
 {
     public DialogVieModel()
     {

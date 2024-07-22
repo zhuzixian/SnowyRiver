@@ -64,6 +64,12 @@ public class DialogVieModel : ViewModelBase, IDialogHostAware,IDialogAware
         RequestClose?.Invoke(dialogResult);
     }
 
-    public virtual string Title => "";
+    private string _title = string.Empty;
+    public virtual string Title
+    {
+        get => _title;
+        protected set => SetProperty(ref _title, value);
+    }
+
     public event Action<IDialogResult>? RequestClose;
 }

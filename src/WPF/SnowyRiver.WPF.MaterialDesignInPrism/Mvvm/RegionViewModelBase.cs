@@ -1,5 +1,4 @@
-﻿using FullApp1.Core.Mvvm;
-using Prism.Regions;
+﻿using Prism.Regions;
 
 namespace SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 public class RegionViewModelBase(IRegionManager regionManager)

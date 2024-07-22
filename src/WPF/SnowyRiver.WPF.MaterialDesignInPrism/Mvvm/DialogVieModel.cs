@@ -1,5 +1,4 @@
-﻿using FullApp1.Core.Mvvm;
-using MaterialDesignThemes.Wpf;
+﻿using MaterialDesignThemes.Wpf;
 using Prism.Commands;
 using Prism.Services.Dialogs;
 using SnowyRiver.WPF.MaterialDesignInPrism.Service;

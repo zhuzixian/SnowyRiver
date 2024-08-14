@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SnowyRiver.Domain.Entities;
+namespace SnowyRiver.Domain.Shared.Entities;
 
 public interface IHasModificationTime
 {

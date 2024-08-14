@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <Version>1.0.1</Version>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SnowyRiver.Domain.Shared\SnowyRiver.Domain.Shared.csproj" />
+  </ItemGroup>
 
 </Project>

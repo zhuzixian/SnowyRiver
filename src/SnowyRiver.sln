@@ -35,11 +35,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnowyRiver.Demo.WPF.Modules
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnowyRiver.WPF.Controls.Diagram", "WPF\Controls\SnowyRiver.WPF.Controls.Diagram\SnowyRiver.WPF.Controls.Diagram.csproj", "{2A18C794-11AC-4A55-91C5-7A6CDAA37CD9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnowyRiver.Application.Contracts", "SnowyRiver.Application.Contracts\SnowyRiver.Application.Contracts.csproj", "{1B0A60A2-6A81-4238-9730-F62B75C7C5AB}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnowyRiver.WPF.MaterialDesignInPrism", "WPF\SnowyRiver.WPF.MaterialDesignInPrism\SnowyRiver.WPF.MaterialDesignInPrism.csproj", "{603F320A-8C31-4845-AEA2-A7300FC2E648}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnowyRiver.WPF.MarkupExtension", "WPF\SnowyRiver.WPF.MarkupExtension\SnowyRiver.WPF.MarkupExtension.csproj", "{9500F43A-B47F-4187-948F-96E3B6CC042C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DDD", "DDD", "{0B81BC32-028F-475E-82F4-6AE2B7CEB47F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnowyRiver.Application.Contracts", "DDD\SnowyRiver.Application.Contracts\SnowyRiver.Application.Contracts.csproj", "{A97F879A-D4A7-4FFC-9E73-C52504A6FD5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.Domain", "DDD\SnowyRiver.Domain\SnowyRiver.Domain.csproj", "{F9C60EDB-EEB4-455E-9E2D-403EC853A1E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,10 +87,6 @@ Global
 		{2A18C794-11AC-4A55-91C5-7A6CDAA37CD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A18C794-11AC-4A55-91C5-7A6CDAA37CD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A18C794-11AC-4A55-91C5-7A6CDAA37CD9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1B0A60A2-6A81-4238-9730-F62B75C7C5AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1B0A60A2-6A81-4238-9730-F62B75C7C5AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1B0A60A2-6A81-4238-9730-F62B75C7C5AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1B0A60A2-6A81-4238-9730-F62B75C7C5AB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{603F320A-8C31-4845-AEA2-A7300FC2E648}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{603F320A-8C31-4845-AEA2-A7300FC2E648}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{603F320A-8C31-4845-AEA2-A7300FC2E648}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -95,6 +95,14 @@ Global
 		{9500F43A-B47F-4187-948F-96E3B6CC042C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9500F43A-B47F-4187-948F-96E3B6CC042C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9500F43A-B47F-4187-948F-96E3B6CC042C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A97F879A-D4A7-4FFC-9E73-C52504A6FD5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A97F879A-D4A7-4FFC-9E73-C52504A6FD5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A97F879A-D4A7-4FFC-9E73-C52504A6FD5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A97F879A-D4A7-4FFC-9E73-C52504A6FD5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9C60EDB-EEB4-455E-9E2D-403EC853A1E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9C60EDB-EEB4-455E-9E2D-403EC853A1E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9C60EDB-EEB4-455E-9E2D-403EC853A1E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9C60EDB-EEB4-455E-9E2D-403EC853A1E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -116,6 +124,8 @@ Global
 		{2A18C794-11AC-4A55-91C5-7A6CDAA37CD9} = {90CF93C1-87A1-436E-AD91-83E65A905673}
 		{603F320A-8C31-4845-AEA2-A7300FC2E648} = {3B2886EE-1186-4C50-B616-1304A9C129FB}
 		{9500F43A-B47F-4187-948F-96E3B6CC042C} = {3B2886EE-1186-4C50-B616-1304A9C129FB}
+		{A97F879A-D4A7-4FFC-9E73-C52504A6FD5F} = {0B81BC32-028F-475E-82F4-6AE2B7CEB47F}
+		{F9C60EDB-EEB4-455E-9E2D-403EC853A1E7} = {0B81BC32-028F-475E-82F4-6AE2B7CEB47F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E75A6A63-872F-41A5-80C6-C3FA93CCA7AC}

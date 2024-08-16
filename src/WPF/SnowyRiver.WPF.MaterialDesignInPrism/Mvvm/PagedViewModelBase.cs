@@ -4,7 +4,7 @@ namespace SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 public class PagedViewModelBase(RegionManager regionManager):RegionViewModelBase(regionManager)
 {
     private long _totalCount;
-    public long TotalCount
+    public virtual long TotalCount
     {
         get => _totalCount;
         set
@@ -17,13 +17,13 @@ public class PagedViewModelBase(RegionManager regionManager):RegionViewModelBase
     }
 
     private int _currentPage = 1;
-    public int CurrentPage
+    public virtual int CurrentPage
     {
         get => _currentPage;
         set => SetProperty(ref _currentPage, value);
     }
 
-    public int TotalPage => (int)Math.Ceiling(TotalCount / (double)PageSize);
+    public virtual int TotalPage => (int)Math.Ceiling(TotalCount / (double)PageSize);
 
     private int _pageSize = 100;
     public virtual int PageSize

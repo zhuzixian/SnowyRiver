@@ -89,7 +89,7 @@ public class PagedViewModelBase(IRegionManager regionManager):RegionViewModelBas
     protected virtual async Task NavigateToPreviousPageAsync()
     {
         CurrentPage--;
-        await Task.CompletedTask;
+        await RefreshAsync();
     }
 
     private DelegateCommand? _navigateToNextPageCommand;
@@ -134,7 +134,7 @@ public class PagedViewModelBase(IRegionManager regionManager):RegionViewModelBas
     private async Task NavigateToNextPageAsync()
     {
         CurrentPage++;
-        await Task.CompletedTask;
+        await RefreshAsync();
     }
 
     private DelegateCommand? _navigateToFirstPageCommand;
@@ -178,7 +178,7 @@ public class PagedViewModelBase(IRegionManager regionManager):RegionViewModelBas
     protected virtual async Task NavigateToFirstPageAsync()
     {
         CurrentPage = 1;
-        await Task.CompletedTask;
+        await RefreshAsync();
     }
 
     private DelegateCommand? _navigateToLastPageCommand;
@@ -222,7 +222,7 @@ public class PagedViewModelBase(IRegionManager regionManager):RegionViewModelBas
     protected virtual async Task NavigateToLastPageAsync()
     {
         CurrentPage = TotalPage;
-        await Task.CompletedTask;
+        await RefreshAsync();
     }
 
     private long _totalCount;

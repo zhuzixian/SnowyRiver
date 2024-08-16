@@ -1,7 +1,7 @@
 ﻿using Prism.Regions;
 
 namespace SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
-public class PagedViewModelBase(RegionManager regionManager):RegionViewModelBase(regionManager)
+public class PagedViewModelBase(IRegionManager regionManager):RegionViewModelBase(regionManager)
 {
     private long _totalCount;
     public virtual long TotalCount

@@ -1,12 +1,5 @@
-﻿using Prism.Regions;
+﻿using Prism.Navigation.Regions;
 using SnowyRiver.Demo.WPF.Core.Mvvm;
 
 namespace SnowyRiver.Demo.WPF.Modules.Controls.ViewModels;
-public class InjectorsViewModel : RegionViewModelBase
-{
-    public InjectorsViewModel(IRegionManager regionManager) :
-        base(regionManager)
-    {
-    }
-
-}
+public class InjectorsViewModel(IRegionManager regionManager) : RegionViewModelBase(regionManager);

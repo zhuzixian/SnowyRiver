@@ -1,7 +1,4 @@
-﻿using Prism.Commands;
-using Prism.Regions;
-
-namespace SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
+﻿namespace SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 public class PagedViewModelBase(IRegionManager regionManager):RegionViewModelBase(regionManager)
 {
     private DelegateCommand? _refreshCommand;

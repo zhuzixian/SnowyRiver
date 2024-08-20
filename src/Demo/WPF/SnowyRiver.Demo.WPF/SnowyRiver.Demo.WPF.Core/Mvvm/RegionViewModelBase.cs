@@ -1,16 +1,12 @@
-﻿using Prism.Regions;
-using System;
+﻿using System;
+using Prism.Navigation.Regions;
 
 namespace SnowyRiver.Demo.WPF.Core.Mvvm
 {
-    public class RegionViewModelBase : ViewModelBase, INavigationAware, IConfirmNavigationRequest
+    public class RegionViewModelBase(IRegionManager regionManager)
+        : ViewModelBase, INavigationAware, IConfirmNavigationRequest
     {
-        protected IRegionManager RegionManager { get; private set; }
-
-        public RegionViewModelBase(IRegionManager regionManager)
-        {
-            RegionManager = regionManager;
-        }
+        protected IRegionManager RegionManager { get; private set; } = regionManager;
 
         public virtual void ConfirmNavigationRequest(NavigationContext navigationContext, Action<bool> continuationCallback)
         {

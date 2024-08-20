@@ -1,6 +1,6 @@
 ﻿using Prism.Ioc;
 using Prism.Modularity;
-using Prism.Regions;
+using Prism.Navigation.Regions;
 using SnowyRiver.Demo.WPF.Core;
 using SnowyRiver.Demo.WPF.Modules.Controls.Views;
 

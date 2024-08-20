@@ -1,7 +1,4 @@
-﻿using Prism.Commands;
-using Prism.Services.Dialogs;
-
-namespace SnowyRiver.WPF.MaterialDesignInPrism.Service
+﻿namespace SnowyRiver.WPF.MaterialDesignInPrism.Service
 {
     /// <summary>
     /// 对话主机ViewModel基类

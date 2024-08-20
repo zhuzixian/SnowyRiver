@@ -1,6 +1,4 @@
 ﻿using MaterialDesignThemes.Wpf;
-using Prism.Commands;
-using Prism.Services.Dialogs;
 using SnowyRiver.WPF.MaterialDesignInPrism.Service;
 
 namespace SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
@@ -61,7 +59,7 @@ public class DialogVieModel : ViewModelBase, IDialogHostAware,IDialogAware
 
     protected void RaiseRequestClose(IDialogResult dialogResult)
     {
-        RequestClose?.Invoke(dialogResult);
+        RequestClose.Invoke(dialogResult);
     }
 
     private string _title = string.Empty;
@@ -71,5 +69,5 @@ public class DialogVieModel : ViewModelBase, IDialogHostAware,IDialogAware
         protected set => SetProperty(ref _title, value);
     }
 
-    public event Action<IDialogResult>? RequestClose;
+    public DialogCloseListener RequestClose { get; }
 }

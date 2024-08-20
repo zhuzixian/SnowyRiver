@@ -1,8 +1,5 @@
 ﻿using System.Windows;
 using MaterialDesignThemes.Wpf;
-using Prism.Ioc;
-using Prism.Mvvm;
-using Prism.Services.Dialogs;
 using SnowyRiver.WPF.MaterialDesignInPrism.Common;
 
 namespace SnowyRiver.WPF.MaterialDesignInPrism.Service;

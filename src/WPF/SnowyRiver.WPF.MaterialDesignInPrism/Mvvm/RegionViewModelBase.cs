@@ -1,6 +1,4 @@
-﻿using Prism.Regions;
-
-namespace SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
+﻿namespace SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 public class RegionViewModelBase(IRegionManager regionManager)
     : ViewModelBase, IConfirmNavigationRequest
 {

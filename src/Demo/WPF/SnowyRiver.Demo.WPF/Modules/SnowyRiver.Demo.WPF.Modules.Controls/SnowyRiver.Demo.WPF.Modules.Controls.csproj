@@ -5,7 +5,7 @@
     <Version>1.0.0-Alpha.1</Version>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+    <PackageReference Include="Prism.Wpf" Version="9.0.537" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\..\WPF\Controls\SnowyRiver.WPF.Controls.Diagram\SnowyRiver.WPF.Controls.Diagram.csproj" />

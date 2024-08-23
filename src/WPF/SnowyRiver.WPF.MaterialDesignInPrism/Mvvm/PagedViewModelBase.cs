@@ -1,5 +1,5 @@
 ﻿namespace SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
-public class PagedViewModelBase(IRegionManager regionManager):RegionViewModelBase(regionManager)
+public class PagedViewModelBase(int pageSize, IRegionManager regionManager):RegionViewModelBase(regionManager)
 {
     private DelegateCommand? _refreshCommand;
     public DelegateCommand RefreshCommand
@@ -262,7 +262,7 @@ public class PagedViewModelBase(IRegionManager regionManager):RegionViewModelBas
 
     public virtual int TotalPage => (int)Math.Ceiling(TotalCount / (double)PageSize);
 
-    private int _pageSize = 100;
+    private int _pageSize = pageSize;
     public virtual int PageSize
     {
         get => _pageSize;

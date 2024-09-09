@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.ComponentModel;
 
 namespace SnowyRiver.WPF.MarkupExtension;
 public class EnumBindingSourceExtension : System.Windows.Markup.MarkupExtension
@@ -28,22 +28,44 @@ public class EnumBindingSourceExtension : System.Windows.Markup.MarkupExtension
 
     public EnumBindingSourceExtension(Type enumType)
     {
-        this.EnumType = enumType;
+        EnumType = enumType;
     }
 
     public override object ProvideValue(IServiceProvider serviceProvider)
     {
-        if (null == this._enumType)
+        if (null == _enumType)
             throw new InvalidOperationException("The EnumType must be specified.");
 
-        var actualEnumType = Nullable.GetUnderlyingType(this._enumType) ?? this._enumType;
+        var actualEnumType = Nullable.GetUnderlyingType(_enumType) ?? _enumType;
         var enumValues = Enum.GetValues(actualEnumType);
+        if (actualEnumType != _enumType)
+        {
+            var tempArray = Array.CreateInstance(actualEnumType, enumValues.Length + 1);
+            enumValues.CopyTo(tempArray, 1);
+            enumValues = tempArray;
+        }
 
-        if (actualEnumType == this._enumType)
-            return enumValues;
+        return (from object enumValue in enumValues
+                select new EnumerationMember
+                {
+                    Value = enumValue,
+                    Description = GetDescription(enumValue)
+                }).ToArray();
+    }
 
-        var tempArray = Array.CreateInstance(actualEnumType, enumValues.Length + 1);
-        enumValues.CopyTo(tempArray, 1);
-        return tempArray;
+    private string? GetDescription(object enumValue)
+    {
+        return EnumType
+            .GetField(enumValue.ToString() ?? string.Empty)
+            ?.GetCustomAttributes(typeof(DescriptionAttribute), false)
+            .FirstOrDefault() is DescriptionAttribute descriptionAttribute
+            ? descriptionAttribute.Description
+            : enumValue.ToString();
+    }
+
+    public class EnumerationMember
+    {
+        public string? Description { get; set; } = default;
+        public object Value { get; set; } = default;
     }
 }

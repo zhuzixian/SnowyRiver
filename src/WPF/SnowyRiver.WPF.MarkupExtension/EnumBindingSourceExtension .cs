@@ -36,36 +36,14 @@ public class EnumBindingSourceExtension : System.Windows.Markup.MarkupExtension
         if (null == _enumType)
             throw new InvalidOperationException("The EnumType must be specified.");
 
-        var actualEnumType = Nullable.GetUnderlyingType(_enumType) ?? _enumType;
+        var actualEnumType = Nullable.GetUnderlyingType(this._enumType) ?? this._enumType;
         var enumValues = Enum.GetValues(actualEnumType);
-        if (actualEnumType != _enumType)
-        {
-            var tempArray = Array.CreateInstance(actualEnumType, enumValues.Length + 1);
-            enumValues.CopyTo(tempArray, 1);
-            enumValues = tempArray;
-        }
 
-        return (from object enumValue in enumValues
-                select new EnumerationMember
-                {
-                    Value = enumValue,
-                    Description = GetDescription(enumValue)
-                }).ToArray();
-    }
+        if (actualEnumType == this._enumType)
+            return enumValues;
 
-    private string? GetDescription(object enumValue)
-    {
-        return EnumType
-            .GetField(enumValue.ToString() ?? string.Empty)
-            ?.GetCustomAttributes(typeof(DescriptionAttribute), false)
-            .FirstOrDefault() is DescriptionAttribute descriptionAttribute
-            ? descriptionAttribute.Description
-            : enumValue.ToString();
-    }
-
-    public class EnumerationMember
-    {
-        public string? Description { get; set; } = default;
-        public object Value { get; set; } = default;
+        var tempArray = Array.CreateInstance(actualEnumType, enumValues.Length + 1);
+        enumValues.CopyTo(tempArray, 1);
+        return tempArray;
     }
 }

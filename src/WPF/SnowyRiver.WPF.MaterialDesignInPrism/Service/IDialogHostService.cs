@@ -5,6 +5,6 @@
     /// </summary>
     public interface IDialogHostService : IDialogService
     {
-        Task<IDialogResult?> ShowDialogAsync(string name, IDialogParameters parameters = null, string IdentifierName = "Root");
+        Task<IDialogResult?> ShowMaterialDesignDialogAsync(string name, IDialogParameters parameters = null, string IdentifierName = "Root");
     }
 }

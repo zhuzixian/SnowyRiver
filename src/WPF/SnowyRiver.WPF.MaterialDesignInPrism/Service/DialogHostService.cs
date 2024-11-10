@@ -11,7 +11,7 @@ public class DialogHostService(IContainerExtension containerExtension)
 {
     private readonly IContainerExtension _containerExtension = containerExtension;
 
-    public async Task<IDialogResult?> ShowDialogAsync(string name, IDialogParameters? parameters = null, string identifierName = "Root")
+    public async Task<IDialogResult?> ShowMaterialDesignDialogAsync(string name, IDialogParameters? parameters = null, string identifierName = "Root")
     {
         parameters ??= new DialogParameters();
 

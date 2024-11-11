@@ -12,5 +12,6 @@ public class MaterialDesignMetroWindow : MetroWindow
         GlowBrush = FindResource("MahApps.Brushes.Accent") as Brush;
         FontFamily = new FontFamily("Microsoft YaHei");
         WindowTransitionsEnabled = false;
+        SetBinding(TitleProperty, "Title");
     }
 }

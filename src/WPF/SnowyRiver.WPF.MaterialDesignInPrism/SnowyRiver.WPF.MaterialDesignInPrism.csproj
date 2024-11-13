@@ -1,20 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFramework>net9.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Version>3.0.4</Version>
+    <Version>9.0.4</Version>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="DryIoc.Microsoft.DependencyInjection" Version="6.2.0" />
     <PackageReference Include="MaterialDesignThemes" Version="5.1.0" />
     <PackageReference Include="MaterialDesignThemes.MahApps" Version="3.1.0" />
-    <PackageReference Include="Prism.Container.DryIoc" Version="9.0.106" />
+    <PackageReference Include="Prism.Container.DryIoc" Version="9.0.107" />
     <PackageReference Include="Prism.DryIoc" Version="9.0.537" />
     <PackageReference Include="Prism.Wpf" Version="9.0.537" />
   </ItemGroup>
-
 </Project>

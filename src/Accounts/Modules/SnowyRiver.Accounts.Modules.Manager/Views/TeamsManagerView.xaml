@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="SnowyRiver.Accounts.Modules.Manager.Views.TeamsManagerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:controls="clr-namespace:SnowyRiver.WPF.MaterialDesignInPrism.Controls;assembly=SnowyRiver.WPF.MaterialDesignInPrism"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ToolBarTray>
+            <ToolBar ClipToBounds="False" Style="{StaticResource MaterialDesignToolBar}">
+                <controls:ToolBarIcoTextButton Text="{lex:Loc Refresh}" Kind="Refresh" Command="{Binding RefreshCommand}"/>
+                <controls:ToolBarIcoTextButton Text="{lex:Loc Create}" Kind="FolderPlus" Command="{Binding CreateCommand}"/>
+                <controls:ToolBarIcoTextButton Text="{lex:Loc Modify}" Kind="FolderEdit" Command="{Binding UpdateCommand}"/>
+                <controls:ToolBarIcoTextButton Text="{lex:Loc Delete}" Kind="FolderRemove" Command="{Binding DeleteCommand}"/>
+            </ToolBar>
+        </ToolBarTray>
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Models}" SelectionMode="Single" SelectionUnit="FullRow"
+                  SelectedItem="{Binding SelectedModel}"
+               AutoGenerateColumns="False" IsReadOnly="True">
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="SelectionChanged">
+                    <prism:InvokeCommandAction Command="{Binding DisplayDetailsCommand}" />
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{lex:Loc SortId}" Binding="{Binding SortId}"/>
+                <DataGridTextColumn Header="{lex:Loc Name}" Binding="{Binding Name}"
+                                    Width="*"/>
+                <DataGridTextColumn Header="{lex:Loc CreatedTime}" Binding="{Binding CreatedTime,StringFormat=yyyy-MM-dd HH:mm:ss}"   
+                                    Width="*"
+                                   />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Version>1.0.0-Alpha.1</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.0" />
+    <PackageReference Include="Prism.DryIoc" Version="9.0.537" />
+    <PackageReference Include="WPFLocalizeExtension" Version="3.10.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\WPF\SnowyRiver.WPF.MaterialDesignInPrism\SnowyRiver.WPF.MaterialDesignInPrism.csproj" />
+    <ProjectReference Include="..\Modules\SnowyRiver.Accounts.Modules.Manager\SnowyRiver.Accounts.Modules.Manager.csproj" />
+    <ProjectReference Include="..\SnowyRiver.Accouns.Mananger.EntityFramework\SnowyRiver.Accounts.Manager.EntityFramework.csproj" />
+    <ProjectReference Include="..\SnowyRiver.Accounts.EntityFramework\SnowyRiver.Accounts.EntityFramework.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="WPFLocalizeExtension">
+      <HintPath>C:\Users\zhuzi\.nuget\packages\wpflocalizeextension\3.10.0\lib\netcoreapp3.1\WPFLocalizeExtension.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

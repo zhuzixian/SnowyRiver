@@ -1,0 +1,17 @@
+﻿<windows:MaterialDesignMetroWindow x:Class="SnowyRiver.Accounts.Manager.Views.MainWindow"
+                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:prism="http://prismlibrary.com/"
+                           xmlns:lex="http://wpflocalizeextension.codeplex.com"
+                           xmlns:windows="clr-namespace:SnowyRiver.WPF.MaterialDesignInPrism.Windows;assembly=SnowyRiver.WPF.MaterialDesignInPrism"
+                           xmlns:core="clr-namespace:SnowyRiver.Accounts.Core;assembly=SnowyRiver.Accounts.Core"
+                           prism:ViewModelLocator.AutoWireViewModel="True"
+                           lex:LocalizeDictionary.DesignCulture="zh-CN"
+                           lex:ResxLocalizationProvider.DefaultAssembly="SnowyRiver.Accounts.Manager"
+                           lex:ResxLocalizationProvider.DefaultDictionary="Resources"
+                           Title="{lex:Loc ProductName}" Height="350" Width="525" 
+                           WindowState="Maximized">
+    <Grid>
+        <ContentControl prism:RegionManager.RegionName="{x:Static core:AccountsRegionNames.AccountsManagerViewRegion}" />
+    </Grid>
+</windows:MaterialDesignMetroWindow>

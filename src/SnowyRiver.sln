@@ -57,6 +57,24 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnowyRiver.Converters", "Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.WPF.Configuration", "WPF\SnowyRiver.WPF. Configuration\SnowyRiver.WPF.Configuration.csproj", "{B1A6F562-16B2-4B6C-B12D-940A1ECE662E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Accounts", "Accounts", "{40B0B2A3-0A39-4C3C-8DEE-41808991D21F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.Accounts.Manager", "Accounts\SnowyRiver.Accounts.Manager\SnowyRiver.Accounts.Manager.csproj", "{87E06FAC-2DD3-4C45-9566-EB94BFDB49ED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{E6E6A0EC-1BED-4F32-9E0F-B8E35A11EE5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.Accounts.Modules.Manager", "Accounts\Modules\SnowyRiver.Accounts.Modules.Manager\SnowyRiver.Accounts.Modules.Manager.csproj", "{59B744A1-FC46-4562-AFAE-4B4E1885EE2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.Accounts.Core", "Accounts\SnowyRiver.Accounts.Core\SnowyRiver.Accounts.Core.csproj", "{EEF262F6-4DAB-4401-B844-5D9FA963422E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.Accounts.Domain", "Accounts\SnowyRiver.Accounts.Domain\SnowyRiver.Accounts.Domain.csproj", "{91339D7B-2EEB-48B1-9582-B6CF3F2BB70F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.Accounts.EntityFramework", "Accounts\SnowyRiver.Accounts.EntityFramework\SnowyRiver.Accounts.EntityFramework.csproj", "{53BB6DDA-B201-4ED3-BF36-AB4928D5B817}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.Accounts.Manager.EntityFramework", "Accounts\SnowyRiver.Accouns.Mananger.EntityFramework\SnowyRiver.Accounts.Manager.EntityFramework.csproj", "{52A1E554-FEE4-4BD4-A89E-1DDBC91597C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.WPF.NotifyPropertyChangedBase", "WPF\SnowyRiver.WPF.NotifyPropertyChangedBase\SnowyRiver.WPF.NotifyPropertyChangedBase.csproj", "{ABBB33E0-132F-494C-95FF-AD2444CCBF10}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -135,6 +153,34 @@ Global
 		{B1A6F562-16B2-4B6C-B12D-940A1ECE662E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1A6F562-16B2-4B6C-B12D-940A1ECE662E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1A6F562-16B2-4B6C-B12D-940A1ECE662E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87E06FAC-2DD3-4C45-9566-EB94BFDB49ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87E06FAC-2DD3-4C45-9566-EB94BFDB49ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87E06FAC-2DD3-4C45-9566-EB94BFDB49ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87E06FAC-2DD3-4C45-9566-EB94BFDB49ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59B744A1-FC46-4562-AFAE-4B4E1885EE2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59B744A1-FC46-4562-AFAE-4B4E1885EE2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59B744A1-FC46-4562-AFAE-4B4E1885EE2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59B744A1-FC46-4562-AFAE-4B4E1885EE2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEF262F6-4DAB-4401-B844-5D9FA963422E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEF262F6-4DAB-4401-B844-5D9FA963422E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEF262F6-4DAB-4401-B844-5D9FA963422E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEF262F6-4DAB-4401-B844-5D9FA963422E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91339D7B-2EEB-48B1-9582-B6CF3F2BB70F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91339D7B-2EEB-48B1-9582-B6CF3F2BB70F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91339D7B-2EEB-48B1-9582-B6CF3F2BB70F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91339D7B-2EEB-48B1-9582-B6CF3F2BB70F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53BB6DDA-B201-4ED3-BF36-AB4928D5B817}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53BB6DDA-B201-4ED3-BF36-AB4928D5B817}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53BB6DDA-B201-4ED3-BF36-AB4928D5B817}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53BB6DDA-B201-4ED3-BF36-AB4928D5B817}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52A1E554-FEE4-4BD4-A89E-1DDBC91597C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52A1E554-FEE4-4BD4-A89E-1DDBC91597C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52A1E554-FEE4-4BD4-A89E-1DDBC91597C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52A1E554-FEE4-4BD4-A89E-1DDBC91597C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABBB33E0-132F-494C-95FF-AD2444CCBF10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABBB33E0-132F-494C-95FF-AD2444CCBF10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABBB33E0-132F-494C-95FF-AD2444CCBF10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABBB33E0-132F-494C-95FF-AD2444CCBF10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -163,6 +209,14 @@ Global
 		{2700B98F-47E8-4E7F-AF79-E90C58ECA296} = {3B2886EE-1186-4C50-B616-1304A9C129FB}
 		{EFD67526-7538-4200-A459-AD0BD60A21AD} = {0AA91054-FCD2-4828-BB88-2276FBDB6722}
 		{B1A6F562-16B2-4B6C-B12D-940A1ECE662E} = {3B2886EE-1186-4C50-B616-1304A9C129FB}
+		{87E06FAC-2DD3-4C45-9566-EB94BFDB49ED} = {40B0B2A3-0A39-4C3C-8DEE-41808991D21F}
+		{E6E6A0EC-1BED-4F32-9E0F-B8E35A11EE5F} = {40B0B2A3-0A39-4C3C-8DEE-41808991D21F}
+		{59B744A1-FC46-4562-AFAE-4B4E1885EE2C} = {E6E6A0EC-1BED-4F32-9E0F-B8E35A11EE5F}
+		{EEF262F6-4DAB-4401-B844-5D9FA963422E} = {40B0B2A3-0A39-4C3C-8DEE-41808991D21F}
+		{91339D7B-2EEB-48B1-9582-B6CF3F2BB70F} = {40B0B2A3-0A39-4C3C-8DEE-41808991D21F}
+		{53BB6DDA-B201-4ED3-BF36-AB4928D5B817} = {40B0B2A3-0A39-4C3C-8DEE-41808991D21F}
+		{52A1E554-FEE4-4BD4-A89E-1DDBC91597C2} = {40B0B2A3-0A39-4C3C-8DEE-41808991D21F}
+		{ABBB33E0-132F-494C-95FF-AD2444CCBF10} = {3B2886EE-1186-4C50-B616-1304A9C129FB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E75A6A63-872F-41A5-80C6-C3FA93CCA7AC}

@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="SnowyRiver.Accounts.Modules.Manager.Views.PermissionEditorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             xmlns:controls="clr-namespace:SnowyRiver.WPF.MaterialDesignInPrism.Controls;assembly=SnowyRiver.WPF.MaterialDesignInPrism"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ToolBarTray>
+            <ToolBar ClipToBounds="False" Style="{StaticResource MaterialDesignToolBar}">
+                <controls:ToolBarIcoTextButton Kind="ArrowLeft" Text="{lex:Loc Back}"
+                                        Command="{Binding BackCommand}"/>
+                <controls:ToolBarIcoTextButton Kind="ContentSave" Text="{lex:Loc Save}" 
+                                               Command="{Binding SaveCommand}"/>
+            </ToolBar>
+        </ToolBarTray>
+        <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock  Text="{lex:Loc Name}" Style="{StaticResource SnowyRiver.Accounts.FieldNameTextBlock}"/>
+            <TextBox Grid.Column="1" Text="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged}" 
+                     Style="{StaticResource SnowyRiver.Accounts.FieldValueTextBox}"/>
+        </Grid>
+    </StackPanel>
+    </Grid>
+</UserControl>

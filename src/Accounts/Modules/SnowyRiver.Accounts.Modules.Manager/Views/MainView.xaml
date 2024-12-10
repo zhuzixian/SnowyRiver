@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="SnowyRiver.Accounts.Modules.Manager.Views.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             xmlns:manager="clr-namespace:SnowyRiver.Accounts.Modules.Manager"
+             xmlns:views="clr-namespace:SnowyRiver.Accounts.Modules.Manager.Views"
+             prism:ViewModelLocator.AutoWireViewModel="True" 
+             lex:LocalizeDictionary.DesignCulture="zh-CN"
+             lex:ResxLocalizationProvider.DefaultAssembly="SnowyRiver.Accounts.Modules.Manager"
+             lex:ResxLocalizationProvider.DefaultDictionary="Resources">
+        <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition  Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TabControl materialDesign:NavigationRailAssist.ShowSelectionBackground="True" SnapsToDevicePixels="True" 
+                 Style="{StaticResource MaterialDesignNavigationRailTabControl}" 
+                 TabStripPlacement="Left" >
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Width="auto" Height="auto">
+                        <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" 
+                                          Kind="Account" />
+                        <TextBlock HorizontalAlignment="Center" Text="{lex:Loc Users}" />
+                    </StackPanel>
+                </TabItem.Header>
+                <ContentControl prism:RegionManager.RegionName="{x:Static manager:RegionNames.UsersManagerViewRegion}"/>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Width="auto" Height="auto">
+                        <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" 
+                                           Kind="AccountGroup" />
+                        <TextBlock HorizontalAlignment="Center" Text="{lex:Loc Teams}" />
+                    </StackPanel>
+                </TabItem.Header>
+                <ContentControl prism:RegionManager.RegionName="{x:Static manager:RegionNames.TeamsManagerViewRegion}"/>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Width="auto" Height="auto">
+                        <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="ShieldAccount" />
+                        <TextBlock HorizontalAlignment="Center" Text="{lex:Loc Roles}" />
+                    </StackPanel>
+                </TabItem.Header>
+                <ContentControl prism:RegionManager.RegionName="{x:Static manager:RegionNames.RolesManagerViewRegion}"/>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Width="auto" Height="auto">
+                        <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="ShieldKey" />
+                        <TextBlock HorizontalAlignment="Center" Text="{lex:Loc Permissions}" />
+                    </StackPanel>
+                </TabItem.Header>
+                <ContentControl prism:RegionManager.RegionName="{x:Static manager:RegionNames.PermissionsManagerViewRegion}"/>
+            </TabItem>
+        </TabControl>
+        <StatusBar Grid.Row="1">
+            <StatusBarItem>
+                <TextBlock Text="{Binding Authentication.User.Name, StringFormat=当前用户：{0}}" />
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</UserControl>

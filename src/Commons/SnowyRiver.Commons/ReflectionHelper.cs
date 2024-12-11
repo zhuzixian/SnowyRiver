@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 using System;
+using System.Linq;
 
 namespace SnowyRiver.Commons;
 
@@ -17,5 +18,19 @@ public static class ReflectionHelper
                 yield return asm;
             }
         }
+    }
+
+    public static ProductInfo GetProductInfo()
+    {
+        var productInfo = new ProductInfo();
+        var assembly = Assembly.GetEntryAssembly();
+        if (assembly != null)
+        {
+            productInfo.Name = assembly.GetCustomAttribute<AssemblyProductAttribute>()?.Product;
+            productInfo.Name = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
+                ?.Split('+').FirstOrDefault();
+        }
+
+        return productInfo;
     }
 }

@@ -1,4 +1,7 @@
-﻿namespace SnowyRiver.Accounts.Modules.Manager.Models;
+﻿using System.Collections.ObjectModel;
+using SnowyRiver.Accounts.Modules.Manager.Views;
+
+namespace SnowyRiver.Accounts.Modules.Manager.Models;
 public class User : EntityModel
 {
     private string _password = string.Empty;
@@ -20,5 +23,19 @@ public class User : EntityModel
     {
         get => _userId;
         set => SetProperty(ref _userId, value);
+    }
+
+    private ObservableCollection<Role> _roles = [];
+    public ObservableCollection<Role> Roles
+    {
+        get => _roles;
+        set => SetProperty(ref _roles, value);
+    }
+
+    private ObservableCollection<Team> _teams = [];
+    public ObservableCollection<Team> Teams
+    {
+        get => _teams;
+        set => SetProperty(ref _teams, value);
     }
 }

@@ -1,10 +1,9 @@
-﻿<UserControl x:Class="SnowyRiver.Accounts.Modules.Manager.Views.PermissionEditorView"
+﻿<UserControl x:Class="SnowyRiver.Accounts.Modules.Manager.Views.RoleEditorView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
-             xmlns:snowyRiverControls="clr-namespace:SnowyRiver.WPF.MaterialDesignInPrism.Controls;assembly=SnowyRiver.WPF.MaterialDesignInPrism" 
-             xmlns:controls="clr-namespace:SnowyRiver.Accounts.Modules.Manager.Controls"
+             xmlns:snowyRiverControls="clr-namespace:SnowyRiver.WPF.MaterialDesignInPrism.Controls;assembly=SnowyRiver.WPF.MaterialDesignInPrism" xmlns:controls="clr-namespace:SnowyRiver.Accounts.Modules.Manager.Controls"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
         <Grid.RowDefinitions>
@@ -20,8 +19,9 @@
                                                          Command="{Binding SaveCommand}"/>
             </ToolBar>
         </ToolBarTray>
-        <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center">
+        <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Top">
             <controls:Input Text="{lex:Loc Name}" Value="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged}"/>
+            <controls:Input Text="{lex:Loc Permissions}" Options="{Binding Permissions, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
     </Grid>
 </UserControl>

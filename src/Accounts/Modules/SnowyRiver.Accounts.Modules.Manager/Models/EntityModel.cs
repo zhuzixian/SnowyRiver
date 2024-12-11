@@ -27,4 +27,11 @@ public class EntityModel : NotifyPropertyChangedObject
         get => _name;
         set => SetProperty(ref _name, value);
     }
+
+    private bool _isSelected;
+    public bool IsSelected
+    {
+        get => _isSelected;
+        set => SetProperty(ref _isSelected, value);
+    }
 }

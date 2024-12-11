@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using AutoMapper;
+using EntityFrameworkCore.QueryBuilder.Interfaces;
 using EntityFrameworkCore.Repository.Interfaces;
 using EntityFrameworkCore.UnitOfWork.Interfaces;
 using Prism.Commands;
@@ -69,15 +70,20 @@ public abstract class ManagerViewModel<TModel, TEntity>(IUnitOfWork unitOfWork,
     private async Task RefreshAsync()
     {
         var repository = await GetRepositoryAsync();
-        var query = repository.MultipleResultQuery()
-            .OrderByDescending(x => x.CreationTime)
-            .Page(0, 100);
+        var query = await GetQueryAsync(repository);
         var result = await repository.SearchAsync(query);
         Models = mapper.Map<ObservableCollection<TModel>>(result);
         for (var i = 0; i < Models.Count; i++)
         {
             Models[i].SortId = i + 1;
         }
+    }
+
+    protected virtual Task<IMultipleResultQuery<TEntity>> GetQueryAsync(IRepository<TEntity> repository)
+    {
+        var query = repository.MultipleResultQuery()
+            .OrderByDescending(x => x.CreationTime);
+        return Task.FromResult(query);
     }
 
     private DelegateCommand? _deleteCommand;

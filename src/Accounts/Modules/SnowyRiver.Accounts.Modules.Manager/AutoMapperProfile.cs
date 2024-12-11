@@ -7,6 +7,10 @@ public class AutoMapperProfile : Profile
     {
         CreateMap<Models.User, Domain.Entities.User>()
             .ReverseMap();
+        CreateMap<Models.Team, Domain.Entities.Team>()
+            .ReverseMap();
+        CreateMap<Models.Role, Domain.Entities.Role>()
+            .ReverseMap();
         CreateMap<Models.Permission, Domain.Entities.Permission>()
             .ReverseMap();
     }

@@ -15,7 +15,7 @@
             <ToolBar ClipToBounds="False" Style="{StaticResource MaterialDesignToolBar}">
                 <controls:ToolBarIcoTextButton Text="{lex:Loc Refresh}" Kind="Refresh" Command="{Binding RefreshCommand}"/>
                 <controls:ToolBarIcoTextButton Text="{lex:Loc Create}" Kind="ShieldPlus" Command="{Binding CreateCommand}"/>
-                <controls:ToolBarIcoTextButton Text="{lex:Loc Modify}" Kind="ShieldRefresh" Command="{Binding UpdateCommand}"/>
+                <controls:ToolBarIcoTextButton Text="{lex:Loc Modify}" Kind="ShieldRefresh" Command="{Binding EditCommand}"/>
                 <controls:ToolBarIcoTextButton Text="{lex:Loc Delete}" Kind="ShieldRemove" Command="{Binding DeleteCommand}"/>
             </ToolBar>
         </ToolBarTray>

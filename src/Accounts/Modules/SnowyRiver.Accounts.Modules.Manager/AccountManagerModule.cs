@@ -22,9 +22,12 @@ namespace SnowyRiver.Accounts.Modules.Manager
         {
             containerRegistry.RegisterForNavigation<MainView>(ViewNames.MainView);
 
+            containerRegistry.RegisterForNavigation<UserEditorView>(ViewNames.UserEditorView);
             containerRegistry.RegisterForNavigation<UsersManagerView>(ViewNames.UsersManagerView);
+            containerRegistry.RegisterForNavigation<TeamEditorView>(ViewNames.TeamEditorView);
             containerRegistry.RegisterForNavigation<TeamsManagerView>(ViewNames.TeamsManagerView);
             containerRegistry.RegisterForNavigation<RolesManagerView>(ViewNames.RolesManagerView);
+            containerRegistry.RegisterForNavigation<RoleEditorView>(ViewNames.RoleEditorView);
             containerRegistry.RegisterForNavigation<PermissionsManagerView>(ViewNames.PermissionsManagerView);
             containerRegistry.RegisterForNavigation<PermissionEditorView>(ViewNames.PermissionEditorView);
         }

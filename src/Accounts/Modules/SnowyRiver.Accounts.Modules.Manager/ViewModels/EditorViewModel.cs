@@ -17,6 +17,9 @@ public class EditorViewModel<TModel, TEntity>(
     where TModel : EntityModel, new()
     where TEntity : Entity<Guid>
 {
+    protected readonly IUnitOfWork UnitOfWork = unitOfWork;
+    protected readonly IMapper Mapper = mapper;
+
     private IRegionNavigationJournal? _journal;
 
     public override void OnNavigatedTo(NavigationContext navigationContext)
@@ -33,7 +36,7 @@ public class EditorViewModel<TModel, TEntity>(
 
     private async Task SaveAsync()
     {
-        var repository = unitOfWork.Repository<TEntity>();
+        var repository = UnitOfWork.Repository<TEntity>();
         if (Model.Id != default)
         {
             var query = repository.SingleResultQuery()
@@ -47,13 +50,13 @@ public class EditorViewModel<TModel, TEntity>(
             var entity = await MapToEntityAsync(Model);
             await repository.AddAsync(entity);
         }
-        await unitOfWork.SaveChangesAsync();
+        await UnitOfWork.SaveChangesAsync();
         await BackAsync();
     }
 
     protected virtual async Task<TEntity> MapToEntityAsync(TModel model)
     {
-        return await Task.FromResult(mapper.Map<TEntity>(model));
+        return await Task.FromResult(Mapper.Map<TEntity>(model));
     }
 
     protected virtual async Task MapToEntityAsync(TModel model, TEntity entity)

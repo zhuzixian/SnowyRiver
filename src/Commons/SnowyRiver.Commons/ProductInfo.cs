@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using System.Reflection;
-
-namespace SnowyRiver.Commons;
+﻿namespace SnowyRiver.Commons;
 public class ProductInfo
 {
     public string Name { get; set; }

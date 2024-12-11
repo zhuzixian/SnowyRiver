@@ -27,7 +27,7 @@ public static class ReflectionHelper
         if (assembly != null)
         {
             productInfo.Name = assembly.GetCustomAttribute<AssemblyProductAttribute>()?.Product;
-            productInfo.Name = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
+            productInfo.Version = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
                 ?.Split('+').FirstOrDefault();
         }
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -15,12 +16,22 @@ namespace SnowyRiver.Accounts.Modules.Manager.Controls
         }
 
         public static readonly DependencyProperty TextWidthProperty = DependencyProperty.Register(
-            nameof(TextWidth), typeof(GridLength), typeof(Input), new PropertyMetadata(default(GridLength)));
+            nameof(TextWidth), typeof(double), typeof(Input), new PropertyMetadata(default(double)));
 
-        public GridLength TextWidth
+        [TypeConverter(typeof(LengthConverter))]
+
+        public double TextWidth
         {
-            get => (GridLength)GetValue(TextWidthProperty);
+            get => (double)GetValue(TextWidthProperty);
             set => SetValue(TextWidthProperty, value);
+        }
+
+        public static readonly DependencyProperty ItemMarginProperty = DependencyProperty.Register(
+            nameof(ItemMargin), typeof(Thickness), typeof(Input), new PropertyMetadata(default(Thickness)));
+        public Thickness ItemMargin
+        {
+            get => (Thickness)GetValue(ItemMarginProperty);
+            set => SetValue(ItemMarginProperty, value);
         }
 
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register(

@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using EntityFrameworkCore.UnitOfWork.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using Prism.Navigation.Regions;
 using SnowyRiver.Accounts.Modules.Manager.Models;
 using RoleEntity = SnowyRiver.Accounts.Domain.Entities.Role;

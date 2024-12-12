@@ -20,8 +20,8 @@
                                                          Command="{Binding SaveCommand}"/>
             </ToolBar>
         </ToolBarTray>
-        <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center">
-            <controls:Input Text="{lex:Loc Name}" Value="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged}"/>
+        <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Top">
+            <controls:Input Text="{lex:Loc Name}" Value="{Binding Model.Name}"/>
         </StackPanel>
     </Grid>
 </UserControl>

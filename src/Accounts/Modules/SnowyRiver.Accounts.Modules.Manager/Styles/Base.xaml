@@ -2,7 +2,9 @@
                     xmlns:controls="clr-namespace:SnowyRiver.Accounts.Modules.Manager.Controls"
                     >
     <Style TargetType="controls:Input">
-        <Setter Property="TextWidth" Value="240"/>
+        <Setter Property="TextWidth" Value="128"/>
+        <Setter Property="Margin" Value="16"/>
         <Setter Property="FontSize" Value="24"/>
+        <Setter Property="ItemMargin" Value="12, 6"/>
     </Style>
 </ResourceDictionary>

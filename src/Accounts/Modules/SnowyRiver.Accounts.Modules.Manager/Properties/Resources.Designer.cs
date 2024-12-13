@@ -151,6 +151,15 @@ namespace SnowyRiver.Accounts.Modules.Manager.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Search 的本地化字符串。
+        /// </summary>
+        internal static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Id 的本地化字符串。
         /// </summary>
         internal static string SortId {

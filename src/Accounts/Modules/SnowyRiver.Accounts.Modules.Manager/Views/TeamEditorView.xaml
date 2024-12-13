@@ -21,7 +21,7 @@
             </ToolBar>
         </ToolBarTray>
         <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Top">
-            <controls:Input Text="{lex:Loc Name}" Value="{Binding Model.Name}"/>
+            <controls:TextInput Text="{lex:Loc Name}" Value="{Binding Model.Name}"/>
         </StackPanel>
     </Grid>
 </UserControl>

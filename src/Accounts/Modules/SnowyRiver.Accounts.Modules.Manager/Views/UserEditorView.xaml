@@ -19,10 +19,15 @@
                                                     Command="{Binding SaveCommand}"/>
             </ToolBar>
         </ToolBarTray>
-        <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Top">
-            <controls:Input Text="{lex:Loc Name}" Value="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged}"/>
-            <controls:Input Text="{lex:Loc Teams}" Options="{Binding Teams}"/>
-            <controls:Input Text="{lex:Loc Roles}" Options="{Binding Roles}"/>
-        </StackPanel>
+        <UniformGrid Grid.Row="1" Columns="2"  VerticalAlignment="Top">
+            <controls:TextInput Text="{lex:Loc Name}" Value="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged}"
+                                Margin="24"/>
+            <UniformGrid Columns="1" Margin="24">
+                <controls:ListInput Text="{lex:Loc Teams}" ItemsSource="{Binding Teams}"
+                                    VerticalAlignment="Top"/>
+                <controls:ListInput Text="{lex:Loc Roles}" ItemsSource="{Binding Roles}"
+                                    VerticalAlignment="Top"/>
+            </UniformGrid>
+        </UniformGrid>
     </Grid>
 </UserControl>

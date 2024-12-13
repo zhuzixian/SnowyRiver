@@ -139,4 +139,7 @@
   <data name="Back" xml:space="preserve">
     <value>Back</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
 </root>

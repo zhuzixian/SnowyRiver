@@ -21,7 +21,7 @@
             </ToolBar>
         </ToolBarTray>
         <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Top">
-            <controls:Input Text="{lex:Loc Name}" Value="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged}"/>
+            <controls:TextInput Text="{lex:Loc Name}" Value="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
     </Grid>
 </UserControl>

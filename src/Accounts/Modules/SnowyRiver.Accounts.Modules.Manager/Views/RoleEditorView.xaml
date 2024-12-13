@@ -20,8 +20,10 @@
             </ToolBar>
         </ToolBarTray>
         <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Top">
-            <controls:Input Text="{lex:Loc Name}" Value="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-            <controls:Input Text="{lex:Loc Permissions}" Options="{Binding Permissions, UpdateSourceTrigger=PropertyChanged}"/>
+            <controls:TextInput Text="{lex:Loc Name}" Value="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            <!--
+            <controls:TextInput Text="{lex:Loc Permissions}" Options="{Binding Permissions, UpdateSourceTrigger=PropertyChanged}"/>
+            -->
         </StackPanel>
     </Grid>
 </UserControl>

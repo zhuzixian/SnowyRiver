@@ -21,9 +21,7 @@
         </ToolBarTray>
         <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Top">
             <controls:TextInput Text="{lex:Loc Name}" Value="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-            <!--
-            <controls:TextInput Text="{lex:Loc Permissions}" Options="{Binding Permissions, UpdateSourceTrigger=PropertyChanged}"/>
-            -->
+            <controls:ListInput Header="{lex:Loc Roles}" ItemsSource="{Binding Permissions}"/>
         </StackPanel>
     </Grid>
 </UserControl>

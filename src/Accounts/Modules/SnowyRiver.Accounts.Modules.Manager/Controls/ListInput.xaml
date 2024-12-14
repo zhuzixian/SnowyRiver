@@ -3,46 +3,41 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
              xmlns:controls="clr-namespace:SnowyRiver.Accounts.Modules.Manager.Controls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <TextBlock Text="{Binding Text}" Margin="0, 24"/>
-        <Grid Grid.Row="1">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <TextBox Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
+    <StackPanel Orientation="Vertical">
+        <TextBlock Text="{Binding Header, RelativeSource={RelativeSource AncestorType=controls:ListInput}}" 
+                   HorizontalAlignment="Center" 
+                   Height="{Binding HeaderHeight, RelativeSource={RelativeSource AncestorType=controls:ListInput}}"
+                   FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=controls:ListInput}}"/>
+        <TextBox Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
                     RelativeSource={RelativeSource AncestorType=controls:ListInput}}"
                     TextChanged="SearchTextBox_OnTextChanged"
                     VerticalContentAlignment="Center"
                     mah:TextBoxHelper.ClearTextButton="True"
                     mah:TextBoxHelper.Watermark="{lex:Loc Search}" />
-                <ListBox Grid.Row="1" Margin="0, 24, 0, 0"
-                              ItemsSource="{Binding SearchResult, RelativeSource={RelativeSource AncestorType=controls:ListInput}}">
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <CheckBox Margin="0, 6" Name="CheckBox" 
+        <ListBox Margin="0, 24, 0, 0"
+                              ItemsSource="{Binding SearchResult, RelativeSource={RelativeSource AncestorType=controls:ListInput}}"
+                              SelectionMode="Multiple">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                    <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox Margin="0, 6" Name="CheckBox" 
                                               Content="{Binding Name}"
                                               VerticalAlignment="Center" VerticalContentAlignment="Center"
-                                              IsChecked="{Binding IsSelected, Mode=TwoWay}"/>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </Grid>
-        </Grid>
-    </Grid>
+                                              IsChecked="{Binding IsSelected, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                                              FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=controls:ListInput}}"
+                                              materialDesign:CheckBoxAssist.CheckBoxSize="{Binding FontSize, RelativeSource={RelativeSource Self}}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </StackPanel>
 </UserControl>

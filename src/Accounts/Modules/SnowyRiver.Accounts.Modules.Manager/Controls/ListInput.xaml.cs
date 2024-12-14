@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using SnowyRiver.Accounts.Modules.Manager.Models;
 
 namespace SnowyRiver.Accounts.Modules.Manager.Controls;
@@ -20,13 +18,22 @@ public partial class ListInput:INotifyPropertyChanged
         InitializeComponent();
     }
 
-    public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
-        nameof(Text), typeof(string), typeof(ListInput), new PropertyMetadata(default(string)));
+    public static readonly DependencyProperty HeaderHeightProperty = DependencyProperty.Register(
+        nameof(HeaderHeight), typeof(double), typeof(ListInput), new PropertyMetadata(double.NaN));
 
-    public string Text
+    public double HeaderHeight
     {
-        get => (string)GetValue(TextProperty);
-        set => SetValue(TextProperty, value);
+        get => (double)GetValue(HeaderHeightProperty);
+        set => SetValue(HeaderHeightProperty, value);
+    }
+
+    public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
+        nameof(Header), typeof(string), typeof(ListInput), new PropertyMetadata(default(string)));
+
+    public string Header
+    {
+        get => (string)GetValue(HeaderProperty);
+        set => SetValue(HeaderProperty, value);
     }
 
     public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register(

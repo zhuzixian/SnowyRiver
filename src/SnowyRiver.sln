@@ -79,6 +79,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OpenCV", "OpenCV", "{077FF3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.OpenCvSharp.Extensions", "OpenCv\SnowyRiver.OpenCvSharp.Extensions\SnowyRiver.OpenCvSharp.Extensions.csproj", "{7DB19A28-45FB-4D1D-A41F-79D6C7004E21}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modbus", "Modbus", "{BE352F3F-EB14-4C0E-8CFA-0A0B5065BB62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.Modbus.FluentModbus", "Modbus\SnowyRiver.Modbus.FluentModbus\SnowyRiver.Modbus.FluentModbus.csproj", "{3A3DF562-6423-4F07-853F-B372C3EC669E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -189,6 +193,10 @@ Global
 		{7DB19A28-45FB-4D1D-A41F-79D6C7004E21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DB19A28-45FB-4D1D-A41F-79D6C7004E21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DB19A28-45FB-4D1D-A41F-79D6C7004E21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A3DF562-6423-4F07-853F-B372C3EC669E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A3DF562-6423-4F07-853F-B372C3EC669E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A3DF562-6423-4F07-853F-B372C3EC669E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A3DF562-6423-4F07-853F-B372C3EC669E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -226,6 +234,7 @@ Global
 		{52A1E554-FEE4-4BD4-A89E-1DDBC91597C2} = {40B0B2A3-0A39-4C3C-8DEE-41808991D21F}
 		{ABBB33E0-132F-494C-95FF-AD2444CCBF10} = {3B2886EE-1186-4C50-B616-1304A9C129FB}
 		{7DB19A28-45FB-4D1D-A41F-79D6C7004E21} = {077FF342-B5C1-4ACB-9F6B-D064DCC9AF3C}
+		{3A3DF562-6423-4F07-853F-B372C3EC669E} = {BE352F3F-EB14-4C0E-8CFA-0A0B5065BB62}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E75A6A63-872F-41A5-80C6-C3FA93CCA7AC}

@@ -11,11 +11,6 @@ namespace SnowyRiver.Accounts.Modules.Manager
         public void OnInitialized(IContainerProvider containerProvider)
         {
             regionManager.RequestNavigate(AccountsRegionNames.AccountsManagerViewRegion, ViewNames.MainView);
-
-            regionManager.RequestNavigate(RegionNames.UsersManagerViewRegion, ViewNames.UsersManagerView);
-            regionManager.RequestNavigate(RegionNames.TeamsManagerViewRegion, ViewNames.TeamsManagerView);
-            regionManager.RequestNavigate(RegionNames.RolesManagerViewRegion, ViewNames.RolesManagerView);
-            regionManager.RequestNavigate(RegionNames.PermissionsManagerViewRegion, ViewNames.PermissionsManagerView);
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

@@ -1,8 +1,8 @@
 ﻿namespace SnowyRiver.Accounts.Modules.Manager;
-internal class ViewNames
+public class ViewNames
 {
     protected const string Prefix = "SnowyRiver.Accounts.Modules.Manager.ViewNames";
-    internal const string MainView = Prefix + nameof(MainView);
+    public const string MainView = Prefix + nameof(MainView);
     internal const string UserEditorView = Prefix + nameof(UserEditorView);
     internal const string UsersManagerView = Prefix + nameof(UsersManagerView);
     internal const string TeamsManagerView = Prefix + nameof(TeamsManagerView);

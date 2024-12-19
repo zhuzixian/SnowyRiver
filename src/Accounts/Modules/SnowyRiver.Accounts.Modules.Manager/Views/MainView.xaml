@@ -22,6 +22,9 @@
         <TabControl materialDesign:NavigationRailAssist.ShowSelectionBackground="True" SnapsToDevicePixels="True" 
                  Style="{StaticResource MaterialDesignNavigationRailTabControl}" 
                  TabStripPlacement="Left" >
+            <TabControl.Resources>
+                <materialDesign:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            </TabControl.Resources>
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Width="auto" Height="auto">
@@ -32,7 +35,7 @@
                 </TabItem.Header>
                 <ContentControl prism:RegionManager.RegionName="{x:Static manager:RegionNames.UsersManagerViewRegion}"/>
             </TabItem>
-            <TabItem>
+            <TabItem Visibility="{Binding TeamsEnable, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TabItem.Header>
                     <StackPanel Width="auto" Height="auto">
                         <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" 

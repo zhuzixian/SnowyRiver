@@ -5,12 +5,18 @@
                            xmlns:lex="http://wpflocalizeextension.codeplex.com"
                            xmlns:windows="clr-namespace:SnowyRiver.WPF.MaterialDesignInPrism.Windows;assembly=SnowyRiver.WPF.MaterialDesignInPrism"
                            xmlns:core="clr-namespace:SnowyRiver.Accounts.Core;assembly=SnowyRiver.Accounts.Core"
+                           xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
                            prism:ViewModelLocator.AutoWireViewModel="True"
                            lex:LocalizeDictionary.DesignCulture="zh-CN"
                            lex:ResxLocalizationProvider.DefaultAssembly="SnowyRiver.Accounts.Manager"
                            lex:ResxLocalizationProvider.DefaultDictionary="Resources"
                            Title="{lex:Loc ProductName}" Height="350" Width="525" 
                            WindowState="Maximized">
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:InvokeCommandAction Command="{Binding HandleLoadedCommand}" />
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
     <Grid>
         <ContentControl prism:RegionManager.RegionName="{x:Static core:AccountsRegionNames.AccountsManagerViewRegion}" />
     </Grid>

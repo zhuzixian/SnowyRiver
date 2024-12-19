@@ -6,11 +6,10 @@ using SnowyRiver.Accounts.Modules.Manager.Views;
 
 namespace SnowyRiver.Accounts.Modules.Manager
 {
-    public class AccountManagerModule(IRegionManager regionManager): IModule
+    public class AccountManagerModule: IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            regionManager.RequestNavigate(AccountsRegionNames.AccountsManagerViewRegion, ViewNames.MainView);
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

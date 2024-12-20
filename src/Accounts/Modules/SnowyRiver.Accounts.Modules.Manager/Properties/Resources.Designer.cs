@@ -115,6 +115,15 @@ namespace SnowyRiver.Accounts.Modules.Manager.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Password 的本地化字符串。
+        /// </summary>
+        internal static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Permissions 的本地化字符串。
         /// </summary>
         internal static string Permissions {

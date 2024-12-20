@@ -22,10 +22,16 @@
         <UniformGrid Grid.Row="1" Columns="2">
             <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="64">
                 <controls:TextInput Text="{lex:Loc Name}" Value="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged}"/>
+                <controls:PasswordInput Text="{lex:Loc Password}" Value="{Binding Model.Password, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
             <UniformGrid Columns="1" Margin="64">
+                <UniformGrid.Resources>
+                    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+                </UniformGrid.Resources>
                 <controls:ListInput Header="{lex:Loc Roles}" ItemsSource="{Binding Roles}"/>
-                <controls:ListInput Header="{lex:Loc Teams}" ItemsSource="{Binding Teams}"/>
+                <controls:ListInput Header="{lex:Loc Teams}" 
+                                    Visibility="{Binding TeamsEnable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                    ItemsSource="{Binding Teams}"/>
             </UniformGrid>
         </UniformGrid>
     </Grid>

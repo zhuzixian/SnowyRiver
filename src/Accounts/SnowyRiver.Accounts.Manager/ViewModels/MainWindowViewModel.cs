@@ -17,7 +17,8 @@ public class MainWindowViewModel(IRegionManager regionManager) : RegionViewModel
     {
         var navigationParameters = new NavigationParameters
         {
-            { nameof(MainViewModel.TeamsEnable), false }
+            { nameof(MainViewModel.TeamsEnable), false },
+            { nameof(MainViewModel.PermissionsEnable), false }
         };
         RegionManager.RequestNavigate(AccountsRegionNames.AccountsManagerViewRegion, ViewNames.MainView, navigationParameters);
     }

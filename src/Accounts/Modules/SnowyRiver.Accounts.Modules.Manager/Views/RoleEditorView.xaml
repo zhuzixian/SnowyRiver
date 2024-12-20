@@ -19,9 +19,11 @@
                                                          Command="{Binding SaveCommand}"/>
             </ToolBar>
         </ToolBarTray>
-        <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Top">
-            <controls:TextInput Text="{lex:Loc Name}" Value="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-            <controls:ListInput Header="{lex:Loc Roles}" ItemsSource="{Binding Permissions}"/>
-        </StackPanel>
+        <UniformGrid Grid.Row="1" Columns="2">
+            <controls:TextInput Text="{lex:Loc Name}" Value="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                Margin="64"/>
+            <controls:ListInput Header="{lex:Loc Roles}" ItemsSource="{Binding Permissions}"
+                                Margin="64"/>
+        </UniformGrid>
     </Grid>
 </UserControl>

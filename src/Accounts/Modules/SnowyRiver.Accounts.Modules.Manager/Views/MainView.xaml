@@ -28,8 +28,7 @@
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Width="auto" Height="auto">
-                        <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" 
-                                          Kind="Account" />
+                        <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="Account" />
                         <TextBlock HorizontalAlignment="Center" Text="{lex:Loc Users}" />
                     </StackPanel>
                 </TabItem.Header>
@@ -54,7 +53,7 @@
                 </TabItem.Header>
                 <ContentControl prism:RegionManager.RegionName="{x:Static manager:RegionNames.RolesManagerViewRegion}"/>
             </TabItem>
-            <TabItem>
+            <TabItem Visibility="{Binding PermissionsEnable, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TabItem.Header>
                     <StackPanel Width="auto" Height="auto">
                         <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="ShieldKey" />

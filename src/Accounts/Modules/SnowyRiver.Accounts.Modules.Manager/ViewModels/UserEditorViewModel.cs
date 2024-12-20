@@ -23,6 +23,11 @@ public class UserEditorViewModel(
     {
         try
         {
+            if (navigationContext.Parameters.TryGetValue<bool>(nameof(TeamsEnable), out var teamsEnable))
+            {
+                TeamsEnable = teamsEnable;
+            }
+
             base.OnNavigatedTo(navigationContext);
 
             var roleRepository = UnitOfWork.Repository<RoleEntity>();
@@ -98,6 +103,13 @@ public class UserEditorViewModel(
         }
 
         await Task.CompletedTask;
+    }
+
+    private bool _teamsEnable = true;
+    public bool TeamsEnable
+    {
+        get => _teamsEnable;
+        set => SetProperty(ref _teamsEnable, value);
     }
 
     private IList<RoleEntity> _roleEntities = [];

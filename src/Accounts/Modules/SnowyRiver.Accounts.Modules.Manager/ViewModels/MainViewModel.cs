@@ -1,4 +1,5 @@
-﻿using Prism.Navigation.Regions;
+﻿using Prism.Navigation;
+using Prism.Navigation.Regions;
 using SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
@@ -12,11 +13,25 @@ public class MainViewModel(IRegionManager regionManager) : RegionViewModelBase(r
         {
             TeamsEnable = teamsEnable;
         }
+        if (navigationContext.Parameters.TryGetValue<bool>(nameof(PermissionsEnable), out var permissionsEnable))
+        {
+            PermissionsEnable = permissionsEnable;
+        }
 
-        RegionManager.RequestNavigate(RegionNames.UsersManagerViewRegion, ViewNames.UsersManagerView);
-        RegionManager.RequestNavigate(RegionNames.TeamsManagerViewRegion, ViewNames.TeamsManagerView);
+        var navigationParameters = new NavigationParameters
+        {
+            { nameof(teamsEnable), teamsEnable }
+        };
+        RegionManager.RequestNavigate(RegionNames.UsersManagerViewRegion, ViewNames.UsersManagerView, navigationParameters);
         RegionManager.RequestNavigate(RegionNames.RolesManagerViewRegion, ViewNames.RolesManagerView);
-        RegionManager.RequestNavigate(RegionNames.PermissionsManagerViewRegion, ViewNames.PermissionsManagerView);
+        if (TeamsEnable)
+        {
+            RegionManager.RequestNavigate(RegionNames.TeamsManagerViewRegion, ViewNames.TeamsManagerView);
+        }
+        if (permissionsEnable)
+        {
+            RegionManager.RequestNavigate(RegionNames.PermissionsManagerViewRegion, ViewNames.PermissionsManagerView);
+        }
     }
 
     private bool _teamsEnable = true;
@@ -24,5 +39,12 @@ public class MainViewModel(IRegionManager regionManager) : RegionViewModelBase(r
     {
         get => _teamsEnable;
         set => SetProperty(ref _teamsEnable, value);
+    }
+
+    private bool _permissionsEnable = true;
+    public bool PermissionsEnable
+    {
+        get => _permissionsEnable;
+        set => SetProperty(ref _permissionsEnable, value);
     }
 }

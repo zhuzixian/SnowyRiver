@@ -53,7 +53,7 @@ public abstract class ManagerViewModel<TModel, TEntity>(IUnitOfWork unitOfWork,
         await NavigateToPermissionEditorViewAsync(new TModel());
     }
 
-    private async Task NavigateToPermissionEditorViewAsync(TModel model)
+    protected virtual async Task NavigateToPermissionEditorViewAsync(TModel model)
     {
         var parameters = new NavigationParameters
         {

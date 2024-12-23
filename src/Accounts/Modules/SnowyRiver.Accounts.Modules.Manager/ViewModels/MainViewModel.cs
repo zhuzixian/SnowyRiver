@@ -1,13 +1,12 @@
-﻿using Prism.Ioc;
-using Prism.Navigation;
+﻿using Prism.Navigation;
 using Prism.Navigation.Regions;
 using SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
 
-public class MainViewModel() : RegionViewModelBase(null)
+public class MainViewModel(IRegionManager regionManager) : RegionViewModelBase(regionManager)
 {
-/*    public override void OnNavigatedTo(NavigationContext navigationContext)
+    public override void OnNavigatedTo(NavigationContext navigationContext)
     {
         base.OnNavigatedTo(navigationContext);
         if (navigationContext.Parameters.TryGetValue<bool>(nameof(TeamsEnable), out var teamsEnable))
@@ -34,7 +33,7 @@ public class MainViewModel() : RegionViewModelBase(null)
             RegionManager.RequestNavigate(RegionNames.PermissionsManagerViewRegion, ViewNames.PermissionsManagerView);
         }
     }
-*/
+
     private bool _teamsEnable = true;
     public bool TeamsEnable
     {

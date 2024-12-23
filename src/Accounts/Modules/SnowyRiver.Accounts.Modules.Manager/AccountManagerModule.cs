@@ -1,7 +1,5 @@
 ﻿using Prism.Ioc;
 using Prism.Modularity;
-using Prism.Navigation.Regions;
-using SnowyRiver.Accounts.Core;
 using SnowyRiver.Accounts.Modules.Manager.Views;
 
 namespace SnowyRiver.Accounts.Modules.Manager
@@ -16,7 +14,7 @@ namespace SnowyRiver.Accounts.Modules.Manager
         {
             containerRegistry.RegisterForNavigation<MainView>(ViewNames.MainView);
 
-/*            containerRegistry.RegisterForNavigation<UserEditorView>(ViewNames.UserEditorView);
+            containerRegistry.RegisterForNavigation<UserEditorView>(ViewNames.UserEditorView);
             containerRegistry.RegisterForNavigation<UsersManagerView>(ViewNames.UsersManagerView);
             containerRegistry.RegisterForNavigation<TeamEditorView>(ViewNames.TeamEditorView);
             containerRegistry.RegisterForNavigation<TeamsManagerView>(ViewNames.TeamsManagerView);
@@ -24,6 +22,6 @@ namespace SnowyRiver.Accounts.Modules.Manager
             containerRegistry.RegisterForNavigation<RoleEditorView>(ViewNames.RoleEditorView);
             containerRegistry.RegisterForNavigation<PermissionsManagerView>(ViewNames.PermissionsManagerView);
             containerRegistry.RegisterForNavigation<PermissionEditorView>(ViewNames.PermissionEditorView);
-*/        }
+        }
     }
 }

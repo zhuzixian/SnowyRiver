@@ -1,10 +1,11 @@
-﻿using Prism.Navigation;
+﻿using Prism.Ioc;
+using Prism.Navigation;
 using Prism.Navigation.Regions;
 using SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
 
-public class MainViewModel(IRegionManager regionManager) : RegionViewModelBase(regionManager)
+public class MainViewModel() : RegionViewModelBase(null)
 {
 /*    public override void OnNavigatedTo(NavigationContext navigationContext)
     {

@@ -19,6 +19,8 @@
             <RowDefinition  Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <TextBlock Text="123412412"></TextBlock>
+        <!--
         <TabControl materialDesign:NavigationRailAssist.ShowSelectionBackground="True" SnapsToDevicePixels="True" 
                  Style="{StaticResource MaterialDesignNavigationRailTabControl}" 
                  TabStripPlacement="Left" >
@@ -68,5 +70,6 @@
                 <TextBlock Text="{Binding Authentication.User.Name, StringFormat=当前用户：{0}}" />
             </StatusBarItem>
         </StatusBar>
+        -->
     </Grid>
 </UserControl>

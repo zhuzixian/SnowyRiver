@@ -19,7 +19,7 @@
                 <controls:ToolBarIcoTextButton Kind="ShieldPlus" Text="{lex:Loc Create}" 
                                                Command="{Binding CreateCommand}"/>
                 <controls:ToolBarIcoTextButton Kind="ShieldEdit" Text="{lex:Loc Modify}"
-                                               Command="{Binding EditCommand}"/>
+                                               Command="{Binding UpdateCommand}"/>
                 <controls:ToolBarIcoTextButton Kind="ShieldRemove" Text="{lex:Loc Delete}"
                                                Command="{Binding DeleteCommand}"/>
             </ToolBar>

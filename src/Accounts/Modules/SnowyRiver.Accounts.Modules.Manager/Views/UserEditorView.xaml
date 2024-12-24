@@ -21,8 +21,8 @@
         </ToolBarTray>
         <UniformGrid Grid.Row="1" Columns="2">
             <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="64">
-                <controls:TextInput Text="{lex:Loc Name}" Value="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged}"/>
-                <controls:PasswordInput Text="{lex:Loc Password}" Value="{Binding Model.Password, UpdateSourceTrigger=PropertyChanged}"/>
+                <controls:TextInput Text="{lex:Loc Name}" Value="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                <controls:PasswordInput Text="{lex:Loc Password}" Value="{Binding Model.NewPassword, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
             </StackPanel>
             <UniformGrid Columns="1" Margin="64">
                 <UniformGrid.Resources>

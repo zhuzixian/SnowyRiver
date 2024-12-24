@@ -22,7 +22,7 @@
         <UniformGrid Grid.Row="1" Columns="2">
             <controls:TextInput Text="{lex:Loc Name}" Value="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                 Margin="64"/>
-            <controls:ListInput Header="{lex:Loc Roles}" ItemsSource="{Binding Permissions}"
+            <controls:ListInput Header="{lex:Loc Permissions}" ItemsSource="{Binding Permissions}"
                                 Margin="64"/>
         </UniformGrid>
     </Grid>

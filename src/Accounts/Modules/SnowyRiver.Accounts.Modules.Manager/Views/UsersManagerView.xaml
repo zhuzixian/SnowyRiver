@@ -5,6 +5,7 @@
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:controls="clr-namespace:SnowyRiver.WPF.MaterialDesignInPrism.Controls;assembly=SnowyRiver.WPF.MaterialDesignInPrism"
+             xmlns:views="clr-namespace:SnowyRiver.Accounts.Modules.Manager.Views"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
         <Grid.RowDefinitions>
@@ -19,9 +20,10 @@
                 <controls:ToolBarIcoTextButton Text="{lex:Loc Delete}" Kind="Delete" Command="{Binding DeleteCommand}"/>
             </ToolBar>
         </ToolBarTray>
-        <DataGrid Grid.Row="1" ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedModel}"
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Models}" SelectedItem="{Binding SelectedModel}"
               AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Resources>
+                <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
                 <Style TargetType="ListBox" BasedOn="{StaticResource {x:Type ListBox}}">
                     <Setter Property="VerticalAlignment" Value="Center"/>
                     <Setter Property="materialDesign:ListBoxItemAssist.ShowSelection" Value="False"/>
@@ -42,7 +44,9 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="{lex:Loc Teams}" Width="2*">
+                <DataGridTemplateColumn Header="{lex:Loc Teams}" Width="2*"
+                                        Visibility="{Binding DataContext.TeamsEnable, RelativeSource={RelativeSource AncestorType=views:UsersManagerView},
+                        Converter={StaticResource BooleanToVisibilityConverter}}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ListBox ItemsSource="{Binding Teams}" DisplayMemberPath="Name" />

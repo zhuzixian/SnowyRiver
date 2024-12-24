@@ -32,13 +32,13 @@ public abstract class ManagerViewModel<TModel, TEntity>(IUnitOfWork unitOfWork,
         }
     }
 
-    private DelegateCommand? _editCommand;
-    public DelegateCommand EditCommand =>
-        _editCommand ??= new DelegateCommand(async () => await EditAsync(),
+    private DelegateCommand? _updateCommand;
+    public DelegateCommand UpdateCommand =>
+        _updateCommand ??= new DelegateCommand(async () => await UpdateAsync(),
             () => SelectedModel != default)
             .ObservesProperty(() => SelectedModel);
 
-    private async Task EditAsync()
+    private async Task UpdateAsync()
     {
         await NavigateToPermissionEditorViewAsync(SelectedModel!);
     }

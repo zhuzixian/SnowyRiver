@@ -7,6 +7,7 @@ using AutoMapper;
 using EntityFrameworkCore.UnitOfWork.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Prism.Navigation.Regions;
+using SnowyRiver.Accounts.Domain.Helpers;
 using SnowyRiver.Accounts.Modules.Manager.Models;
 using UserEntity = SnowyRiver.Accounts.Domain.Entities.User;
 using RoleEntity = SnowyRiver.Accounts.Domain.Entities.Role;
@@ -68,6 +69,16 @@ public class UserEditorViewModel(
     {
         var entity =  await Task.FromResult(Mapper.Map<UserEntity>(model));
         await MapToEntityAsync(entity);
+        if (string.IsNullOrWhiteSpace(entity.PasswordSalt))
+        {
+            entity.PasswordSalt = PasswordHelper.CreateSalt();
+        }
+
+        if (!string.IsNullOrWhiteSpace(model.NewPassword))
+        {
+            entity.Password = PasswordHelper.CreatePassword(model.NewPassword, entity.PasswordSalt);
+        }
+
         return entity;
     }
 
@@ -76,6 +87,15 @@ public class UserEditorViewModel(
     {
         await base.MapToEntityAsync(model, entity);
         entity.Name = model.Name;
+        if (string.IsNullOrWhiteSpace(entity.PasswordSalt))
+        {
+            entity.PasswordSalt = PasswordHelper.CreateSalt();
+        }
+
+        if (!string.IsNullOrWhiteSpace(model.NewPassword))
+        {
+            entity.Password = PasswordHelper.CreatePassword(model.NewPassword, entity.PasswordSalt);
+        }
         await MapToEntityAsync(entity);
     }
 
@@ -102,6 +122,12 @@ public class UserEditorViewModel(
             }
         }
 
+        if (entity.UserId == 0)
+        {
+            var repository = UnitOfWork.Repository<UserEntity>();
+            var maxUserId = await repository.MaxAsync(x => x.UserId);
+            entity.UserId = maxUserId + 1;
+        }
         await Task.CompletedTask;
     }
 

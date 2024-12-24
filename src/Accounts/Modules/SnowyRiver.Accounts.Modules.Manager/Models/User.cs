@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using SnowyRiver.Accounts.Modules.Manager.Views;
 
 namespace SnowyRiver.Accounts.Modules.Manager.Models;
 public class User : EntityModel
@@ -11,6 +10,13 @@ public class User : EntityModel
         set => SetProperty(ref _password, value);
     }
 
+    private string _newPassword = string.Empty;
+    public string NewPassword
+    {
+        get => _newPassword;
+        set => SetProperty(ref _newPassword, value);
+    }
+
     private string _passwordSalt = string.Empty;
     public string PasswordSalt
     {
@@ -18,8 +24,8 @@ public class User : EntityModel
         set => SetProperty(ref _passwordSalt, value);
     }
 
-    private long _userId;
-    public long UserId
+    private int _userId;
+    public int UserId
     {
         get => _userId;
         set => SetProperty(ref _userId, value);

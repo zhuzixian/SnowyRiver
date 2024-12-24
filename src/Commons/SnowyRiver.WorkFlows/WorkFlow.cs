@@ -6,29 +6,29 @@ public class WorkFlow<TStep>: NotifyPropertyChangedObject
      where TStep : WorkStep
 {
     private string _name = string.Empty;
-    public string Name
+    public virtual string Name
     {
         get => _name;
         set => Set(ref _name, value);
     }
 
-    private ObservableCollection<TStep> _steps = [];
+    private  ObservableCollection<TStep> _steps = [];
 
-    public ObservableCollection<TStep> Steps
+    public virtual ObservableCollection<TStep> Steps
     {
         get => _steps;
         set => Set(ref _steps, value);
     }
 
     private DateTime? _startTime;
-    public DateTime? StartTime
+    public virtual DateTime? StartTime
     {
         get => _startTime;
         set => Set(ref _startTime, value);
     }
 
     private DateTime? _endTime;
-    public DateTime? EndTime
+    public virtual DateTime? EndTime
     {
         get => _endTime;
         set => Set(ref _endTime, value);

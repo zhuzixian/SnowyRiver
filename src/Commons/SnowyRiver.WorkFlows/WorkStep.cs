@@ -11,28 +11,28 @@ public class WorkStep : NotifyPropertyChangedObject
     }
 
     private string _name = string.Empty;
-    public string Name
+    public virtual string Name
     {
         get => _name;
         set => Set(ref _name, value);
     }
 
     private WorkStepState _state;
-    public WorkStepState State
+    public virtual WorkStepState State
     {
         get => _state;
         set => Set(ref _state, value);
     }
 
     private DateTime? _startTime;
-    public DateTime? StartTime
+    public virtual DateTime? StartTime
     {
         get => _startTime;
         set => Set(ref _startTime, value);
     }
 
     private DateTime? _endTime;
-    public DateTime? EndTime
+    public virtual DateTime? EndTime
     {
         get => _endTime;
         set => Set(ref _endTime, value);

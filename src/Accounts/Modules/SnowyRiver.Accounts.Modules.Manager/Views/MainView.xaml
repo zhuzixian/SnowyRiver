@@ -21,7 +21,7 @@
         </Grid.RowDefinitions>
         <TabControl materialDesign:NavigationRailAssist.ShowSelectionBackground="True" SnapsToDevicePixels="True" 
                  Style="{StaticResource MaterialDesignNavigationRailTabControl}" 
-                 TabStripPlacement="Left" >
+                 TabStripPlacement="Left"   materialDesign:ColorZoneAssist.Mode="Standard">
             <TabControl.Resources>
                 <materialDesign:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
             </TabControl.Resources>

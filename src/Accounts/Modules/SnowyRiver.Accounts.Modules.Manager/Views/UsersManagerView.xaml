@@ -8,6 +8,9 @@
              xmlns:views="clr-namespace:SnowyRiver.Accounts.Modules.Manager.Views"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
+        <Grid.Resources>
+            <FrameworkElement x:Key="ProxyElement" DataContext="{Binding}"/>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -20,42 +23,45 @@
                 <controls:ToolBarIcoTextButton Text="{lex:Loc Delete}" Kind="Delete" Command="{Binding DeleteCommand}"/>
             </ToolBar>
         </ToolBarTray>
-        <DataGrid Grid.Row="1" ItemsSource="{Binding Models}" SelectedItem="{Binding SelectedModel}"
-              AutoGenerateColumns="False" IsReadOnly="True">
-            <DataGrid.Resources>
-                <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-                <Style TargetType="ListBox" BasedOn="{StaticResource {x:Type ListBox}}">
-                    <Setter Property="VerticalAlignment" Value="Center"/>
-                    <Setter Property="materialDesign:ListBoxItemAssist.ShowSelection" Value="False"/>
-                    <Setter Property="DisplayMemberPath" Value="Name"/>
-                </Style>
-            </DataGrid.Resources>
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="{lex:Loc SortId}" Binding="{Binding SortId}"   
-                                Width="*"/>
-                <DataGridTextColumn Header="{lex:Loc Name}" Binding="{Binding Name}" 
-                                Width="2*" />
-                <DataGridTextColumn Header="{lex:Loc UserId}" Binding="{Binding UserId}"
-                                Width="*"/>
-                <DataGridTemplateColumn Header="{lex:Loc Roles}" Width="2*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <ListBox ItemsSource="{Binding Roles}" DisplayMemberPath="Name"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="{lex:Loc Teams}" Width="2*"
-                                        Visibility="{Binding DataContext.TeamsEnable, RelativeSource={RelativeSource AncestorType=views:UsersManagerView},
-                        Converter={StaticResource BooleanToVisibilityConverter}}">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <ListBox ItemsSource="{Binding Teams}" DisplayMemberPath="Name" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="{lex:Loc CreationTime}" Binding="{Binding CreationTime,StringFormat=yyyy-MM-dd HH:mm:ss}"   
-                                Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <Grid Grid.Row="1">
+            <ContentControl Visibility="Collapsed" Content="{StaticResource ProxyElement}"/>
+            <DataGrid ItemsSource="{Binding Models}" SelectedItem="{Binding SelectedModel}" 
+                      AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Resources>
+                    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+                    <Style TargetType="ListBox" BasedOn="{StaticResource {x:Type ListBox}}">
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="materialDesign:ListBoxItemAssist.ShowSelection" Value="False"/>
+                        <Setter Property="DisplayMemberPath" Value="Name"/>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="{lex:Loc SortId}" Binding="{Binding SortId}"   
+                        Width="*"/>
+                    <DataGridTextColumn Header="{lex:Loc Name}" Binding="{Binding Name}" 
+                        Width="2*" />
+                    <DataGridTextColumn Header="{lex:Loc UserId}" Binding="{Binding UserId}"
+                        Width="*"/>
+                    <DataGridTemplateColumn Header="{lex:Loc Roles}" Width="2*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ListBox ItemsSource="{Binding Roles}" DisplayMemberPath="Name"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="{lex:Loc Teams}" Width="2*"
+                                            Visibility="{Binding DataContext.TeamsEnable,Source={StaticResource ProxyElement},
+                                                Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ListBox ItemsSource="{Binding Teams}" DisplayMemberPath="Name" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="{lex:Loc CreationTime}" Binding="{Binding CreationTime,StringFormat=yyyy-MM-dd HH:mm:ss}"   
+                        Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </UserControl>

@@ -16,10 +16,12 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.0" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="5.3.15" />
     <PackageReference Include="Prism.DryIoc" Version="9.0.537" />
     <PackageReference Include="WPFLocalizeExtension" Version="3.10.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Commons\SnowyRiver.Commons\SnowyRiver.Commons.csproj" />
     <ProjectReference Include="..\..\WPF\SnowyRiver.WPF.MaterialDesignInPrism\SnowyRiver.WPF.MaterialDesignInPrism.csproj" />
     <ProjectReference Include="..\Modules\SnowyRiver.Accounts.Modules.Manager\SnowyRiver.Accounts.Modules.Manager.csproj" />
     <ProjectReference Include="..\SnowyRiver.Accouns.Mananger.EntityFramework\SnowyRiver.Accounts.Manager.EntityFramework.csproj" />

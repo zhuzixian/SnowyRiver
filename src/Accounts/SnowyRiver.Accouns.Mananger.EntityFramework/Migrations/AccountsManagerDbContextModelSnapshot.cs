@@ -100,6 +100,9 @@ namespace SnowyRiver.Accounts.Manager.EntityFramework.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("Scope")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.ToTable("Accounts_Roles", (string)null);

@@ -20,6 +20,6 @@ public class MainWindowViewModel(IRegionManager regionManager) : RegionViewModel
             { nameof(MainViewModel.TeamsEnable), false },
             { nameof(MainViewModel.PermissionsEnable), false }
         };
-        RegionManager.RequestNavigate(AccountsRegionNames.AccountsManagerViewRegion, ViewNames.MainView, navigationParameters);
+        RegionManager.RequestNavigate(AccountsRegionNames.AccountsManagerViewRegion, Modules.Manager.ViewNames.MainView, navigationParameters);
     }
 }

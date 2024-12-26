@@ -70,6 +70,15 @@ namespace SnowyRiver.Accounts.Modules.Manager.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Cancel 的本地化字符串。
+        /// </summary>
+        internal static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Create 的本地化字符串。
         /// </summary>
         internal static string Create {
@@ -97,6 +106,33 @@ namespace SnowyRiver.Accounts.Modules.Manager.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Login 的本地化字符串。
+        /// </summary>
+        internal static string Login {
+            get {
+                return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Please enter the correct username 的本地化字符串。
+        /// </summary>
+        internal static string LoginNotFoundUser {
+            get {
+                return ResourceManager.GetString("LoginNotFoundUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Please enter the correct password 的本地化字符串。
+        /// </summary>
+        internal static string LoginPasswordVerificationFailed {
+            get {
+                return ResourceManager.GetString("LoginPasswordVerificationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Modify 的本地化字符串。
         /// </summary>
         internal static string Modify {
@@ -111,6 +147,15 @@ namespace SnowyRiver.Accounts.Modules.Manager.Properties {
         internal static string Name {
             get {
                 return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Ok 的本地化字符串。
+        /// </summary>
+        internal static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
             }
         }
         

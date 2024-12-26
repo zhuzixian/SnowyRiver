@@ -9,7 +9,6 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
              xmlns:manager="clr-namespace:SnowyRiver.Accounts.Modules.Manager"
-             xmlns:views="clr-namespace:SnowyRiver.Accounts.Modules.Manager.Views"
              prism:ViewModelLocator.AutoWireViewModel="True" 
              lex:LocalizeDictionary.DesignCulture="zh-CN"
              lex:ResxLocalizationProvider.DefaultAssembly="SnowyRiver.Accounts.Modules.Manager"

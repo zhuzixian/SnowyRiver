@@ -10,6 +10,12 @@ using EntityFrameworkCore.UnitOfWork.Extensions;
 using SnowyRiver.Accounts.Manager.EntityFramework;
 using System;
 using System.Threading.Tasks;
+using Prism.Dialogs;
+using SnowyRiver.Accounts.Modules.Manager.Services;
+using SnowyRiver.WPF.MaterialDesignInPrism.Service;
+using SnowyRiver.WPF.MaterialDesignInPrism.Windows;
+using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
 
 namespace SnowyRiver.Accounts.Manager
 {
@@ -40,6 +46,9 @@ namespace SnowyRiver.Accounts.Manager
                 }
             }
 
+            var dialogService = ContainerLocator.Container.Resolve<IDialogService>();
+            dialogService.ShowDialog(ViewNames.SplashView);
+
             base.OnInitialized();
         }
 
@@ -51,6 +60,13 @@ namespace SnowyRiver.Accounts.Manager
 
         protected override void ConfigureServices(IServiceCollection services)
         {
+            services.AddLogging(config =>
+            {
+                config.ClearProviders();
+                config.SetMinimumLevel(LogLevel.Trace);
+                config.AddNLog();
+            });
+
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddDbContext<AccountsManagerDbContext>(options => options.AddAccountsManagerOptions());
@@ -60,6 +76,12 @@ namespace SnowyRiver.Accounts.Manager
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.Register<IDialogHostService, DialogHostService>();
+            containerRegistry.RegisterDialogWindow<MaterialDesignMetroDialogWindow>();
+
+            containerRegistry.RegisterDialog<SplashView>(ViewNames.SplashView);
+
+            containerRegistry.RegisterSingleton<IAuthenticationService, AuthenticationService>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

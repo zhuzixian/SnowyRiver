@@ -11,7 +11,7 @@ using SnowyRiver.Accounts.Manager.EntityFramework;
 namespace SnowyRiver.Accounts.Manager.EntityFramework.Migrations
 {
     [DbContext(typeof(AccountsManagerDbContext))]
-    [Migration("20241224145618_Initial")]
+    [Migration("20241226073226_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -102,6 +102,9 @@ namespace SnowyRiver.Accounts.Manager.EntityFramework.Migrations
                         .IsRequired()
                         .HasMaxLength(64)
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Scope")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 

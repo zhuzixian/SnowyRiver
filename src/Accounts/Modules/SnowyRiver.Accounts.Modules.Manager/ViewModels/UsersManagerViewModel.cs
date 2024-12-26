@@ -1,8 +1,6 @@
-﻿using System.Collections.ObjectModel;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AutoMapper;
 using EntityFrameworkCore.UnitOfWork.Interfaces;
-using Prism.Commands;
 using Prism.Navigation;
 using Prism.Navigation.Regions;
 using SnowyRiver.Accounts.Modules.Manager.Models;

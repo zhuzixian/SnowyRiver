@@ -1,4 +1,3 @@
 ﻿namespace SnowyRiver.Accounts.Modules.Manager.Models;
-public class Team : EntityModel
-{
-}
+
+public class Team : EntityModel;

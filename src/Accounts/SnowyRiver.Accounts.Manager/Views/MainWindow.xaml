@@ -6,6 +6,7 @@
                            xmlns:windows="clr-namespace:SnowyRiver.WPF.MaterialDesignInPrism.Windows;assembly=SnowyRiver.WPF.MaterialDesignInPrism"
                            xmlns:core="clr-namespace:SnowyRiver.Accounts.Core;assembly=SnowyRiver.Accounts.Core"
                            xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+                           xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                            prism:ViewModelLocator.AutoWireViewModel="True"
                            lex:LocalizeDictionary.DesignCulture="zh-CN"
                            lex:ResxLocalizationProvider.DefaultAssembly="SnowyRiver.Accounts.Manager"
@@ -17,7 +18,9 @@
             <b:InvokeCommandAction Command="{Binding HandleLoadedCommand}" />
         </b:EventTrigger>
     </b:Interaction.Triggers>
-    <Grid>
-        <ContentControl prism:RegionManager.RegionName="{x:Static core:AccountsRegionNames.AccountsManagerViewRegion}" />
-    </Grid>
+    <materialDesign:DialogHost Identifier="Root">
+        <Grid>
+            <ContentControl prism:RegionManager.RegionName="{x:Static core:AccountsRegionNames.AccountsManagerViewRegion}" />
+        </Grid>
+    </materialDesign:DialogHost>
 </windows:MaterialDesignMetroWindow>

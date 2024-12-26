@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using Prism.Dialogs;
 using Prism.Navigation;
 using Prism.Navigation.Regions;
+using SnowyRiver.Accounts.Modules.Manager.Models;
 using SnowyRiver.Accounts.Modules.Manager.ViewModels;
 using SnowyRiver.Commons;
 using SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
@@ -53,7 +54,7 @@ public class SplashViewModel : DialogVieModel
 
             var loginParameters = new NavigationParameters
             {
-                {nameof(LoginViewModel.NextAction), () => RaiseRequestClose(new DialogResult(ButtonResult.OK))}
+                {nameof(LoginViewModel<User, Role, Team>.NextAction), () => RaiseRequestClose(new DialogResult(ButtonResult.OK))}
             };
             RegionManager.RequestNavigate(RegionNames.SplashViewContentRegion, Modules.Manager.ViewNames.LoginView, loginParameters);
         }

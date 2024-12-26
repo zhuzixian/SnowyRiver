@@ -1,0 +1,115 @@
+﻿using Prism.Commands;
+using Prism.Navigation.Regions;
+using SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
+using System.Threading.Tasks;
+using System;
+using SnowyRiver.Accounts.Modules.Manager.Models;
+using SnowyRiver.Accounts.Modules.Manager.Services;
+using SnowyRiver.WPF.Localized;
+
+namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
+public class LoginViewModel<TUser, TRole, TTeam>(IAuthenticationService<TUser, TRole, TTeam> authenticationService, 
+        IRegionManager regionManager) : RegionViewModelBase(regionManager)
+    where TRole : Role
+    where TTeam : Team
+    where TUser : User<TRole, TTeam>
+{
+    public override void OnNavigatedTo(NavigationContext navigationContext)
+    {
+        if (navigationContext.Parameters.TryGetValue<Action>(nameof(NextAction), out var nextAction))
+        {
+            NextAction = nextAction;
+        }
+
+        base.OnNavigatedTo(navigationContext);
+    }
+
+    public Action? NextAction { get; protected set; }
+
+    private DelegateCommand? _confirmCommand;
+    public DelegateCommand ConfirmCommand => _confirmCommand ??= new DelegateCommand(() => _ = ConfirmAsync(),
+            () => !string.IsNullOrWhiteSpace(UserName) && !string.IsNullOrWhiteSpace(Password))
+        .ObservesProperty(() => UserName)
+        .ObservesProperty(() => Password);
+
+    private bool _isLoggingIn;
+    public bool IsLoggingIn
+    {
+        get => _isLoggingIn;
+        set => SetProperty(ref _isLoggingIn, value);
+    }
+
+    public async Task ConfirmAsync()
+    {
+        try
+        {
+            IsLoggingIn = true;
+            var (isLoginSucceed, loginFailedReason) = await authenticationService.LoginAsync(UserName, Password);
+            if (!isLoginSucceed)
+            {
+                Message = loginFailedReason == LoginFailedReason.NotFoundUser
+                    ? LocalizationProvider.GetLocalizedValueFromCurrentAssembly("LoginNotFoundUser")
+                    : LocalizationProvider.GetLocalizedValueFromCurrentAssembly("LoginPasswordVerificationFailed");
+            }
+            else
+            {
+                NextAction?.Invoke();
+            }
+        }
+        catch (Exception e)
+        {
+            Message = e.Message;
+        }
+        finally
+        {
+            IsLoggingIn = false;
+        }
+    }
+
+    protected virtual async Task HandleNextAsync()
+    {
+        await Task.CompletedTask;
+    }
+
+    private DelegateCommand? _cancelCommand;
+    public DelegateCommand CancelCommand => _cancelCommand ??= new DelegateCommand(Cancel);
+
+    public virtual void Cancel()
+    {
+        Environment.Exit(-1);
+    }
+
+    private string _userName = string.Empty;
+    public string UserName
+    {
+        get => _userName;
+        set
+        {
+            if (SetProperty(ref _userName, value))
+            {
+                Message = string.Empty;
+            }
+        }
+    }
+
+    private string _password = string.Empty;
+    public string Password
+    {
+        get => _password;
+        set
+        {
+            if (SetProperty(ref _password, value))
+            {
+                Message = string.Empty;
+            }
+        }
+    }
+
+    private string _message = string.Empty;
+
+    public string Message
+    {
+        get => _message;
+        set => SetProperty(ref _message, value);
+    }
+}

@@ -4,27 +4,14 @@ using SnowyRiver.WPF.MaterialDesignInPrism.Service;
 namespace SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 public class DialogVieModel : ViewModelBase, IDialogHostAware,IDialogAware
 {
-    public DialogVieModel()
-    {
-        ConfirmCommand = new DelegateCommand(Confirm);
-        CancelCommand = new DelegateCommand(Cancel);
-    }
-    public string IdentifierName { get; set; }
+    public string IdentifierName { get; set; } = string.Empty;
 
-    private DelegateCommand _confirmCommand;
+    private DelegateCommand? _confirmCommand;
 
-    public DelegateCommand ConfirmCommand
-    {
-        get => _confirmCommand;
-        protected set => SetProperty(ref _confirmCommand, value);
-    }
+    public DelegateCommand ConfirmCommand => _confirmCommand ??= new DelegateCommand(Confirm);
 
-    private DelegateCommand _cancelCommand;
-    public DelegateCommand CancelCommand
-    {
-        get => _cancelCommand;
-        set => SetProperty(ref _cancelCommand, value);
-    }
+    private DelegateCommand? _cancelCommand;
+    public DelegateCommand CancelCommand => _cancelCommand ??= new DelegateCommand(Cancel);
 
     public virtual void Cancel()
     {
@@ -69,5 +56,5 @@ public class DialogVieModel : ViewModelBase, IDialogHostAware,IDialogAware
         protected set => SetProperty(ref _title, value);
     }
 
-    public DialogCloseListener RequestClose { get; }
+    public DialogCloseListener RequestClose { get; protected set; }
 }

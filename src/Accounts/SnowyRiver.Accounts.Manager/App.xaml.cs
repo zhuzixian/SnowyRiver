@@ -16,6 +16,7 @@ using SnowyRiver.WPF.MaterialDesignInPrism.Service;
 using SnowyRiver.WPF.MaterialDesignInPrism.Windows;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
+using SnowyRiver.Accounts.Modules.Manager.Models;
 
 namespace SnowyRiver.Accounts.Manager
 {
@@ -81,7 +82,7 @@ namespace SnowyRiver.Accounts.Manager
 
             containerRegistry.RegisterDialog<SplashView>(ViewNames.SplashView);
 
-            containerRegistry.RegisterSingleton<IAuthenticationService, AuthenticationService>();
+            containerRegistry.RegisterSingleton<IAuthenticationService<User, Role, Team>, AuthenticationService>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

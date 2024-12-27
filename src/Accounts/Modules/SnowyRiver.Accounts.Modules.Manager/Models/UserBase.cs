@@ -1,9 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 
 namespace SnowyRiver.Accounts.Modules.Manager.Models;
-public class User<TRole, TTeam> : EntityModel
-    where TRole : Role
-    where TTeam : Team
+public class User<TUser, TRole, TTeam, TPermission> : EntityModel
+    where TTeam : Team<TUser, TRole, TTeam, TPermission>
+    where TUser : User<TUser, TRole, TTeam, TPermission>
+    where TRole : Role<TUser, TRole, TTeam, TPermission>
+    where TPermission : Permission<TUser, TRole, TTeam, TPermission>
 {
     private string _password = string.Empty;
     public string Password

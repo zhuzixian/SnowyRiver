@@ -10,12 +10,17 @@ using SnowyRiver.Accounts.Modules.Manager.Models;
 using SnowyRiver.WPF.NotifyPropertyChangedBase;
 
 namespace SnowyRiver.Accounts.Modules.Manager.Services;
-public class AuthenticationService<TTeam, TRole, TUser, TUserEntity>(IUnitOfWork unitOfWork, IMapper mapper)
-    : NotifyPropertyChangedObject, IAuthenticationService<TUser, TRole, TTeam>
-        where TTeam : Team
-        where TRole : Role
-        where TUser : User<TRole, TTeam>
-        where TUserEntity : Domain.Entities.User
+public class AuthenticationService<TTeam, TRole, TUser, TPermission,
+    TTeamEntity, TRoleEntity, TUserEntity, TPermissionEntity>(IUnitOfWork unitOfWork, IMapper mapper)
+    : NotifyPropertyChangedObject, IAuthenticationService<TUser, TTeam, TRole, TPermission>
+    where TTeam : Team<TUser, TRole, TTeam, TPermission>
+    where TUser : User<TUser, TRole, TTeam, TPermission>
+    where TRole : Role<TUser, TRole, TTeam, TPermission>
+    where TPermission : Permission<TUser, TRole, TTeam, TPermission>
+    where TTeamEntity : Domain.Entities.Team<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
+    where TUserEntity : Domain.Entities.User<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
+    where TRoleEntity : Domain.Entities.Role<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
+    where TPermissionEntity : Domain.Entities.Permission<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
 {
     public async Task<(bool, LoginFailedReason)> LoginAsync(string username, string password)
     {
@@ -76,8 +81,8 @@ public class AuthenticationService<TTeam, TRole, TUser, TUserEntity>(IUnitOfWork
         protected set => Set(ref _user, value);
     }
 
-    private Team? _selectedTeam;
-    public Team? SelectedTeam
+    private TTeam? _selectedTeam;
+    public TTeam? SelectedTeam
     {
         get => _selectedTeam;
         set => Set(ref _selectedTeam, value);

@@ -1,4 +1,3 @@
 ﻿namespace SnowyRiver.Accounts.Modules.Manager.Models;
-public class Permission: EntityModel
-{
-}
+
+public class Permission : Permission<User, Role, Team, Permission>;

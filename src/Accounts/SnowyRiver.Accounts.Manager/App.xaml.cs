@@ -82,7 +82,7 @@ namespace SnowyRiver.Accounts.Manager
 
             containerRegistry.RegisterDialog<SplashView>(ViewNames.SplashView);
 
-            containerRegistry.RegisterSingleton<IAuthenticationService<User, Role, Team>, AuthenticationService>();
+            containerRegistry.RegisterSingleton<IAuthenticationService<User, Team, Role, Permission>, AuthenticationService>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

@@ -1,3 +1,3 @@
 ﻿namespace SnowyRiver.Accounts.Modules.Manager.Models;
 
-public class Role : Role<Permission>;
+public class Role : Role<User, Role, Team, Permission>;

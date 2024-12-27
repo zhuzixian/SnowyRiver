@@ -8,11 +8,13 @@ using SnowyRiver.Accounts.Modules.Manager.Services;
 using SnowyRiver.WPF.Localized;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
-public class LoginViewModel<TUser, TRole, TTeam>(IAuthenticationService<TUser, TRole, TTeam> authenticationService, 
+public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
+    IAuthenticationService<TUser, TTeam, TRole, TPermission> authenticationService, 
         IRegionManager regionManager) : RegionViewModelBase(regionManager)
-    where TRole : Role
-    where TTeam : Team
-    where TUser : User<TRole, TTeam>
+    where TTeam : Team<TUser, TRole, TTeam, TPermission>
+    where TUser : User<TUser, TRole, TTeam, TPermission>
+    where TRole : Role<TUser, TRole, TTeam, TPermission>
+    where TPermission : Permission<TUser, TRole, TTeam, TPermission>
 {
     public override void OnNavigatedTo(NavigationContext navigationContext)
     {

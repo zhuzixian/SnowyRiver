@@ -54,7 +54,7 @@ public class SplashViewModel : DialogVieModel
 
             var loginParameters = new NavigationParameters
             {
-                {nameof(LoginViewModel<User, Role, Team>.NextAction), () => RaiseRequestClose(new DialogResult(ButtonResult.OK))}
+                {nameof(LoginViewModel.NextAction), () => RaiseRequestClose(new DialogResult(ButtonResult.OK))}
             };
             RegionManager.RequestNavigate(RegionNames.SplashViewContentRegion, Modules.Manager.ViewNames.LoginView, loginParameters);
         }

@@ -30,10 +30,10 @@ namespace SnowyRiver.Accounts.Manager.EntityFramework.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Scope = table.Column<int>(type: "INTEGER", nullable: false),
                     IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false),
                     CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false)
+                    Name = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false),
+                    Scope = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -45,10 +45,10 @@ namespace SnowyRiver.Accounts.Manager.EntityFramework.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    IsActive = table.Column<bool>(type: "INTEGER", nullable: false),
                     IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false),
                     CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false)
+                    Name = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false),
+                    IsActive = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -60,12 +60,12 @@ namespace SnowyRiver.Accounts.Manager.EntityFramework.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Password = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false),
-                    PasswordSalt = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false),
                     IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false),
                     CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false)
+                    Name = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Password = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false),
+                    PasswordSalt = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false)
                 },
                 constraints: table =>
                 {

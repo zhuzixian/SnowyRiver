@@ -8,18 +8,10 @@ public class AccountsManagerDbContextFactory : IDesignTimeDbContextFactory<Accou
 {
     public AccountsManagerDbContext CreateDbContext(string[] args)
     {
-        var connectionString = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json")
-            .Build()
-            .GetConnectionString("SQLite");
-        if (!string.IsNullOrWhiteSpace(connectionString))
-        {
-            var contextOptions = new DbContextOptionsBuilder<AccountsManagerDbContext>()
-                .AddAccountsManagerOptions()
-                .Options;
-            return new AccountsManagerDbContext(contextOptions);
-        }
-        return default;
+        var contextOptions = new DbContextOptionsBuilder<AccountsManagerDbContext>()
+            .AddAccountsManagerOptions()
+            .Options;
+        return new AccountsManagerDbContext(contextOptions);
     }
 }
 

@@ -14,10 +14,6 @@ namespace SnowyRiver.WPF.Modules.Splash
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterDialog<SplashView>(ViewNames.SplashView);
-            containerRegistry.RegisterForNavigation<ProductInfosView>(ViewNames.ProductInfoView);
-            containerRegistry.RegisterForNavigation<WelcomeView>(ViewNames.WelcomeView);
-            containerRegistry.RegisterForNavigation<InitializationView>(ViewNames.InitializationView);
-            containerRegistry.RegisterForNavigation<DbMigratorView>(ViewNames.DbMigratorView);
         }
     }
 }

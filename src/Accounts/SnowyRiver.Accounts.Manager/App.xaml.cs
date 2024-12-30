@@ -16,7 +16,11 @@ using SnowyRiver.WPF.MaterialDesignInPrism.Service;
 using SnowyRiver.WPF.MaterialDesignInPrism.Windows;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
+using SnowyRiver.Accounts.Manager.ViewModels;
 using SnowyRiver.Accounts.Modules.Manager.Models;
+using SnowyRiver.WPF.Modules.Splash;
+using SnowyRiver.Commons;
+using SnowyRiver.WPF.Modules.Splash.Views;
 
 namespace SnowyRiver.Accounts.Manager
 {
@@ -48,7 +52,7 @@ namespace SnowyRiver.Accounts.Manager
             }
 
             var dialogService = ContainerLocator.Container.Resolve<IDialogService>();
-            dialogService.ShowDialog(ViewNames.SplashView);
+            dialogService.ShowDialog(WPF.Modules.Splash.ViewNames.SplashView);
 
             base.OnInitialized();
         }
@@ -77,18 +81,22 @@ namespace SnowyRiver.Accounts.Manager
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            var productInfo = ReflectionHelper.GetProductInfo();
+            containerRegistry.RegisterInstance(productInfo);
+
             containerRegistry.Register<IDialogHostService, DialogHostService>();
             containerRegistry.RegisterDialogWindow<MaterialDesignMetroDialogWindow>();
-
-            containerRegistry.RegisterDialog<SplashView>(ViewNames.SplashView);
-
             containerRegistry.RegisterSingleton<IAuthenticationService<User, Team, Role, Permission>, AuthenticationService>();
+
+            containerRegistry.RegisterSnowyRiverSplashView();
+            containerRegistry.RegisterForNavigation<DbMigratorView, DbMigratorViewModel>(WPF.Modules.Splash.ViewNames.DbMigratorView);
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
             base.ConfigureModuleCatalog(moduleCatalog);
             moduleCatalog.AddModule<AccountManagerModule>();
+            moduleCatalog.AddModule<SnowyRiverSplashModule>();
         }
     }
 }

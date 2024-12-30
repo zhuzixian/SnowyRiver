@@ -1,4 +1,4 @@
-﻿namespace SnowyRiver.Accounts.Manager.Views
+﻿namespace SnowyRiver.WPF.Modules.Splash.Views
 {
     /// <summary>
     /// Interaction logic for SplashWindow.xaml

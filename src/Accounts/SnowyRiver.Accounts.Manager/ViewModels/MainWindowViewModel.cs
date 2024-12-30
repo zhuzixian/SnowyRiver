@@ -2,7 +2,6 @@
 using Prism.Navigation;
 using Prism.Navigation.Regions;
 using SnowyRiver.Accounts.Core;
-using SnowyRiver.Accounts.Modules.Manager;
 using SnowyRiver.Accounts.Modules.Manager.ViewModels;
 using SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 

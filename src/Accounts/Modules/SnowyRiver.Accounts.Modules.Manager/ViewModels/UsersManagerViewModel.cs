@@ -41,7 +41,8 @@ public class UsersManagerViewModel(IUnitOfWork unitOfWork, IMapper mapper,
         var query = repository.MultipleResultQuery()
             .OrderByDescending(x => x.CreationTime)
             .Include(x => x.Include(u => u.Teams))
-            .Include(x => x.Include(u => u.Roles));
+            .Include(x => x.Include(u => u.Roles)
+                .ThenInclude(r => r.Permissions));
         return Task.FromResult(query);
     }
 

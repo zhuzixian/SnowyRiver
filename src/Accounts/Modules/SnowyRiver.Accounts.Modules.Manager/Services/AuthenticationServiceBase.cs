@@ -22,7 +22,7 @@ public class AuthenticationService<TTeam, TRole, TUser, TPermission,
     where TRoleEntity : Domain.Entities.Role<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
     where TPermissionEntity : Domain.Entities.Permission<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
 {
-    public async Task<(bool, LoginFailedReason)> LoginAsync(string username, string password)
+    public virtual async Task<(bool, LoginFailedReason)> LoginAsync(string username, string password)
     {
         try
         {

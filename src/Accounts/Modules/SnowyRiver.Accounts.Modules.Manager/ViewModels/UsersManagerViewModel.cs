@@ -1,6 +1,9 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
+using EntityFrameworkCore.QueryBuilder.Interfaces;
+using EntityFrameworkCore.Repository.Interfaces;
 using EntityFrameworkCore.UnitOfWork.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Prism.Navigation;
 using Prism.Navigation.Regions;
 using SnowyRiver.Accounts.Modules.Manager.Models;
@@ -31,6 +34,15 @@ public class UsersManagerViewModel(IUnitOfWork unitOfWork, IMapper mapper,
         };
         RegionManager.RequestNavigate(ManagerViewRegion, EditorView, parameters);
         await Task.CompletedTask;
+    }
+
+    protected override Task<IMultipleResultQuery<UserEntity>> GetQueryAsync(IRepository<UserEntity> repository)
+    {
+        var query = repository.MultipleResultQuery()
+            .OrderByDescending(x => x.CreationTime)
+            .Include(x => x.Include(u => u.Teams))
+            .Include(x => x.Include(u => u.Roles));
+        return Task.FromResult(query);
     }
 
     private bool _teamsEnable;

@@ -23,7 +23,7 @@ public class DialogVieModel : ViewModelBase, IDialogHostAware,IDialogAware
         Close(new DialogResult(ButtonResult.OK));
     }
 
-    protected virtual void Close(object result)
+    protected virtual void Close(IDialogResult result)
     {
         DialogHost.Close(IdentifierName, result);
     }

@@ -10,6 +10,13 @@ public class WorkStep : NotifyPropertyChangedObject
         set => Set(ref _sortId, value);
     }
 
+    private bool _enable;
+    public bool Enable
+    {
+        get => _enable;
+        set => Set(ref _enable, value);
+    }
+
     private string _name = string.Empty;
     public string Name
     {

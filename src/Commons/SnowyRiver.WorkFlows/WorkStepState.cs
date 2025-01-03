@@ -1,5 +1,5 @@
 ﻿namespace SnowyRiver.WorkFlows;
-public enum WorkStepState
+public enum WorkState
 {
     Waiting,
     Running,

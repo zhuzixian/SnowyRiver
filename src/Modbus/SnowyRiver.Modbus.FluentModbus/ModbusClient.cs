@@ -128,8 +128,8 @@ public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy
     public Task WriteMultipleCoilsAsync(int unitIdentifier, int startingAddress, bool[] values,
         CancellationToken cancellationToken = default)
     {
-        return ExecuteAsync(() => Task.Run(() => 
-            client.WriteMultipleCoilsAsync(unitIdentifier, startingAddress, values, cancellationToken), cancellationToken));
+        return ExecuteAsync(() => 
+            client.WriteMultipleCoilsAsync(unitIdentifier, startingAddress, values, cancellationToken));
     }
 
     public Task<Memory<TRead>> ReadWriteMultipleRegistersAsync<TRead, TWrite>(int unitIdentifier,

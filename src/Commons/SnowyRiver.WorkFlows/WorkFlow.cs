@@ -33,4 +33,11 @@ public class WorkFlow<TStep>: NotifyPropertyChangedObject
         get => _endTime;
         set => Set(ref _endTime, value);
     }
+
+    private WorkState _state;
+    public WorkState State
+    {
+        get => _state;
+        set => Set(ref _state, value);
+    }
 }

@@ -24,8 +24,8 @@ public class WorkStep : NotifyPropertyChangedObject
         set => Set(ref _name, value);
     }
 
-    private WorkStepState _state;
-    public WorkStepState State
+    private WorkState _state;
+    public WorkState State
     {
         get => _state;
         set => Set(ref _state, value);

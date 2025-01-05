@@ -6,7 +6,8 @@ using EntityFrameworkCore.QueryBuilder.Interfaces;
 using EntityFrameworkCore.UnitOfWork.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using SnowyRiver.Accounts.Domain.Helpers;
-using SnowyRiver.Accounts.Modules.Manager.Models;
+using SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
+using SnowyRiver.Accounts.Modules.Manager.Interfaces.Services;
 using SnowyRiver.WPF.NotifyPropertyChangedBase;
 
 namespace SnowyRiver.Accounts.Modules.Manager.Services;

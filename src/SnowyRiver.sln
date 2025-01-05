@@ -89,6 +89,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.WPF.Modules.Spla
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{E3FE9B43-966E-4FBF-986F-7691D8C240ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.Accounts.Modules.Manager.Interfaces", "Accounts\Modules\SnowyRiver.Accounts.Modules.Manager.Interfaces\SnowyRiver.Accounts.Modules.Manager.Interfaces.csproj", "{A99D6E30-9CF6-421D-A46E-BA101429038E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -211,6 +213,10 @@ Global
 		{151A58CD-C60C-4508-B662-B7C8A3E612EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{151A58CD-C60C-4508-B662-B7C8A3E612EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{151A58CD-C60C-4508-B662-B7C8A3E612EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A99D6E30-9CF6-421D-A46E-BA101429038E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A99D6E30-9CF6-421D-A46E-BA101429038E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A99D6E30-9CF6-421D-A46E-BA101429038E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A99D6E30-9CF6-421D-A46E-BA101429038E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -252,6 +258,7 @@ Global
 		{8695513A-EA35-4027-B028-69A5E9307008} = {0AA91054-FCD2-4828-BB88-2276FBDB6722}
 		{151A58CD-C60C-4508-B662-B7C8A3E612EE} = {E3FE9B43-966E-4FBF-986F-7691D8C240ED}
 		{E3FE9B43-966E-4FBF-986F-7691D8C240ED} = {3B2886EE-1186-4C50-B616-1304A9C129FB}
+		{A99D6E30-9CF6-421D-A46E-BA101429038E} = {E6E6A0EC-1BED-4F32-9E0F-B8E35A11EE5F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E75A6A63-872F-41A5-80C6-C3FA93CCA7AC}

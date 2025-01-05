@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace SnowyRiver.Accounts.Modules.Manager.Models;
+﻿namespace SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
 
 public class Team<TUser, TRole, TTeam, TPermission> : EntityModel
     where TTeam : Team<TUser, TRole, TTeam, TPermission>

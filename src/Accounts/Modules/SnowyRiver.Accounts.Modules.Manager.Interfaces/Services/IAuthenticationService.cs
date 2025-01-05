@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel;
-using System.Threading.Tasks;
-using SnowyRiver.Accounts.Modules.Manager.Models;
+using SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
 
-namespace SnowyRiver.Accounts.Modules.Manager.Services;
+namespace SnowyRiver.Accounts.Modules.Manager.Interfaces.Services;
 
 public interface IAuthenticationService<out TUser, out TTeam, TRole,  TPermission> : INotifyPropertyChanged
     where TTeam : Team<TUser, TRole, TTeam, TPermission>

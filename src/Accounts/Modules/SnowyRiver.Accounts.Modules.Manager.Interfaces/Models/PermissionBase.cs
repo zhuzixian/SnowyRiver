@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace SnowyRiver.Accounts.Modules.Manager.Models;
+namespace SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
 public class Permission<TUser, TRole, TTeam, TPermission> : EntityModel
     where TTeam : Team<TUser, TRole, TTeam, TPermission>
     where TUser : User<TUser, TRole, TTeam, TPermission>

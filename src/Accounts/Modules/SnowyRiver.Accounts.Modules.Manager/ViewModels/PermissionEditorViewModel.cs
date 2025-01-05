@@ -2,7 +2,7 @@
 using AutoMapper;
 using EntityFrameworkCore.UnitOfWork.Interfaces;
 using Prism.Navigation.Regions;
-using SnowyRiver.Accounts.Modules.Manager.Models;
+using SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
 using PermissionEntity = SnowyRiver.Accounts.Domain.Entities.Permission;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;

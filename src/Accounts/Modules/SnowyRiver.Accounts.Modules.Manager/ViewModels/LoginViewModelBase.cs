@@ -3,8 +3,8 @@ using Prism.Navigation.Regions;
 using SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 using System.Threading.Tasks;
 using System;
-using SnowyRiver.Accounts.Modules.Manager.Models;
-using SnowyRiver.Accounts.Modules.Manager.Services;
+using SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
+using SnowyRiver.Accounts.Modules.Manager.Interfaces.Services;
 using SnowyRiver.WPF.Localized;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;

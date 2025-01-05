@@ -5,7 +5,7 @@ using EntityFrameworkCore.Repository.Interfaces;
 using EntityFrameworkCore.UnitOfWork.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Prism.Navigation.Regions;
-using SnowyRiver.Accounts.Modules.Manager.Models;
+using SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
 using RoleEntity = SnowyRiver.Accounts.Domain.Entities.Role;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;

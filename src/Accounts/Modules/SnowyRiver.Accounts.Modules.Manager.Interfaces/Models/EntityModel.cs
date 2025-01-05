@@ -1,7 +1,6 @@
-﻿using System;
-using SnowyRiver.WPF.NotifyPropertyChangedBase;
+﻿using SnowyRiver.WPF.NotifyPropertyChangedBase;
 
-namespace SnowyRiver.Accounts.Modules.Manager.Models;
+namespace SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
 public class EntityModel : NotifyPropertyChangedObject
 {
     public Guid Id { get; set; }

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using EntityFrameworkCore.UnitOfWork.Interfaces;
-using SnowyRiver.Accounts.Modules.Manager.Models;
+using SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
 
 namespace SnowyRiver.Accounts.Modules.Manager.Services;
 

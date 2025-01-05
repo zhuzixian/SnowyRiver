@@ -2,10 +2,10 @@
 using EntityFrameworkCore.UnitOfWork.Interfaces;
 using Prism.Commands;
 using Prism.Navigation.Regions;
-using SnowyRiver.Accounts.Modules.Manager.Models;
 using SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 using System.Threading.Tasks;
 using AutoMapper;
+using SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
 using SnowyRiver.Domain.Entities;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;

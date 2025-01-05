@@ -6,7 +6,7 @@ using EntityFrameworkCore.UnitOfWork.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Prism.Navigation;
 using Prism.Navigation.Regions;
-using SnowyRiver.Accounts.Modules.Manager.Models;
+using SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
 using UserEntity = SnowyRiver.Accounts.Domain.Entities.User;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;

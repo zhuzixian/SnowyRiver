@@ -2,9 +2,16 @@
 using System.Collections.ObjectModel;
 
 namespace SnowyRiver.WorkFlows;
-public class WorkFlow<TStep>: NotifyPropertyChangedObject
-     where TStep : WorkStep
+public class WorkFlow<TStep, TKey, TStepKey>: NotifyPropertyChangedObject
+     where TStep : WorkStep<TStepKey>
 {
+    private TKey _id;
+    public TKey Id
+    {
+        get => _id;
+        set => Set(ref _id, value);
+    }
+
     private string _name = string.Empty;
     public string Name
     {

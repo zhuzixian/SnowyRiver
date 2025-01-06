@@ -14,7 +14,7 @@ public class WorkFlow<TStep>: NotifyPropertyChangedObject
 
     private ObservableCollection<TStep> _steps = [];
 
-    public virtual ObservableCollection<TStep> Steps
+    public ObservableCollection<TStep> Steps
     {
         get => _steps;
         set => Set(ref _steps, value);

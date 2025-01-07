@@ -9,7 +9,7 @@ using SnowyRiver.WPF.Localized;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
 public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
-    IAuthenticationService<TUser, TTeam, TRole, TPermission> authenticationService, 
+    IAuthenticationServiceBase<TUser, TTeam, TRole, TPermission> authenticationService, 
         IRegionManager regionManager) : RegionViewModelBase(regionManager)
     where TTeam : Team<TUser, TRole, TTeam, TPermission>
     where TUser : User<TUser, TRole, TTeam, TPermission>

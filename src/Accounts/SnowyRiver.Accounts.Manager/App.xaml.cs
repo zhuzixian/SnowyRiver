@@ -87,7 +87,7 @@ namespace SnowyRiver.Accounts.Manager
 
             containerRegistry.Register<IDialogHostService, DialogHostService>();
             containerRegistry.RegisterDialogWindow<MaterialDesignMetroDialogWindow>();
-            containerRegistry.RegisterSingleton<IAuthenticationServiceBase<User, Team, Role, Permission>, AuthenticationService>();
+            containerRegistry.RegisterSingleton<IAuthenticationService, AuthenticationService>();
 
             containerRegistry.RegisterSnowyRiverSplashView();
             containerRegistry.RegisterForNavigation<DbMigratorView, DbMigratorViewModel>(WPF.Modules.Splash.ViewNames.DbMigratorView);

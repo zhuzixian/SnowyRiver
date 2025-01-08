@@ -10,7 +10,7 @@ using SnowyRiver.WPF.Localized;
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
 public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
     IAuthenticationService<TUser, TTeam, TRole, TPermission> authenticationService, 
-        IRegionManager regionManager) : RegionViewModelBase(regionManager)
+        IRegionManager regionManager) : RegionDialogViewModelBase(regionManager)
     where TTeam : Team<TUser, TRole, TTeam, TPermission>
     where TUser : User<TUser, TRole, TTeam, TPermission>
     where TRole : Role<TUser, TRole, TTeam, TPermission>

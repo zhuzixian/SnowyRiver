@@ -2,6 +2,8 @@
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Threading;
+using System.Threading.Tasks;
 using SnowyRiver.WPF.NotifyPropertyChangedBase;
 
 namespace SnowyRiver.WPF.Configuration;
@@ -92,11 +94,24 @@ public abstract class JsonConfiguration:NotifyPropertyChangedObject
     public void Save() => Save(Path, Options);
     public void Save(string path) => Save(path, Options);
     public void Save(JsonConfigurationOptions options) => Save(Path, options);
-    public void Save(string path, JsonConfigurationOptions options)
+    public virtual void Save(string path, JsonConfigurationOptions options)
     {
         OnBeforeSave();
-        string json = JsonSerializer.Serialize(this, GetType(), options.SerializerOptions);
+        var json = JsonSerializer.Serialize(this, GetType(), options.SerializerOptions);
         File.WriteAllText(path, json);
+        OnAfterSave();
+    }
+
+    public async Task SaveAsync(CancellationToken cancellationToken) => await SaveAsync(Path, Options, cancellationToken);
+    public async Task SaveAsync(string path, CancellationToken cancellationToken) => await SaveAsync(path, Options, cancellationToken);
+    public async Task SaveAsync(JsonConfigurationOptions options, CancellationToken cancellationToken) => await SaveAsync(Path, options, cancellationToken);
+
+    public virtual async Task SaveAsync(string path, JsonConfigurationOptions options, CancellationToken cancellationToken)
+    {
+        OnBeforeSave();
+        using var stream = new FileStream(path, FileMode.OpenOrCreate);
+        await JsonSerializer.SerializeAsync(stream, this, GetType(), cancellationToken: cancellationToken,
+            options:options.SerializerOptions);
         OnAfterSave();
     }
 

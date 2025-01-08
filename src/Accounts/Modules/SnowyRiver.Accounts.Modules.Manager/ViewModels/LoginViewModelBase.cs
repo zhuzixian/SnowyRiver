@@ -41,7 +41,7 @@ public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
         set => SetProperty(ref _isLoggingIn, value);
     }
 
-    public async Task ConfirmAsync()
+    public virtual async Task ConfirmAsync()
     {
         try
         {

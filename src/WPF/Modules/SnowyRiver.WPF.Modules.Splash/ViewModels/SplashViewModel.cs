@@ -6,7 +6,7 @@ using SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 
 namespace SnowyRiver.WPF.Modules.Splash.ViewModels;
 
-public class SplashViewModel(IRegionManager regionManager): DialogVieModel
+public class SplashViewModel(IRegionManager regionManager): DialogViewModel
 {
     private IRegionManager _regionManager = regionManager;
     public IRegionManager RegionManager

@@ -5,6 +5,10 @@ namespace SnowyRiver.Modbus.FluentModbus;
 
 public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy)
 {
+    protected DateTime LastAccessTime = DateTime.MinValue;
+
+    public TimeSpan MinAccessIntervalTime { get; set; } = TimeSpan.MinValue;
+
     public ModbusClient BaseClient => client;
 
     protected SemaphoreSlim AsyncLocker = new(1);
@@ -16,7 +20,12 @@ public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy
             await AsyncLocker.WaitAsync();
             try
             {
+                while (MinAccessIntervalTime > TimeSpan.Zero && DateTime.Now - LastAccessTime < MinAccessIntervalTime)
+                {
+                    await Task.Delay(TimeSpan.FromMilliseconds(5));
+                }
                 await action();
+                LastAccessTime = DateTime.Now;
             }
             finally
             {
@@ -32,6 +41,7 @@ public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy
             await AsyncLocker.WaitAsync();
             try
             {
+                
                 return await action();
             }
             finally

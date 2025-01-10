@@ -4,12 +4,12 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Version>9.0.13</Version>
+    <Version>9.0.14</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="DryIoc.Microsoft.DependencyInjection" Version="6.2.0" />
-    <PackageReference Include="MaterialDesignThemes" Version="5.2.0" />
-    <PackageReference Include="MaterialDesignThemes.MahApps" Version="5.2.0" />
+    <PackageReference Include="MaterialDesignThemes" Version="5.2.1" />
+    <PackageReference Include="MaterialDesignThemes.MahApps" Version="5.2.1" />
     <PackageReference Include="Prism.Container.DryIoc" Version="9.0.107" />
     <PackageReference Include="Prism.DryIoc" Version="9.0.537" />
     <PackageReference Include="Prism.Wpf" Version="9.0.537" />

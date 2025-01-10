@@ -8,10 +8,10 @@ public class DialogViewModel : ViewModelBase, IDialogHostAware,IDialogAware
 
     private DelegateCommand? _confirmCommand;
 
-    public DelegateCommand ConfirmCommand => _confirmCommand ??= new DelegateCommand(Confirm);
+    public virtual DelegateCommand ConfirmCommand => _confirmCommand ??= new DelegateCommand(Confirm);
 
     private DelegateCommand? _cancelCommand;
-    public DelegateCommand CancelCommand => _cancelCommand ??= new DelegateCommand(Cancel);
+    public virtual DelegateCommand CancelCommand => _cancelCommand ??= new DelegateCommand(Cancel);
 
     public virtual void Cancel()
     {
@@ -28,20 +28,14 @@ public class DialogViewModel : ViewModelBase, IDialogHostAware,IDialogAware
         DialogHost.Close(IdentifierName, result);
     }
 
-    public virtual Task OnDialogOpenedAsync(IDialogParameters parameters)
-    {
-        return Task.FromResult(true);
-    }
-
     public virtual bool CanCloseDialog() => true;
 
     public void OnDialogClosed()
     {
     }
 
-    public async void OnDialogOpened(IDialogParameters parameters)
+    public virtual void OnDialogOpened(IDialogParameters parameters)
     {
-        await OnDialogOpenedAsync(parameters);
     }
 
     protected void RaiseRequestClose(IDialogResult dialogResult)

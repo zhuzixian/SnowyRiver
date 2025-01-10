@@ -29,11 +29,11 @@ public class DialogHostService(IContainerExtension containerExtension)
 
         return (IDialogResult)(await DialogHost.Show(dialogContent, viewModel.IdentifierName, DialogOpenedEventHandler))!;
 
-        async void DialogOpenedEventHandler(object sender, DialogOpenedEventArgs eventArgs)
+        void DialogOpenedEventHandler(object sender, DialogOpenedEventArgs eventArgs)
         {
             var sessionContent = eventArgs.Session.Content;
             eventArgs.Session.UpdateContent(new ProgressDialog());
-            if (viewModel is { } aware) await aware.OnDialogOpenedAsync(parameters);
+            if (viewModel is { } aware) aware.OnDialogOpened(parameters);
             eventArgs.Session.UpdateContent(sessionContent);
         }
     }

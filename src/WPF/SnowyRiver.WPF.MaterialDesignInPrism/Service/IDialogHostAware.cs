@@ -15,7 +15,7 @@
         /// </summary>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        Task OnDialogOpenedAsync(IDialogParameters parameters);
+        void OnDialogOpened(IDialogParameters parameters);
 
         /// <summary>
         /// 确认

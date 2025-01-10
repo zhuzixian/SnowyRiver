@@ -29,7 +29,7 @@ public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
     public Action? NextAction { get; protected set; }
 
     private DelegateCommand? _confirmCommand;
-    public DelegateCommand ConfirmCommand => _confirmCommand ??= new DelegateCommand(() => _ = ConfirmAsync(),
+    public override DelegateCommand ConfirmCommand => _confirmCommand ??= new DelegateCommand(() => _ = ConfirmAsync(),
             () => !string.IsNullOrWhiteSpace(UserName) && !string.IsNullOrWhiteSpace(Password))
         .ObservesProperty(() => UserName)
         .ObservesProperty(() => Password);
@@ -74,9 +74,9 @@ public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
     }
 
     private DelegateCommand? _cancelCommand;
-    public DelegateCommand CancelCommand => _cancelCommand ??= new DelegateCommand(Cancel);
+    public override DelegateCommand CancelCommand => _cancelCommand ??= new DelegateCommand(Cancel);
 
-    public virtual void Cancel()
+    public override void Cancel()
     {
         Environment.Exit(-1);
     }

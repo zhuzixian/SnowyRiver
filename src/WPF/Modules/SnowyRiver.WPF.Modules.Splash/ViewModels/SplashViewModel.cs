@@ -15,13 +15,12 @@ public class SplashViewModel(IRegionManager regionManager): DialogViewModel
         set => SetProperty(ref _regionManager, value);
     }
 
-    public override async Task OnDialogOpenedAsync(IDialogParameters parameters)
+    public override void OnDialogOpened(IDialogParameters parameters)
     {
         RegionManager.RequestNavigate(RegionNames.SplashContentRegion, ViewNames.WelcomeView,
             new NavigationParameters
             {
                 { nameof(RequestClose), () => RaiseRequestClose(new DialogResult(ButtonResult.OK)) }
             });
-        await Task.CompletedTask;
     }
 }

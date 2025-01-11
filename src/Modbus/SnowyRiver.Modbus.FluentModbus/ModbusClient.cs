@@ -1,5 +1,6 @@
 ﻿using FluentModbus;
 using Polly.Retry;
+using SnowyRiver.Polly;
 
 namespace SnowyRiver.Modbus.FluentModbus;
 
@@ -15,39 +16,24 @@ public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy
 
     public Task ExecuteAsync(Func<Task> action, CancellationToken cancellationToken = default)
     {
-        return retryPolicy.ExecuteAsync(async () =>
-        {
-            await AsyncLocker.WaitAsync(cancellationToken);
-            try
+        return Executor.ExecuteAsync(retryPolicy, AsyncLocker, async () =>
             {
                 await WaitingMinAccessIntervalTimeAsync(cancellationToken);
                 await action();
                 LastAccessTime = DateTime.Now;
-            }
-            finally
-            {
-                AsyncLocker.Release();
-            }
-        });
+            }, cancellationToken);
     }
 
     protected Task<TResult> ExecuteAsync<TResult>(Func<Task<TResult>> task, CancellationToken cancellationToken = default)
     {
-        return retryPolicy.ExecuteAsync(async () =>
-        {
-            await AsyncLocker.WaitAsync(cancellationToken);
-            try
+        return Executor.ExecuteAsync(retryPolicy, AsyncLocker,
+            async () =>
             {
                 await WaitingMinAccessIntervalTimeAsync(cancellationToken);
                 var result = await task.Invoke();
                 LastAccessTime = DateTime.Now;
                 return result;
-            }
-            finally
-            {
-                AsyncLocker.Release();
-            }
-        });
+            }, cancellationToken);
     }
 
     protected async Task WaitingMinAccessIntervalTimeAsync(CancellationToken cancellationToken)
@@ -78,7 +64,7 @@ public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy
         CancellationToken cancellationToken = default) where T : unmanaged
     {
         return ExecuteAsync(() =>
-            client.WriteMultipleRegistersAsync(unitIdentifier, startingAddress, dataset, cancellationToken), 
+            client.WriteMultipleRegistersAsync(unitIdentifier, startingAddress, dataset, cancellationToken),
             cancellationToken);
     }
 
@@ -149,7 +135,7 @@ public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy
     public Task WriteMultipleCoilsAsync(int unitIdentifier, int startingAddress, bool[] values,
         CancellationToken cancellationToken = default)
     {
-        return ExecuteAsync(() => 
+        return ExecuteAsync(() =>
             client.WriteMultipleCoilsAsync(unitIdentifier, startingAddress, values, cancellationToken), cancellationToken);
     }
 

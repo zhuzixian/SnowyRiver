@@ -1,5 +1,6 @@
 ﻿using SnowyRiver.WPF.NotifyPropertyChangedBase;
 using System.Collections.ObjectModel;
+using System.Text.Json.Serialization;
 
 namespace SnowyRiver.WorkFlows;
 public class WorkFlow<TStep>: NotifyPropertyChangedObject
@@ -21,6 +22,7 @@ public class WorkFlow<TStep>: NotifyPropertyChangedObject
     }
 
     private DateTime? _startTime;
+    [JsonIgnore]
     public DateTime? StartTime
     {
         get => _startTime;
@@ -28,6 +30,7 @@ public class WorkFlow<TStep>: NotifyPropertyChangedObject
     }
 
     private DateTime? _endTime;
+    [JsonIgnore]
     public DateTime? EndTime
     {
         get => _endTime;
@@ -35,6 +38,7 @@ public class WorkFlow<TStep>: NotifyPropertyChangedObject
     }
 
     private WorkState _state;
+    [JsonIgnore]
     public WorkState State
     {
         get => _state;

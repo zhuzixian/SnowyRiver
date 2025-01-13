@@ -63,9 +63,14 @@ public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy
     public Task WriteMultipleRegistersAsync<T>(int unitIdentifier, int startingAddress, T[] dataset,
         CancellationToken cancellationToken = default) where T : unmanaged
     {
-        return ExecuteAsync(() =>
-            client.WriteMultipleRegistersAsync(unitIdentifier, startingAddress, dataset, cancellationToken),
-            cancellationToken);
+        return ExecuteAsync(async () =>
+        {
+            // TODO: Fix this issue
+            // Corruption of array passed to WriteMultipleRegistersAsync
+            // https://github.com/Apollo3zehn/FluentModbus/issues/52
+            var sendDataSet = (T[])dataset.Clone();
+            await client.WriteMultipleRegistersAsync(unitIdentifier, startingAddress, sendDataSet, cancellationToken);
+        }, cancellationToken);
     }
 
     public Task WriteMultipleRegistersAsync(byte unitIdentifier, ushort startingAddress, byte[] dataset,

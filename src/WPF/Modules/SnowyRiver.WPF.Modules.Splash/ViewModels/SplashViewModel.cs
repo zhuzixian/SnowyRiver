@@ -1,12 +1,11 @@
-﻿using System.Threading.Tasks;
-using Prism.Dialogs;
+﻿using Prism.Dialogs;
 using Prism.Navigation;
 using Prism.Navigation.Regions;
 using SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 
 namespace SnowyRiver.WPF.Modules.Splash.ViewModels;
 
-public class SplashViewModel(IRegionManager regionManager): DialogViewModel
+public class SplashViewModel(IRegionManager regionManager): DialogViewModelBase
 {
     private IRegionManager _regionManager = regionManager;
     public IRegionManager RegionManager

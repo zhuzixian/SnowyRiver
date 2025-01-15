@@ -2,6 +2,8 @@
 using MaterialDesignThemes.Wpf;
 using SnowyRiver.WPF.MaterialDesignInPrism.Common;
 using SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs;
+using SnowyRiver.WPF.MaterialDesignInPrism.ViewModels;
+using SnowyRiver.WPF.MaterialDesignInPrism.Views;
 
 namespace SnowyRiver.WPF.MaterialDesignInPrism.Service;
 /// <summary>
@@ -37,5 +39,16 @@ public class DialogHostService(IContainerExtension containerExtension)
             if (viewModel is { } aware) aware.OnDialogOpened(parameters);
             eventArgs.Session.UpdateContent(sessionContent);
         }
+    }
+
+    public async Task<IDialogResult?> ShowMaterialDesignDialogAsync(string title, string message, string[] buttons, string identifierName = "Root")
+    {
+        return await ShowMaterialDesignDialogAsync(nameof(DialogView),
+            new DialogParameters
+            {
+                { nameof(DialogViewModel.Title), title },
+                { nameof(DialogViewModel.Message), message },
+                { nameof(DialogViewModel.Buttons), buttons }
+            }, identifierName);
     }
 }

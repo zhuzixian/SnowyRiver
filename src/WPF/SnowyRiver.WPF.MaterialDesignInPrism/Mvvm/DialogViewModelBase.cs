@@ -2,7 +2,7 @@
 using SnowyRiver.WPF.MaterialDesignInPrism.Service;
 
 namespace SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
-public class DialogViewModel : ViewModelBase, IDialogHostAware,IDialogAware
+public class DialogViewModelBase : ViewModelBase, IDialogHostAware,IDialogAware
 {
     public string IdentifierName { get; set; } = string.Empty;
 

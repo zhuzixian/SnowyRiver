@@ -1,5 +1,5 @@
 ﻿namespace SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
-public class RegionDialogViewModelBase(IRegionManager regionManager) : DialogViewModel, IConfirmNavigationRequest
+public class RegionDialogViewModelBase(IRegionManager regionManager) : DialogViewModelBase, IConfirmNavigationRequest
 {
     protected IRegionManager RegionManager { get; private set; } = regionManager;
 

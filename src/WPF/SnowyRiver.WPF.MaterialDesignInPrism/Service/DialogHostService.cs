@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using MaterialDesignThemes.Wpf;
 using SnowyRiver.WPF.MaterialDesignInPrism.Common;
+using SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs;
 
 namespace SnowyRiver.WPF.MaterialDesignInPrism.Service;
 /// <summary>

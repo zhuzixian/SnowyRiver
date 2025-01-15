@@ -4,7 +4,7 @@
              xmlns:prism="http://prismlibrary.com/"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <Grid Width="600" Height="309" Margin="16">
+    <Grid Width="600" Height="371" Margin="12">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -12,10 +12,20 @@
         </Grid.RowDefinitions>
         <TextBlock Text="{Binding Title}"
                    HorizontalAlignment="Center"
+                   Foreground="{DynamicResource MaterialDesign.Brush.Primary}"
                    Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
-        <TextBlock Grid.Row="1" Text="{Binding Message}"/>
+        <TextBlock Grid.Row="1" Text="{Binding Message}"
+                   TextWrapping="Wrap" VerticalAlignment="Center"/>
         <ItemsControl Grid.Row="2" ItemsSource="{Binding Buttons}"
                       HorizontalAlignment="Right">
+            <ItemsControl.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatMidBgButton}">
+                    <Setter Property="Margin" Value="12, 0"/>
+                    <Setter Property="Width" Value="100"/>
+                    <Setter Property="Height" Value="42"/>
+                    <Setter Property="Foreground" Value="{DynamicResource MaterialDesign.Brush.Primary.Dark.Foreground}"/>
+                </Style>
+            </ItemsControl.Resources>
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal"/>
@@ -24,8 +34,6 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Button Content="{Binding .}"
-                            Style="{StaticResource MaterialDesignFlatMidBgButton}"
-                            Margin="6, 0"
                             Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
                             CommandParameter="{Binding .}"/>
                 </DataTemplate>

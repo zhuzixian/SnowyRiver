@@ -10,11 +10,13 @@ using Prism.Navigation;
 using Prism.Navigation.Regions;
 using SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
 using SnowyRiver.Domain.Entities;
+using SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs;
 using SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
 public abstract class ManagerViewModel<TModel, TEntity>(IUnitOfWork unitOfWork, 
     IMapper mapper,
+    IDialogHostService dialog,
     IRegionManager regionManager): RegionViewModelBase(regionManager)
     where TEntity: HasNameCreationTimeSoftDeleteEntity<Guid>
     where TModel : EntityModel, new()

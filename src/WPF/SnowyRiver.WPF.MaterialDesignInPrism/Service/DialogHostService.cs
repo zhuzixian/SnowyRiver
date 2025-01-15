@@ -30,7 +30,24 @@ public class DialogHostService(IContainerExtension containerExtension)
 
         viewModel.IdentifierName = identifierName;
 
-        return (IDialogResult)(await DialogHost.Show(dialogContent, viewModel.IdentifierName, DialogOpenedEventHandler))!;
+        var result = await DialogHost.Show(dialogContent, viewModel.IdentifierName, DialogOpenedEventHandler);
+        if (result is IDialogResult dialogResult)
+        {
+            return dialogResult;
+        }
+
+        if (result != null)
+        {
+            return new DialogResult
+            {
+                Parameters = new DialogParameters
+                {
+                    { nameof(DialogResult), result }
+                }
+            };
+        }
+
+        return new DialogResult();
 
         void DialogOpenedEventHandler(object sender, DialogOpenedEventArgs eventArgs)
         {
@@ -41,9 +58,14 @@ public class DialogHostService(IContainerExtension containerExtension)
         }
     }
 
-    public async Task<IDialogResult?> ShowMaterialDesignDialogAsync(string title, string message, string[] buttons, string identifierName = "Root")
+    public virtual Task<IDialogResult?> ShowMaterialDesignDialogAsync(string title, string message, string[] buttons, string identifierName = "Root")
     {
-        return await ShowMaterialDesignDialogAsync(nameof(DialogView),
+        return ShowMaterialDesignDialogAsync(nameof(DialogView), title, message, buttons, identifierName);
+    }
+
+    public virtual Task<IDialogResult?> ShowMaterialDesignDialogAsync(string view, string title, string message, string[] buttons, string identifierName = "Root")
+    {
+        return ShowMaterialDesignDialogAsync(view,
             new DialogParameters
             {
                 { nameof(DialogViewModel.Title), title },

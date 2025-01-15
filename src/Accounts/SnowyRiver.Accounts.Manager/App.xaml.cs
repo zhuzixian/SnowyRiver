@@ -21,6 +21,7 @@ using SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
 using SnowyRiver.Accounts.Modules.Manager.Interfaces.Services;
 using SnowyRiver.WPF.Modules.Splash;
 using SnowyRiver.Commons;
+using SnowyRiver.WPF.MaterialDesignInPrism;
 using SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs;
 using SnowyRiver.WPF.Modules.Splash.Views;
 
@@ -86,8 +87,6 @@ namespace SnowyRiver.Accounts.Manager
             var productInfo = ReflectionHelper.GetProductInfo();
             containerRegistry.RegisterInstance(productInfo);
 
-            containerRegistry.Register<IDialogHostService, DialogHostService>();
-            containerRegistry.RegisterDialogWindow<MaterialDesignMetroDialogWindow>();
             containerRegistry.RegisterSingleton<IAuthenticationService, AuthenticationService>();
 
             containerRegistry.RegisterSnowyRiverSplashView();
@@ -96,6 +95,7 @@ namespace SnowyRiver.Accounts.Manager
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
+            moduleCatalog.AddModule<SnowyRiverMaterialDesignModule>();
             base.ConfigureModuleCatalog(moduleCatalog);
             moduleCatalog.AddModule<AccountManagerModule>();
             moduleCatalog.AddModule<SnowyRiverSplashModule>();

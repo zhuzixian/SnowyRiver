@@ -9,7 +9,8 @@ namespace SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs
     public interface IDialogHostService : IDialogService
     {
         Task<IDialogResult> ShowMaterialDesignDialogAsync(string name, IDialogParameters parameters = null, string identifierName = "Root");
-        Task<IDialogResult> ShowMaterialDesignDialogAsync( string title, string message, string[] buttons, string identifierName = "Root");
+        Task<IDialogResult> ShowMaterialDesignDialogAsync(string name, string title, string message, string[] buttons, string identifierName = "Root");
+        Task<IDialogResult> ShowMaterialDesignDialogAsync(string title, string message, string[] buttons, string identifierName = "Root");
 
     }
 }

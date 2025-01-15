@@ -16,9 +16,9 @@ public class DialogViewModel: DialogViewModelBase
             Message = message;
         }
 
-        if (parameters.TryGetValue<ObservableCollection<string>>(nameof(Buttons), out var buttons))
+        if (parameters.TryGetValue <string[]>(nameof(Buttons), out var buttons))
         {
-            Buttons = buttons;
+            Buttons = new ObservableCollection<string>(buttons);
         }
 
         base.OnDialogOpened(parameters);

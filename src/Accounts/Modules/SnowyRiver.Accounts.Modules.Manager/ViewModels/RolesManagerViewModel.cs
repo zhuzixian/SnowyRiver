@@ -6,14 +6,16 @@ using EntityFrameworkCore.UnitOfWork.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Prism.Navigation.Regions;
 using SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
+using SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs;
 using RoleEntity = SnowyRiver.Accounts.Domain.Entities.Role;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
 public class RolesManagerViewModel(
     IUnitOfWork unitOfWork,
     IMapper mapper,
+    IDialogHostService dialog,
     IRegionManager regionManager) 
-    : ManagerViewModel<Role, RoleEntity>(unitOfWork, mapper, regionManager)
+    : ManagerViewModel<Role, RoleEntity>(unitOfWork, mapper, dialog, regionManager)
 {
 
     protected override async Task<IMultipleResultQuery<RoleEntity>> GetQueryAsync(IRepository<RoleEntity> repository)

@@ -21,6 +21,7 @@ using SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
 using SnowyRiver.Accounts.Modules.Manager.Interfaces.Services;
 using SnowyRiver.WPF.Modules.Splash;
 using SnowyRiver.Commons;
+using SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs;
 using SnowyRiver.WPF.Modules.Splash.Views;
 
 namespace SnowyRiver.Accounts.Manager

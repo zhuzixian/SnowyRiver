@@ -44,20 +44,26 @@ public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy
         }
     }
 
-    public Task<Memory<T>> ReadHoldingRegistersAsync<T>(int unitIdentifier, int startingAddress, int count,
+    public Task<T[]> ReadHoldingRegistersAsync<T>(int unitIdentifier, int startingAddress, int count,
         CancellationToken cancellationToken = default) where T : unmanaged
     {
-        return ExecuteAsync(() =>
-            client.ReadHoldingRegistersAsync<T>(unitIdentifier, startingAddress, count, cancellationToken),
+        return ExecuteAsync(async () =>
+            {
+                var memoryData = await client.ReadHoldingRegistersAsync<T>(unitIdentifier, startingAddress, count, cancellationToken);
+                return memoryData.Span.ToArray();
+            },
             cancellationToken);
     }
 
-    public Task<Memory<byte>> ReadHoldingRegistersAsync(byte unitIdentifier, ushort startingAddress,
+    public Task<byte[]> ReadHoldingRegistersAsync(byte unitIdentifier, ushort startingAddress,
         ushort quantity, CancellationToken cancellationToken = default)
     {
-        return ExecuteAsync(() =>
-            client.ReadHoldingRegistersAsync(unitIdentifier, startingAddress, quantity, cancellationToken),
-            cancellationToken);
+        return ExecuteAsync(async() =>
+        {
+            var memoryData = await client.ReadHoldingRegistersAsync(unitIdentifier, startingAddress, quantity, cancellationToken);
+            return memoryData.Span.ToArray();
+        },
+        cancellationToken);
     }
 
     public Task WriteMultipleRegistersAsync<T>(int unitIdentifier, int startingAddress, T[] dataset,
@@ -88,25 +94,34 @@ public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy
             client.ReadCoilsAsync(unitIdentifier, startingAddress, quantity, cancellationToken), cancellationToken);
     }
 
-    public Task<Memory<byte>> ReadDiscreteInputsAsync(int unitIdentifier, int startingAddress, int quantity,
+    public Task<byte[]> ReadDiscreteInputsAsync(int unitIdentifier, int startingAddress, int quantity,
         CancellationToken cancellationToken = default)
     {
-        return ExecuteAsync(() =>
-            client.ReadDiscreteInputsAsync(unitIdentifier, startingAddress, quantity, cancellationToken), cancellationToken);
+        return ExecuteAsync(async () =>
+            {
+                var memoryData = await client.ReadDiscreteInputsAsync(unitIdentifier, startingAddress, quantity, cancellationToken);
+                return memoryData.Span.ToArray();
+            }, cancellationToken);
     }
 
-    public Task<Memory<T>> ReadInputRegistersAsync<T>(int unitIdentifier, int startingAddress, int count,
+    public Task<T[]> ReadInputRegistersAsync<T>(int unitIdentifier, int startingAddress, int count,
         CancellationToken cancellationToken = default) where T : unmanaged
     {
-        return ExecuteAsync(() =>
-            client.ReadInputRegistersAsync<T>(unitIdentifier, startingAddress, count, cancellationToken), cancellationToken);
+        return ExecuteAsync( async () =>
+            {
+               var memoryData = await client.ReadInputRegistersAsync<T>(unitIdentifier, startingAddress, count, cancellationToken);
+               return memoryData.Span.ToArray();
+            },cancellationToken);
     }
 
-    public Task<Memory<byte>> ReadInputRegistersAsync(byte unitIdentifier, ushort startingAddress,
+    public Task<byte[]> ReadInputRegistersAsync(byte unitIdentifier, ushort startingAddress,
         ushort quantity, CancellationToken cancellationToken = default)
     {
-        return ExecuteAsync(() =>
-            client.ReadInputRegistersAsync(unitIdentifier, startingAddress, quantity, cancellationToken), cancellationToken);
+        return ExecuteAsync(async () =>
+        {
+            var memoryData = await client.ReadInputRegistersAsync(unitIdentifier, startingAddress, quantity, cancellationToken);
+            return memoryData.Span.ToArray();
+        }, cancellationToken);
     }
 
     public Task WriteSingleCoilAsync(int unitIdentifier, int registerAddress, bool value,
@@ -144,21 +159,30 @@ public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy
             client.WriteMultipleCoilsAsync(unitIdentifier, startingAddress, values, cancellationToken), cancellationToken);
     }
 
-    public Task<Memory<TRead>> ReadWriteMultipleRegistersAsync<TRead, TWrite>(int unitIdentifier,
+    public Task<TRead[]> ReadWriteMultipleRegistersAsync<TRead, TWrite>(int unitIdentifier,
         int readStartingAddress, int readCount, int writeStartingAddress, TWrite[] dataset,
         CancellationToken cancellationToken = default) where TRead : unmanaged
         where TWrite : unmanaged
     {
-        return ExecuteAsync(() =>
-            client.ReadWriteMultipleRegistersAsync<TRead, TWrite>(unitIdentifier, readStartingAddress, readCount,
-                writeStartingAddress, dataset, cancellationToken), cancellationToken);
+        return ExecuteAsync(async () =>
+        {
+            var memoryData = await client.ReadWriteMultipleRegistersAsync<TRead, TWrite>(unitIdentifier,
+                readStartingAddress, readCount,
+                writeStartingAddress, dataset, cancellationToken);
+            return memoryData.Span.ToArray();
+        }, cancellationToken);
     }
 
-    public Task<Memory<byte>> ReadWriteMultipleRegistersAsync(byte unitIdentifier, ushort readStartingAddress,
+    public Task<byte[]> ReadWriteMultipleRegistersAsync(byte unitIdentifier, ushort readStartingAddress,
         ushort readQuantity, ushort writeStartingAddress, byte[] dataset, CancellationToken cancellationToken = default)
     {
-        return ExecuteAsync(() =>
-            client.ReadWriteMultipleRegistersAsync(unitIdentifier, readStartingAddress, readQuantity, writeStartingAddress,
-                dataset, cancellationToken), cancellationToken);
+        return ExecuteAsync(async () =>
+        {
+            var memoryData = await client.ReadWriteMultipleRegistersAsync(unitIdentifier, readStartingAddress,
+                readQuantity,
+                writeStartingAddress,
+                dataset, cancellationToken);
+            return memoryData.Span.ToArray();
+        }, cancellationToken);
     }
 }

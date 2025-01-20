@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using SnowyRiver.Accounts.Domain.Shared;
 
 namespace SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
 public class Role<TUser, TRole, TTeam, TPermission> : EntityModel
@@ -19,5 +20,12 @@ public class Role<TUser, TRole, TTeam, TPermission> : EntityModel
     {
         get => _users; 
         set => Set(ref _users, value);
+    }
+
+    private PermissionsScope _scope;
+    public PermissionsScope Scope
+    {
+        get => _scope; 
+        set => Set(ref _scope, value);
     }
 }

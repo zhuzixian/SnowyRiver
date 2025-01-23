@@ -6,6 +6,7 @@ using System;
 using SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
 using SnowyRiver.Accounts.Modules.Manager.Interfaces.Services;
 using SnowyRiver.WPF.Localized;
+using System.Linq;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
 public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
@@ -52,6 +53,10 @@ public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
                 Message = loginFailedReason == LoginFailedReason.NotFoundUser
                     ? LocalizationProvider.GetLocalizedValueFromCurrentAssembly("LoginNotFoundUser")
                     : LocalizationProvider.GetLocalizedValueFromCurrentAssembly("LoginPasswordVerificationFailed");
+                if (authenticationService.User != null && authenticationService.User.Teams.Any())
+                {
+                    authenticationService.SelectedTeam = authenticationService.User.Teams.First();
+                }
             }
             else
             {

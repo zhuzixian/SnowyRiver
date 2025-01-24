@@ -30,4 +30,30 @@ public static class Executor
             locker.Release();
         }
     }
+
+    public static void Execute(SemaphoreSlim locker, Action action)
+    {
+        locker.Wait();
+        try
+        {
+            action.Invoke();
+        }
+        finally
+        {
+            locker.Release();
+        }
+    }
+
+    public static TResult Execute<TResult>(SemaphoreSlim locker, Func<TResult> func)
+    {
+        locker.Wait();
+        try
+        {
+            return func.Invoke();
+        }
+        finally
+        {
+            locker.Release();
+        }
+    }
 }

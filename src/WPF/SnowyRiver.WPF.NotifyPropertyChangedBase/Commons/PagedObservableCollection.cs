@@ -1,8 +1,26 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace SnowyRiver.WPF.NotifyPropertyChangedBase.Commons;
 public class PagedObservableCollection<T> : NotifyPropertyChangedObject
 {
+    public PagedObservableCollection(){}
+
+    public PagedObservableCollection(IList<T> source, int? pageIndex, int? pageSize, int totalCount)
+    {
+        if (source?.Any() ?? false)
+        {
+            PageIndex = pageIndex ?? 1;
+            PageSize = pageSize;
+            Count = source.Count;
+            TotalCount = totalCount;
+            TotalPages = PageSize > 0 ? (int)Math.Ceiling(TotalCount / (decimal)PageSize.Value) : 0;
+            Items = new ObservableCollection<T>(source);
+        }
+    }
+
     private int? _pageIndex;
     public int? PageIndex
     {

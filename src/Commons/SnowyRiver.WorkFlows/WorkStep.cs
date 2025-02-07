@@ -1,5 +1,5 @@
 ﻿namespace SnowyRiver.WorkFlows;
-public class WorkStep<TKey>: WorkStep
+public class WorkStep<TKey, TState>: WorkStep<TState>
 {
     private TKey _id;
     public TKey Id

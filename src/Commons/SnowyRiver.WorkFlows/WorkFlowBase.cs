@@ -3,8 +3,8 @@ using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
 
 namespace SnowyRiver.WorkFlows;
-public class WorkFlow<TStep>: NotifyPropertyChangedObject
-     where TStep : WorkStep
+public class WorkFlow<TState, TStep, TStepState>: NotifyPropertyChangedObject
+     where TStep : WorkStep<TStepState>
 {
     private string _name = string.Empty;
     public string Name
@@ -37,9 +37,9 @@ public class WorkFlow<TStep>: NotifyPropertyChangedObject
         set => Set(ref _endTime, value);
     }
 
-    private WorkState _state;
+    private TState _state;
     [JsonIgnore]
-    public WorkState State
+    public TState State
     {
         get => _state;
         set => Set(ref _state, value);

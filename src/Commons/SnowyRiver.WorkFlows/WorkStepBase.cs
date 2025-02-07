@@ -2,7 +2,7 @@
 using SnowyRiver.WPF.NotifyPropertyChangedBase;
 
 namespace SnowyRiver.WorkFlows;
-public class WorkStep: NotifyPropertyChangedObject
+public class WorkStep<TSate>: NotifyPropertyChangedObject
 {
     private int _sortId;
     public int SortId
@@ -25,9 +25,9 @@ public class WorkStep: NotifyPropertyChangedObject
         set => Set(ref _name, value);
     }
 
-    private WorkState _state;
+    private TSate _state;
     [JsonIgnore]
-    public WorkState State
+    public TSate State
     {
         get => _state;
         set => Set(ref _state, value);

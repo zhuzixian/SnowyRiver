@@ -3,9 +3,16 @@ using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
 
 namespace SnowyRiver.WorkFlows;
-public class WorkFlow<TState, TStep, TStepState>: NotifyPropertyChangedObject
-     where TStep : WorkStep<TStepState>
+public class WorkFlow<TKey, TState, TStepKey, TStep, TStepState>: NotifyPropertyChangedObject
+     where TStep : WorkStep<TStepKey, TStepState>
 {
+    private TKey _id;
+    public TKey Id
+    {
+        get => _id;
+        set => Set(ref _id, value);
+    }
+
     private string _name = string.Empty;
     public string Name
     {

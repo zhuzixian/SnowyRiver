@@ -2,8 +2,15 @@
 using SnowyRiver.WPF.NotifyPropertyChangedBase;
 
 namespace SnowyRiver.WorkFlows;
-public class WorkStep<TSate>: NotifyPropertyChangedObject
+public class WorkStep<TKey, TSate>: NotifyPropertyChangedObject
 {
+    private TKey _id;
+    public TKey Id
+    {
+        get => _id;
+        set => Set(ref _id, value);
+    }
+
     private int _sortId;
     public int SortId
     {

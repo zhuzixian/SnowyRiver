@@ -9,4 +9,6 @@ public class MaterialDesignMetroDialogWindow : MaterialDesignMetroWindow,IDialog
     }
 
     public IDialogResult? Result { get; set; }
+
+    protected override bool EnableActivateOnShowMeWindowMessage => true;
 }

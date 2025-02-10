@@ -10,19 +10,16 @@ using EntityFrameworkCore.UnitOfWork.Extensions;
 using SnowyRiver.Accounts.Manager.EntityFramework;
 using System;
 using System.Threading.Tasks;
+using Akavache;
 using Prism.Dialogs;
 using SnowyRiver.Accounts.Modules.Manager.Services;
-using SnowyRiver.WPF.MaterialDesignInPrism.Service;
-using SnowyRiver.WPF.MaterialDesignInPrism.Windows;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 using SnowyRiver.Accounts.Manager.ViewModels;
-using SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
 using SnowyRiver.Accounts.Modules.Manager.Interfaces.Services;
 using SnowyRiver.WPF.Modules.Splash;
 using SnowyRiver.Commons;
 using SnowyRiver.WPF.MaterialDesignInPrism;
-using SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs;
 using SnowyRiver.WPF.Modules.Splash.Views;
 
 namespace SnowyRiver.Accounts.Manager
@@ -37,27 +34,41 @@ namespace SnowyRiver.Accounts.Manager
             return Container.Resolve<MainWindow>();
         }
 
+        protected override void OnExit(ExitEventArgs e)
+        {
+            BlobCache.Shutdown().Wait();
+            base.OnExit(e);
+        }
+
         protected override async void OnInitialized()
         {
-            WPFLocalizeExtension.Engine.LocalizeDictionary.Instance.Culture = CultureInfo.CurrentCulture;
-
             try
             {
-                await MigrateAsync();
+                Registrations.Start(AppDomain.CurrentDomain.FriendlyName);
+                WPFLocalizeExtension.Engine.LocalizeDictionary.Instance.Culture = CultureInfo.CurrentCulture;
+
+                try
+                {
+                    await MigrateAsync();
+                }
+                catch (Exception e)
+                {
+                    var errorMessage = $"The database error: {(e.InnerException != null ? e.InnerException.Message : e.Message)}";
+                    if (MessageBox.Show(errorMessage, "Error", MessageBoxButton.OK) == MessageBoxResult.OK)
+                    {
+                        Environment.Exit(0);
+                    }
+                }
+
+                var dialogService = ContainerLocator.Container.Resolve<IDialogService>();
+                dialogService.ShowDialog(WPF.Modules.Splash.ViewNames.SplashView);
+
+                base.OnInitialized();
             }
             catch (Exception e)
             {
-                var errorMessage = $"The database error: {(e.InnerException != null ? e.InnerException.Message : e.Message)}";
-                if (MessageBox.Show(errorMessage, "Error", MessageBoxButton.OK) == MessageBoxResult.OK)
-                {
-                    Environment.Exit(0);
-                }
+                //
             }
-
-            var dialogService = ContainerLocator.Container.Resolve<IDialogService>();
-            dialogService.ShowDialog(WPF.Modules.Splash.ViewNames.SplashView);
-
-            base.OnInitialized();
         }
 
         private static async Task MigrateAsync()

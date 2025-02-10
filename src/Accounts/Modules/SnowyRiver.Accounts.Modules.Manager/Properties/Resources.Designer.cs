@@ -187,6 +187,15 @@ namespace SnowyRiver.Accounts.Modules.Manager.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Remember me 的本地化字符串。
+        /// </summary>
+        internal static string RememberMe {
+            get {
+                return ResourceManager.GetString("RememberMe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Roles 的本地化字符串。
         /// </summary>
         internal static string Roles {

@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SnowyRiver.Accounts.Modules.Manager.Controls
 {
@@ -50,6 +39,15 @@ namespace SnowyRiver.Accounts.Modules.Manager.Controls
         {
             get => (string)GetValue(PasswordProperty);
             set => SetValue(PasswordProperty, value);
+        }
+
+        public static readonly DependencyProperty RememberMeProperty = DependencyProperty.Register(
+            nameof(RememberMe), typeof(bool), typeof(Login), new PropertyMetadata(false));
+
+        public bool RememberMe
+        {
+            get => (bool)GetValue(RememberMeProperty);
+            set => SetValue(RememberMeProperty, value);
         }
 
         public static readonly DependencyProperty ConfirmCommandProperty = DependencyProperty.Register(

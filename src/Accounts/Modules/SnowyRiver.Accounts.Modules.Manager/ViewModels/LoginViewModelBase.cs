@@ -7,6 +7,9 @@ using SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
 using SnowyRiver.Accounts.Modules.Manager.Interfaces.Services;
 using SnowyRiver.WPF.Localized;
 using System.Linq;
+using System.Reactive.Linq;
+using Akavache;
+using SnowyRiver.Accounts.Modules.Manager.Models;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
 public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
@@ -17,23 +20,39 @@ public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
     where TRole : Role<TUser, TRole, TTeam, TPermission>
     where TPermission : Permission<TUser, TRole, TTeam, TPermission>
 {
-    public override void OnNavigatedTo(NavigationContext navigationContext)
+    public override async void OnNavigatedTo(NavigationContext navigationContext)
     {
-        if (navigationContext.Parameters.TryGetValue<Action>(nameof(NextAction), out var nextAction))
+        try
         {
-            NextAction = nextAction;
-        }
+            if (navigationContext.Parameters.TryGetValue<Action>(nameof(NextAction), out var nextAction))
+            {
+                NextAction = nextAction;
+            }
 
-        base.OnNavigatedTo(navigationContext);
+            base.OnNavigatedTo(navigationContext);
+
+            var cacheLogin = await BlobCache.LocalMachine.GetObject<Login>(RememberMeCacheKey)
+                .Catch(Observable.Return(default(Login?)));
+            if (cacheLogin != null)
+            {
+                Login.UserName = cacheLogin.UserName;
+                Login.Password = cacheLogin.Password;
+                RememberMe = true;
+            }
+        }
+        catch (Exception e)
+        {
+            //
+        }
     }
 
     public Action? NextAction { get; protected set; }
 
     private DelegateCommand? _confirmCommand;
     public override DelegateCommand ConfirmCommand => _confirmCommand ??= new DelegateCommand(() => _ = ConfirmAsync(),
-            () => !string.IsNullOrWhiteSpace(UserName) && !string.IsNullOrWhiteSpace(Password))
-        .ObservesProperty(() => UserName)
-        .ObservesProperty(() => Password);
+            () => !string.IsNullOrWhiteSpace(Login.UserName) && !string.IsNullOrWhiteSpace(Login.Password))
+        .ObservesProperty(() => Login.UserName)
+        .ObservesProperty(() => Login.Password);
 
     private bool _isLoggingIn;
     public bool IsLoggingIn
@@ -47,7 +66,7 @@ public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
         try
         {
             IsLoggingIn = true;
-            var (isLoginSucceed, loginFailedReason) = await authenticationService.LoginAsync(UserName, Password);
+            var (isLoginSucceed, loginFailedReason) = await authenticationService.LoginAsync(Login.UserName, Login.Password);
             if (!isLoginSucceed)
             {
                 Message = loginFailedReason == LoginFailedReason.NotFoundUser
@@ -60,6 +79,15 @@ public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
             }
             else
             {
+                if (RememberMe)
+                {
+                    await BlobCache.LocalMachine.InsertObject(RememberMeCacheKey, Login);
+                }
+                else
+                {
+                    await BlobCache.LocalMachine.InvalidateObject<Login>(RememberMeCacheKey);
+                }
+
                 NextAction?.Invoke();
             }
         }
@@ -86,30 +114,14 @@ public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
         Environment.Exit(-1);
     }
 
-    private string _userName = string.Empty;
-    public string UserName
-    {
-        get => _userName;
-        set
-        {
-            if (SetProperty(ref _userName, value))
-            {
-                Message = string.Empty;
-            }
-        }
-    }
+    private Login? _login;
+    public Login Login => _login ??= new Login();
 
-    private string _password = string.Empty;
-    public string Password
+    private bool _rememberMe;
+    public bool RememberMe
     {
-        get => _password;
-        set
-        {
-            if (SetProperty(ref _password, value))
-            {
-                Message = string.Empty;
-            }
-        }
+        get => _rememberMe;
+        set => SetProperty(ref _rememberMe, value);
     }
 
     private string _message = string.Empty;
@@ -119,4 +131,6 @@ public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
         get => _message;
         set => SetProperty(ref _message, value);
     }
+
+    protected virtual string RememberMeCacheKey => "Accounts.RememberMe";
 }

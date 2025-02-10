@@ -9,8 +9,9 @@
              lex:ResxLocalizationProvider.DefaultAssembly="SnowyRiver.Accounts.Modules.Manager"
              lex:ResxLocalizationProvider.DefaultDictionary="Resources">
     <controls:Login Message="{Binding Message}"
-                    UserName="{Binding UserName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                    Password="{Binding Password, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    UserName="{Binding Login.UserName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    Password="{Binding Login.Password, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    RememberMe="{Binding RememberMe, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                     ConfirmCommand="{Binding ConfirmCommand}"
                     CancelCommand="{Binding CancelCommand}"/>
 </UserControl>

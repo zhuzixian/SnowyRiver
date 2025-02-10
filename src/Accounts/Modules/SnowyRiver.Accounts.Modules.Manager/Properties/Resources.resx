@@ -160,4 +160,7 @@
   <data name="LoginPasswordVerificationFailed" xml:space="preserve">
     <value>Please enter the correct password</value>
   </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Remember me</value>
+  </data>
 </root>

@@ -67,4 +67,14 @@ public static class Extensions
             recordsArray[i].SortId = baseSortId + i + 1;
         }
     }
+
+    public static bool IsNullOrEmpty<T>(this string value)
+    {
+        return string.IsNullOrEmpty(value);
+    }
+
+    public static bool IsNullOrWhiteSpace<T>(this string value)
+    {
+        return string.IsNullOrWhiteSpace(value);
+    }
 }

@@ -1,7 +1,8 @@
-﻿using System;
+﻿using SnowyRiver.Commons;
+using System;
 
 namespace SnowyRiver.WPF.NotifyPropertyChangedBase.Commons;
-public class QueryFilter : NotifyPropertyChangedObject
+public class QueryFilter : NotifyPropertyChangedObject, IQueryFilter
 {
     private DateTime? _startTime = DateTime.Today;
 

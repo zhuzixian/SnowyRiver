@@ -44,7 +44,7 @@ public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy
         }
     }
 
-    public Task<T[]> ReadHoldingRegistersAsync<T>(int unitIdentifier, int startingAddress, int count,
+    public virtual Task<T[]> ReadHoldingRegistersAsync<T>(int unitIdentifier, int startingAddress, int count,
         CancellationToken cancellationToken = default) where T : unmanaged
     {
         return ExecuteAsync(async () =>
@@ -55,7 +55,7 @@ public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy
             cancellationToken);
     }
 
-    public Task<byte[]> ReadHoldingRegistersAsync(byte unitIdentifier, ushort startingAddress,
+    public virtual Task<byte[]> ReadHoldingRegistersAsync(byte unitIdentifier, ushort startingAddress,
         ushort quantity, CancellationToken cancellationToken = default)
     {
         return ExecuteAsync(async() =>
@@ -66,7 +66,7 @@ public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy
         cancellationToken);
     }
 
-    public Task WriteMultipleRegistersAsync<T>(int unitIdentifier, int startingAddress, T[] dataset,
+    public virtual Task WriteMultipleRegistersAsync<T>(int unitIdentifier, int startingAddress, T[] dataset,
         CancellationToken cancellationToken = default) where T : unmanaged
     {
         return ExecuteAsync(async () =>
@@ -79,7 +79,7 @@ public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy
         }, cancellationToken);
     }
 
-    public Task WriteMultipleRegistersAsync(byte unitIdentifier, ushort startingAddress, byte[] dataset,
+    public virtual Task WriteMultipleRegistersAsync(byte unitIdentifier, ushort startingAddress, byte[] dataset,
         CancellationToken cancellationToken = default)
     {
         return ExecuteAsync(() =>
@@ -87,14 +87,14 @@ public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy
             cancellationToken);
     }
 
-    public Task<Memory<byte>> ReadCoilsAsync(int unitIdentifier, int startingAddress, int quantity,
+    public virtual Task<Memory<byte>> ReadCoilsAsync(int unitIdentifier, int startingAddress, int quantity,
         CancellationToken cancellationToken = default)
     {
         return ExecuteAsync(() =>
             client.ReadCoilsAsync(unitIdentifier, startingAddress, quantity, cancellationToken), cancellationToken);
     }
 
-    public Task<byte[]> ReadDiscreteInputsAsync(int unitIdentifier, int startingAddress, int quantity,
+    public virtual Task<byte[]> ReadDiscreteInputsAsync(int unitIdentifier, int startingAddress, int quantity,
         CancellationToken cancellationToken = default)
     {
         return ExecuteAsync(async () =>
@@ -104,7 +104,7 @@ public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy
             }, cancellationToken);
     }
 
-    public Task<T[]> ReadInputRegistersAsync<T>(int unitIdentifier, int startingAddress, int count,
+    public virtual Task<T[]> ReadInputRegistersAsync<T>(int unitIdentifier, int startingAddress, int count,
         CancellationToken cancellationToken = default) where T : unmanaged
     {
         return ExecuteAsync( async () =>
@@ -114,7 +114,7 @@ public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy
             },cancellationToken);
     }
 
-    public Task<byte[]> ReadInputRegistersAsync(byte unitIdentifier, ushort startingAddress,
+    public virtual Task<byte[]> ReadInputRegistersAsync(byte unitIdentifier, ushort startingAddress,
         ushort quantity, CancellationToken cancellationToken = default)
     {
         return ExecuteAsync(async () =>
@@ -124,42 +124,42 @@ public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy
         }, cancellationToken);
     }
 
-    public Task WriteSingleCoilAsync(int unitIdentifier, int registerAddress, bool value,
+    public virtual Task WriteSingleCoilAsync(int unitIdentifier, int registerAddress, bool value,
         CancellationToken cancellationToken = default)
     {
         return ExecuteAsync(() =>
             client.WriteSingleCoilAsync(unitIdentifier, registerAddress, value, cancellationToken), cancellationToken);
     }
 
-    public Task WriteSingleRegisterAsync(int unitIdentifier, int registerAddress, short value,
+    public virtual Task WriteSingleRegisterAsync(int unitIdentifier, int registerAddress, short value,
         CancellationToken cancellationToken = default)
     {
         return ExecuteAsync(() =>
             client.WriteSingleRegisterAsync(unitIdentifier, registerAddress, value, cancellationToken), cancellationToken);
     }
 
-    public Task WriteSingleRegisterAsync(int unitIdentifier, int registerAddress, ushort value,
+    public virtual Task WriteSingleRegisterAsync(int unitIdentifier, int registerAddress, ushort value,
         CancellationToken cancellationToken = default)
     {
         return ExecuteAsync(() =>
             client.WriteSingleRegisterAsync(unitIdentifier, registerAddress, value, cancellationToken), cancellationToken);
     }
 
-    public Task WriteSingleRegisterAsync(byte unitIdentifier, ushort registerAddress, byte[] value,
+    public virtual Task WriteSingleRegisterAsync(byte unitIdentifier, ushort registerAddress, byte[] value,
         CancellationToken cancellationToken = default)
     {
         return ExecuteAsync(() =>
             client.WriteSingleRegisterAsync(unitIdentifier, registerAddress, value, cancellationToken), cancellationToken);
     }
 
-    public Task WriteMultipleCoilsAsync(int unitIdentifier, int startingAddress, bool[] values,
+    public virtual Task WriteMultipleCoilsAsync(int unitIdentifier, int startingAddress, bool[] values,
         CancellationToken cancellationToken = default)
     {
         return ExecuteAsync(() =>
             client.WriteMultipleCoilsAsync(unitIdentifier, startingAddress, values, cancellationToken), cancellationToken);
     }
 
-    public Task<TRead[]> ReadWriteMultipleRegistersAsync<TRead, TWrite>(int unitIdentifier,
+    public virtual Task<TRead[]> ReadWriteMultipleRegistersAsync<TRead, TWrite>(int unitIdentifier,
         int readStartingAddress, int readCount, int writeStartingAddress, TWrite[] dataset,
         CancellationToken cancellationToken = default) where TRead : unmanaged
         where TWrite : unmanaged
@@ -173,7 +173,7 @@ public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy
         }, cancellationToken);
     }
 
-    public Task<byte[]> ReadWriteMultipleRegistersAsync(byte unitIdentifier, ushort readStartingAddress,
+    public virtual Task<byte[]> ReadWriteMultipleRegistersAsync(byte unitIdentifier, ushort readStartingAddress,
         ushort readQuantity, ushort writeStartingAddress, byte[] dataset, CancellationToken cancellationToken = default)
     {
         return ExecuteAsync(async () =>

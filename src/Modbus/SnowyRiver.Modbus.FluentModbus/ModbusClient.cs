@@ -4,7 +4,7 @@ using SnowyRiver.Polly;
 
 namespace SnowyRiver.Modbus.FluentModbus;
 
-public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy)
+public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy):IModbusClient
 {
     protected DateTime LastAccessTime = DateTime.MinValue;
 

@@ -3,11 +3,11 @@
     <TargetFramework>net9.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <Nullable>enable</Nullable>
-    <Version>9.0.28</Version>
+    <Version>9.0.29</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="akavache" Version="10.1.6" />
-    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="EntityFrameworkCore.Data.UnitOfWork" Version="9.0.0" />
     <PackageReference Include="Prism.Wpf" Version="9.0.537" />
     <PackageReference Include="WPFLocalizeExtension" Version="3.10.0" />

@@ -4,12 +4,15 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>SnowyRiver.WPF.Configuration</RootNamespace>
     <Nullable>enable</Nullable>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SnowyRiver.WPF.NotifyPropertyChangedBase" Version="1.0.0" />
-    <PackageReference Include="System.Text.Json" Version="9.0.0" />
+    <PackageReference Include="System.Text.Json" Version="9.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SnowyRiver.WPF.NotifyPropertyChangedBase\SnowyRiver.WPF.NotifyPropertyChangedBase.csproj" />
   </ItemGroup>
 
 </Project>

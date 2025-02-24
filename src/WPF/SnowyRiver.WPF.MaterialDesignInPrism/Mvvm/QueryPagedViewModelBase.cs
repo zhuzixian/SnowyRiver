@@ -2,9 +2,14 @@
 using System.ComponentModel;
 
 namespace SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
-public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter>(IRegionManager regionManager) : RegionDialogViewModelBase(regionManager)
+public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter> : RegionDialogViewModelBase
     where TRecordFilter : QueryFilter, new()
 {
+    public QueryPagedViewModelBase(IRegionManager regionManager)
+        : base(regionManager)
+    {
+        Filter = new TRecordFilter();
+    }
 
     protected virtual void FilterOnPropertyChanged(object? sender, PropertyChangedEventArgs args)
     {

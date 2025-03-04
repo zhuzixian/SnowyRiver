@@ -101,6 +101,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.Ef", "SnowyRiver
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.CommonInitializer", "DDD\SnowyRiver.CommonInitializer\SnowyRiver.CommonInitializer.csproj", "{CE6C35AA-2AE8-40EE-A720-0D51136BFD79}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.Reflection", "Commons\SnowyRiver.Reflection\SnowyRiver.Reflection.csproj", "{8B06AD25-03F3-4B05-BFDF-B7EE2B73E91A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -247,6 +249,10 @@ Global
 		{CE6C35AA-2AE8-40EE-A720-0D51136BFD79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE6C35AA-2AE8-40EE-A720-0D51136BFD79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE6C35AA-2AE8-40EE-A720-0D51136BFD79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B06AD25-03F3-4B05-BFDF-B7EE2B73E91A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B06AD25-03F3-4B05-BFDF-B7EE2B73E91A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B06AD25-03F3-4B05-BFDF-B7EE2B73E91A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B06AD25-03F3-4B05-BFDF-B7EE2B73E91A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -292,6 +298,7 @@ Global
 		{96DB2D07-7574-421E-99D6-7F37BF8F7562} = {0AA91054-FCD2-4828-BB88-2276FBDB6722}
 		{45AE3507-70F4-40E2-97C9-BE7005FEE37A} = {3B2886EE-1186-4C50-B616-1304A9C129FB}
 		{CE6C35AA-2AE8-40EE-A720-0D51136BFD79} = {0B81BC32-028F-475E-82F4-6AE2B7CEB47F}
+		{8B06AD25-03F3-4B05-BFDF-B7EE2B73E91A} = {0AA91054-FCD2-4828-BB88-2276FBDB6722}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E75A6A63-872F-41A5-80C6-C3FA93CCA7AC}

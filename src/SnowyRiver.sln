@@ -97,6 +97,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.WPF.MaterialDesi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.Jwt", "SnowyRiver.Jwt\SnowyRiver.Jwt.csproj", "{81B772F6-0917-4AC2-AE6A-12A4804990E3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.Ef", "SnowyRiver.EF\SnowyRiver.Ef.csproj", "{5B76A702-8AC2-4FC4-86BC-2D8FC2BA318E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -235,6 +237,10 @@ Global
 		{81B772F6-0917-4AC2-AE6A-12A4804990E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81B772F6-0917-4AC2-AE6A-12A4804990E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81B772F6-0917-4AC2-AE6A-12A4804990E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B76A702-8AC2-4FC4-86BC-2D8FC2BA318E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B76A702-8AC2-4FC4-86BC-2D8FC2BA318E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B76A702-8AC2-4FC4-86BC-2D8FC2BA318E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B76A702-8AC2-4FC4-86BC-2D8FC2BA318E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

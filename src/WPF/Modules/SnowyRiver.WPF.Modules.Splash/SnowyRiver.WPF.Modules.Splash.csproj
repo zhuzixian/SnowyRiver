@@ -9,7 +9,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Accounts\Modules\SnowyRiver.Accounts.Modules.Manager\SnowyRiver.Accounts.Modules.Manager.csproj" />
-    <ProjectReference Include="..\..\..\Commons\SnowyRiver.Commons\SnowyRiver.Commons.csproj" />
     <ProjectReference Include="..\..\..\Commons\SnowyRiver.Reflection\SnowyRiver.Reflection.csproj" />
     <ProjectReference Include="..\..\SnowyRiver.WPF.MaterialDesignInPrism\SnowyRiver.WPF.MaterialDesignInPrism.csproj" />
   </ItemGroup>

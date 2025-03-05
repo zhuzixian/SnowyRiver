@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SnowyRiver.Commons;
+namespace SnowyRiver.Domain.Shared.Entities;
 
 public interface IQueryFilter
 {

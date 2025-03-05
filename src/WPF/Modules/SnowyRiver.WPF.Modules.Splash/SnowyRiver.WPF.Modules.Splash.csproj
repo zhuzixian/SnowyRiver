@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net9.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <Version>1.0.6</Version>
+    <Version>1.0.7</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Prism.Wpf" Version="9.0.537" />
@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Accounts\Modules\SnowyRiver.Accounts.Modules.Manager\SnowyRiver.Accounts.Modules.Manager.csproj" />
     <ProjectReference Include="..\..\..\Commons\SnowyRiver.Commons\SnowyRiver.Commons.csproj" />
+    <ProjectReference Include="..\..\..\Commons\SnowyRiver.Reflection\SnowyRiver.Reflection.csproj" />
     <ProjectReference Include="..\..\SnowyRiver.WPF.MaterialDesignInPrism\SnowyRiver.WPF.MaterialDesignInPrism.csproj" />
   </ItemGroup>
 </Project>

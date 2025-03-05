@@ -18,7 +18,7 @@ using NLog.Extensions.Logging;
 using SnowyRiver.Accounts.Manager.ViewModels;
 using SnowyRiver.Accounts.Modules.Manager.Interfaces.Services;
 using SnowyRiver.WPF.Modules.Splash;
-using SnowyRiver.Commons;
+using SnowyRiver.Reflection;
 using SnowyRiver.WPF.MaterialDesignInPrism;
 using SnowyRiver.WPF.Modules.Splash.Views;
 

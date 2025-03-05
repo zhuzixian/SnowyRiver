@@ -95,8 +95,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.Polly", "Commons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.WPF.MaterialDesignInPrism.Core", "WPF\SnowyRiver.WPF.MaterialDesignInPrism.Core\SnowyRiver.WPF.MaterialDesignInPrism.Core.csproj", "{45AE3507-70F4-40E2-97C9-BE7005FEE37A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.Jwt", "SnowyRiver.Jwt\SnowyRiver.Jwt.csproj", "{81B772F6-0917-4AC2-AE6A-12A4804990E3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.Ef", "SnowyRiver.EF\SnowyRiver.Ef.csproj", "{5B76A702-8AC2-4FC4-86BC-2D8FC2BA318E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.CommonInitializer", "DDD\SnowyRiver.CommonInitializer\SnowyRiver.CommonInitializer.csproj", "{CE6C35AA-2AE8-40EE-A720-0D51136BFD79}"
@@ -237,10 +235,6 @@ Global
 		{45AE3507-70F4-40E2-97C9-BE7005FEE37A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45AE3507-70F4-40E2-97C9-BE7005FEE37A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45AE3507-70F4-40E2-97C9-BE7005FEE37A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{81B772F6-0917-4AC2-AE6A-12A4804990E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{81B772F6-0917-4AC2-AE6A-12A4804990E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{81B772F6-0917-4AC2-AE6A-12A4804990E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{81B772F6-0917-4AC2-AE6A-12A4804990E3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5B76A702-8AC2-4FC4-86BC-2D8FC2BA318E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5B76A702-8AC2-4FC4-86BC-2D8FC2BA318E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B76A702-8AC2-4FC4-86BC-2D8FC2BA318E}.Release|Any CPU.ActiveCfg = Release|Any CPU

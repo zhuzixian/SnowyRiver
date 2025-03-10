@@ -4,7 +4,7 @@ using SnowyRiver.WPF.MaterialDesignInPrism.Service;
 namespace SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 public class DialogViewModelBase : ViewModelBase, IDialogHostAware,IDialogAware
 {
-    public string IdentifierName { get; set; } = string.Empty;
+    public virtual string? IdentifierName { get; set; } = null;
 
     private DelegateCommand? _confirmCommand;
 

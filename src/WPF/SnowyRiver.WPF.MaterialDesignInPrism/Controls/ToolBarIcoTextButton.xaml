@@ -9,8 +9,10 @@
              d:DesignHeight="450" d:DesignWidth="800"
              Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
     <StackPanel Orientation="Horizontal">
-        <materialDesign:PackIcon Kind="{Binding Kind, RelativeSource={RelativeSource AncestorType=controls:ToolBarIcoTextButton}}"/>
+        <materialDesign:PackIcon Kind="{Binding Kind, RelativeSource={RelativeSource AncestorType=controls:ToolBarIcoTextButton}}"
+                                 VerticalAlignment="Center"/>
         <TextBlock Text="{Binding Text, RelativeSource={RelativeSource AncestorType=controls:ToolBarIcoTextButton}}" 
-                   Margin="6, 0, 0, 0"/>
+                   Margin="6, 0, 0, 0"
+                   VerticalAlignment="Center"/>
     </StackPanel>
 </Button>

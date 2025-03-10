@@ -73,9 +73,13 @@
                        materialDesign:HintAssist.Hint="Password"/>
                 </Grid>
                 <Grid Margin="0, 12, 0, 6">
-                    <CheckBox Content="{lex:Loc RememberMe}" 
-                        IsChecked="{Binding RememberMe, Mode=TwoWay,
+                    <Grid.Resources>
+                        <materialDesign:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+                    </Grid.Resources>
+                    <CheckBox Content="{lex:Loc RememberMe}" IsChecked="{Binding RememberMe, Mode=TwoWay,
                             UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=controls:Login}}"
+                              Visibility="{Binding EnableRememberMe, Converter={StaticResource BooleanToVisibilityConverter},
+                        RelativeSource={RelativeSource AncestorType=controls:Login}}"
                               FontSize="18"
                               VerticalAlignment="Center" VerticalContentAlignment="Bottom"
                               HorizontalAlignment="Right"/>

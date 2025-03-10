@@ -50,6 +50,15 @@ namespace SnowyRiver.Accounts.Modules.Manager.Controls
             set => SetValue(RememberMeProperty, value);
         }
 
+        public static readonly DependencyProperty EnableRememberMeProperty = DependencyProperty.Register(
+            nameof(EnableRememberMe), typeof(bool), typeof(Login), new PropertyMetadata(false));
+
+        public bool EnableRememberMe
+        {
+            get => (bool)GetValue(EnableRememberMeProperty);
+            set => SetValue(EnableRememberMeProperty, value);
+        }
+
         public static readonly DependencyProperty ConfirmCommandProperty = DependencyProperty.Register(
             nameof(ConfirmCommand), typeof(ICommand), typeof(Login), new PropertyMetadata(default(ICommand)));
 

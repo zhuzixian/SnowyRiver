@@ -12,6 +12,7 @@
                     UserName="{Binding Login.UserName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                     Password="{Binding Login.Password, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                     RememberMe="{Binding RememberMe, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    EnableRememberMe="{Binding EnableRememberMe}"
                     ConfirmCommand="{Binding ConfirmCommand}"
                     CancelCommand="{Binding CancelCommand}"/>
 </UserControl>

@@ -1,4 +1,4 @@
-﻿using SnowyRiver.Commons;
+﻿using SnowyRiver.Domain.Shared.Entities;
 
 namespace SnowyRiver.WPF.NotifyPropertyChangedBase.Commons;
 public class HasSortIdNotifyPropertyChangedObject : NotifyPropertyChangedObject, IHasSortId

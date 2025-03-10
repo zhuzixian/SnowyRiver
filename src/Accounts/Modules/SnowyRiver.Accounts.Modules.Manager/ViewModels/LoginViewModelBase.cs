@@ -54,6 +54,8 @@ public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
         .ObservesProperty(() => Login.UserName)
         .ObservesProperty(() => Login.Password);
 
+    public virtual bool EnableRememberMe { get; } = true;
+
     private bool _isLoggingIn;
     public bool IsLoggingIn
     {

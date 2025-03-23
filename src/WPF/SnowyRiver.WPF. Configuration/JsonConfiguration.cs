@@ -19,6 +19,7 @@ public abstract class JsonConfiguration:NotifyPropertyChangedObject
 
     protected virtual JsonConfigurationOptions DefaultOptions => GlobalOptions;
 
+    [JsonIgnore]
     public static JsonConfigurationOptions GlobalOptions { get; set; } = new();
 
     [JsonIgnore]
@@ -46,7 +47,7 @@ public abstract class JsonConfiguration:NotifyPropertyChangedObject
 
     public static T? Load<T>(string path, JsonConfigurationOptions options) where T : JsonConfiguration, new()
     {
-        T? config = default;
+        T? config = null;
         if (File.Exists(path))
             config = Read<T>(path, options);
         else if (options.CreateNew)
@@ -63,8 +64,8 @@ public abstract class JsonConfiguration:NotifyPropertyChangedObject
 
     public static T? Read<T>(string path, JsonConfigurationOptions options) where T : JsonConfiguration, new()
     {
-        string json = File.ReadAllText(path);
-        T? config = JsonSerializer.Deserialize<T>(json, options.SerializerOptions);
+        var json = File.ReadAllText(path);
+        var config = JsonSerializer.Deserialize<T>(json, options.SerializerOptions);
         if (config != null)
         {
             config.OnReading();
@@ -109,6 +110,10 @@ public abstract class JsonConfiguration:NotifyPropertyChangedObject
     public virtual async Task SaveAsync(string path, JsonConfigurationOptions options, CancellationToken cancellationToken)
     {
         OnBeforeSave();
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+        }
         using var stream = new FileStream(path, FileMode.OpenOrCreate);
         await JsonSerializer.SerializeAsync(stream, this, GetType(), cancellationToken: cancellationToken,
             options:options.SerializerOptions);

@@ -24,4 +24,5 @@ public enum LoginFailedReason
     NotFoundUser,
     PasswordVerificationFailed,
     UnKnow,
+    NoPermissions
 }

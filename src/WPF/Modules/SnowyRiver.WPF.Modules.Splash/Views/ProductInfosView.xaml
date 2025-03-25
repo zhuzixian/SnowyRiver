@@ -9,7 +9,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Margin="0, 12">
-            <Image Source="pack://application:,,,/Resources/logo.png" Height="48"/>
+            <Image Source="{Binding Logo}" Height="48"/>
         </Grid>
         <StackPanel Grid.Row="1" Orientation="Vertical" Margin="12, 0" DataContext="{Binding ProductInfo}"
                     VerticalAlignment="Center" HorizontalAlignment="Center">

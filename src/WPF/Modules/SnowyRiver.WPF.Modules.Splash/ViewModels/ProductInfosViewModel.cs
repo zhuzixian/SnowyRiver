@@ -11,4 +11,6 @@ public class ProductInfosViewModel(ProductInfo productInfo, IRegionManager regio
         get => _productInfo;
         set => SetProperty(ref _productInfo, value);
     }
+
+    public virtual string Logo => "/Resources/logo.png";
 }

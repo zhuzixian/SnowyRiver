@@ -1,16 +1,35 @@
-﻿using Prism.Navigation.Regions;
+﻿using System;
+using System.IO;
+using System.Windows.Media.Imaging;
+using Prism.Navigation.Regions;
 using SnowyRiver.Reflection;
 using SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 
 namespace SnowyRiver.WPF.Modules.Splash.ViewModels;
-public class ProductInfosViewModel(ProductInfo productInfo, IRegionManager regionManager) : RegionViewModelBase(regionManager)
+public class ProductInfosViewModel: RegionViewModelBase
 {
-    private ProductInfo _productInfo = productInfo;
+    public ProductInfosViewModel(ProductInfo productInfo, IRegionManager regionManager):base(regionManager)
+    {
+        ProductInfo = productInfo;
+
+        var logoFileInfo = new FileInfo("./Resources/logo.png");
+        if (logoFileInfo.Exists)
+        {
+            Logo = new BitmapImage(new Uri(logoFileInfo.FullName));
+        }
+    }
+
+    private ProductInfo _productInfo;
     public ProductInfo ProductInfo
     {
         get => _productInfo;
         set => SetProperty(ref _productInfo, value);
     }
 
-    public virtual string Logo => "/Resources/logo.png";
+    private BitmapImage _logo;
+    public BitmapImage Logo
+    {
+        get => _logo;
+        set => SetProperty(ref _logo, value);
+    }
 }

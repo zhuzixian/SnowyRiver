@@ -4,7 +4,7 @@
              xmlns:prism="http://prismlibrary.com/"
              xmlns:controls="clr-namespace:SnowyRiver.WPF.MaterialDesignInPrism.Controls;assembly=SnowyRiver.WPF.MaterialDesignInPrism"
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <Grid>
+    <Grid Margin="12">
         <controls:TripsDialog Title="{Binding Title}"
                               Message="{Binding Message}"
                               Buttons="{Binding Buttons}"

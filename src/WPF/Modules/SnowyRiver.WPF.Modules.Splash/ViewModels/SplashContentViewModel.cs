@@ -19,7 +19,7 @@ public class SplashContentViewModel(IRegionManager regionManager) : RegionViewMo
                 { nameof(DialogViewModel.Buttons), buttons },
                 { nameof(DialogViewModel), dialogResult }
             });
-        while (!string.IsNullOrEmpty(dialogResult.Value))
+        while (string.IsNullOrEmpty(dialogResult.Value))
         {
             await Task.Delay(TimeSpan.FromMilliseconds(200));
         }

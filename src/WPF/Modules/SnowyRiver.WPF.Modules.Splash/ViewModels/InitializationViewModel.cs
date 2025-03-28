@@ -5,7 +5,7 @@ using SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 
 namespace SnowyRiver.WPF.Modules.Splash.ViewModels;
 
-public class InitializationViewModel(IRegionManager regionManager): RegionViewModelBase(regionManager)
+public class InitializationViewModel(IRegionManager regionManager): SplashContentViewModel(regionManager)
 {
     public override async void OnNavigatedTo(NavigationContext navigationContext)
     {

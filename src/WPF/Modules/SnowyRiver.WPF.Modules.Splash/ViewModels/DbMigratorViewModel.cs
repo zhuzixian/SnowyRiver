@@ -6,7 +6,7 @@ using SnowyRiver.Accounts.Modules.Manager.ViewModels;
 using SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 
 namespace SnowyRiver.WPF.Modules.Splash.ViewModels;
-public class DbMigratorViewModel(IRegionManager regionManager) : RegionViewModelBase(regionManager)
+public class DbMigratorViewModel(IRegionManager regionManager) : SplashContentViewModel(regionManager)
 {
     public override async void OnNavigatedTo(NavigationContext navigationContext)
     {

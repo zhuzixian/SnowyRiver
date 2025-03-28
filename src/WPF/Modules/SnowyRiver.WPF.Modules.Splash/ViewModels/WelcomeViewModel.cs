@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Prism.Navigation.Regions;
-using SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 
 namespace SnowyRiver.WPF.Modules.Splash.ViewModels;
-public class WelcomeViewModel(IRegionManager regionManager) : RegionViewModelBase(regionManager)
+public class WelcomeViewModel(IRegionManager regionManager) : SplashContentViewModel(regionManager)
 {
     public override async void OnNavigatedTo(NavigationContext navigationContext)
     {

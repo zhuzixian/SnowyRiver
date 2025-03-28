@@ -14,4 +14,6 @@ public class WelcomeViewModel(IRegionManager regionManager) : SplashContentViewM
         RegionManager.RequestNavigate(RegionNames.SplashContentRegion, ViewNames.DbMigratorView, 
             navigationContext.Parameters);
     }
+
+    protected override string ViewName => ViewNames.WelcomeView;
 }

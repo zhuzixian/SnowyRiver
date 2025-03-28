@@ -6,8 +6,21 @@ using SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 
 namespace SnowyRiver.WPF.Modules.Splash.ViewModels;
 
-public class SplashContentViewModel(IRegionManager regionManager) : RegionViewModelBase(regionManager)
+public abstract class SplashContentViewModel(IRegionManager regionManager) : RegionViewModelBase(regionManager)
 {
+    private INavigationParameters _navigationToParameters = new NavigationParameters();
+
+    public override void OnNavigatedTo(NavigationContext navigationContext)
+    {
+        _navigationToParameters = navigationContext.Parameters;
+        base.OnNavigatedTo(navigationContext);
+    }
+
+    protected void TryAgain()
+    {
+        RegionManager.RequestNavigate(RegionNames.SplashContentRegion, ViewName, _navigationToParameters);
+    }
+
     protected async Task<string> ShowDialogAsync(string view, NavigationParameters parameters)
     {
         var dialogResult = new SplashDialogResult();
@@ -38,4 +51,6 @@ public class SplashContentViewModel(IRegionManager regionManager) : RegionViewMo
                 { nameof(DialogViewModel.Buttons), buttons },
             });
     }
+
+    protected abstract string ViewName { get; }
 }

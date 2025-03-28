@@ -1,9 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Prism.Navigation;
 using Prism.Navigation.Regions;
 using SnowyRiver.Accounts.Modules.Manager.ViewModels;
-using SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 
 namespace SnowyRiver.WPF.Modules.Splash.ViewModels;
 public class DbMigratorViewModel(IRegionManager regionManager) : SplashContentViewModel(regionManager)
@@ -33,6 +31,8 @@ public class DbMigratorViewModel(IRegionManager regionManager) : SplashContentVi
 
         }
     }
+
+    protected override string ViewName => ViewNames.DbMigratorView;
 
     protected virtual async Task MigrateAsync()
     {

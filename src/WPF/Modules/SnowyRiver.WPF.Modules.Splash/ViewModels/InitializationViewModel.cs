@@ -24,6 +24,8 @@ public class InitializationViewModel(IRegionManager regionManager): SplashConten
         }
     }
 
+    protected override string ViewName => ViewNames.InitializationView;
+
     protected virtual async Task InitializeAsync()
     {
         await Task.CompletedTask;

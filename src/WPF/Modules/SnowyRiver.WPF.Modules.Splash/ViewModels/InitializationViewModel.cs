@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Prism.Navigation.Regions;
 
@@ -26,7 +27,7 @@ public class InitializationViewModel(IRegionManager regionManager): SplashConten
 
     protected override string ViewName => ViewNames.InitializationView;
 
-    protected virtual async Task InitializeAsync()
+    protected virtual async Task InitializeAsync(CancellationToken cancellationToken = default)
     {
         await Task.CompletedTask;
     }

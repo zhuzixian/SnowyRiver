@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using Prism.Navigation;
 using Prism.Navigation.Regions;
 using SnowyRiver.Accounts.Modules.Manager.ViewModels;
@@ -34,7 +35,7 @@ public class DbMigratorViewModel(IRegionManager regionManager) : SplashContentVi
 
     protected override string ViewName => ViewNames.DbMigratorView;
 
-    protected virtual async Task MigrateAsync()
+    protected virtual async Task MigrateAsync(CancellationToken cancellationToken = default)
     {
         await Task.CompletedTask;
     }

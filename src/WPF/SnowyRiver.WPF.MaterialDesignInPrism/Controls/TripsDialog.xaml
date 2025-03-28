@@ -35,7 +35,7 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Button Content="{Binding .}"
-                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                            Command="{Binding Command, RelativeSource={RelativeSource AncestorType=controls:TripsDialog}}"
                             CommandParameter="{Binding .}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

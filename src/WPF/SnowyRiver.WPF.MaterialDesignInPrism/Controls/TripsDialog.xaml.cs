@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace SnowyRiver.WPF.MaterialDesignInPrism.Controls;
 /// <summary>
@@ -38,5 +39,14 @@ public partial class TripsDialog : UserControl
     {
         get => (IEnumerable)GetValue(ButtonsProperty);
         set => SetValue(ButtonsProperty, value);
+    }
+
+    public static readonly DependencyProperty CommandProperty = DependencyProperty.Register(
+        nameof(Command), typeof(ICommand), typeof(TripsDialog), new PropertyMetadata(default(ICommand)));
+
+    public ICommand Command
+    {
+        get => (DelegateCommand<string>)GetValue(CommandProperty);
+        set => SetValue(CommandProperty, value);
     }
 }

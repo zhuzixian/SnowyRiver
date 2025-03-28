@@ -22,16 +22,19 @@ public abstract class SplashContentViewModel(IRegionManager regionManager) : Reg
         throw new TaskCanceledException();
     }
 
-    protected async Task<string> ShowDialogAsync(string view, NavigationParameters parameters)
+    protected async Task<string> ShowDialogAsync(string view, NavigationParameters? parameters = null)
     {
         var dialogResult = new SplashDialogResult();
         var navigationParameters = new NavigationParameters
         {
             { nameof(DialogViewModel.Result), dialogResult }
         };
-        foreach (var parameter in parameters)
+        if (parameters != null)
         {
-            navigationParameters.Add(parameter.Key, parameter.Value!);
+            foreach (var parameter in parameters)
+            {
+                navigationParameters.Add(parameter.Key, parameter.Value!);
+            }
         }
         RegionManager.RequestNavigate(RegionNames.SplashContentRegion, view, navigationParameters);
         while (string.IsNullOrEmpty(dialogResult.Value))

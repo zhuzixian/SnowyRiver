@@ -10,24 +10,27 @@ public class DbMigratorViewModel(IRegionManager regionManager) : SplashContentVi
 {
     public override async void OnNavigatedTo(NavigationContext navigationContext)
     {
+        base.OnNavigatedTo(navigationContext);
+        RegionManager.RequestNavigate(RegionNames.InitializationViewProductInfosRegion, ViewNames.ProductInfoView);
         try
         {
-            base.OnNavigatedTo(navigationContext);
-            RegionManager.RequestNavigate(RegionNames.InitializationViewProductInfosRegion, ViewNames.ProductInfoView);
             await MigrateAsync();
-            RegionManager.RequestNavigate(RegionNames.SplashContentRegion, SnowyRiver.Accounts.Modules.Manager.ViewNames.LoginView,
+            RegionManager.RequestNavigate(RegionNames.SplashContentRegion,
+                SnowyRiver.Accounts.Modules.Manager.ViewNames.LoginView,
                 new NavigationParameters
                 {
-                    {nameof(LoginViewModel.NextAction), () =>
                     {
-                        RegionManager.RequestNavigate(RegionNames.SplashContentRegion, ViewNames.InitializationView, 
-                            navigationContext.Parameters);
-                    }}
+                        nameof(LoginViewModel.NextAction), () =>
+                        {
+                            RegionManager.RequestNavigate(RegionNames.SplashContentRegion, ViewNames.InitializationView,
+                                navigationContext.Parameters);
+                        }
+                    }
                 });
         }
-        catch (Exception e)
+        catch (TaskCanceledException)
         {
-            //
+
         }
     }
 

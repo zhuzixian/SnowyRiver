@@ -16,9 +16,10 @@ public abstract class SplashContentViewModel(IRegionManager regionManager) : Reg
         base.OnNavigatedTo(navigationContext);
     }
 
-    protected void TryAgain()
+    protected virtual void TryAgain()
     {
         RegionManager.RequestNavigate(RegionNames.SplashContentRegion, ViewName, _navigationToParameters);
+        throw new TaskCanceledException();
     }
 
     protected async Task<string> ShowDialogAsync(string view, NavigationParameters parameters)

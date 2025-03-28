@@ -13,7 +13,7 @@ public class SplashContentViewModel(IRegionManager regionManager) : RegionViewMo
         var dialogResult = new SplashDialogResult();
         var navigationParameters = new NavigationParameters
         {
-            { nameof(DialogViewModel), dialogResult }
+            { nameof(DialogViewModel.Result), dialogResult }
         };
         foreach (var parameter in parameters)
         {

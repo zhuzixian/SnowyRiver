@@ -6,7 +6,7 @@
     <Version>9.0.30</Version>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="akavache" Version="10.1.6" />
+    <PackageReference Include="akavache" Version="10.2.41" />
     <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="EntityFrameworkCore.Data.UnitOfWork" Version="9.0.0" />
     <PackageReference Include="Prism.Wpf" Version="9.0.537" />

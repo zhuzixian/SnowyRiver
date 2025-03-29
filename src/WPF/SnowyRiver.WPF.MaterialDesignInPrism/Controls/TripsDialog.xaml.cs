@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using MaterialDesignThemes.Wpf;
+using System.Collections;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -42,7 +43,7 @@ public partial class TripsDialog : UserControl
     }
 
     public static readonly DependencyProperty CommandProperty = DependencyProperty.Register(
-        nameof(Command), typeof(ICommand), typeof(TripsDialog), new PropertyMetadata(default(ICommand)));
+        nameof(Command), typeof(ICommand), typeof(TripsDialog), new PropertyMetadata(DialogHost.CloseDialogCommand));
 
     public ICommand Command
     {

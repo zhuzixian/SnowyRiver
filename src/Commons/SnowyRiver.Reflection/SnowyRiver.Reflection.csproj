@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AsmResolver.DotNet" Version="5.5.1" />
-    <PackageReference Include="System.Reflection.Metadata" Version="9.0.2" />
+    <PackageReference Include="System.Reflection.Metadata" Version="9.0.3" />
   </ItemGroup>
 </Project>

@@ -10,6 +10,7 @@ public static class SnowyRiverSplashExtensionMethods
         containerRegistry.RegisterForNavigation<WelcomeView>(ViewNames.WelcomeView);
         containerRegistry.RegisterForNavigation<InitializationView>(ViewNames.InitializationView);
         containerRegistry.RegisterForNavigation<DbMigratorView>(ViewNames.DbMigratorView);
+        containerRegistry.RegisterForNavigation<DialogView>(ViewNames.DialogView);
         return containerRegistry;
     }
 }

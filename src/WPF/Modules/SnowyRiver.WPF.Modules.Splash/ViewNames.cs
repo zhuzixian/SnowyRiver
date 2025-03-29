@@ -7,4 +7,5 @@ public static class ViewNames
     public const string WelcomeView = Prefix + nameof(WelcomeView);
     public const string InitializationView = Prefix + nameof(InitializationView);
     public const string DbMigratorView = Prefix + nameof(DbMigratorView);
+    public const string DialogView = Prefix + nameof(DialogView);
 }

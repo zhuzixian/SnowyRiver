@@ -61,7 +61,9 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter> : RegionDi
     private DelegateCommand? _navigateToFirstPageCommand;
 
     public DelegateCommand? NavigateToFirstPageCommand
-        => _navigateToFirstPageCommand ??= new DelegateCommand(() => _ = NavigateToFirstPageAsync());
+        => _navigateToFirstPageCommand ??= new DelegateCommand(() => _ = NavigateToFirstPageAsync(),
+        () => !IsRefreshing)
+            .ObservesProperty(() => IsRefreshing);
 
     protected async Task NavigateToFirstPageAsync(CancellationToken cancellationToken = default)
     {
@@ -70,7 +72,9 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter> : RegionDi
 
     private DelegateCommand? _navigateToPreviousPageCommand;
     public DelegateCommand NavigateToPreviousPageCommand
-        => _navigateToPreviousPageCommand ??= new DelegateCommand(() => _ = NavigateToPreviousPageAsync());
+        => _navigateToPreviousPageCommand ??= new DelegateCommand(() => _ = NavigateToPreviousPageAsync(),
+            () => !IsRefreshing)
+    .ObservesProperty(() => IsRefreshing);
 
     protected async Task NavigateToPreviousPageAsync(CancellationToken cancellationToken = default)
     {
@@ -79,7 +83,9 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter> : RegionDi
 
     private DelegateCommand? _navigateToNextPageCommand;
     public DelegateCommand? NavigateToNextPageCommand
-        => _navigateToNextPageCommand ??= new DelegateCommand(() => _ = NavigateToNextPageAsync());
+        => _navigateToNextPageCommand ??= new DelegateCommand(() => _ = NavigateToNextPageAsync(),
+                () => !IsRefreshing)
+            .ObservesProperty(() => IsRefreshing);
 
     protected async Task NavigateToNextPageAsync(CancellationToken cancellationToken = default)
     {
@@ -88,7 +94,9 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter> : RegionDi
 
     private DelegateCommand? _navigateToLastPageCommand;
     public DelegateCommand? NavigateToLastPageCommand
-        => _navigateToLastPageCommand ??= new DelegateCommand(() => _ = NavigateToLastPageAsync());
+        => _navigateToLastPageCommand ??= new DelegateCommand(() => _ = NavigateToLastPageAsync(),
+                () => !IsRefreshing)
+            .ObservesProperty(() => IsRefreshing);
 
     protected async Task NavigateToLastPageAsync(CancellationToken cancellationToken = default)
     {

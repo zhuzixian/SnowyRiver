@@ -1,4 +1,5 @@
 ﻿using FluentModbus;
+using Nito.AsyncEx;
 using Polly.Retry;
 using SnowyRiver.Polly;
 
@@ -12,7 +13,7 @@ public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy
 
     public ModbusClient BaseClient => client;
 
-    protected SemaphoreSlim AsyncLocker = new(1, 1);
+    protected AsyncLock AsyncLocker = new();
 
     public Task ExecuteAsync(Func<Task> action, CancellationToken cancellationToken = default)
     {

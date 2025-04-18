@@ -105,6 +105,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.WPF", "WPF\Snowy
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.AsyncEx", "Commons\SnowyRiver.AsyncEx\SnowyRiver.AsyncEx.csproj", "{2D22E12A-4F20-4B1D-BB15-7349E6B33045}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.Exceptions", "Commons\SnowyRiver.Exceptions\SnowyRiver.Exceptions.csproj", "{F969CA00-EA42-489B-B3F5-B17457C8A218}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -259,6 +261,10 @@ Global
 		{2D22E12A-4F20-4B1D-BB15-7349E6B33045}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D22E12A-4F20-4B1D-BB15-7349E6B33045}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D22E12A-4F20-4B1D-BB15-7349E6B33045}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F969CA00-EA42-489B-B3F5-B17457C8A218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F969CA00-EA42-489B-B3F5-B17457C8A218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F969CA00-EA42-489B-B3F5-B17457C8A218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F969CA00-EA42-489B-B3F5-B17457C8A218}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -307,6 +313,7 @@ Global
 		{8B06AD25-03F3-4B05-BFDF-B7EE2B73E91A} = {0AA91054-FCD2-4828-BB88-2276FBDB6722}
 		{25F0CF55-BB63-4C6B-9CD2-D03724575285} = {3B2886EE-1186-4C50-B616-1304A9C129FB}
 		{2D22E12A-4F20-4B1D-BB15-7349E6B33045} = {0AA91054-FCD2-4828-BB88-2276FBDB6722}
+		{F969CA00-EA42-489B-B3F5-B17457C8A218} = {0AA91054-FCD2-4828-BB88-2276FBDB6722}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E75A6A63-872F-41A5-80C6-C3FA93CCA7AC}

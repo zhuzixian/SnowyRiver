@@ -14,18 +14,26 @@ public class DbMigratorViewModel(IRegionManager regionManager) : SplashContentVi
         try
         {
             await MigrateAsync();
-            RegionManager.RequestNavigate(RegionNames.SplashContentRegion,
-                SnowyRiver.Accounts.Modules.Manager.ViewNames.LoginView,
-                new NavigationParameters
-                {
+            if (IsRequestNavigateToLoginView)
+            {
+                RegionManager.RequestNavigate(RegionNames.SplashContentRegion,
+                    SnowyRiver.Accounts.Modules.Manager.ViewNames.LoginView,
+                    new NavigationParameters
                     {
-                        nameof(LoginViewModel.NextAction), () =>
                         {
-                            RegionManager.RequestNavigate(RegionNames.SplashContentRegion, ViewNames.InitializationView,
-                                navigationContext.Parameters);
+                            nameof(LoginViewModel.NextAction), () =>
+                            {
+                                RegionManager.RequestNavigate(RegionNames.SplashContentRegion, ViewNames.InitializationView,
+                                    navigationContext.Parameters);
+                            }
                         }
-                    }
-                });
+                    });
+            }
+            else
+            {
+                RegionManager.RequestNavigate(RegionNames.SplashContentRegion, ViewNames.InitializationView,
+                    navigationContext.Parameters);
+            }
         }
         catch (TaskCanceledException)
         {
@@ -39,4 +47,6 @@ public class DbMigratorViewModel(IRegionManager regionManager) : SplashContentVi
     {
         await Task.CompletedTask;
     }
+
+    protected virtual bool IsRequestNavigateToLoginView => true;
 }

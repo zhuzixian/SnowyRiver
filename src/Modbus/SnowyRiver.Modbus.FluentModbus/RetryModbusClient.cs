@@ -11,8 +11,6 @@ public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy
 
     public TimeSpan MinAccessIntervalTime { get; set; } = TimeSpan.MinValue;
 
-    public ModbusClient BaseClient => client;
-
     protected AsyncLock AsyncLocker = new();
 
     public Task ExecuteAsync(Func<Task> action, CancellationToken cancellationToken = default)
@@ -84,7 +82,7 @@ public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy
         CancellationToken cancellationToken = default)
     {
         return ExecuteAsync(() =>
-            client.WriteMultipleRegistersAsync(unitIdentifier, startingAddress, dataset, cancellationToken),
+                client.WriteMultipleRegistersAsync(unitIdentifier, startingAddress, dataset, cancellationToken),
             cancellationToken);
     }
 

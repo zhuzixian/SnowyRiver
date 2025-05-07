@@ -3,7 +3,7 @@ using FluentModbus;
 using SnowyRiver.WPF.Configuration;
 
 namespace SnowyRiver.Modbus.FluentModbus;
-public class ModbusOptions : JsonConfiguration
+public class ModbusRtuClientOptions : JsonConfiguration
 {
     public bool IsMock { get; set; }
 

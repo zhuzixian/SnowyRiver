@@ -43,6 +43,8 @@ public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy
         }
     }
 
+    public bool IsConnected => client.IsConnected;
+
     public virtual Task<T[]> ReadHoldingRegistersAsync<T>(int unitIdentifier, int startingAddress, int count,
         CancellationToken cancellationToken = default) where T : unmanaged
     {

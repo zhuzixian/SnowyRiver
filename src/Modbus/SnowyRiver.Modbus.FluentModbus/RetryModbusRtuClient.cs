@@ -23,4 +23,10 @@ public class RetryModbusRtuClient(ModbusRtuClientOptions options, AsyncRetryPoli
     {
         modbusClient.Initialize(serialPort, endianness);
     }
+
+    public void Close()
+    {
+        modbusClient.Close();
+    }
+
 }

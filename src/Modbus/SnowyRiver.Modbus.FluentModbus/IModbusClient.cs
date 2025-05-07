@@ -1,6 +1,7 @@
 ﻿namespace SnowyRiver.Modbus.FluentModbus;
 public interface IModbusClient
 {
+    public bool IsConnected { get; }
     public Task<T[]> ReadHoldingRegistersAsync<T>(int unitIdentifier, int startingAddress, int count,
         CancellationToken cancellationToken = default) where T : unmanaged;
 

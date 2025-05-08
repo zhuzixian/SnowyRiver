@@ -10,14 +10,20 @@ public class RetryModbusRtuClient(ModbusRtuClientOptions options, AsyncRetryPoli
 {
     public void Connect()
     {
+       Connect(options.PortName);
+    }
+
+    public void Connect(string port)
+    {
         var serialPort = new SnowyRiverModbusRtuSerialPort(
-                new SerialPort(options.PortName, options.BaudRate, options.Parity)
-                {
-                    ReadTimeout = options.ReadTimeout,
-                    WriteTimeout = options.WriteTimeout,
-                });
+            new SerialPort(port, options.BaudRate, options.Parity)
+            {
+                ReadTimeout = options.ReadTimeout,
+                WriteTimeout = options.WriteTimeout,
+            });
         Initialize(serialPort, options.Endian);
     }
+
 
     public void Initialize(IModbusRtuSerialPort serialPort, ModbusEndianness endianness)
     {

@@ -107,7 +107,7 @@ public class SnowyRiverModbusRtuSerialPort : IModbusRtuSerialPort
 
                     if (_serialPort.BytesToRead <= 0)
                     {
-                        await Task.Delay(TimeSpan.FromMilliseconds(10), token);
+                        await Task.Delay(TimeSpan.FromMilliseconds(1), token);
                         continue;
                     }
 

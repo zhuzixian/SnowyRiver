@@ -44,9 +44,9 @@ public class WorkFlow<TKey, TState, TStepKey, TStep, TStepState>: NotifyProperty
         set => Set(ref _endTime, value);
     }
 
-    private TState _state;
+    private TState? _state;
     [JsonIgnore]
-    public TState State
+    public TState? State
     {
         get => _state;
         set => Set(ref _state, value);

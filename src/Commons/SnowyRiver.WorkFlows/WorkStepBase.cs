@@ -32,9 +32,9 @@ public class WorkStep<TKey, TSate>: NotifyPropertyChangedObject
         set => Set(ref _name, value);
     }
 
-    private TSate _state;
+    private TSate? _state;
     [JsonIgnore]
-    public TSate State
+    public TSate? State
     {
         get => _state;
         set => Set(ref _state, value);
@@ -54,5 +54,26 @@ public class WorkStep<TKey, TSate>: NotifyPropertyChangedObject
     {
         get => _endTime;
         set => Set(ref _endTime, value);
+    }
+
+    private int _cycleCount = 1;
+    /// <summary>
+    /// 执行次数
+    /// </summary>
+    public int CycleCount
+    {
+        get => _cycleCount;
+        set => Set(ref _cycleCount, value);
+    }
+
+    private int _cycleIndex;
+    /// <summary>
+    /// 完成次数
+    /// </summary>
+    [JsonIgnore]
+    public int CycleIndex
+    {
+        get => _cycleIndex;
+        set => Set(ref _cycleIndex, value);
     }
 }

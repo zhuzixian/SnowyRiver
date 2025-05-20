@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows.Media.Imaging;
 using Prism.Navigation.Regions;
+using SnowyRiver.Products;
 using SnowyRiver.Reflection;
 using SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 

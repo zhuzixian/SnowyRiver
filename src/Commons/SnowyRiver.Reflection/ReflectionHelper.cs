@@ -105,18 +105,19 @@ public static class ReflectionHelper
         return returnAssemblies.ToArray();
     }
 
-    public static ProductInfo GetProductInfo()
+    public static (string? Name, string? Version) GetProductInfo()
     {
-        var productInfo = new ProductInfo();
+        var productName = default(string?);
+        var productVersion = default(string?);
         var assembly = Assembly.GetEntryAssembly();
         if (assembly != null)
         {
-            productInfo.Name = assembly.GetCustomAttribute<AssemblyProductAttribute>()?.Product;
-            productInfo.Version = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
+            productName = assembly.GetCustomAttribute<AssemblyProductAttribute>()?.Product;
+            productVersion = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
                 ?.Split('+').FirstOrDefault();
         }
 
-        return productInfo;
+        return (productName, productVersion);
     }
 
     private static bool IsSystemAssembly(string asmPath)

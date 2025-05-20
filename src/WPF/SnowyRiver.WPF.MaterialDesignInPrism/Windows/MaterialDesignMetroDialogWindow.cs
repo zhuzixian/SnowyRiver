@@ -6,6 +6,8 @@ public class MaterialDesignMetroDialogWindow : MaterialDesignMetroWindow,IDialog
     public MaterialDesignMetroDialogWindow()
     {
         WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        ShowMinButton = false;
+        ShowMaxRestoreButton = false;
     }
 
     public IDialogResult? Result { get; set; }

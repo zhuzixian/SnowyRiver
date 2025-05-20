@@ -5,4 +5,5 @@ namespace SnowyRiver.Products;
 public interface IProductInfosProvider
 {
     Task<ProductInfo> GetProductInfosAsync(CancellationToken cancellationToken = default);
+    ProductInfo GetProductInfos();
 }

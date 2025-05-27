@@ -37,6 +37,7 @@ public class AuthenticationService<TTeam, TRole, TUser, TPermission,
                 if (matchedUser != null)
                 {
                     User = mapper.Map<TUser>(matchedUser);
+                    IsAuthenticated = true;
                     return (true, LoginFailedReason.Succeed);
                 }
 

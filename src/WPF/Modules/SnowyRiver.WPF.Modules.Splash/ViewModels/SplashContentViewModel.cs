@@ -22,7 +22,7 @@ public abstract class SplashContentViewModel(IRegionManager regionManager) : Reg
         throw new TaskCanceledException();
     }
 
-    protected async Task<string> ShowDialogAsync(string view, NavigationParameters? parameters = null)
+    protected virtual async Task<string> ShowDialogAsync(string view, NavigationParameters? parameters = null)
     {
         var dialogResult = new SplashDialogResult();
         var navigationParameters = new NavigationParameters
@@ -45,7 +45,7 @@ public abstract class SplashContentViewModel(IRegionManager regionManager) : Reg
         return dialogResult.Value!;
     }
 
-    protected async Task<string> ShowDialogAsync(string title, string message, string[] buttons)
+    protected virtual async Task<string> ShowDialogAsync(string title, string message, string[] buttons)
     {
         return await ShowDialogAsync(ViewNames.DialogView,
             new NavigationParameters

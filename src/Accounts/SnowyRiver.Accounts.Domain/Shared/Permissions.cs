@@ -3,4 +3,5 @@ public static class Permissions
 {
     private const string Prefix = "SnowyRiver.Accounts.Permissions.";
     public const string ManageAccounts = Prefix + nameof(ManageAccounts);
+    public const string ManageDevices = Prefix + nameof(ManageDevices);
 }

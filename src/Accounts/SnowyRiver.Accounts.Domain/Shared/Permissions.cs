@@ -1,5 +1,6 @@
 ﻿namespace SnowyRiver.Accounts.Domain.Shared;
-public enum Permissions
+public static class Permissions
 {
-    ManageAccounts,
+    private const string Prefix = "SnowyRiver.Accounts.Permissions.";
+    public const string ManageAccounts = Prefix + nameof(ManageAccounts);
 }

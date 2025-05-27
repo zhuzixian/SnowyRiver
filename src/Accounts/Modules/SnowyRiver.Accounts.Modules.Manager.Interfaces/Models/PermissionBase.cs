@@ -13,4 +13,11 @@ public class Permission<TUser, TRole, TTeam, TPermission> : EntityModel
         get => _roles;
         set => Set(ref _roles, value);
     }
+
+    private string? _alias;
+    public string? Alias
+    {
+        get => _alias;
+        set => SetProperty(ref _alias, value);
+    }
 }

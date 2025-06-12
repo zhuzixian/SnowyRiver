@@ -1,11 +1,11 @@
 ﻿using System.Windows;
 
 namespace SnowyRiver.WPF.Proxies;
-public class BindingProxy:Freezable
+public class DataBindingProxy:Freezable
 {
     protected override Freezable CreateInstanceCore()
     {
-        return new BindingProxy();
+        return new DataBindingProxy();
     }
 
     public object Data
@@ -15,5 +15,5 @@ public class BindingProxy:Freezable
     }
 
     public static readonly DependencyProperty DataProperty =
-        DependencyProperty.Register(nameof(Data), typeof(object), typeof(BindingProxy), new UIPropertyMetadata(null));
+        DependencyProperty.Register(nameof(Data), typeof(object), typeof(DataBindingProxy), new UIPropertyMetadata(null));
 }

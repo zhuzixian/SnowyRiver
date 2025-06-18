@@ -30,6 +30,13 @@ public class SerialPortOptions : JsonConfiguration
         set => Set(ref _parity, value);
     }
 
+    private int _dataBits = 8;
+    public int DataBits
+    {
+        get => _dataBits;
+        set => Set(ref _dataBits, value);
+    }
+
     private StopBits _stopBits = StopBits.One;
     public StopBits StopBits
     {

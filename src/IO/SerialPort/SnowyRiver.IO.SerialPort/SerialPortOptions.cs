@@ -1,9 +1,9 @@
 ﻿using System.IO.Ports;
-using FluentModbus;
 using SnowyRiver.WPF.Configuration;
 
-namespace SnowyRiver.Modbus.FluentModbus;
-public class ModbusRtuClientOptions : JsonConfiguration
+namespace SnowyRiver.IO.SerialPort;
+
+public class SerialPortOptions : JsonConfiguration
 {
     public bool IsMock { get; set; }
 
@@ -19,21 +19,21 @@ public class ModbusRtuClientOptions : JsonConfiguration
 
     public int BaudRate
     {
-        get => _baudRate; 
+        get => _baudRate;
         set => Set(ref _baudRate, value);
     }
 
     private Parity _parity = Parity.Even;
     public Parity Parity
     {
-        get => _parity; 
+        get => _parity;
         set => Set(ref _parity, value);
     }
 
     private StopBits _stopBits = StopBits.One;
     public StopBits StopBits
     {
-        get => _stopBits; 
+        get => _stopBits;
         set => Set(ref _stopBits, value);
     }
 
@@ -50,12 +50,5 @@ public class ModbusRtuClientOptions : JsonConfiguration
     {
         get => _writeTimeout;
         set => Set(ref _writeTimeout, value);
-    }
-
-    private ModbusEndianness _endian = ModbusEndianness.LittleEndian;
-    public ModbusEndianness Endian
-    {
-        get => _endian;
-        set => Set(ref _endian, value);
     }
 }

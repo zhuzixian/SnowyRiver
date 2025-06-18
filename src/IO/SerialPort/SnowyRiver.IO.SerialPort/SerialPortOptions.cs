@@ -58,4 +58,11 @@ public class SerialPortOptions : JsonConfiguration
         get => _writeTimeout;
         set => Set(ref _writeTimeout, value);
     }
+
+    private string _newLine = "\r\n";
+    public string NewLine
+    {
+        get => _newLine;
+        set => Set(ref _newLine, value);
+    }
 }

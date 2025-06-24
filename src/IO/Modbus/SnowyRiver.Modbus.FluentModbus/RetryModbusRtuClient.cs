@@ -8,6 +8,8 @@ public class RetryModbusRtuClient(ModbusRtuClientOptions options, AsyncRetryPoli
     ModbusRtuClient modbusClient)
     :RetryModbusClient(modbusClient, retryPolicy)
 {
+    private SerialPort? _serialPort;
+
     public void Connect()
     {
        Connect(options.PortName);
@@ -15,12 +17,17 @@ public class RetryModbusRtuClient(ModbusRtuClientOptions options, AsyncRetryPoli
 
     public void Connect(string port)
     {
-        var serialPort = new SnowyRiverModbusRtuSerialPort(
-            new SerialPort(port, options.BaudRate, options.Parity)
-            {
-                ReadTimeout = options.ReadTimeout,
-                WriteTimeout = options.WriteTimeout,
-            });
+        Connect(new SerialPort(port, options.BaudRate, options.Parity)
+        {
+            ReadTimeout = options.ReadTimeout,
+            WriteTimeout = options.WriteTimeout,
+        });
+    }
+
+    public void Connect(SerialPort port)
+    {
+        _serialPort = port;
+        var serialPort = new SnowyRiverModbusRtuSerialPort(port);
         Initialize(serialPort, options.Endian);
     }
 
@@ -35,4 +42,11 @@ public class RetryModbusRtuClient(ModbusRtuClientOptions options, AsyncRetryPoli
         modbusClient.Close();
     }
 
+
+    public Task<TResult> ExecuteAsync<TResult>(Func<SerialPort?, CancellationToken, Task<TResult>> task, CancellationToken cancellationToken = default)
+    {
+        return ExecuteAsync(async () => 
+                await task.Invoke(_serialPort, cancellationToken), 
+            cancellationToken);
+    }
 }

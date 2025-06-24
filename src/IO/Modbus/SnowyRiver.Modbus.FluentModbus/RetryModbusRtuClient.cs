@@ -21,6 +21,7 @@ public class RetryModbusRtuClient(ModbusRtuClientOptions options, AsyncRetryPoli
         {
             ReadTimeout = options.ReadTimeout,
             WriteTimeout = options.WriteTimeout,
+            NewLine = options.NewLine,
         });
     }
 

@@ -86,7 +86,10 @@ namespace SnowyRiver.Accounts.Manager
                 config.AddNLog();
             });
 
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddAutoMapper(config =>
+            {
+                config.AddMaps(AppDomain.CurrentDomain.GetAssemblies());
+            });
 
             services.AddDbContext<AccountsManagerDbContext>(options => options.AddAccountsManagerOptions());
             services.AddScoped<DbContext, AccountsManagerDbContext>();

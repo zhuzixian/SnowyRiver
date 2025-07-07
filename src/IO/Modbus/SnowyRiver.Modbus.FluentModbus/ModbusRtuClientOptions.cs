@@ -4,8 +4,6 @@ using SnowyRiver.IO.SerialPort;
 namespace SnowyRiver.Modbus.FluentModbus;
 public class ModbusRtuClientOptions : SerialPortOptions
 {
-
-
     private ModbusEndianness _endian = ModbusEndianness.LittleEndian;
     public ModbusEndianness Endian
     {

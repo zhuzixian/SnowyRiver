@@ -6,7 +6,7 @@ namespace SnowyRiver.Modbus.FluentModbus;
 
 public class RetryModbusRtuClient(ModbusRtuClientOptions options, AsyncRetryPolicy retryPolicy,
     ModbusRtuClient modbusClient)
-    :RetryModbusClient(modbusClient, retryPolicy)
+    :RetryModbusClient(modbusClient, retryPolicy), IModbusRtuClient
 {
     private SerialPort? _serialPort;
 

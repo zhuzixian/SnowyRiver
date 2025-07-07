@@ -4,9 +4,12 @@ using System.IO.Ports;
 
 namespace SnowyRiver.Modbus.FluentModbus;
 
-public class RetryModbusRtuClient(ModbusRtuClientOptions options, AsyncRetryPolicy retryPolicy,
+public class RetryModbusRtuClient(
+    ModbusRtuClientOptions options, 
+    AsyncRetryPolicy retryPolicy,
     ModbusRtuClient modbusClient)
-    :RetryModbusClient(modbusClient, retryPolicy), IModbusRtuClient
+    :RetryModbusClient(modbusClient, retryPolicy),
+        IModbusRtuClient
 {
     private SerialPort? _serialPort;
 
@@ -44,7 +47,8 @@ public class RetryModbusRtuClient(ModbusRtuClientOptions options, AsyncRetryPoli
     }
 
 
-    public Task<TResult> ExecuteAsync<TResult>(Func<SerialPort?, CancellationToken, Task<TResult>> task, CancellationToken cancellationToken = default)
+    public Task<TResult> ExecuteAsync<TResult>(Func<SerialPort?, CancellationToken, Task<TResult>> task, 
+        CancellationToken cancellationToken = default)
     {
         return ExecuteAsync(async () => 
                 await task.Invoke(_serialPort, cancellationToken), 

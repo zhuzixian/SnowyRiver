@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Version>1.0.18</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentModbus" Version="5.3.2" />
+    <PackageReference Include="Polly" Version="8.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Commons\SnowyRiver.Commons\SnowyRiver.Commons.csproj" />
+    <ProjectReference Include="..\..\Commons\SnowyRiver.Polly\SnowyRiver.Polly.csproj" />
+    <ProjectReference Include="..\..\WPF\SnowyRiver.WPF. Configuration\SnowyRiver.WPF.Configuration.csproj" />
+  </ItemGroup>
+
+</Project>

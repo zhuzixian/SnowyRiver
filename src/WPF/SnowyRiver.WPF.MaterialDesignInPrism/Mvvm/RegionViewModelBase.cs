@@ -2,7 +2,12 @@
 public class RegionViewModelBase(IRegionManager regionManager)
     : ViewModelBase, IConfirmNavigationRequest
 {
-    protected IRegionManager RegionManager { get; private set; } = regionManager;
+    private IRegionManager _regionManager = regionManager;
+    public IRegionManager RegionManager
+    {
+        get => _regionManager; 
+        protected set => SetProperty(ref _regionManager, value);
+    }
 
     public virtual void ConfirmNavigationRequest(NavigationContext navigationContext, Action<bool> continuationCallback)
     {
@@ -21,6 +26,9 @@ public class RegionViewModelBase(IRegionManager regionManager)
 
     public virtual void OnNavigatedTo(NavigationContext navigationContext)
     {
-
+        if (navigationContext.Parameters.TryGetValue<IRegionManager>(nameof(RegionManager), out var regionManager))
+        {
+            RegionManager = regionManager;
+        }
     }
 }

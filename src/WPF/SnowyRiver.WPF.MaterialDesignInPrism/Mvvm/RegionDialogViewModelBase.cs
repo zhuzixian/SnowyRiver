@@ -1,7 +1,12 @@
 ﻿namespace SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 public class RegionDialogViewModelBase(IRegionManager regionManager) : DialogViewModelBase, IConfirmNavigationRequest
 {
-    protected IRegionManager RegionManager { get; private set; } = regionManager;
+    private IRegionManager _regionManager = regionManager;
+    public IRegionManager RegionManager
+    {
+        get => _regionManager;
+        protected set => SetProperty(ref _regionManager, value);
+    }
 
     public virtual void ConfirmNavigationRequest(NavigationContext navigationContext, Action<bool> continuationCallback)
     {
@@ -18,8 +23,20 @@ public class RegionDialogViewModelBase(IRegionManager regionManager) : DialogVie
 
     }
 
+    public override void OnDialogOpened(IDialogParameters parameters)
+    {
+        if (parameters.TryGetValue<IRegionManager>(nameof(RegionManager), out var regionManager))
+        {
+            RegionManager = regionManager;
+        }
+        base.OnDialogOpened(parameters);
+    }
+
     public virtual void OnNavigatedTo(NavigationContext navigationContext)
     {
-
+        if (navigationContext.Parameters.TryGetValue<IRegionManager>(nameof(RegionManager), out var regionManager))
+        {
+            RegionManager = regionManager;
+        }
     }
 }

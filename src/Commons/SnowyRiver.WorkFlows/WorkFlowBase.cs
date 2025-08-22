@@ -28,6 +28,13 @@ public class WorkFlow<TKey, TState, TStepKey, TStep, TStepState>: NotifyProperty
         set => Set(ref _steps, value);
     }
 
+    private bool _enable = true;
+    public bool Enable
+    {
+        get => _enable;
+        set => Set(ref _enable, value);
+    }
+
     private DateTime? _startTime;
     [JsonIgnore]
     public DateTime? StartTime

@@ -9,8 +9,11 @@ using Microsoft.Extensions.DependencyInjection;
 using EntityFrameworkCore.UnitOfWork.Extensions;
 using SnowyRiver.Accounts.Manager.EntityFramework;
 using System;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Akavache;
+using Akavache.Sqlite3;
+using Akavache.SystemTextJson;
 using Prism.Dialogs;
 using SnowyRiver.Accounts.Modules.Manager.Services;
 using Microsoft.Extensions.Logging;
@@ -21,6 +24,7 @@ using SnowyRiver.WPF.Modules.Splash;
 using SnowyRiver.Reflection;
 using SnowyRiver.WPF.MaterialDesignInPrism;
 using SnowyRiver.WPF.Modules.Splash.Views;
+using Splat.Builder;
 
 namespace SnowyRiver.Accounts.Manager
 {
@@ -36,7 +40,7 @@ namespace SnowyRiver.Accounts.Manager
 
         protected override void OnExit(ExitEventArgs e)
         {
-            BlobCache.Shutdown().Wait();
+            CacheDatabase.Shutdown().Wait();
             base.OnExit(e);
         }
 
@@ -44,7 +48,10 @@ namespace SnowyRiver.Accounts.Manager
         {
             try
             {
-                Registrations.Start(AppDomain.CurrentDomain.FriendlyName);
+                AppBuilder.CreateSplatBuilder()
+                    .WithAkavacheCacheDatabase<SystemJsonSerializer>(builder =>
+                        builder.WithApplicationName(AppDomain.CurrentDomain.FriendlyName)
+                            .WithSqliteDefaults());
                 WPFLocalizeExtension.Engine.LocalizeDictionary.Instance.Culture = CultureInfo.CurrentCulture;
 
                 try

@@ -31,7 +31,7 @@ public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
 
             base.OnNavigatedTo(navigationContext);
 
-            var cacheLogin = await BlobCache.LocalMachine.GetObject<Login>(RememberMeCacheKey)
+            var cacheLogin = await CacheDatabase.LocalMachine.GetObject<Login>(RememberMeCacheKey)
                 .Catch(Observable.Return(default(Login?)));
             if (cacheLogin != null)
             {
@@ -83,11 +83,11 @@ public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
             {
                 if (RememberMe)
                 {
-                    await BlobCache.LocalMachine.InsertObject(RememberMeCacheKey, Login);
+                    await CacheDatabase.LocalMachine.InsertObject(RememberMeCacheKey, Login);
                 }
                 else
                 {
-                    await BlobCache.LocalMachine.InvalidateObject<Login>(RememberMeCacheKey);
+                    await CacheDatabase.LocalMachine.InvalidateObject<Login>(RememberMeCacheKey);
                 }
 
                 NextAction?.Invoke();

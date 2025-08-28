@@ -7,6 +7,9 @@
     <Product>用户管理系统</Product>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Akavache" Version="11.0.1" />
+    <PackageReference Include="Akavache.Sqlite3" Version="11.0.1" />
+    <PackageReference Include="Akavache.SystemTextJson" Version="11.0.1" />
     <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.8">
       <PrivateAssets>all</PrivateAssets>

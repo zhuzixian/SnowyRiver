@@ -3,25 +3,25 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net9.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <Product>用户管理系统</Product>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Akavache" Version="11.0.1" />
-    <PackageReference Include="Akavache.Sqlite3" Version="11.0.1" />
-    <PackageReference Include="Akavache.SystemTextJson" Version="11.0.1" />
+    <PackageReference Include="Akavache" Version="11.4.1" />
+    <PackageReference Include="Akavache.Sqlite3" Version="11.4.1" />
+    <PackageReference Include="Akavache.SystemTextJson" Version="11.4.1" />
     <PackageReference Include="AutoMapper" Version="14.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.8">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.9">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.8" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.8">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.9">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.8" />
-    <PackageReference Include="NLog.Extensions.Logging" Version="6.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.9" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="6.0.4" />
     <PackageReference Include="Prism.DryIoc" Version="9.0.537" />
     <PackageReference Include="WPFLocalizeExtension" Version="3.10.0" />
   </ItemGroup>

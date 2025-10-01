@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace SnowyRiver.WPF.MarkupExtension;
+﻿namespace SnowyRiver.WPF.MarkupExtension;
 public class EnumBindingSourceExtension : System.Windows.Markup.MarkupExtension
 {
     private Type _enumType;
@@ -13,7 +11,7 @@ public class EnumBindingSourceExtension : System.Windows.Markup.MarkupExtension
             {
                 if (null != value)
                 {
-                    Type enumType = Nullable.GetUnderlyingType(value) ?? value;
+                    var enumType = Nullable.GetUnderlyingType(value) ?? value;
 
                     if (!enumType.IsEnum)
                         throw new ArgumentException("Type must be for an Enum.");
@@ -36,10 +34,10 @@ public class EnumBindingSourceExtension : System.Windows.Markup.MarkupExtension
         if (null == _enumType)
             throw new InvalidOperationException("The EnumType must be specified.");
 
-        var actualEnumType = Nullable.GetUnderlyingType(this._enumType) ?? this._enumType;
+        var actualEnumType = Nullable.GetUnderlyingType(_enumType) ?? _enumType;
         var enumValues = Enum.GetValues(actualEnumType);
 
-        if (actualEnumType == this._enumType)
+        if (actualEnumType == _enumType)
             return enumValues;
 
         var tempArray = Array.CreateInstance(actualEnumType, enumValues.Length + 1);

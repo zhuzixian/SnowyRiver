@@ -1,8 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using DryIoc.Microsoft.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
+using SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs;
+using SnowyRiver.WPF.MaterialDesignInPrism.Service;
 using System.Diagnostics;
-using DryIoc.Microsoft.DependencyInjection;
-using Container = DryIoc.Container;
 using System.Windows;
+using Container = DryIoc.Container;
 
 namespace SnowyRiver.WPF.MaterialDesignInPrism;
 public abstract class SnowyRiverApplication : PrismApplication
@@ -40,6 +42,11 @@ public abstract class SnowyRiverApplication : PrismApplication
 
     protected virtual void ConfigureServices(IServiceCollection services)
     {
+    }
+
+    protected override void RegisterTypes(IContainerRegistry containerRegistry)
+    {
+        containerRegistry.Register<IDialogHostService, DialogHostService>();
     }
 
     protected virtual bool IsSupportMultiProcess => true;

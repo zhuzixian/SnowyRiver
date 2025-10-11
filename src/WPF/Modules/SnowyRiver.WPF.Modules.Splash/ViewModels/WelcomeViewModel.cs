@@ -1,6 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
-using Prism.Navigation.Regions;
+﻿using Prism.Navigation.Regions;
+using System;
 
 namespace SnowyRiver.WPF.Modules.Splash.ViewModels;
 public class WelcomeViewModel(IRegionManager regionManager) : SplashContentViewModel(regionManager)
@@ -10,10 +9,21 @@ public class WelcomeViewModel(IRegionManager regionManager) : SplashContentViewM
         base.OnNavigatedTo(navigationContext);
 
         RegionManager.RequestNavigate(RegionNames.WelcomeContentRegion, ViewNames.ProductInfoView);
-        await Task.Delay(TimeSpan.FromSeconds(1));
-        RegionManager.RequestNavigate(RegionNames.SplashContentRegion, ViewNames.DbMigratorView, 
-            navigationContext.Parameters);
+        if (!string.IsNullOrWhiteSpace(NextView))
+        {
+            RegionManager.RequestNavigate(RegionNames.SplashContentRegion, NextView, 
+                navigationContext.Parameters);
+        }
+        else
+        {
+            if (navigationContext.Parameters.TryGetValue<Action>(nameof(SplashViewModel.RequestClose), out var requestClose))
+            {
+                requestClose.Invoke();
+            }
+        }
     }
+
+    protected virtual string? NextView => ViewNames.DbMigratorView;
 
     protected override string ViewName => ViewNames.WelcomeView;
 }

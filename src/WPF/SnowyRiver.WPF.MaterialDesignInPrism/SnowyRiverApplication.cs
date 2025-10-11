@@ -44,8 +44,9 @@ public abstract class SnowyRiverApplication : PrismApplication
     {
     }
 
-    protected override void RegisterTypes(IContainerRegistry containerRegistry)
+    protected override void RegisterRequiredTypes(IContainerRegistry containerRegistry)
     {
+        base.RegisterRequiredTypes(containerRegistry);
         containerRegistry.Register<IDialogHostService, DialogHostService>();
     }
 

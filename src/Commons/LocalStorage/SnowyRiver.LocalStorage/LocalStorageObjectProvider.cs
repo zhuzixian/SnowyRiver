@@ -2,7 +2,7 @@
 using SnowyRiver.LocalStorage.Interface;
 
 namespace SnowyRiver.LocalStorage;
-public class LocalStorageObjectProvider<T>(
+public abstract class LocalStorageObjectProvider<T>(
     ILocalStorageService localStorageService)
     :NotifyPropertyChangedObject, ILocalStorageObjectProvider<T>
 {
@@ -31,5 +31,5 @@ public class LocalStorageObjectProvider<T>(
     }
 
 
-    protected virtual string Key => string.Empty;
+    protected abstract string Key { get; }
 }

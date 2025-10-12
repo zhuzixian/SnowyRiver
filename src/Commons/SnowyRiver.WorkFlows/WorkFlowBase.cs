@@ -1,6 +1,6 @@
-﻿using SnowyRiver.WPF.NotifyPropertyChangedBase;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
+using SnowyRiver.ComponentModel.NotifyPropertyChanged;
 
 namespace SnowyRiver.WorkFlows;
 public class WorkFlow<TKey, TState, TStepKey, TStep, TStepState>: NotifyPropertyChangedObject

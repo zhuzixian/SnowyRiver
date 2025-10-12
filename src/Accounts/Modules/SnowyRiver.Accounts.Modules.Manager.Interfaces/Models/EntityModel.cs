@@ -1,4 +1,4 @@
-﻿using SnowyRiver.WPF.NotifyPropertyChangedBase;
+﻿using SnowyRiver.ComponentModel.NotifyPropertyChanged;
 
 namespace SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
 public class EntityModel : NotifyPropertyChangedObject

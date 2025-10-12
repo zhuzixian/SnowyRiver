@@ -4,11 +4,11 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Version>1.0.14</Version>
+    <Version>1.0.15</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\WPF\SnowyRiver.WPF.NotifyPropertyChangedBase\SnowyRiver.WPF.NotifyPropertyChangedBase.csproj" />
+    <ProjectReference Include="..\..\ComponentModel\SnowyRiver.ComponentModel.NotifyPropertyChanged\SnowyRiver.ComponentModel.NotifyPropertyChanged.csproj" />
   </ItemGroup>
 
 </Project>

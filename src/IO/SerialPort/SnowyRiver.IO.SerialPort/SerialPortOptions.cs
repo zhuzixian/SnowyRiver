@@ -1,5 +1,5 @@
 ﻿using System.IO.Ports;
-using SnowyRiver.WPF.Configuration;
+using SnowyRiver.Configuration;
 
 namespace SnowyRiver.IO.SerialPort;
 

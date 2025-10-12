@@ -1,5 +1,5 @@
 ﻿using System.Text.Json.Serialization;
-using SnowyRiver.WPF.NotifyPropertyChangedBase;
+using SnowyRiver.ComponentModel.NotifyPropertyChanged;
 
 namespace SnowyRiver.WorkFlows;
 public class WorkStep<TKey, TSate>: NotifyPropertyChangedObject

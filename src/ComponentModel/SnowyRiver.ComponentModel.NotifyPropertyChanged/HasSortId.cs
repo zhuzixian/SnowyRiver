@@ -1,6 +1,6 @@
 ﻿using SnowyRiver.ComponentModel.Interface;
 
-namespace SnowyRiver.ComponentModel.NotifyPropertyChanged.Commons;
+namespace SnowyRiver.ComponentModel.NotifyPropertyChanged;
 public class HasSortIdNotifyPropertyChangedObject : NotifyPropertyChangedObject, IHasSortId
 {
     private int _sortId;

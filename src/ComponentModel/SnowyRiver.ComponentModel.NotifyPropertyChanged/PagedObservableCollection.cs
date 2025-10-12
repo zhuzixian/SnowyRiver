@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
 
-namespace SnowyRiver.WPF.NotifyPropertyChangedBase.Commons;
+namespace SnowyRiver.ComponentModel.NotifyPropertyChanged;
 public class PagedObservableCollection<T> : NotifyPropertyChangedObject
 {
     public PagedObservableCollection(){}

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using SnowyRiver.Accounts.Domain.Helpers;
 using SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
 using SnowyRiver.Accounts.Modules.Manager.Interfaces.Services;
-using SnowyRiver.WPF.NotifyPropertyChangedBase;
+using SnowyRiver.ComponentModel.NotifyPropertyChanged;
 
 namespace SnowyRiver.Accounts.Modules.Manager.Services;
 public class AuthenticationService<TTeam, TRole, TUser, TPermission,

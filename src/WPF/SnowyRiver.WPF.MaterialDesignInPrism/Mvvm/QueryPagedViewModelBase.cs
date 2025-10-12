@@ -1,5 +1,5 @@
-﻿using SnowyRiver.WPF.NotifyPropertyChangedBase.Commons;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using SnowyRiver.ComponentModel.NotifyPropertyChanged;
 
 namespace SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter> : RegionDialogViewModelBase

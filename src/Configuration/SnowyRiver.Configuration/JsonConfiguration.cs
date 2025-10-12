@@ -1,12 +1,8 @@
-﻿using System;
-using System.IO;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading;
-using System.Threading.Tasks;
-using SnowyRiver.WPF.NotifyPropertyChangedBase;
+using SnowyRiver.ComponentModel.NotifyPropertyChanged;
 
-namespace SnowyRiver.WPF.Configuration;
+namespace SnowyRiver.Configuration;
 public abstract class JsonConfiguration:NotifyPropertyChangedObject
 {
     [JsonIgnore] 
@@ -114,7 +110,8 @@ public abstract class JsonConfiguration:NotifyPropertyChangedObject
         {
             File.Delete(path);
         }
-        using var stream = new FileStream(path, FileMode.OpenOrCreate);
+
+        await using var stream = new FileStream(path, FileMode.OpenOrCreate);
         await JsonSerializer.SerializeAsync(stream, this, GetType(), cancellationToken: cancellationToken,
             options:options.SerializerOptions);
         OnAfterSave();

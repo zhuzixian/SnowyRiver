@@ -1,10 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net9.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="14.0.0" />
@@ -12,6 +12,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\WPF\SnowyRiver.WPF.MaterialDesignInPrism\SnowyRiver.WPF.MaterialDesignInPrism.csproj" />
-    <ProjectReference Include="..\..\WPF\SnowyRiver.WPF.NotifyPropertyChangedBase\SnowyRiver.WPF.NotifyPropertyChangedBase.csproj" />
   </ItemGroup>
 </Project>

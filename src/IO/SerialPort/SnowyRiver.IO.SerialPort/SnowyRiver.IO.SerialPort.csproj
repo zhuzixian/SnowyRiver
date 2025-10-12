@@ -4,7 +4,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Version>1.0.5</Version>
+    <Version>1.0.6</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\WPF\SnowyRiver.WPF. Configuration\SnowyRiver.WPF.Configuration.csproj" />
+    <ProjectReference Include="..\..\..\Configuration\SnowyRiver.Configuration\SnowyRiver.Configuration.csproj" />
   </ItemGroup>
 
 </Project>

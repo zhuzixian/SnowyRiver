@@ -1,6 +1,6 @@
 ﻿using SnowyRiver.ComponentModel.Interface;
 
-namespace SnowyRiver.WPF.NotifyPropertyChangedBase.Commons;
+namespace SnowyRiver.ComponentModel.NotifyPropertyChanged;
 public class QueryFilter : NotifyPropertyChangedObject, IQueryFilter
 {
     private DateTime? _startTime = DateTime.Today;

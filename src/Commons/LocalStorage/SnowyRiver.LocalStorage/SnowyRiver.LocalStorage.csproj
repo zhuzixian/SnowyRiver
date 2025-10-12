@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\ComponentModel\SnowyRiver.ComponentModel.NotifyPropertyChanged\SnowyRiver.ComponentModel.NotifyPropertyChanged.csproj" />
     <ProjectReference Include="..\..\Serializer\SnowyRiver.Serializer.Interfaces\SnowyRiver.Serializer.Interfaces.csproj" />
     <ProjectReference Include="..\SnowyRiver.LocalStorage.Interface\SnowyRiver.LocalStorage.Interface.csproj" />
   </ItemGroup>

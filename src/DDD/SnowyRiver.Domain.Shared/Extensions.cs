@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using SnowyRiver.Domain.Shared.Entities;
+﻿using System.Collections.ObjectModel;
+using SnowyRiver.ComponentModel.Interface;
 
 namespace SnowyRiver.Domain.Shared;
 public static class Extensions

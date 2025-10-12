@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using SnowyRiver.Domain.Shared.Entities;
+using SnowyRiver.ComponentModel.Interface;
 
 namespace SnowyRiver.EF;
 public static class EfCoreExtensions

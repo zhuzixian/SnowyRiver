@@ -129,6 +129,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.Serializer", "Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.LocalStorage.Akavache", "Commons\LocalStorage\SnowyRiver.LocalStorage.Akavache\SnowyRiver.LocalStorage.Akavache.csproj", "{6698D2FB-BF36-41D5-B771-C3B038FB7FC1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ComponentModel", "ComponentModel", "{37728EE8-6FFB-49F5-91B1-A727C952F886}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.ComponentModel.NotifyPropertyChanged", "ComponentModel\SnowyRiver.ComponentModel.NotifyPropertyChanged\SnowyRiver.ComponentModel.NotifyPropertyChanged.csproj", "{3ED0E1F5-FFD9-1E2A-443C-09F809ED7059}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnowyRiver.ComponentModel.Interface", "ComponentModel\SnowyRiver.ComponentModel.Interface\SnowyRiver.ComponentModel.Interface.csproj", "{181EFA8B-F639-4A64-97ED-2C2BCA443D0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -315,6 +321,14 @@ Global
 		{6698D2FB-BF36-41D5-B771-C3B038FB7FC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6698D2FB-BF36-41D5-B771-C3B038FB7FC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6698D2FB-BF36-41D5-B771-C3B038FB7FC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3ED0E1F5-FFD9-1E2A-443C-09F809ED7059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ED0E1F5-FFD9-1E2A-443C-09F809ED7059}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ED0E1F5-FFD9-1E2A-443C-09F809ED7059}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ED0E1F5-FFD9-1E2A-443C-09F809ED7059}.Release|Any CPU.Build.0 = Release|Any CPU
+		{181EFA8B-F639-4A64-97ED-2C2BCA443D0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{181EFA8B-F639-4A64-97ED-2C2BCA443D0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{181EFA8B-F639-4A64-97ED-2C2BCA443D0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{181EFA8B-F639-4A64-97ED-2C2BCA443D0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -375,6 +389,8 @@ Global
 		{6F3A6BCE-9310-45D3-B919-FF82C5B9925B} = {C92B269B-CB14-4114-B821-625E10953C75}
 		{5C5D8E1C-265F-4D43-BE64-7FED553164BB} = {C92B269B-CB14-4114-B821-625E10953C75}
 		{6698D2FB-BF36-41D5-B771-C3B038FB7FC1} = {D5056D50-C1C1-4680-B68A-796831CDA308}
+		{3ED0E1F5-FFD9-1E2A-443C-09F809ED7059} = {37728EE8-6FFB-49F5-91B1-A727C952F886}
+		{181EFA8B-F639-4A64-97ED-2C2BCA443D0A} = {37728EE8-6FFB-49F5-91B1-A727C952F886}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E75A6A63-872F-41A5-80C6-C3FA93CCA7AC}

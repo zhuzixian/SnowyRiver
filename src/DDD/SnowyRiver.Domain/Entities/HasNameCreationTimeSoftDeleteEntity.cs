@@ -1,4 +1,4 @@
-﻿using SnowyRiver.Domain.Shared.Entities;
+﻿using SnowyRiver.ComponentModel.Interface;
 
 namespace SnowyRiver.Domain.Entities;
 public class HasNameCreationTimeSoftDeleteEntity<TKey> : HasCreationTimeSoftDeleteEntity<TKey>,IHasName

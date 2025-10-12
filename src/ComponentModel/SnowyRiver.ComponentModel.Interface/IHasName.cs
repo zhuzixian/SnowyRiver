@@ -1,4 +1,4 @@
-﻿namespace SnowyRiver.Domain.Shared.Entities;
+﻿namespace SnowyRiver.ComponentModel.Interface;
 public interface IHasName
 {
     public string Name { get; set; }

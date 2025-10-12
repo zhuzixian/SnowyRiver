@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SnowyRiver.Domain.Shared.Entities;
+﻿namespace SnowyRiver.ComponentModel.Interface;
 
 public interface IHasModificationTime
 {

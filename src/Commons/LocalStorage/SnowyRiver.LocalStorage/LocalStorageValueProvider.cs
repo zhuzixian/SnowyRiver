@@ -2,9 +2,9 @@
 using SnowyRiver.LocalStorage.Interface;
 
 namespace SnowyRiver.LocalStorage;
-public abstract class LocalStorageObjectProvider<T>(
+public abstract class LocalStorageValueProvider<T>(
     ILocalStorageService localStorageService)
-    :NotifyPropertyChangedObject, ILocalStorageObjectProvider<T>
+    :NotifyPropertyChangedObject, ILocalStorageValueProvider<T>
 {
     public async Task InitializeAsync(CancellationToken cancellationToken = default)
     {
@@ -13,21 +13,21 @@ public abstract class LocalStorageObjectProvider<T>(
 
     public async Task SaveAsync(CancellationToken cancellationToken = default)
     {
-        await localStorageService.SetItemAsync(Key, Object, cancellationToken);
+        await localStorageService.SetItemAsync(Key, Value, cancellationToken);
     }
 
     public async Task RefreshAsync(CancellationToken cancellationToken = default)
     {
-        Object = await localStorageService.GetItemAsync<T?>(Key, cancellationToken);
+        Value = await localStorageService.GetItemAsync<T?>(Key, cancellationToken);
     }
 
 
-    private T? _object;
+    private T? _value;
 
-    public T? Object
+    public T? Value
     {
-        get => _object; 
-        set => Set(ref _object, value);
+        get => _value; 
+        set => Set(ref _value, value);
     }
 
 

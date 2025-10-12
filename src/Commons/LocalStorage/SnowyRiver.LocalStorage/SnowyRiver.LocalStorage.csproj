@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Serializer\SnowyRiver.Serializer.Interfaces\SnowyRiver.Serializer.Interfaces.csproj" />
+    <ProjectReference Include="..\SnowyRiver.LocalStorage.Interface\SnowyRiver.LocalStorage.Interface.csproj" />
+  </ItemGroup>
+
+</Project>

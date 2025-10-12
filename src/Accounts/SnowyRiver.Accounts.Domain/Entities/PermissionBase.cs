@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using SnowyRiver.Domain.Entities;
+﻿using SnowyRiver.Domain.Entities;
 
 namespace SnowyRiver.Accounts.Domain.Entities;
 public class Permission<TUser, TRole, TTeam, TPermission> : HasNameCreationTimeSoftDeleteEntity<Guid>

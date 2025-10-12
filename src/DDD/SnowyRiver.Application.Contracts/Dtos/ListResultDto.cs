@@ -1,4 +1,6 @@
-﻿namespace SnowyRiver.Application.Contracts.Dtos;
+﻿using SnowyRiver.ComponentModel.Interface;
+
+namespace SnowyRiver.Application.Contracts.Dtos;
 public class ListResultDto<T> : IListResult<T>
 {
     /// <inheritdoc />

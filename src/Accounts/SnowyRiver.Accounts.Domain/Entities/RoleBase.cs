@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using SnowyRiver.Accounts.Domain.Shared;
+﻿using SnowyRiver.Accounts.Domain.Shared;
 using SnowyRiver.Domain.Entities;
 
 namespace SnowyRiver.Accounts.Domain.Entities;

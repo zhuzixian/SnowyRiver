@@ -13,13 +13,13 @@ public class DialogViewModelBase : ViewModelBase, IDialogHostAware,IDialogAware
     private DelegateCommand? _cancelCommand;
     public virtual DelegateCommand CancelCommand => _cancelCommand ??= new DelegateCommand(() => _ = CancelAsync());
 
-    public virtual async Task CancelAsync(CancellationToken cancellationToken = default)
+    protected virtual async Task CancelAsync(CancellationToken cancellationToken = default)
     {
         await Task.CompletedTask;
         Close(new DialogResult(ButtonResult.Cancel));
     }
 
-    public virtual async Task ConfirmAsync(CancellationToken cancellationToken = default)
+    protected virtual async Task ConfirmAsync(CancellationToken cancellationToken = default)
     {
         await Task.CompletedTask;
         Close(new DialogResult(ButtonResult.OK));

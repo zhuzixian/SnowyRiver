@@ -23,7 +23,7 @@ public class SerialPortOptions : JsonConfiguration
         set => Set(ref _baudRate, value);
     }
 
-    private Parity _parity = Parity.Even;
+    private Parity _parity = Parity.None;
     public Parity Parity
     {
         get => _parity;

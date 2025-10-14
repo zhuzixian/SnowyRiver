@@ -8,18 +8,20 @@ public class DialogViewModelBase : ViewModelBase, IDialogHostAware,IDialogAware
 
     private DelegateCommand? _confirmCommand;
 
-    public virtual DelegateCommand ConfirmCommand => _confirmCommand ??= new DelegateCommand(Confirm);
+    public virtual DelegateCommand ConfirmCommand => _confirmCommand ??= new DelegateCommand(() => _ = ConfirmAsync());
 
     private DelegateCommand? _cancelCommand;
-    public virtual DelegateCommand CancelCommand => _cancelCommand ??= new DelegateCommand(Cancel);
+    public virtual DelegateCommand CancelCommand => _cancelCommand ??= new DelegateCommand(() => _ = CancelAsync());
 
-    public virtual void Cancel()
+    public virtual async Task CancelAsync(CancellationToken cancellationToken = default)
     {
+        await Task.CompletedTask;
         Close(new DialogResult(ButtonResult.Cancel));
     }
 
-    public virtual void Confirm()
+    public virtual async Task ConfirmAsync(CancellationToken cancellationToken = default)
     {
+        await Task.CompletedTask;
         Close(new DialogResult(ButtonResult.OK));
     }
 

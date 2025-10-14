@@ -8,6 +8,7 @@ using SnowyRiver.Accounts.Modules.Manager.Interfaces.Services;
 using SnowyRiver.WPF.Localized;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Threading;
 using Akavache;
 using SnowyRiver.Accounts.Modules.Manager.Models;
 
@@ -108,11 +109,9 @@ public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
         await Task.CompletedTask;
     }
 
-    private DelegateCommand? _cancelCommand;
-    public override DelegateCommand CancelCommand => _cancelCommand ??= new DelegateCommand(Cancel);
-
-    public override void Cancel()
+    protected override async Task CancelAsync(CancellationToken cancellationToken = default)
     {
+        await Task.CompletedTask;
         Environment.Exit(-1);
     }
 

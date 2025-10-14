@@ -26,6 +26,12 @@ public abstract class SnowyRiverApplication : PrismApplication
         base.OnStartup(e);
     }
 
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        MainWindow?.Activate();
+    }
+
     protected virtual bool GetCurrentIsOnlyProcess()
     {
         var thisProc = Process.GetCurrentProcess();

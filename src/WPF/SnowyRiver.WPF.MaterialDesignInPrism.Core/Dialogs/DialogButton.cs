@@ -6,4 +6,5 @@ public class DialogButton
     public const string Abort = "中止";
     public const string TryAgain = "重试";
     public const string Resume = "继续";
+    public const string Ignore = "忽略";
 }

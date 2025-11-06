@@ -1,16 +1,12 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using EntityFrameworkCore.QueryBuilder.Interfaces;
 using EntityFrameworkCore.UnitOfWork.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using SnowyRiver.Accounts.Domain.Helpers;
-using SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
-using SnowyRiver.Accounts.Modules.Manager.Interfaces.Services;
+using SnowyRiver.Accounts.Services.Interfaces;
 using SnowyRiver.ComponentModel.NotifyPropertyChanged;
 
-namespace SnowyRiver.Accounts.Modules.Manager.Services;
+namespace SnowyRiver.Accounts.Services;
 public class AuthenticationService<TTeam, TRole, TUser, TPermission,
     TTeamEntity, TRoleEntity, TUserEntity, TPermissionEntity>(IUnitOfWork unitOfWork, IMapper mapper)
     : NotifyPropertyChangedObject, IAuthenticationService<TUser, TTeam, TRole, TPermission>

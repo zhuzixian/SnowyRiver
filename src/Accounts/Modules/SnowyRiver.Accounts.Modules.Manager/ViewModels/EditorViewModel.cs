@@ -5,7 +5,7 @@ using Prism.Navigation.Regions;
 using SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 using System.Threading.Tasks;
 using AutoMapper;
-using SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
+using SnowyRiver.Accounts.Services.Interfaces;
 using SnowyRiver.Domain.Entities;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;

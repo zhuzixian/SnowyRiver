@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
+using SnowyRiver.Accounts.Services.Interfaces;
 
 namespace SnowyRiver.Accounts.Modules.Manager.Controls;
 /// <summary>

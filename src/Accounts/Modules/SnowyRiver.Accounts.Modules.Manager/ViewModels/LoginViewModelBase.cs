@@ -3,14 +3,13 @@ using Prism.Navigation.Regions;
 using SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 using System.Threading.Tasks;
 using System;
-using SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
-using SnowyRiver.Accounts.Modules.Manager.Interfaces.Services;
 using SnowyRiver.WPF.Localized;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading;
 using Akavache;
 using SnowyRiver.Accounts.Modules.Manager.Models;
+using SnowyRiver.Accounts.Services.Interfaces;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
 public class LoginViewModel<TUser, TTeam, TRole, TPermission>(

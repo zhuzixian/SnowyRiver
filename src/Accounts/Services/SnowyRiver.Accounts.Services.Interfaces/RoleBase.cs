@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using SnowyRiver.Accounts.Domain.Shared;
 
-namespace SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
+namespace SnowyRiver.Accounts.Services.Interfaces;
 public class Role<TUser, TRole, TTeam, TPermission> : EntityModel
     where TTeam : Team<TUser, TRole, TTeam, TPermission>
     where TUser : User<TUser, TRole, TTeam, TPermission>

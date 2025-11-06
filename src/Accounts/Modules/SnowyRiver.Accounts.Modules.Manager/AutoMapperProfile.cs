@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
+using SnowyRiver.Accounts.Services.Interfaces;
 
 namespace SnowyRiver.Accounts.Modules.Manager;
 public class AutoMapperProfile : Profile

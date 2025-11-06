@@ -2,7 +2,7 @@
 using AutoMapper;
 using EntityFrameworkCore.UnitOfWork.Interfaces;
 using Prism.Navigation.Regions;
-using SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
+using SnowyRiver.Accounts.Services.Interfaces;
 using TeamEntity = SnowyRiver.Accounts.Domain.Entities.Team;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;

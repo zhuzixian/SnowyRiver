@@ -1,6 +1,6 @@
 ﻿using SnowyRiver.ComponentModel.NotifyPropertyChanged;
 
-namespace SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
+namespace SnowyRiver.Accounts.Services.Interfaces;
 public class EntityModel : NotifyPropertyChangedObject
 {
     public Guid Id { get; set; }

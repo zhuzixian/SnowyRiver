@@ -3,7 +3,7 @@
     <TargetFramework>net9.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <Nullable>enable</Nullable>
-    <Version>9.0.37</Version>
+    <Version>9.0.38</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="akavache" Version="11.4.1" />
@@ -15,9 +15,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\DDD\SnowyRiver.Domain\SnowyRiver.Domain.csproj" />
     <ProjectReference Include="..\..\..\WPF\SnowyRiver.WPF.Localized\SnowyRiver.WPF.Localized.csproj" />
+    <ProjectReference Include="..\..\Services\SnowyRiver.Accounts.Services.Interfaces\SnowyRiver.Accounts.Services.Interfaces.csproj" />
     <ProjectReference Include="..\..\SnowyRiver.Accounts.Core\SnowyRiver.Accounts.Core.csproj" />
+    <ProjectReference Include="..\..\SnowyRiver.Accounts.Domain.Shared\SnowyRiver.Accounts.Domain.Shared.csproj" />
     <ProjectReference Include="..\..\SnowyRiver.Accounts.Domain\SnowyRiver.Accounts.Domain.csproj" />
-    <ProjectReference Include="..\SnowyRiver.Accounts.Modules.Manager.Interfaces\SnowyRiver.Accounts.Modules.Manager.Interfaces.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MaterialDesignThemes.Wpf">
@@ -48,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Converters\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\TeamEditorView.xaml">

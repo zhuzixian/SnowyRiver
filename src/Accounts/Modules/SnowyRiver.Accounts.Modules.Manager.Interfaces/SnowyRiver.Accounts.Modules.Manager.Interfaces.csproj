@@ -8,12 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="Services\IAuthenticationService.cs" />
+    <ProjectReference Include="..\..\..\ComponentModel\SnowyRiver.ComponentModel.NotifyPropertyChanged\SnowyRiver.ComponentModel.NotifyPropertyChanged.csproj" />
+    <ProjectReference Include="..\..\SnowyRiver.Accounts.Domain\SnowyRiver.Accounts.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\ComponentModel\SnowyRiver.ComponentModel.NotifyPropertyChanged\SnowyRiver.ComponentModel.NotifyPropertyChanged.csproj" />
-    <ProjectReference Include="..\..\SnowyRiver.Accounts.Domain\SnowyRiver.Accounts.Domain.csproj" />
+    <Folder Include="Models\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

@@ -8,7 +8,7 @@ using EntityFrameworkCore.UnitOfWork.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Prism.Navigation.Regions;
 using SnowyRiver.Accounts.Domain.Helpers;
-using SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
+using SnowyRiver.Accounts.Services.Interfaces;
 using UserEntity = SnowyRiver.Accounts.Domain.Entities.User;
 using RoleEntity = SnowyRiver.Accounts.Domain.Entities.Role;
 using TeamEntity = SnowyRiver.Accounts.Domain.Entities.Team;

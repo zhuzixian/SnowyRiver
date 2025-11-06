@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
+    <PackageReference Include="EntityFrameworkCore.Data.UnitOfWork" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\SnowyRiver.Accounts.Domain\SnowyRiver.Accounts.Domain.csproj" />
+    <ProjectReference Include="..\SnowyRiver.Accounts.Services.Interfaces\SnowyRiver.Accounts.Services.Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>

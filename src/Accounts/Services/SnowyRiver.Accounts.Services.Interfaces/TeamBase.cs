@@ -1,4 +1,4 @@
-﻿namespace SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
+﻿namespace SnowyRiver.Accounts.Services.Interfaces;
 
 public class Team<TUser, TRole, TTeam, TPermission> : EntityModel
     where TTeam : Team<TUser, TRole, TTeam, TPermission>

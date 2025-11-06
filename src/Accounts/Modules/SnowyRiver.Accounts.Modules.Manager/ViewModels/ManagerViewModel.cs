@@ -8,7 +8,7 @@ using EntityFrameworkCore.UnitOfWork.Interfaces;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Navigation.Regions;
-using SnowyRiver.Accounts.Modules.Manager.Interfaces.Models;
+using SnowyRiver.Accounts.Services.Interfaces;
 using SnowyRiver.Domain.Entities;
 using SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs;
 using SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;

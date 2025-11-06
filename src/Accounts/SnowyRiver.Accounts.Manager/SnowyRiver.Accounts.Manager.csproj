@@ -30,6 +30,7 @@
     <ProjectReference Include="..\..\WPF\Modules\SnowyRiver.WPF.Modules.Splash\SnowyRiver.WPF.Modules.Splash.csproj" />
     <ProjectReference Include="..\..\WPF\SnowyRiver.WPF.MaterialDesignInPrism\SnowyRiver.WPF.MaterialDesignInPrism.csproj" />
     <ProjectReference Include="..\Modules\SnowyRiver.Accounts.Modules.Manager\SnowyRiver.Accounts.Modules.Manager.csproj" />
+    <ProjectReference Include="..\Services\SnowyRiver.Accounts.Services\SnowyRiver.Accounts.Services.csproj" />
     <ProjectReference Include="..\SnowyRiver.Accouns.Mananger.EntityFramework\SnowyRiver.Accounts.Manager.EntityFramework.csproj" />
     <ProjectReference Include="..\SnowyRiver.Accounts.EntityFramework\SnowyRiver.Accounts.EntityFramework.csproj" />
   </ItemGroup>

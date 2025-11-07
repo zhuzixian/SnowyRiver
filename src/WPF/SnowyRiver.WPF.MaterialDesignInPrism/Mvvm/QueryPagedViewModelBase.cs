@@ -11,6 +11,12 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter>: RegionDia
         Filter = new TRecordFilter();
     }
 
+    public override void OnNavigatedTo(NavigationContext navigationContext)
+    {
+        base.OnNavigatedTo(navigationContext);
+        _ = HandleRefreshCommandAsync();
+    }
+
     protected virtual void FilterOnPropertyChanged(object? sender, PropertyChangedEventArgs args)
     {
         _ = RefreshAsync();

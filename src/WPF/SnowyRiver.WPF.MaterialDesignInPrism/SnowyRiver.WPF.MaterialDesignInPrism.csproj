@@ -4,7 +4,7 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Version>9.0.41</Version>
+    <Version>9.0.42</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="DryIoc.Microsoft.DependencyInjection" Version="6.2.0" />

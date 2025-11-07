@@ -1,8 +1,8 @@
-﻿using System.ComponentModel;
-using SnowyRiver.ComponentModel.NotifyPropertyChanged;
+﻿using SnowyRiver.ComponentModel.NotifyPropertyChanged;
+using System.ComponentModel;
 
 namespace SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
-public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter> : RegionDialogViewModelBase
+public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter>: RegionDialogViewModelBase
     where TRecordFilter : QueryFilter, new()
 {
     protected QueryPagedViewModelBase(IRegionManager regionManager)
@@ -13,6 +13,7 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter> : RegionDi
 
     protected virtual void FilterOnPropertyChanged(object? sender, PropertyChangedEventArgs args)
     {
+        _ = RefreshAsync();
     }
 
     private DelegateCommand? _refreshCommand;
@@ -107,6 +108,37 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter> : RegionDi
     {
         Filter.PageIndex = pageIndex;
         return Task.CompletedTask;
+    }
+
+    private DelegateCommand? _saveRecordsAsCommand;
+    public DelegateCommand SaveRecordsAsCommand
+        => _saveRecordsAsCommand ??= new DelegateCommand(() => _ = HandleSaveRecordsAsAsync(),
+                () => !ISavingRecordsAs && Records.Items.Any())
+            .ObservesProperty(() => ISavingRecordsAs);
+
+    private async Task HandleSaveRecordsAsAsync(CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            ISavingRecordsAs = true;
+            await SaveRecordsAsAsync(cancellationToken);
+        }
+        finally
+        {
+            ISavingRecordsAs = false;
+        }
+    }
+
+    protected virtual async Task SaveRecordsAsAsync(CancellationToken cancellationToken = default)
+    {
+        await Task.CompletedTask;
+    }
+
+    private bool _isSavingRecordsAs;
+    public bool ISavingRecordsAs
+    {
+        get => _isSavingRecordsAs;
+        set => SetProperty(ref _isSavingRecordsAs, value);
     }
 
     private PagedObservableCollection<TRecord> _records = new();

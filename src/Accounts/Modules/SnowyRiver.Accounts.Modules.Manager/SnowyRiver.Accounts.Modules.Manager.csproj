@@ -6,11 +6,11 @@
     <Version>9.0.38</Version>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="akavache" Version="11.4.1" />
-    <PackageReference Include="AutoMapper" Version="14.0.0" />
-    <PackageReference Include="EntityFrameworkCore.Data.UnitOfWork" Version="9.0.0" />
-    <PackageReference Include="Prism.Wpf" Version="9.0.537" />
-    <PackageReference Include="WPFLocalizeExtension" Version="3.10.0" />
+    <PackageReference Include="akavache" />
+    <PackageReference Include="AutoMapper"/>
+    <PackageReference Include="EntityFrameworkCore.Data.UnitOfWork"/>
+    <PackageReference Include="Prism.Wpf" />
+    <PackageReference Include="WPFLocalizeExtension" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\DDD\SnowyRiver.Domain\SnowyRiver.Domain.csproj" />

@@ -6,7 +6,7 @@
     <Version>9.0.0</Version>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="WPFLocalizeExtension" Version="3.10.0" />
+    <PackageReference Include="WPFLocalizeExtension" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Commons\SnowyRiver.Commons\SnowyRiver.Commons.csproj" />

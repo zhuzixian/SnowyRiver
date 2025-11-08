@@ -7,8 +7,8 @@
     <Version>1.0.4</Version>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="14.0.0" />
-    <PackageReference Include="WPFLocalizeExtension" Version="3.10.0" />
+    <PackageReference Include="AutoMapper" />
+    <PackageReference Include="WPFLocalizeExtension" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\WPF\SnowyRiver.WPF.MaterialDesignInPrism\SnowyRiver.WPF.MaterialDesignInPrism.csproj" />

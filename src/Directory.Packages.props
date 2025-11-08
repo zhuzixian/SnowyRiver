@@ -1,0 +1,40 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+    <NoWarn>$(NoWarn);NU1507</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="akavache" Version="11.4.1" />
+    <PackageVersion Include="Akavache.Sqlite3" Version="11.4.1" />
+    <PackageVersion Include="Akavache.SystemTextJson" Version="11.4.1" />
+    <PackageVersion Include="AutoMapper" Version="14.0.0" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="9.0.10" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.10"/>
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.10" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.10"/>
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.10" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="9.0.10" />
+    <PackageVersion Include="EntityFrameworkCore.Data.UnitOfWork" Version="9.0.0" />
+    <PackageVersion Include="NLog.Extensions.Logging" Version="6.0.5" />
+    <PackageVersion Include="Nito.AsyncEx" Version="5.1.2" />
+    <PackageVersion Include="Prism.Core" Version="9.0.537" />
+    <PackageVersion Include="Prism.Wpf" Version="9.0.537" />
+    <PackageVersion Include="Prism.DryIoc" Version="9.0.537" />
+    <PackageVersion Include="Prism.Container.DryIoc" Version="9.0.107" />
+    <PackageVersion Include="Polly" Version="8.6.4" />
+    <PackageVersion Include="WPFLocalizeExtension" Version="3.10.0" />
+    <PackageVersion Include="AsmResolver.DotNet" Version="5.5.1" />
+    <PackageVersion Include="System.Reflection.Metadata" Version="9.0.10" />
+    <PackageVersion Include="System.IO.Ports" Version="9.0.10" />
+    <PackageVersion Include="MahApps.Metro" Version="2.4.11" />
+    <PackageVersion Include="MaterialDesignColors" Version="5.3.0" />
+    <PackageVersion Include="MaterialDesignThemes" Version="5.3.0" />
+    <PackageVersion Include="MaterialDesignThemes.MahApps" Version="5.3.0" />
+    <PackageVersion Include="FluentModbus" Version="5.3.2" />
+    <PackageVersion Include="OpenCvSharp4.Extensions" Version="4.11.0.20250507" />
+    <PackageVersion Include="AIStudio.Wpf.DiagramDesigner" Version="1.2.7" />
+    <PackageVersion Include="MathConverter" Version="2.2.1" />
+    <PackageVersion Include="DryIoc.Microsoft.DependencyInjection" Version="6.2.0" />
+  </ItemGroup>
+</Project>

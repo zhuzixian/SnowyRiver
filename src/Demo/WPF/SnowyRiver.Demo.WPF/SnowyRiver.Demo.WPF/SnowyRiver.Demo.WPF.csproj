@@ -1,16 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows7.0</TargetFramework>
+    <TargetFramework>net9.0-windows7.0</TargetFramework>
     <UseWPF>true</UseWPF>
     <Version>2.0.1</Version>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="MahApps.Metro" Version="2.4.11" />
-    <PackageReference Include="MaterialDesignColors" Version="5.3.0" />
-    <PackageReference Include="MaterialDesignThemes" Version="5.3.0" />
-    <PackageReference Include="MaterialDesignThemes.MahApps" Version="5.3.0" />
-    <PackageReference Include="Prism.DryIoc" Version="9.0.537" />
+    <PackageReference Include="MahApps.Metro" />
+    <PackageReference Include="MaterialDesignColors" />
+    <PackageReference Include="MaterialDesignThemes"/>
+    <PackageReference Include="MaterialDesignThemes.MahApps" />
+    <PackageReference Include="Prism.DryIoc" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\WPF\Controls\SnowyRiver.WPF.Controls.Diagram\SnowyRiver.WPF.Controls.Diagram.csproj" />

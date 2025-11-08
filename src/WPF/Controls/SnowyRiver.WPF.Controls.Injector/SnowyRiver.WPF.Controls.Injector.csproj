@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MathConverter" Version="2.2.1" />
+    <PackageReference Include="MathConverter" />
   </ItemGroup>
 
 </Project>

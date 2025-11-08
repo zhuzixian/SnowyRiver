@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="3u0n5bdt.pzt~" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\ComponentModel\SnowyRiver.ComponentModel.NotifyPropertyChanged\SnowyRiver.ComponentModel.NotifyPropertyChanged.csproj" />
     <ProjectReference Include="..\..\..\DDD\SnowyRiver.Domain.Shared\SnowyRiver.Domain.Shared.csproj" />
     <ProjectReference Include="..\..\SnowyRiver.Accounts.Domain.Shared\SnowyRiver.Accounts.Domain.Shared.csproj" />

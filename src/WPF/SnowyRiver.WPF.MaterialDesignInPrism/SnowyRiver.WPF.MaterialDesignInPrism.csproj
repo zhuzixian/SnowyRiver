@@ -7,12 +7,12 @@
     <Version>9.0.42</Version>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="DryIoc.Microsoft.DependencyInjection" Version="6.2.0" />
-    <PackageReference Include="MaterialDesignThemes" Version="5.3.0" />
-    <PackageReference Include="MaterialDesignThemes.MahApps" Version="5.3.0" />
-    <PackageReference Include="Prism.Container.DryIoc" Version="9.0.107" />
-    <PackageReference Include="Prism.DryIoc" Version="9.0.537" />
-    <PackageReference Include="Prism.Wpf" Version="9.0.537" />
+    <PackageReference Include="DryIoc.Microsoft.DependencyInjection" />
+    <PackageReference Include="MaterialDesignThemes" />
+    <PackageReference Include="MaterialDesignThemes.MahApps" />
+    <PackageReference Include="Prism.Container.DryIoc" />
+    <PackageReference Include="Prism.DryIoc" />
+    <PackageReference Include="Prism.Wpf" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ComponentModel\SnowyRiver.ComponentModel.NotifyPropertyChanged\SnowyRiver.ComponentModel.NotifyPropertyChanged.csproj" />

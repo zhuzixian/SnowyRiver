@@ -7,23 +7,23 @@
     <Product>用户管理系统</Product>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Akavache" Version="11.4.1" />
-    <PackageReference Include="Akavache.Sqlite3" Version="11.4.1" />
-    <PackageReference Include="Akavache.SystemTextJson" Version="11.4.1" />
-    <PackageReference Include="AutoMapper" Version="14.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.10">
+    <PackageReference Include="Akavache" />
+    <PackageReference Include="Akavache.Sqlite3"/>
+    <PackageReference Include="Akavache.SystemTextJson" />
+    <PackageReference Include="AutoMapper"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.10" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.10">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.10" />
-    <PackageReference Include="NLog.Extensions.Logging" Version="6.0.5" />
-    <PackageReference Include="Prism.DryIoc" Version="9.0.537" />
-    <PackageReference Include="WPFLocalizeExtension" Version="3.10.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json"/>
+    <PackageReference Include="NLog.Extensions.Logging"/>
+    <PackageReference Include="Prism.DryIoc"/>
+    <PackageReference Include="WPFLocalizeExtension"/>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Commons\SnowyRiver.Commons\SnowyRiver.Commons.csproj" />

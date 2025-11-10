@@ -54,7 +54,7 @@ public partial class TextFieldEditor
     }
 
     public static readonly DependencyProperty UnitStyleProperty = DependencyProperty.Register(
-        nameof(UnitStyle), typeof(Style), typeof(TextFieldEditor), new PropertyMetadata(0d));
+        nameof(UnitStyle), typeof(Style), typeof(TextFieldEditor), new PropertyMetadata(default(Style)));
 
     public Style UnitStyle
     {

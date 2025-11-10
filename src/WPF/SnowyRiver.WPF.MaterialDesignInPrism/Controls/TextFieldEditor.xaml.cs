@@ -35,23 +35,30 @@ public partial class TextFieldEditor
         set => SetValue(UnitProperty, value);
     }
 
-    public static readonly DependencyProperty HeaderWidthProperty = DependencyProperty.Register(
-        nameof(HeaderWidth), typeof(double), typeof(TextFieldEditor), new PropertyMetadata(0d));
+    public static readonly DependencyProperty HeaderStyleProperty = DependencyProperty.Register(
+        nameof(HeaderStyle), typeof(Style), typeof(TextFieldEditor), new PropertyMetadata(default(Style)));
 
-
-    public double HeaderWidth
+    public Style HeaderStyle
     {
-        get => (double)GetValue(HeaderWidthProperty);
-        set => SetValue(HeaderWidthProperty, value);
+        get => (Style)GetValue(HeaderStyleProperty);
+        set => SetValue(HeaderStyleProperty, value);
     }
 
-    public static readonly DependencyProperty UnitWidthProperty = DependencyProperty.Register(
-        nameof(UnitWidth), typeof(double), typeof(TextFieldEditor), new PropertyMetadata(0d));
+    public static readonly DependencyProperty ValueStyleProperty = DependencyProperty.Register(
+        nameof(ValueStyle), typeof(Style), typeof(TextFieldEditor), new PropertyMetadata(default(Style)));
 
-
-    public double UnitWidth
+    public Style ValueStyle
     {
-        get => (double)GetValue(UnitWidthProperty);
-        set => SetValue(UnitWidthProperty, value);
+        get => (Style)GetValue(HeaderStyleProperty);
+        set => SetValue(HeaderStyleProperty, value);
+    }
+
+    public static readonly DependencyProperty UnitStyleProperty = DependencyProperty.Register(
+        nameof(UnitStyle), typeof(Style), typeof(TextFieldEditor), new PropertyMetadata(0d));
+
+    public Style UnitStyle
+    {
+        get => (Style)GetValue(UnitStyleProperty);
+        set => SetValue(UnitStyleProperty, value);
     }
 }

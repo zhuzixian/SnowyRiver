@@ -11,18 +11,13 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <TextBlock Text="{Binding Header, RelativeSource={RelativeSource AncestorType=controls:TextFieldEditor}}"
-                   Width="{Binding HeaderWidth, RelativeSource={RelativeSource AncestorType=controls:TextFieldEditor}}"
-                   VerticalAlignment="Center"
-                   FontWeight="Bold"/>
+                   Style="{Binding HeaderStyle, RelativeSource={RelativeSource AncestorType=controls:TextFieldEditor}}"/>
         <TextBox Grid.Column="1" 
                  Text="{Binding Value, 
                         RelativeSource={RelativeSource AncestorType=controls:TextFieldEditor},
                         UpdateSourceTrigger=PropertyChanged}"
-                 Style="{StaticResource MahApps.Styles.TextBox}"
-                 Margin="6, 0"
-                 VerticalContentAlignment="Center"/>
+                 Style="{Binding ValueStyle, RelativeSource={RelativeSource AncestorType=controls:TextFieldEditor}}"/>
         <TextBlock Grid.Column="2" Text="{Binding Unit, RelativeSource={RelativeSource AncestorType=controls:TextFieldEditor}}"
-                   Width="{Binding UnitWidth, RelativeSource={RelativeSource AncestorType=controls:TextFieldEditor}}"
-                   VerticalAlignment="Bottom"/>
+                   Style="{Binding UnitStyle, RelativeSource={RelativeSource AncestorType=controls:TextFieldEditor}}"/>
     </Grid>
 </UserControl>

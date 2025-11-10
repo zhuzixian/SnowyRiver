@@ -19,13 +19,14 @@ public class AuthenticationService<TTeam, TRole, TUser, TPermission,
     where TRoleEntity : Domain.Entities.Role<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
     where TPermissionEntity : Domain.Entities.Permission<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
 {
-    public virtual async Task<(bool, LoginFailedReason)> LoginAsync(string username, string password)
+    public virtual async Task<(bool, LoginFailedReason)> LoginAsync(string username, string password, 
+        CancellationToken cancellationToken = default)
     {
         try
         {
             var repository = unitOfWork.Repository<TUserEntity>();
             var query = GetQuery(username);
-            var matchedNameUsers = await repository.SearchAsync(query);
+            var matchedNameUsers = await repository.SearchAsync(query, cancellationToken);
             if (matchedNameUsers.Count > 0)
             {
                 var matchedUser = matchedNameUsers.FirstOrDefault(

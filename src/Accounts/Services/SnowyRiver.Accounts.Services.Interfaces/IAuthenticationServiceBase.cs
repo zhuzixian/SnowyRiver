@@ -8,7 +8,8 @@ public interface IAuthenticationService<out TUser, TTeam, TRole,  TPermission> :
     where TRole : Role<TUser, TRole, TTeam, TPermission>
     where TPermission : Permission<TUser, TRole, TTeam, TPermission>
 {
-    public Task<(bool, LoginFailedReason)> LoginAsync(string username, string password);
+    public Task<(bool, LoginFailedReason)> LoginAsync(string username, string password,
+        CancellationToken cancellationToken = default);
     public Task LogoutAsync();
     public bool IsAuthenticated { get; }
 

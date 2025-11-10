@@ -63,12 +63,12 @@ public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
         set => SetProperty(ref _isLoggingIn, value);
     }
 
-    public virtual async Task ConfirmAsync()
+    protected override async Task ConfirmAsync(CancellationToken cancellationToken = default)
     {
         try
         {
             IsLoggingIn = true;
-            var (isLoginSucceed, loginFailedReason) = await authenticationService.LoginAsync(Login.UserName, Login.Password);
+            var (isLoginSucceed, loginFailedReason) = await LoginAsync(Login.UserName, Login.Password, cancellationToken);
             if (!isLoginSucceed)
             {
                 Message = loginFailedReason == LoginFailedReason.NotFoundUser
@@ -101,6 +101,12 @@ public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
         {
             IsLoggingIn = false;
         }
+    }
+
+    protected virtual async Task<(bool, LoginFailedReason)> LoginAsync(string username, string password, 
+        CancellationToken cancellationToken = default)
+    {
+        return await authenticationService.LoginAsync(username, password, cancellationToken);
     }
 
     protected virtual async Task HandleNextAsync()

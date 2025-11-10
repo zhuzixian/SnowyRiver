@@ -11,7 +11,9 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <TextBlock Text="{Binding Header, RelativeSource={RelativeSource AncestorType=controls:TextFieldEditor}}"
-                   Width="{Binding HeaderWidth, RelativeSource={RelativeSource AncestorType=controls:TextFieldEditor}}"/>
+                   Width="{Binding HeaderWidth, RelativeSource={RelativeSource AncestorType=controls:TextFieldEditor}}"
+                   VerticalAlignment="Center"
+                   FontWeight="Bold"/>
         <TextBox Grid.Column="1" 
                  Text="{Binding Value, 
                         RelativeSource={RelativeSource AncestorType=controls:TextFieldEditor},

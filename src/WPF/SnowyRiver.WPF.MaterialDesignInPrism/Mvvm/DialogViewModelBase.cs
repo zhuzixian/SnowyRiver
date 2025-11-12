@@ -6,23 +6,27 @@ public class DialogViewModelBase : ViewModelBase, IDialogHostAware,IDialogAware
 {
     public virtual string? IdentifierName { get; set; } = null;
 
-    private DelegateCommand? _confirmCommand;
+    public virtual DelegateCommand ConfirmCommand => field ??= new DelegateCommand(async () =>
+    {
+        await ConfirmAsync();
+        Close(new DialogResult(ButtonResult.OK));
+    });
 
-    public virtual DelegateCommand ConfirmCommand => _confirmCommand ??= new DelegateCommand(() => _ = ConfirmAsync());
+    public virtual DelegateCommand CancelCommand => field ??= new DelegateCommand(async () =>
+    {
+        await CancelAsync();
+        Close(new DialogResult(ButtonResult.Cancel));
+    });
 
-    private DelegateCommand? _cancelCommand;
-    public virtual DelegateCommand CancelCommand => _cancelCommand ??= new DelegateCommand(() => _ = CancelAsync());
 
     protected virtual async Task CancelAsync(CancellationToken cancellationToken = default)
     {
         await Task.CompletedTask;
-        Close(new DialogResult(ButtonResult.Cancel));
     }
 
     protected virtual async Task ConfirmAsync(CancellationToken cancellationToken = default)
     {
         await Task.CompletedTask;
-        Close(new DialogResult(ButtonResult.OK));
     }
 
     protected virtual void Close(IDialogResult result)
@@ -45,12 +49,11 @@ public class DialogViewModelBase : ViewModelBase, IDialogHostAware,IDialogAware
         RequestClose.Invoke(dialogResult);
     }
 
-    private string _title = string.Empty;
     public virtual string Title
     {
-        get => _title;
-        protected set => SetProperty(ref _title, value);
-    }
+        get;
+        protected set => SetProperty(ref field, value);
+    } = string.Empty;
 
     public DialogCloseListener RequestClose { get; protected set; }
 }

@@ -15,7 +15,7 @@
         <TextBox Grid.Column="1" 
                  Text="{Binding Value, 
                         RelativeSource={RelativeSource AncestorType=controls:TextFieldEditor},
-                        UpdateSourceTrigger=PropertyChanged}"
+                        UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                  Style="{Binding ValueStyle, RelativeSource={RelativeSource AncestorType=controls:TextFieldEditor}}"/>
         <TextBlock Grid.Column="2" Text="{Binding Unit, RelativeSource={RelativeSource AncestorType=controls:TextFieldEditor}}"
                    Style="{Binding UnitStyle, RelativeSource={RelativeSource AncestorType=controls:TextFieldEditor}}"/>

@@ -16,7 +16,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 9.x.x
+          dotnet-version: 10.x.x
 
       - name: Remove Demo
         run: dotnet sln src/SnowyRiver.sln remove Demo
@@ -32,3 +32,4 @@ jobs:
    
       - name: Publish to nuget.org
         run: dotnet nuget push artifacts\*.nupkg  --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}} --skip-duplicate
+

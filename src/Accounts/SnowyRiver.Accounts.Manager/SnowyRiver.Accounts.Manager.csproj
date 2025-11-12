@@ -3,27 +3,27 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net10.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <Version>10.0.0</Version>
+    <Version>10.0.1</Version>
     <Product>用户管理系统</Product>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Akavache" />
-    <PackageReference Include="Akavache.Sqlite3"/>
+    <PackageReference Include="Akavache.Sqlite3" />
     <PackageReference Include="Akavache.SystemTextJson" />
-    <PackageReference Include="AutoMapper"/>
+    <PackageReference Include="AutoMapper" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json"/>
-    <PackageReference Include="NLog.Extensions.Logging"/>
-    <PackageReference Include="Prism.DryIoc"/>
-    <PackageReference Include="WPFLocalizeExtension"/>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" />
+    <PackageReference Include="NLog.Extensions.Logging" />
+    <PackageReference Include="Prism.DryIoc" />
+    <PackageReference Include="WPFLocalizeExtension" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Commons\SnowyRiver.Commons\SnowyRiver.Commons.csproj" />

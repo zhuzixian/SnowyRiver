@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using AutoMapper;
 using EntityFrameworkCore.QueryBuilder.Interfaces;
 using EntityFrameworkCore.Repository.Interfaces;
 using EntityFrameworkCore.UnitOfWork.Interfaces;
+using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using Prism.Navigation.Regions;
 using SnowyRiver.Accounts.Services.Interfaces;

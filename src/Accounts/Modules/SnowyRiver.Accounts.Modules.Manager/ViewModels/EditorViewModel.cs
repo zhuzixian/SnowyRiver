@@ -4,7 +4,7 @@ using Prism.Commands;
 using Prism.Navigation.Regions;
 using SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 using System.Threading.Tasks;
-using AutoMapper;
+using MapsterMapper;
 using SnowyRiver.Accounts.Services.Interfaces;
 using SnowyRiver.Domain.Entities;
 

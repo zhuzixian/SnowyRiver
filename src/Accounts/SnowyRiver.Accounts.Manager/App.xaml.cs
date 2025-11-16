@@ -1,30 +1,32 @@
-﻿using Prism.Ioc;
-using SnowyRiver.Accounts.Manager.Views;
-using System.Globalization;
-using System.Windows;
-using Prism.Modularity;
-using SnowyRiver.Accounts.Modules.Manager;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using EntityFrameworkCore.UnitOfWork.Extensions;
-using SnowyRiver.Accounts.Manager.EntityFramework;
-using System;
-using System.Reactive.Linq;
-using System.Threading.Tasks;
-using Akavache;
+﻿using Akavache;
 using Akavache.Sqlite3;
 using Akavache.SystemTextJson;
-using Prism.Dialogs;
+using EntityFrameworkCore.UnitOfWork.Extensions;
+using MapsterMapper;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
+using Prism.Dialogs;
+using Prism.Ioc;
+using Prism.Modularity;
+using SnowyRiver.Accounts.Manager.EntityFramework;
 using SnowyRiver.Accounts.Manager.ViewModels;
+using SnowyRiver.Accounts.Manager.Views;
+using SnowyRiver.Accounts.Modules.Manager;
 using SnowyRiver.Accounts.Services;
 using SnowyRiver.Accounts.Services.Interfaces;
-using SnowyRiver.WPF.Modules.Splash;
 using SnowyRiver.Reflection;
 using SnowyRiver.WPF.MaterialDesignInPrism;
+using SnowyRiver.WPF.Modules.Splash;
 using SnowyRiver.WPF.Modules.Splash.Views;
 using Splat.Builder;
+using System;
+using System.Globalization;
+using System.Reactive.Linq;
+using System.Threading.Tasks;
+using System.Windows;
+using Mapster;
 
 namespace SnowyRiver.Accounts.Manager
 {
@@ -93,10 +95,9 @@ namespace SnowyRiver.Accounts.Manager
                 config.AddNLog();
             });
 
-            services.AddAutoMapper(config =>
-            {
-                config.AddMaps(AppDomain.CurrentDomain.GetAssemblies());
-            });
+            var config = TypeAdapterConfig.GlobalSettings;
+            services.AddSingleton(config);
+            services.AddScoped<IMapper, ServiceMapper>();
 
             services.AddDbContext<AccountsManagerDbContext>(options => options.AddAccountsManagerOptions());
             services.AddScoped<DbContext, AccountsManagerDbContext>();

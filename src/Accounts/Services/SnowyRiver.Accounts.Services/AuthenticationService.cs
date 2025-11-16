@@ -1,5 +1,5 @@
-﻿using AutoMapper;
-using EntityFrameworkCore.UnitOfWork.Interfaces;
+﻿using EntityFrameworkCore.UnitOfWork.Interfaces;
+using MapsterMapper;
 using SnowyRiver.Accounts.Services.Interfaces;
 
 namespace SnowyRiver.Accounts.Services;

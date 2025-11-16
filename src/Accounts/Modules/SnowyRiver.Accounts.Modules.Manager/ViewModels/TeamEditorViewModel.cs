@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using AutoMapper;
 using EntityFrameworkCore.UnitOfWork.Interfaces;
+using MapsterMapper;
 using Prism.Navigation.Regions;
 using SnowyRiver.Accounts.Services.Interfaces;
 using TeamEntity = SnowyRiver.Accounts.Domain.Entities.Team;

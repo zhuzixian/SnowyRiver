@@ -1,6 +1,6 @@
-﻿using AutoMapper;
-using EntityFrameworkCore.QueryBuilder.Interfaces;
+﻿using EntityFrameworkCore.QueryBuilder.Interfaces;
 using EntityFrameworkCore.UnitOfWork.Interfaces;
+using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using SnowyRiver.Accounts.Domain.Helpers;
 using SnowyRiver.Accounts.Services.Interfaces;

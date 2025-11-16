@@ -1,5 +1,5 @@
-﻿using AutoMapper;
-using EntityFrameworkCore.UnitOfWork.Interfaces;
+﻿using EntityFrameworkCore.UnitOfWork.Interfaces;
+using MapsterMapper;
 using Prism.Navigation.Regions;
 using SnowyRiver.Accounts.Services.Interfaces;
 using SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs;

@@ -1,4 +1,7 @@
-﻿using Prism.Ioc;
+﻿using Example;
+using Mapster;
+using MapsterMapper;
+using Prism.Ioc;
 using Prism.Modularity;
 using SnowyRiver.Accounts.Modules.Manager.Views;
 

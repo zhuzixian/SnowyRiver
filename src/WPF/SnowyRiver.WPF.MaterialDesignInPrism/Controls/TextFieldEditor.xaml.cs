@@ -61,4 +61,13 @@ public partial class TextFieldEditor
         get => (Style)GetValue(UnitStyleProperty);
         set => SetValue(UnitStyleProperty, value);
     }
+
+    public static readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register(
+       nameof(IsReadOnly), typeof(bool), typeof(TextFieldEditor), new PropertyMetadata(false));
+
+    public bool IsReadOnly
+    {
+        get => (bool)GetValue(IsReadOnlyProperty);
+        set => SetValue(IsReadOnlyProperty, value);
+    }
 }

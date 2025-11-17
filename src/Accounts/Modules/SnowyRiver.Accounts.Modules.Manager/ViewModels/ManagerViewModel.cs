@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using EntityFrameworkCore.QueryBuilder.Interfaces;
 using EntityFrameworkCore.Repository.Interfaces;
 using EntityFrameworkCore.UnitOfWork.Interfaces;
+using Mapster;
 using MapsterMapper;
 using Prism.Commands;
 using Prism.Navigation;
@@ -74,7 +75,8 @@ public abstract class ManagerViewModel<TModel, TEntity>(IUnitOfWork unitOfWork,
         var repository = await GetRepositoryAsync();
         var query = await GetQueryAsync(repository);
         var result = await repository.SearchAsync(query);
-        Models = mapper.Map<ObservableCollection<TModel>>(result);
+        Models = await mapper.From(result)
+            .AdaptToTypeAsync<ObservableCollection<TModel>>();
         for (var i = 0; i < Models.Count; i++)
         {
             Models[i].SortId = i + 1;

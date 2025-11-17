@@ -3,12 +3,13 @@
     <TargetFramework>net10.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <Nullable>enable</Nullable>
-    <Version>10.0.2</Version>
+    <Version>10.0.3</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="akavache" />
     <PackageReference Include="EntityFrameworkCore.Data.UnitOfWork" />
     <PackageReference Include="Mapster" />
+    <PackageReference Include="Mapster.Async" />
     <PackageReference Include="Mapster.DependencyInjection" />
     <PackageReference Include="Prism.Wpf" />
     <PackageReference Include="WPFLocalizeExtension" />

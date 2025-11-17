@@ -1,5 +1,6 @@
 ﻿using EntityFrameworkCore.QueryBuilder.Interfaces;
 using EntityFrameworkCore.UnitOfWork.Interfaces;
+using Mapster;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using SnowyRiver.Accounts.Domain.Helpers;
@@ -33,7 +34,8 @@ public class AuthenticationService<TTeam, TRole, TUser, TPermission,
                     x => PasswordHelper.VerifyPassword(password, x.PasswordSalt, x.Password));
                 if (matchedUser != null)
                 {
-                    User = mapper.Map<TUser>(matchedUser);
+                    User = await mapper.From(matchedUser)
+                        .AdaptToTypeAsync<TUser>();
                     IsAuthenticated = true;
                     return (true, LoginFailedReason.Succeed);
                 }

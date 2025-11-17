@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using EntityFrameworkCore.UnitOfWork.Interfaces;
+using Mapster;
 using MapsterMapper;
 using Prism.Navigation.Regions;
 using SnowyRiver.Accounts.Services.Interfaces;
@@ -29,7 +30,8 @@ public class RoleEditorViewModel(
             if (permissions != null)
             {
                 _permissionEntities = permissions;
-                Permissions = Mapper.Map<ObservableCollection<Permission>>(_permissionEntities);
+                Permissions = await Mapper.From(_permissionEntities)
+                    .AdaptToTypeAsync<ObservableCollection<Permission>>();
                 foreach (var permission in Permissions)
                 {
                     permission.IsSelected = Model.Permissions.Any(x => x.Id == permission.Id);
@@ -44,7 +46,8 @@ public class RoleEditorViewModel(
 
     protected override async Task<RoleEntity> MapToEntityAsync(Role model)
     {
-        var entity =  await Task.FromResult(Mapper.Map<RoleEntity>(model));
+        var entity = await Mapper.From(model)
+            .AdaptToTypeAsync<RoleEntity>();
         await MapToEntityAsync(entity);
         return entity;
     }

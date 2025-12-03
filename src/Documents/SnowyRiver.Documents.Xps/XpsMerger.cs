@@ -41,54 +41,80 @@ public static class XpsMerger
     {
         var mergedStream = new MemoryStream();
 
+        var sourceUriAddedToStore = new List<Uri>();
+        var sourcePackages = new List<Package>();
+        var sourceDocument = new List<XpsDocument>();
         var targetPackageUriPath = $"memory://target_{Guid.NewGuid()}.xps";
         var targetPackageUri = new Uri(targetPackageUriPath);
         using var targetPackage = Package.Open(mergedStream, FileMode.Create, FileAccess.ReadWrite);
-        using var mergedXpsDoc =
-            new XpsDocument(targetPackage, CompressionOption.Maximum, targetPackageUriPath);
-        PackageStore.AddPackage(targetPackageUri, targetPackage);
-        var xpsWriter = XpsDocument.CreateXpsDocumentWriter(mergedXpsDoc);
-        var documentSequence = new FixedDocumentSequence();
-
-        foreach (var sourceStream in sourceXpsStreams)
+        using var mergedXpsDoc = new XpsDocument(targetPackage, CompressionOption.Maximum, targetPackageUriPath);
+        try
         {
-            if (sourceStream.Length == 0)
-                continue;
 
-            sourceStream.Position = 0;
+            PackageStore.AddPackage(targetPackageUri, targetPackage);
 
-            // 为每个源文档创建唯一的URI
-            var sourcePackageUriPath = $"memory://source_{Guid.NewGuid()}.xps";
-            var sourcePackageUri = new Uri(sourcePackageUriPath);
-            using var sourcePackage = Package.Open(sourceStream, FileMode.Open, FileAccess.Read);
-            using var sourceXpsDoc = new XpsDocument(sourcePackage, CompressionOption.Normal, sourcePackageUriPath);
-            PackageStore.AddPackage(sourcePackageUri, sourcePackage);
-            var sourceSequence = sourceXpsDoc.GetFixedDocumentSequence();
-            if (sourceSequence != null)
+            var xpsWriter = XpsDocument.CreateXpsDocumentWriter(mergedXpsDoc);
+            var documentSequence = new FixedDocumentSequence();
+
+            foreach (var sourceStream in sourceXpsStreams)
             {
-                // 复制文档引用
-                foreach (var sourceDocumentReference in sourceSequence.References)
+                if (sourceStream.Length == 0)
+                    continue;
+
+                sourceStream.Position = 0;
+
+                // 为每个源文档创建唯一的URI
+                var sourcePackageUriPath = $"memory://source_{Guid.NewGuid()}.xps";
+                var sourcePackageUri = new Uri(sourcePackageUriPath);
+                var sourcePackage = Package.Open(sourceStream, FileMode.Open, FileAccess.Read);
+                sourcePackages.Add(sourcePackage);
+                var sourceXpsDoc = new XpsDocument(sourcePackage, CompressionOption.Normal, sourcePackageUriPath);
+                sourceDocument.Add(sourceXpsDoc);
+                PackageStore.AddPackage(sourcePackageUri, sourcePackage);
+                sourceUriAddedToStore.Add(sourcePackageUri);
+                var sourceSequence = sourceXpsDoc.GetFixedDocumentSequence();
+                if (sourceSequence != null)
                 {
-                    var targetDocumentReference = new DocumentReference
+                    // 复制文档引用
+                    foreach (var sourceDocumentReference in sourceSequence.References)
                     {
-                        Source = sourceDocumentReference.Source
-                    };
-                    // 设置BaseUri以确保资源解析正确
-                    ((IUriContext)targetDocumentReference).BaseUri = ((IUriContext)sourceDocumentReference).BaseUri;
-                    documentSequence.References.Add(targetDocumentReference);
+                        var targetDocumentReference = new DocumentReference
+                        {
+                            Source = sourceDocumentReference.Source
+                        };
+                        // 设置BaseUri以确保资源解析正确
+                        ((IUriContext)targetDocumentReference).BaseUri = ((IUriContext)sourceDocumentReference).BaseUri;
+                        documentSequence.References.Add(targetDocumentReference);
+                    }
                 }
             }
-            PackageStore.RemovePackage(sourcePackageUri);
-        }
 
-        // 写入合并后的文档序列
-        if (documentSequence.References.Count > 0)
+            // 写入合并后的文档序列
+            if (documentSequence.References.Count > 0)
+            {
+                xpsWriter.Write(documentSequence);
+            }
+
+            mergedStream.Position = 0;
+            return mergedStream;
+        }
+        finally
         {
-            xpsWriter.Write(documentSequence);
-        }
-        PackageStore.RemovePackage(targetPackageUri);
+            PackageStore.RemovePackage(targetPackageUri);
+            foreach (var sourceUri in sourceUriAddedToStore)
+            {
+                PackageStore.RemovePackage(sourceUri);
+            }
 
-        mergedStream.Position = 0;
-        return mergedStream;
+            foreach (var document in sourceDocument)
+            {
+                document.Close();
+            }
+
+            foreach (var package in sourcePackages)
+            {
+                package.Close();
+            }
+        }
     }
 }

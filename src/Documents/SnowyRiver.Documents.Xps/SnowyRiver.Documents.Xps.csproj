@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <Version>10.0.1</Version>
+    <Version>10.0.2</Version>
   </PropertyGroup>
 
 </Project>

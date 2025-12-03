@@ -19,7 +19,7 @@ jobs:
           dotnet-version: 10.x.x
 
       - name: Remove Demo
-        run: dotnet sln src/SnowyRiver.slnx remove Demo
+        run: dotnet slnx src/SnowyRiver.slnx remove Demo
  
       - name: Restore dependencies
         run: dotnet restore src/SnowyRiver.slnx
@@ -32,5 +32,6 @@ jobs:
    
       - name: Publish to nuget.org
         run: dotnet nuget push artifacts\*.nupkg  --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}} --skip-duplicate
+
 
 

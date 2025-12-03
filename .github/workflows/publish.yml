@@ -24,13 +24,13 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
  
       - name: Restore dependencies
-        run: dotnet restore src/SnowyRiver.slnx
+        run: dotnet restore
 
       - name: Build the solution
-        run: dotnet build src/SnowyRiver.slnx --configuration ${{ env.BUILD_CONFIGURATION }} --no-restore 
+        run: dotnet build --configuration ${{ env.BUILD_CONFIGURATION }} --no-restore 
     
       - name: Package the library project
-        run: dotnet pack src/SnowyRiver.slnx \
+        run: dotnet pack \
                --configuration ${{ env.BUILD_CONFIGURATION }} \
                --output ./nupkgs
    
@@ -39,6 +39,7 @@ jobs:
                 --source https://api.nuget.org/v3/index.json \
                 --api-key ${{secrets.NUGET_API_KEY}} \
                 --skip-duplicate
+
 
 
 

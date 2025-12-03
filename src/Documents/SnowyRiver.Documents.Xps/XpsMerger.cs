@@ -73,13 +73,9 @@ public static class XpsMerger
                     {
                         Source = sourceDocumentReference.Source
                     };
+                    // 设置BaseUri以确保资源解析正确
                     ((IUriContext)targetDocumentReference).BaseUri = ((IUriContext)sourceDocumentReference).BaseUri;
-                    var fixedDocument = targetDocumentReference.GetDocument(true);
-                    if (fixedDocument != null && fixedDocument.Pages.Any())
-                    {
-                        targetDocumentReference.SetDocument(fixedDocument);
-                        documentSequence.References.Add(targetDocumentReference);
-                    }
+                    documentSequence.References.Add(targetDocumentReference);
                 }
             }
             PackageStore.RemovePackage(sourcePackageUri);

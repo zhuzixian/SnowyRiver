@@ -11,6 +11,9 @@ env:
 jobs:
   build-and-publish:
     runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: src
     
     steps:
       - name: Checkout code
@@ -39,6 +42,7 @@ jobs:
                 --source https://api.nuget.org/v3/index.json \
                 --api-key ${{secrets.NUGET_API_KEY}} \
                 --skip-duplicate
+
 
 
 

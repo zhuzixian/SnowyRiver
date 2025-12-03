@@ -36,10 +36,11 @@ jobs:
         run: dotnet pack --configuration ${{ env.BUILD_CONFIGURATION }} --output ./nupkgs
 
       - name: List generated packages (for debugging)
-        run: ls -la ./nupkgs/
+        run: Get-ChildItem ./nupkgs/
    
       - name: Publish to nuget.org
         run: dotnet nuget push  ./nupkgs/*.nupkg  --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}} --skip-duplicate
+
 
 
 

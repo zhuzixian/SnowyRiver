@@ -8,13 +8,19 @@ namespace SnowyRiver.Documents.Xps;
 
 public static class XpsMerger
 {
-    public static byte[] Merge(IEnumerable<byte[]> sourceXpsBytes)
+    public static byte[]? Merge(IEnumerable<byte[]?>? sourceXpsBytes)
     {
+        if (sourceXpsBytes == null)
+        {
+            return null;
+        }
+
         var memoryStreams = sourceXpsBytes?
+            .Where(x => x is { Length: > 0 })
             .Select(bytes =>
             {
                 var ms = new MemoryStream();
-                ms.Write(bytes, 0, bytes.Length);
+                ms.Write(bytes!, 0, bytes!.Length);
                 ms.Position = 0;
                 return ms;
             })

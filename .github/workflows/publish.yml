@@ -33,15 +33,11 @@ jobs:
         run: dotnet build --configuration ${{ env.BUILD_CONFIGURATION }} --no-restore 
     
       - name: Package the library project
-        run: dotnet pack \
-               --configuration ${{ env.BUILD_CONFIGURATION }} \
-               --output ./nupkgs
+        run: dotnet pack --configuration ${{ env.BUILD_CONFIGURATION }} --output ./nupkgs
    
       - name: Publish to nuget.org
-        run: dotnet nuget push  ./nupkgs/*.nupkg  \
-                --source https://api.nuget.org/v3/index.json \
-                --api-key ${{secrets.NUGET_API_KEY}} \
-                --skip-duplicate
+        run: dotnet nuget push  ./nupkgs/*.nupkg  --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}} --skip-duplicate
+
 
 
 

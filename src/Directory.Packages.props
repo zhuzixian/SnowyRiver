@@ -5,11 +5,15 @@
     <NoWarn>$(NoWarn);NU1507</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="akavache" Version="11.4.1" />
-    <PackageVersion Include="Akavache.Sqlite3" Version="11.4.1" />
-    <PackageVersion Include="Akavache.SystemTextJson" Version="11.4.1" />
+    <PackageVersion Include="coverlet.collector" Version="6.0.4" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
+    <PackageVersion Include="akavache" Version="11.5.1" />
+    <PackageVersion Include="Akavache.Sqlite3" Version="11.5.1" />
+    <PackageVersion Include="Akavache.SystemTextJson" Version="11.5.1" />
     <PackageVersion Include="AutoMapper" Version="14.0.0" />
     <PackageVersion Include="Mapster" Version="7.4.0" />
+    <PackageVersion Include="Mapster.Async" Version="2.0.1" />
     <PackageVersion Include="Mapster.DependencyInjection" Version="1.0.1" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="9.0.10" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.10" />
@@ -24,7 +28,7 @@
     <PackageVersion Include="Prism.Wpf" Version="9.0.537" />
     <PackageVersion Include="Prism.DryIoc" Version="9.0.537" />
     <PackageVersion Include="Prism.Container.DryIoc" Version="9.0.107" />
-    <PackageVersion Include="Polly" Version="8.6.4" />
+    <PackageVersion Include="Polly" Version="8.6.5" />
     <PackageVersion Include="WPFLocalizeExtension" Version="3.10.0" />
     <PackageVersion Include="AsmResolver.DotNet" Version="5.5.1" />
     <PackageVersion Include="System.Reflection.Metadata" Version="10.0.0" />
@@ -38,5 +42,7 @@
     <PackageVersion Include="AIStudio.Wpf.DiagramDesigner" Version="1.3.1" />
     <PackageVersion Include="MathConverter" Version="2.2.1" />
     <PackageVersion Include="DryIoc.Microsoft.DependencyInjection" Version="6.2.0" />
+    <PackageVersion Include="Xunit.StaFact" Version="3.0.13" />
+    <PackageVersion Include="xunit.v3" Version="3.2.1" />
   </ItemGroup>
 </Project>

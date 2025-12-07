@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using EntityFrameworkCore.UnitOfWork.Interfaces;
+using Mapster;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using Prism.Navigation.Regions;
@@ -38,7 +39,8 @@ public class UserEditorViewModel(
             if (roles != null)
             {
                 _roleEntities = roles;
-                Roles = Mapper.Map<ObservableCollection<Role>>(_roleEntities);
+                Roles = await Mapper.From(_roleEntities)
+                    .AdaptToTypeAsync<ObservableCollection<Role>>();
                 foreach (var role in Roles)
                 {
                     role.IsSelected = Model.Roles.Any(x => x.Id ==  role.Id);
@@ -52,7 +54,8 @@ public class UserEditorViewModel(
             if (teams != null)
             {
                 _teamEntities = teams;
-                Teams = Mapper.Map<ObservableCollection<Team>>(_teamEntities);
+                Teams = await Mapper.From(_teamEntities)
+                    .AdaptToTypeAsync<ObservableCollection<Team>>();
                 foreach (var team in Teams)
                 {
                     team.IsSelected = Model.Roles.Any(x => x.Id == team.Id);
@@ -67,7 +70,8 @@ public class UserEditorViewModel(
 
     protected override async Task<UserEntity> MapToEntityAsync(User model)
     {
-        var entity =  await Task.FromResult(Mapper.Map<UserEntity>(model));
+        var entity =  await Mapper.From(model)
+            .AdaptToTypeAsync<UserEntity>();
         await MapToEntityAsync(entity);
         if (string.IsNullOrWhiteSpace(entity.PasswordSalt))
         {

@@ -1,35 +1,51 @@
-﻿name: publish
+﻿name: Build, Test and Publish to NuGet
 
 on: 
   push:
     branches: ["main"]
 
+env:
+  DOTNET_VERSION: '10.x.x'
+  BUILD_CONFIGURATION: 'Release'
+
 jobs:
-  publish:
+  build-and-publish:
     runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: src
+    
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
         with:
           submodules: true
 
-      - name: Setup .NET
+      - name: Setup .NET SDK
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 10.x.x
-
-      - name: Remove Demo
-        run: dotnet sln src/SnowyRiver.sln remove Demo
+          dotnet-version: ${{ env.DOTNET_VERSION }}
  
       - name: Restore dependencies
-        run: dotnet restore src/SnowyRiver.sln
+        run: dotnet restore
 
-      - name: Build
-        run: dotnet build --configuration Release --no-restore src/SnowyRiver.sln
+      - name: Build the solution
+        run: dotnet build --configuration ${{ env.BUILD_CONFIGURATION }} --no-restore 
     
-      - name: Create the package
-        run: dotnet pack --output artifacts src/SnowyRiver.sln 
+      - name: Package the library project
+        run: dotnet pack --configuration ${{ env.BUILD_CONFIGURATION }} --output nupkgs
    
       - name: Publish to nuget.org
-        run: dotnet nuget push artifacts\*.nupkg  --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}} --skip-duplicate
+        run: dotnet nuget push nupkgs\*.nupkg  --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}} --skip-duplicate
+
+
+
+
+
+
+
+
+
+
+
 

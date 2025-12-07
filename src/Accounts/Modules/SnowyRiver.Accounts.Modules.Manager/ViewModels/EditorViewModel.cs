@@ -4,6 +4,7 @@ using Prism.Commands;
 using Prism.Navigation.Regions;
 using SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 using System.Threading.Tasks;
+using Mapster;
 using MapsterMapper;
 using SnowyRiver.Accounts.Services.Interfaces;
 using SnowyRiver.Domain.Entities;
@@ -56,7 +57,8 @@ public class EditorViewModel<TModel, TEntity>(
 
     protected virtual async Task<TEntity> MapToEntityAsync(TModel model)
     {
-        return await Task.FromResult(Mapper.Map<TEntity>(model));
+        return await Mapper.From(model)
+            .AdaptToTypeAsync<TEntity>();
     }
 
     protected virtual async Task MapToEntityAsync(TModel model, TEntity entity)

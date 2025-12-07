@@ -1,0 +1,96 @@
+<Solution>
+  <Folder Name="/Accounts/">
+    <Project Path="Accounts/SnowyRiver.Accouns.Mananger.EntityFramework/SnowyRiver.Accounts.Manager.EntityFramework.csproj" />
+    <Project Path="Accounts/SnowyRiver.Accounts.Core/SnowyRiver.Accounts.Core.csproj" />
+    <Project Path="Accounts/SnowyRiver.Accounts.Domain.Shared/SnowyRiver.Accounts.Domain.Shared.csproj" />
+    <Project Path="Accounts/SnowyRiver.Accounts.Domain/SnowyRiver.Accounts.Domain.csproj" />
+    <Project Path="Accounts/SnowyRiver.Accounts.EntityFramework/SnowyRiver.Accounts.EntityFramework.csproj" />
+    <Project Path="Accounts/SnowyRiver.Accounts.Manager/SnowyRiver.Accounts.Manager.csproj" />
+  </Folder>
+  <Folder Name="/Accounts/Modules/">
+    <Project Path="Accounts/Modules/SnowyRiver.Accounts.Modules.Manager/SnowyRiver.Accounts.Modules.Manager.csproj" />
+  </Folder>
+  <Folder Name="/Accounts/Services/">
+    <Project Path="Accounts/Services/SnowyRiver.Accounts.Services.Interfaces/SnowyRiver.Accounts.Services.Interfaces.csproj" />
+    <Project Path="Accounts/Services/SnowyRiver.Accounts.Services/SnowyRiver.Accounts.Services.csproj" />
+  </Folder>
+  <Folder Name="/Commons/">
+    <Project Path="Commons/SnowyRiver.AsyncEx/SnowyRiver.AsyncEx.csproj" />
+    <Project Path="Commons/SnowyRiver.Commons/SnowyRiver.Commons.csproj" />
+    <Project Path="Commons/SnowyRiver.Converters/SnowyRiver.Converters.csproj" />
+    <Project Path="Commons/SnowyRiver.Exceptions/SnowyRiver.Exceptions.csproj" />
+    <Project Path="Commons/SnowyRiver.Polly/SnowyRiver.Polly.csproj" />
+    <Project Path="Commons/SnowyRiver.Products/SnowyRiver.Products.csproj" />
+    <Project Path="Commons/SnowyRiver.Reflection/SnowyRiver.Reflection.csproj" />
+    <Project Path="Commons/SnowyRiver.WorkFlows/SnowyRiver.WorkFlows.csproj" />
+  </Folder>
+  <Folder Name="/Commons/LocalStorage/">
+    <Project Path="Commons/LocalStorage/SnowyRiver.LocalStorage.Akavache/SnowyRiver.LocalStorage.Akavache.csproj" />
+    <Project Path="Commons/LocalStorage/SnowyRiver.LocalStorage.Interface/SnowyRiver.LocalStorage.Interface.csproj" />
+    <Project Path="Commons/LocalStorage/SnowyRiver.LocalStorage/SnowyRiver.LocalStorage.csproj" />
+  </Folder>
+  <Folder Name="/Commons/Serializer/">
+    <Project Path="Commons/Serializer/SnowyRiver.Serializer.Interfaces/SnowyRiver.Serializer.Interfaces.csproj" />
+    <Project Path="Commons/Serializer/SnowyRiver.Serializer/SnowyRiver.Serializer.csproj" />
+  </Folder>
+  <Folder Name="/ComponentModel/">
+    <Project Path="ComponentModel/SnowyRiver.ComponentModel.Interface/SnowyRiver.ComponentModel.Interface.csproj" />
+    <Project Path="ComponentModel/SnowyRiver.ComponentModel.NotifyPropertyChanged/SnowyRiver.ComponentModel.NotifyPropertyChanged.csproj" />
+  </Folder>
+  <Folder Name="/Configuration/">
+    <Project Path="Configuration/SnowyRiver.Configuration/SnowyRiver.Configuration.csproj" />
+  </Folder>
+  <Folder Name="/DDD/">
+    <Project Path="DDD/SnowyRiver.Application.Contracts/SnowyRiver.Application.Contracts.csproj" />
+    <Project Path="DDD/SnowyRiver.CommonInitializer/SnowyRiver.CommonInitializer.csproj" />
+    <Project Path="DDD/SnowyRiver.Domain.Shared/SnowyRiver.Domain.Shared.csproj" />
+    <Project Path="DDD/SnowyRiver.Domain/SnowyRiver.Domain.csproj" />
+  </Folder>
+  <Folder Name="/Demo/" />
+  <Folder Name="/Demo/WPF/">
+    <Project Path="Demo/WPF/SnowyRiver.Demo.WPF/SnowyRiver.Demo.WPF.Core/SnowyRiver.Demo.WPF.Core.csproj" />
+    <Project Path="Demo/WPF/SnowyRiver.Demo.WPF/SnowyRiver.Demo.WPF/SnowyRiver.Demo.WPF.csproj" />
+  </Folder>
+  <Folder Name="/Demo/WPF/Modules/">
+    <Project Path="Demo/WPF/SnowyRiver.Demo.WPF/Modules/SnowyRiver.Demo.WPF.Modules.Controls/SnowyRiver.Demo.WPF.Modules.Controls.csproj" />
+  </Folder>
+  <Folder Name="/Demo/WPF/Services/">
+    <Project Path="Demo/WPF/SnowyRiver.Demo.WPF/Services/SnowyRiver.Demo.WPF.Services.Interfaces/SnowyRiver.Demo.WPF.Services.Interfaces.csproj" />
+    <Project Path="Demo/WPF/SnowyRiver.Demo.WPF/Services/SnowyRiver.Demo.WPF.Services/SnowyRiver.Demo.WPF.Services.csproj" />
+  </Folder>
+  <Folder Name="/Demo/WPF/Tests/" />
+  <Folder Name="/Documents/">
+    <Project Path="Documents/SnowyRiver.Documents.Xps/SnowyRiver.Documents.Xps.csproj" />
+  </Folder>
+  <Folder Name="/IO/" />
+  <Folder Name="/IO/Modbus/">
+    <Project Path="IO/Modbus/SnowyRiver.Modbus.FluentModbus/SnowyRiver.Modbus.FluentModbus.csproj" />
+  </Folder>
+  <Folder Name="/IO/SerialPort/">
+    <Project Path="IO/SerialPort/SnowyRiver.IO.SerialPort/SnowyRiver.IO.SerialPort.csproj" />
+  </Folder>
+  <Folder Name="/OpenCV/">
+    <Project Path="OpenCv/SnowyRiver.OpenCvSharp.Extensions/SnowyRiver.OpenCvSharp.Extensions.csproj" />
+  </Folder>
+  <Folder Name="/Tests/" />
+  <Folder Name="/Tests/Documents/">
+    <Project Path="Tests/SnowyRiver.Documents.Xps.Tests/SnowyRiver.Documents.Xps.Tests.csproj" />
+  </Folder>
+  <Folder Name="/WPF/">
+    <Project Path="WPF/SnowyRiver.WPF.Converters/SnowyRiver.WPF.Converters.csproj" />
+    <Project Path="WPF/SnowyRiver.WPF.Localized/SnowyRiver.WPF.Localized.csproj" />
+    <Project Path="WPF/SnowyRiver.WPF.MarkupExtension/SnowyRiver.WPF.MarkupExtension.csproj" />
+    <Project Path="WPF/SnowyRiver.WPF.MaterialDesignInPrism.Core/SnowyRiver.WPF.MaterialDesignInPrism.Core.csproj" />
+    <Project Path="WPF/SnowyRiver.WPF.MaterialDesignInPrism/SnowyRiver.WPF.MaterialDesignInPrism.csproj" />
+    <Project Path="WPF/SnowyRiver.WPF/SnowyRiver.WPF.csproj" />
+  </Folder>
+  <Folder Name="/WPF/Controls/">
+    <Project Path="WPF/Controls/SnowyRiver.WPF.Controls.Diagram/SnowyRiver.WPF.Controls.Diagram.csproj" />
+    <Project Path="WPF/Controls/SnowyRiver.WPF.Controls.Injector/SnowyRiver.WPF.Controls.Injector.csproj" />
+    <Project Path="WPF/Controls/SnowyRiver.WPF.Controls.Valves/SnowyRiver.WPF.Controls.Valves.csproj" />
+  </Folder>
+  <Folder Name="/WPF/Modules/">
+    <Project Path="WPF/Modules/SnowyRiver.WPF.Modules.Splash/SnowyRiver.WPF.Modules.Splash.csproj" />
+  </Folder>
+  <Project Path="SnowyRiver.EF/SnowyRiver.Ef.csproj" />
+</Solution>

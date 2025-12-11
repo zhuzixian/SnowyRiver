@@ -4,15 +4,19 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Version>10.0.0</Version>
+    <Version>10.0.1</Version>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ComponentModel\SnowyRiver.ComponentModel.Interface\SnowyRiver.ComponentModel.Interface.csproj" />
+  </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Entities\" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ComponentModel\SnowyRiver.ComponentModel.Interface\SnowyRiver.ComponentModel.Interface.csproj" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
   </ItemGroup>
 
 </Project>

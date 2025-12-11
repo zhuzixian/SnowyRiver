@@ -6,6 +6,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
+    <PackageVersion Include="EntityFrameworkCore.Data.UnitOfWork.Abstractions" Version="9.0.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
     <PackageVersion Include="akavache" Version="11.5.1" />

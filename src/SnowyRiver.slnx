@@ -62,6 +62,11 @@
   <Folder Name="/Documents/">
     <Project Path="Documents/SnowyRiver.Documents.Xps/SnowyRiver.Documents.Xps.csproj" />
   </Folder>
+  <Folder Name="/EF/">
+    <Project Path="EF/SnowyRiver.EF.DataAccess.Abstractions/SnowyRiver.EF.DataAccess.Abstractions.csproj" Id="22b78efb-a60a-4404-8f07-0e8b0f5a893f" />
+    <Project Path="EF/SnowyRiver.EF.DataAccess/SnowyRiver.EF.DataAccess.csproj" Id="dbcf197d-7664-4db9-8071-673eba13e9f0" />
+    <Project Path="EF/SnowyRiver.EF/SnowyRiver.EF.csproj" />
+  </Folder>
   <Folder Name="/IO/" />
   <Folder Name="/IO/Modbus/">
     <Project Path="IO/Modbus/SnowyRiver.Modbus.FluentModbus/SnowyRiver.Modbus.FluentModbus.csproj" />
@@ -92,5 +97,4 @@
   <Folder Name="/WPF/Modules/">
     <Project Path="WPF/Modules/SnowyRiver.WPF.Modules.Splash/SnowyRiver.WPF.Modules.Splash.csproj" />
   </Folder>
-  <Project Path="SnowyRiver.EF/SnowyRiver.Ef.csproj" />
 </Solution>

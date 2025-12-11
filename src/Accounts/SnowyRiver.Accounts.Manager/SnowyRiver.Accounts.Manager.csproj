@@ -27,6 +27,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Commons\SnowyRiver.Commons\SnowyRiver.Commons.csproj" />
+    <ProjectReference Include="..\..\EF\SnowyRiver.EF.DataAccess\SnowyRiver.EF.DataAccess.csproj" />
     <ProjectReference Include="..\..\WPF\Modules\SnowyRiver.WPF.Modules.Splash\SnowyRiver.WPF.Modules.Splash.csproj" />
     <ProjectReference Include="..\..\WPF\SnowyRiver.WPF.MaterialDesignInPrism\SnowyRiver.WPF.MaterialDesignInPrism.csproj" />
     <ProjectReference Include="..\Modules\SnowyRiver.Accounts.Modules.Manager\SnowyRiver.Accounts.Modules.Manager.csproj" />

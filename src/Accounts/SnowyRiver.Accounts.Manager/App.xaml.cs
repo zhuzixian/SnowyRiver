@@ -27,6 +27,7 @@ using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Mapster;
+using SnowyRiver.EF.DataAccess.Extensions;
 
 namespace SnowyRiver.Accounts.Manager
 {
@@ -101,7 +102,7 @@ namespace SnowyRiver.Accounts.Manager
 
             services.AddDbContext<AccountsManagerDbContext>(options => options.AddAccountsManagerOptions());
             services.AddScoped<DbContext, AccountsManagerDbContext>();
-            services.AddUnitOfWork();
+            services.AddUnitOfWorkFactory();
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

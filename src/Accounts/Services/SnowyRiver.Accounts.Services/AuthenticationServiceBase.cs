@@ -6,10 +6,11 @@ using Microsoft.EntityFrameworkCore;
 using SnowyRiver.Accounts.Domain.Helpers;
 using SnowyRiver.Accounts.Services.Interfaces;
 using SnowyRiver.ComponentModel.NotifyPropertyChanged;
+using SnowyRiver.EF.DataAccess.Abstractions;
 
 namespace SnowyRiver.Accounts.Services;
 public class AuthenticationService<TTeam, TRole, TUser, TPermission,
-    TTeamEntity, TRoleEntity, TUserEntity, TPermissionEntity>(IUnitOfWork unitOfWork, IMapper mapper)
+    TTeamEntity, TRoleEntity, TUserEntity, TPermissionEntity>(IUnitOfWorkFactory unitOfWorkFactory, IMapper mapper)
     : NotifyPropertyChangedObject, IAuthenticationService<TUser, TTeam, TRole, TPermission>
     where TTeam : Team<TUser, TRole, TTeam, TPermission>
     where TUser : User<TUser, TRole, TTeam, TPermission>
@@ -25,6 +26,7 @@ public class AuthenticationService<TTeam, TRole, TUser, TPermission,
     {
         try
         {
+            using var unitOfWork = unitOfWorkFactory.Create();
             var repository = unitOfWork.Repository<TUserEntity>();
             var query = GetQuery(username);
             var matchedNameUsers = await repository.SearchAsync(query, cancellationToken);
@@ -53,6 +55,7 @@ public class AuthenticationService<TTeam, TRole, TUser, TPermission,
 
     protected virtual IMultipleResultQuery<TUserEntity> GetQuery(string username)
     {
+        using var unitOfWork = unitOfWorkFactory.Create();
         return unitOfWork.Repository<TUserEntity>().MultipleResultQuery()
             .Include(x => x.Include(user => user.Teams))
             .Include(x => x.Include(user => user.Roles)

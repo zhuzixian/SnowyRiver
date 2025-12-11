@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SnowyRiver.ComponentModel.Interface;
 
-namespace SnowyRiver.EF;
+namespace SnowyRiver.EF.Extensions;
 public static class EfCoreExtensions
 {
     // 为每个实体设置全局“IsDeleted=false”查询筛选器

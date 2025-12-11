@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Query;
 
-namespace SnowyRiver.Domain.Shared.Extensions;
+namespace SnowyRiver.EF.Extensions;
 public static class SetPropertyCallsExtensions
 {
     public static Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> Append<TEntity>(

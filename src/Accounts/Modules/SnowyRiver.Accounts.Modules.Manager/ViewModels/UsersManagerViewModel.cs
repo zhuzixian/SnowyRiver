@@ -7,17 +7,15 @@ using Microsoft.EntityFrameworkCore;
 using Prism.Navigation;
 using Prism.Navigation.Regions;
 using SnowyRiver.Accounts.Services.Interfaces;
+using SnowyRiver.EF.DataAccess.Abstractions;
 using SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs;
 using UserEntity = SnowyRiver.Accounts.Domain.Entities.User;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
-public class UsersManagerViewModel(IUnitOfWork unitOfWork, IMapper mapper,
+public class UsersManagerViewModel(IUnitOfWorkFactory unitOfWorkFactory, IMapper mapper,
     IDialogHostService dialog,
     IRegionManager regionManager) : ManagerViewModel<User, UserEntity>(
-        unitOfWork,
-        mapper,
-        dialog,
-    regionManager)
+        unitOfWorkFactory, mapper, dialog, regionManager)
 {
     public override async void OnNavigatedTo(NavigationContext navigationContext)
     {

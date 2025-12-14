@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using EntityFrameworkCore.UnitOfWork.Interfaces;
 using Mapster;
 using MapsterMapper;
 using Prism.Navigation.Regions;
 using SnowyRiver.Accounts.Services.Interfaces;
+using SnowyRiver.EF.DataAccess.Abstractions;
 using RoleEntity = SnowyRiver.Accounts.Domain.Entities.Role;
 using PermissionEntity = SnowyRiver.Accounts.Domain.Entities.Permission;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
 public class RoleEditorViewModel(
-    IUnitOfWork unitOfWork, 
+    IUnitOfWorkFactory unitOfWorkFactory, 
     IMapper mapper,
     IRegionManager regionManager)
-    : EditorViewModel<Role, RoleEntity>(unitOfWork, mapper, regionManager)
+    : EditorViewModel<Role, RoleEntity>(unitOfWorkFactory, mapper, regionManager)
 {
     public override async void OnNavigatedTo(NavigationContext navigationContext)
     {
@@ -24,7 +24,8 @@ public class RoleEditorViewModel(
         {
             base.OnNavigatedTo(navigationContext);
 
-            var permissionRepository = UnitOfWork.Repository<PermissionEntity>();
+            using var unitOfWork = UnitOfWorkFactory.Create();
+            var permissionRepository = unitOfWork.Repository<PermissionEntity>();
             var permissionQuery = permissionRepository.MultipleResultQuery();
             var permissions = await permissionRepository.SearchAsync(permissionQuery);
             if (permissions != null)

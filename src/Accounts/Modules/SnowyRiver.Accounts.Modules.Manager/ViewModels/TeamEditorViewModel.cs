@@ -1,16 +1,16 @@
 ﻿using System.Threading.Tasks;
-using EntityFrameworkCore.UnitOfWork.Interfaces;
 using MapsterMapper;
 using Prism.Navigation.Regions;
 using SnowyRiver.Accounts.Services.Interfaces;
+using SnowyRiver.EF.DataAccess.Abstractions;
 using TeamEntity = SnowyRiver.Accounts.Domain.Entities.Team;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
 public class TeamEditorViewModel(
-    IUnitOfWork unitOfWork, 
+    IUnitOfWorkFactory unitOfWorkFactory, 
     IMapper mapper,
     IRegionManager regionManager)
-    : EditorViewModel<Team, TeamEntity>(unitOfWork, mapper, regionManager)
+    : EditorViewModel<Team, TeamEntity>(unitOfWorkFactory, mapper, regionManager)
 {
     protected override async Task MapToEntityAsync(Team model, TeamEntity entity)
     {

@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using EntityFrameworkCore.UnitOfWork.Interfaces;
 using Mapster;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using Prism.Navigation.Regions;
 using SnowyRiver.Accounts.Domain.Helpers;
 using SnowyRiver.Accounts.Services.Interfaces;
+using SnowyRiver.EF.DataAccess.Abstractions;
 using UserEntity = SnowyRiver.Accounts.Domain.Entities.User;
 using RoleEntity = SnowyRiver.Accounts.Domain.Entities.Role;
 using TeamEntity = SnowyRiver.Accounts.Domain.Entities.Team;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
 public class UserEditorViewModel(
-    IUnitOfWork unitOfWork, 
+    IUnitOfWorkFactory unitOfWorkFactory, 
     IMapper mapper,
     IRegionManager regionManager)
-    : EditorViewModel<User, UserEntity>(unitOfWork, mapper, regionManager)
+    : EditorViewModel<User, UserEntity>(unitOfWorkFactory, mapper, regionManager)
 {
     public override async void OnNavigatedTo(NavigationContext navigationContext)
     {
@@ -32,7 +32,8 @@ public class UserEditorViewModel(
 
             base.OnNavigatedTo(navigationContext);
 
-            var roleRepository = UnitOfWork.Repository<RoleEntity>();
+            using var unitOfWork = UnitOfWorkFactory.Create();
+            var roleRepository = unitOfWork.Repository<RoleEntity>();
             var roleQuery = roleRepository.MultipleResultQuery()
                 .Include(source => source.Include(x => x.Users));
             var roles = await roleRepository.SearchAsync(roleQuery);
@@ -47,7 +48,7 @@ public class UserEditorViewModel(
                 }
             }
 
-            var teamRepository = UnitOfWork.Repository<TeamEntity>();
+            var teamRepository = unitOfWork.Repository<TeamEntity>();
             var teamQuery = teamRepository.MultipleResultQuery()
                 .Include(source => source.Include(x => x.Users));
             var teams = await teamRepository.SearchAsync(teamQuery);
@@ -105,20 +106,17 @@ public class UserEditorViewModel(
 
     private async Task MapToEntityAsync(UserEntity entity)
     {
-        entity.Roles ??= [];
         entity.Roles.Clear();
         foreach (var role in Roles)
         {
             if (role.IsSelected)
             {
                 var roleEntity = _roleEntities.First(x => x.Id == role.Id);
-                entity.Roles ??= [];
                 if (entity.Roles.All(x => x.Id != roleEntity.Id))
                 {
                     entity.Roles.Add(roleEntity);
                 }
 
-                roleEntity.Users??= [];
                 if (roleEntity.Users.All(x => x.Id != entity.Id))
                 {
                     roleEntity.Users.Add(entity);
@@ -128,35 +126,33 @@ public class UserEditorViewModel(
 
         if (entity.UserId == 0)
         {
-            var repository = UnitOfWork.Repository<UserEntity>();
+            using var unitOfWork = UnitOfWorkFactory.Create();
+            var repository = unitOfWork.Repository<UserEntity>();
             var maxUserId = await repository.MaxAsync(x => x.UserId);
             entity.UserId = maxUserId + 1;
         }
         await Task.CompletedTask;
     }
 
-    private bool _teamsEnable = true;
     public bool TeamsEnable
     {
-        get => _teamsEnable;
-        set => SetProperty(ref _teamsEnable, value);
-    }
+        get;
+        set => SetProperty(ref field, value);
+    } = true;
 
     private IList<RoleEntity> _roleEntities = [];
 
-    private ObservableCollection<Role> _roles = [];
     public ObservableCollection<Role> Roles
     {
-        get => _roles;
-        set => SetProperty(ref _roles, value);
-    }
+        get;
+        set => SetProperty(ref field, value);
+    } = [];
 
     private IList<TeamEntity> _teamEntities = [];
 
-    private ObservableCollection<Team> _teams = [];
     public ObservableCollection<Team> Teams
     {
-        get => _teams;
-        set => SetProperty(ref _teams, value);
-    }
+        get;
+        set => SetProperty(ref field, value);
+    } = [];
 }

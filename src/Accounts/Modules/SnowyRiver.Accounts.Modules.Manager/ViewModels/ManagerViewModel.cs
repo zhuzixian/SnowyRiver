@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using EntityFrameworkCore.QueryBuilder.Interfaces;
 using EntityFrameworkCore.Repository.Interfaces;
-using EntityFrameworkCore.UnitOfWork.Interfaces;
 using Mapster;
 using MapsterMapper;
 using Prism.Commands;
@@ -11,11 +10,12 @@ using Prism.Navigation;
 using Prism.Navigation.Regions;
 using SnowyRiver.Accounts.Services.Interfaces;
 using SnowyRiver.Domain.Entities;
+using SnowyRiver.EF.DataAccess.Abstractions;
 using SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs;
 using SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
-public abstract class ManagerViewModel<TModel, TEntity>(IUnitOfWork unitOfWork, 
+public abstract class ManagerViewModel<TModel, TEntity>(IUnitOfWorkFactory unitOfWorkFactory, 
     IMapper mapper,
     IDialogHostService dialog,
     IRegionManager regionManager): RegionViewModelBase(regionManager)
@@ -35,9 +35,8 @@ public abstract class ManagerViewModel<TModel, TEntity>(IUnitOfWork unitOfWork,
         }
     }
 
-    private DelegateCommand? _updateCommand;
     public DelegateCommand UpdateCommand =>
-        _updateCommand ??= new DelegateCommand(async () => await UpdateAsync(),
+        field ??= new DelegateCommand(async () => await UpdateAsync(),
             () => SelectedModel != default)
             .ObservesProperty(() => SelectedModel);
 
@@ -46,10 +45,8 @@ public abstract class ManagerViewModel<TModel, TEntity>(IUnitOfWork unitOfWork,
         await NavigateToPermissionEditorViewAsync(SelectedModel!);
     }
 
-    private DelegateCommand? _createCommand;
-
     public DelegateCommand CreateCommand
-        => _createCommand ??= new DelegateCommand(async () => await CreateAsync());
+        => field ??= new DelegateCommand(async () => await CreateAsync());
 
     private async Task CreateAsync()
     {
@@ -66,13 +63,13 @@ public abstract class ManagerViewModel<TModel, TEntity>(IUnitOfWork unitOfWork,
         await Task.CompletedTask;
     }
 
-    private DelegateCommand? _refreshCommand;
     public DelegateCommand RefreshCommand => 
-        _refreshCommand ??= new DelegateCommand(async () => await RefreshAsync());
+        field ??= new DelegateCommand(async () => await RefreshAsync());
 
     private async Task RefreshAsync()
     {
-        var repository = await GetRepositoryAsync();
+        using var unitOfWork = unitOfWorkFactory.Create();
+        var repository = unitOfWork.Repository<TEntity>();
         var query = await GetQueryAsync(repository);
         var result = await repository.SearchAsync(query);
         Models = await mapper.From(result)
@@ -90,38 +87,32 @@ public abstract class ManagerViewModel<TModel, TEntity>(IUnitOfWork unitOfWork,
         return Task.FromResult(query);
     }
 
-    private DelegateCommand? _deleteCommand;
     public DelegateCommand DeleteCommand => 
-        _deleteCommand ??= new DelegateCommand(async () => await DeleteAsync(),
+        field ??= new DelegateCommand(async () => await DeleteAsync(),
             () => SelectedModel != default)
             .ObservesProperty(() => SelectedModel);
 
     private async Task DeleteAsync()
     {
-        var repository = await GetRepositoryAsync();
+        using var unitOfWork = unitOfWorkFactory.Create();
+        var repository = unitOfWork.Repository<TEntity>();
         await repository.RemoveAsync(x => x.Id == SelectedModel!.Id);
         await RefreshAsync();
     }
 
-    protected Task<IRepository<TEntity>> GetRepositoryAsync()
-    {
-        return Task.FromResult(unitOfWork.Repository<TEntity>());
-    }
 
     protected abstract string EditorView { get; }
     protected abstract string ManagerViewRegion { get; }
 
-    private ObservableCollection<TModel> _models = [];
     public ObservableCollection<TModel> Models
     {
-        get => _models;
-        set => SetProperty(ref _models, value);
-    }
+        get;
+        set => SetProperty(ref field, value);
+    } = [];
 
-    private TModel? _selectedModel;
     public TModel? SelectedModel
     {
-        get => _selectedModel;
-        set => SetProperty(ref _selectedModel, value);
+        get;
+        set => SetProperty(ref field, value);
     }
 }

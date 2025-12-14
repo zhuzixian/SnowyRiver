@@ -8,18 +8,18 @@ using Mapster;
 using MapsterMapper;
 using SnowyRiver.Accounts.Services.Interfaces;
 using SnowyRiver.Domain.Entities;
-using SnowyRiver.Domain.Shared.Entities;
+using SnowyRiver.EF.DataAccess.Abstractions;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
 public class EditorViewModel<TModel, TEntity>(
-    IUnitOfWork unitOfWork, 
+    IUnitOfWorkFactory unitOfWorkFactory, 
     IMapper mapper,
     IRegionManager regionManager) 
     : RegionViewModelBase(regionManager)
     where TModel : EntityModel, new()
     where TEntity : Entity<Guid>
 {
-    protected readonly IUnitOfWork UnitOfWork = unitOfWork;
+    protected readonly IUnitOfWorkFactory UnitOfWorkFactory = unitOfWorkFactory;
     protected readonly IMapper Mapper = mapper;
 
     private IRegionNavigationJournal? _journal;
@@ -33,13 +33,13 @@ public class EditorViewModel<TModel, TEntity>(
             ? model : new TModel();
     }
 
-    private DelegateCommand? _saveCommand;
-    public DelegateCommand SaveCommand => _saveCommand ??= new DelegateCommand(async () => await SaveAsync());
+    public DelegateCommand SaveCommand => field ??= new DelegateCommand(async () => await SaveAsync());
 
     private async Task SaveAsync()
     {
-        var repository = UnitOfWork.Repository<TEntity>();
-        if (Model.Id != default)
+        using var unitOfWork = UnitOfWorkFactory.Create();
+        var repository = unitOfWork.Repository<TEntity>();
+        if (Model.Id != Guid.Empty)
         {
             var query = repository.SingleResultQuery()
                 .AndFilter(entity => entity.Id == Model.Id);
@@ -52,7 +52,7 @@ public class EditorViewModel<TModel, TEntity>(
             var entity = await MapToEntityAsync(Model);
             await repository.AddAsync(entity);
         }
-        await UnitOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
         await BackAsync();
     }
 
@@ -64,7 +64,7 @@ public class EditorViewModel<TModel, TEntity>(
 
     protected virtual async Task MapToEntityAsync(TModel model, TEntity entity)
     {
-        if (entity.Id == default)
+        if (entity.Id == Guid.Empty)
         {
             entity.Id = model.Id;
         }
@@ -72,9 +72,8 @@ public class EditorViewModel<TModel, TEntity>(
         await Task.CompletedTask;
     }
 
-    private DelegateCommand? _backCommand;
     public DelegateCommand BackCommand
-        => _backCommand ??= new DelegateCommand(async () => await BackAsync());
+        => field ??= new DelegateCommand(async () => await BackAsync());
 
     private async Task BackAsync()
     {
@@ -82,10 +81,9 @@ public class EditorViewModel<TModel, TEntity>(
         await Task.CompletedTask;
     }
 
-    private TModel _model = new();
     public TModel Model
     {
-        get => _model;
-        set => SetProperty(ref _model, value);
-    }
+        get;
+        set => SetProperty(ref field, value);
+    } = new();
 }

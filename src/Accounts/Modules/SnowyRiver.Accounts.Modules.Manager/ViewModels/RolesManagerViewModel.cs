@@ -1,23 +1,22 @@
 ﻿using System.Threading.Tasks;
 using EntityFrameworkCore.QueryBuilder.Interfaces;
 using EntityFrameworkCore.Repository.Interfaces;
-using EntityFrameworkCore.UnitOfWork.Interfaces;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using Prism.Navigation.Regions;
 using SnowyRiver.Accounts.Services.Interfaces;
+using SnowyRiver.EF.DataAccess.Abstractions;
 using SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs;
 using RoleEntity = SnowyRiver.Accounts.Domain.Entities.Role;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
 public class RolesManagerViewModel(
-    IUnitOfWork unitOfWork,
+    IUnitOfWorkFactory unitOfWorkFactory,
     IMapper mapper,
     IDialogHostService dialog,
     IRegionManager regionManager) 
-    : ManagerViewModel<Role, RoleEntity>(unitOfWork, mapper, dialog, regionManager)
+    : ManagerViewModel<Role, RoleEntity>(unitOfWorkFactory, mapper, dialog, regionManager)
 {
-
     protected override async Task<IMultipleResultQuery<RoleEntity>> GetQueryAsync(IRepository<RoleEntity> repository)
     {
         var query = await base.GetQueryAsync(repository);

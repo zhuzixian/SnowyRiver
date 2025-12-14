@@ -11,8 +11,4 @@
     <ProjectReference Include="..\..\ComponentModel\SnowyRiver.ComponentModel.Interface\SnowyRiver.ComponentModel.Interface.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Entities\" />
-  </ItemGroup>
-
 </Project>

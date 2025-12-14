@@ -1,6 +1,4 @@
-﻿using SnowyRiver.Domain.Shared.Entities;
-
-namespace SnowyRiver.Domain.Entities;
+﻿namespace SnowyRiver.Domain.Shared.Entities;
 public class Entity<TKey>:IEntity<TKey>
 {
     public Entity()

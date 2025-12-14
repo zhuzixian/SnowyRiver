@@ -8,6 +8,7 @@ using Mapster;
 using MapsterMapper;
 using SnowyRiver.Accounts.Services.Interfaces;
 using SnowyRiver.Domain.Entities;
+using SnowyRiver.Domain.Shared.Entities;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
 public class EditorViewModel<TModel, TEntity>(

@@ -1,4 +1,4 @@
-﻿namespace SnowyRiver.ComponentModel.Interface;
+﻿namespace SnowyRiver.Domain.Shared.Entities;
 
 public interface IEntity<T>
 {

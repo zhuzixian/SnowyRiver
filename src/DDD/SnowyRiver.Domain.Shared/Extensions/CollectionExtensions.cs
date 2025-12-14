@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using SnowyRiver.ComponentModel.Interface;
+using SnowyRiver.Domain.Shared.Entities;
 
 namespace SnowyRiver.Domain.Shared.Extensions;
 public static class CollectionExtensions

@@ -1,4 +1,4 @@
-﻿using SnowyRiver.ComponentModel.Interface;
+﻿using SnowyRiver.Domain.Shared.Entities;
 
 namespace SnowyRiver.Application.Contracts.Dtos;
 public class ListResultDto<T> : IListResult<T>
@@ -6,10 +6,9 @@ public class ListResultDto<T> : IListResult<T>
     /// <inheritdoc />
     public IReadOnlyList<T> Items
     {
-        get => _items ??= new List<T>();
-        set => _items = value;
+        get => field ??= new List<T>();
+        set;
     }
-    private IReadOnlyList<T>? _items;
 
     /// <summary>
     /// Creates a new <see cref="ListResultDto{T}"/> object.

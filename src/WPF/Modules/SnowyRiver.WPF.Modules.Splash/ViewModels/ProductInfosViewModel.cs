@@ -2,7 +2,7 @@
 using System.IO;
 using System.Windows.Media.Imaging;
 using Prism.Navigation.Regions;
-using SnowyRiver.Products;
+using SnowyRiver.Products.Abstractions;
 using SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 
 namespace SnowyRiver.WPF.Modules.Splash.ViewModels;

@@ -1,4 +1,4 @@
-﻿namespace SnowyRiver.Products;
+﻿namespace SnowyRiver.Products.Abstractions;
 public class ProductInfo
 {
     public string? Name { get; set; }

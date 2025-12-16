@@ -2,11 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
-    <Version>10.0.0</Version>
+    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Version>10.0.0</Version>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="AsmResolver.DotNet" />
-  </ItemGroup>
 </Project>

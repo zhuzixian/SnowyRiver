@@ -18,7 +18,7 @@
                            Style="{StaticResource MaterialDesignHeadline3TextBlock}"
                            Foreground="{DynamicResource MaterialDesign.Brush.Primary}" />
             </Viewbox>
-            <TextBlock Text="{Binding Version, StringFormat=Ver.{0}}"
+            <TextBlock Text="{Binding Version}"
                            Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
                            HorizontalAlignment="Right"
                            Foreground="{DynamicResource MaterialDesign.Brush.Primary}"/>

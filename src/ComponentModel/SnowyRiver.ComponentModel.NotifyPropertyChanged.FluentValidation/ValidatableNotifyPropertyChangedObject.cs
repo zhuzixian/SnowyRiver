@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using FluentValidation;
 
 namespace SnowyRiver.ComponentModel.NotifyPropertyChanged.FluentValidation;
@@ -56,7 +57,7 @@ public abstract class ValidatableNotifyPropertyChangedObject<T> : NotifyProperty
         }
     }
 
-    protected async Task ValidatePropertyAsync(object value, string propertyName)
+    protected async Task ValidatePropertyAsync([CallerMemberName]string? propertyName = null)
     {
         if(Validator == null) return;
 
@@ -70,7 +71,7 @@ public abstract class ValidatableNotifyPropertyChangedObject<T> : NotifyProperty
         SetErrors(propertyName, propertyErrors);
     }
 
-    protected void ValidateProperty(object value, string propertyName)
+    protected void ValidateProperty([CallerMemberName]string? propertyName = null)
     {
         if (Validator == null) return;
 

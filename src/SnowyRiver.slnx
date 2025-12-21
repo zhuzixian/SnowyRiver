@@ -36,6 +36,7 @@
   </Folder>
   <Folder Name="/ComponentModel/">
     <Project Path="ComponentModel/SnowyRiver.ComponentModel.Interface/SnowyRiver.ComponentModel.Interface.csproj" />
+    <Project Path="ComponentModel/SnowyRiver.ComponentModel.NotifyPropertyChanged.FluentValidation/SnowyRiver.ComponentModel.NotifyPropertyChanged.FluentValidation.csproj" Id="de05dc35-61d3-460b-a5a0-fe24d981f60f" />
     <Project Path="ComponentModel/SnowyRiver.ComponentModel.NotifyPropertyChanged/SnowyRiver.ComponentModel.NotifyPropertyChanged.csproj" />
   </Folder>
   <Folder Name="/Configuration/">

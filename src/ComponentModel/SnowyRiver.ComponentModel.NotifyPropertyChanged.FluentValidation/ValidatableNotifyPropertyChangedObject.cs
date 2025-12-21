@@ -100,4 +100,38 @@ public abstract class ValidatableNotifyPropertyChangedObject<T> : NotifyProperty
         }
         return !HasErrors;
     }
+
+    protected override bool Set<T1>(ref T1 field, T1 value, [CallerMemberName] string propertyName = null)
+    {
+        var result = base.Set(ref field, value, propertyName);
+        if (result)
+        {
+            ValidateProperty(propertyName);
+        }
+
+        return result;
+    }
+
+    protected override bool SetProperty<T1>(ref T1 storage, T1 value, [CallerMemberName] string? propertyName = null)
+    {
+        var result = base.SetProperty(ref storage, value, propertyName);
+        if (result)
+        {
+            ValidateProperty(propertyName);
+        }
+
+        return result;
+    }
+
+    protected override bool SetProperty<T>(ref T storage, T value, Action? onChanged,
+        [CallerMemberName] string? propertyName = null)
+    {
+        var result = base.SetProperty(ref storage, value, onChanged, propertyName);
+        if (result)
+        {
+            ValidateProperty(propertyName);
+        }
+
+        return result;
+    }
 }

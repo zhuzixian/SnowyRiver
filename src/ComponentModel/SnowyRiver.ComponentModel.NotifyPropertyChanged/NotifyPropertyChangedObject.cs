@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 
 namespace SnowyRiver.ComponentModel.NotifyPropertyChanged;
 public class NotifyPropertyChangedObject : INotifyPropertyChanged
 {
-    public event PropertyChangedEventHandler PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     /// <summary>
     /// Raises this object's PropertyChanged event.
@@ -19,6 +20,13 @@ public class NotifyPropertyChangedObject : INotifyPropertyChanged
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+
+    protected void RaisePropertyChanged<T>(Expression<Func<T>> propertyExpression)
+    {
+        var propertyName = this.GetPropertyNameFromExpression(propertyExpression);
+        RaisePropertyChanged(propertyName);
+    }
+
 
     protected virtual bool Set<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
     {

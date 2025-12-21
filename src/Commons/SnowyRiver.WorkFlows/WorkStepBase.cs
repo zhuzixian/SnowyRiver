@@ -1,79 +1,70 @@
-﻿using System.Text.Json.Serialization;
-using SnowyRiver.ComponentModel.NotifyPropertyChanged;
+﻿using SnowyRiver.ComponentModel.NotifyPropertyChanged.FluentValidation;
+using System.Text.Json.Serialization;
 
 namespace SnowyRiver.WorkFlows;
-public class WorkStep<TKey, TSate>: NotifyPropertyChangedObject
+public class WorkStep<TKey, TSate>: ValidatableNotifyPropertyChangedObject
 {
-    private TKey _id;
     public TKey Id
     {
-        get => _id;
-        set => Set(ref _id, value);
+        get;
+        set => Set(ref field, value);
     }
 
-    private int _sortId;
     public int SortId
     {
-        get => _sortId;
-        set => Set(ref _sortId, value);
+        get;
+        set => Set(ref field, value);
     }
 
-    private bool _enable;
     public bool Enable
     {
-        get => _enable;
-        set => Set(ref _enable, value);
+        get;
+        set => Set(ref field, value);
     }
 
-    private string _name = string.Empty;
     public string Name
     {
-        get => _name;
-        set => Set(ref _name, value);
-    }
+        get;
+        set => Set(ref field, value);
+    } = string.Empty;
 
-    private TSate? _state;
     [JsonIgnore]
     public TSate? State
     {
-        get => _state;
-        set => Set(ref _state, value);
+        get;
+        set => Set(ref field, value);
     }
 
-    private DateTime? _startTime;
     [JsonIgnore]
     public DateTime? StartTime
     {
-        get => _startTime;
-        set => Set(ref _startTime, value);
+        get;
+        set => Set(ref field, value);
     }
 
-    private DateTime? _endTime;
     [JsonIgnore]
     public DateTime? EndTime
     {
-        get => _endTime;
-        set => Set(ref _endTime, value);
+        get;
+        set => Set(ref field, value);
     }
 
-    private int _cycleCount = 1;
     /// <summary>
     /// 执行次数
     /// </summary>
     public int CycleCount
     {
-        get => _cycleCount;
-        set => Set(ref _cycleCount, value);
-    }
+        get;
+        set => Set(ref field, value);
+    } = 1;
 
-    private int _cycleIndex;
     /// <summary>
     /// 完成次数
     /// </summary>
     [JsonIgnore]
     public int CycleIndex
     {
-        get => _cycleIndex;
-        set => Set(ref _cycleIndex, value);
+        get;
+        set => Set(ref field, value);
     }
 }

@@ -4,11 +4,11 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Version>10.0.1</Version>
+    <Version>10.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ComponentModel\SnowyRiver.ComponentModel.NotifyPropertyChanged\SnowyRiver.ComponentModel.NotifyPropertyChanged.csproj" />
+    <ProjectReference Include="..\..\ComponentModel\SnowyRiver.ComponentModel.NotifyPropertyChanged.FluentValidation\SnowyRiver.ComponentModel.NotifyPropertyChanged.FluentValidation.csproj" />
   </ItemGroup>
 
 </Project>

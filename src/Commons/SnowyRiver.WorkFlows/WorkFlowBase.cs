@@ -1,61 +1,53 @@
-﻿using System.Collections.ObjectModel;
+﻿using SnowyRiver.ComponentModel.NotifyPropertyChanged.FluentValidation;
+using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
-using SnowyRiver.ComponentModel.NotifyPropertyChanged;
 
 namespace SnowyRiver.WorkFlows;
-public class WorkFlow<TKey, TState, TStepKey, TStep, TStepState>: NotifyPropertyChangedObject
+public class WorkFlow<TKey, TState, TStepKey, TStep, TStepState>: ValidatableNotifyPropertyChangedObject
      where TStep : WorkStep<TStepKey, TStepState>
 {
-    private TKey _id;
     public TKey Id
     {
-        get => _id;
-        set => Set(ref _id, value);
+        get;
+        set => Set(ref field, value);
     }
 
-    private string _name = string.Empty;
     public string Name
     {
-        get => _name;
-        set => Set(ref _name, value);
-    }
-
-    private ObservableCollection<TStep> _steps = [];
+        get;
+        set => Set(ref field, value);
+    } = string.Empty;
 
     public ObservableCollection<TStep> Steps
     {
-        get => _steps;
-        set => Set(ref _steps, value);
-    }
+        get;
+        set => Set(ref field, value);
+    } = [];
 
-    private bool _enable = true;
     public bool Enable
     {
-        get => _enable;
-        set => Set(ref _enable, value);
-    }
+        get;
+        set => Set(ref field, value);
+    } = true;
 
-    private DateTime? _startTime;
     [JsonIgnore]
     public DateTime? StartTime
     {
-        get => _startTime;
-        set => Set(ref _startTime, value);
+        get;
+        set => Set(ref field, value);
     }
 
-    private DateTime? _endTime;
     [JsonIgnore]
     public DateTime? EndTime
     {
-        get => _endTime;
-        set => Set(ref _endTime, value);
+        get;
+        set => Set(ref field, value);
     }
 
-    private TState? _state;
     [JsonIgnore]
     public TState? State
     {
-        get => _state;
-        set => Set(ref _state, value);
+        get;
+        set => Set(ref field, value);
     }
 }

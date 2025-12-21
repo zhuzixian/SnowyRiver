@@ -1,44 +1,40 @@
 ﻿using System.Collections;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using FluentValidation;
 
 namespace SnowyRiver.ComponentModel.NotifyPropertyChanged.FluentValidation;
-public class ValidatableNotifyPropertyChangedObject : NotifyPropertyChangedObject, INotifyDataErrorInfo
+
+public abstract class ValidatableNotifyPropertyChangedObject<T> : NotifyPropertyChangedObject, INotifyDataErrorInfo
+    where T : ValidatableNotifyPropertyChangedObject<T>
 {
-    // 存储属性名及其对应的错误信息列表
+    protected virtual IValidator<T>? Validator { get; set; }
     private readonly Dictionary<string, List<string>> _errors = new();
 
-    // 错误变更事件，WPF绑定引擎监听此事件以更新UI
     public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
 
-    // 是否存在任何错误
-    public bool HasErrors => _errors.Any(kv => kv.Value.Count > 0);
+    public bool HasErrors => _errors.Any(kv => kv.Value is { Count: > 0 });
 
-    // 获取指定属性的错误列表
     public IEnumerable GetErrors(string? propertyName)
     {
         if (string.IsNullOrEmpty(propertyName))
         {
-            // 返回所有错误（例如用于表单提交前的整体检查）
             return _errors.Values.SelectMany(errors => errors);
         }
 
-        return _errors.TryGetValue(propertyName, out var errors1) 
-            ? errors1 : Enumerable.Empty<string>();
+        return _errors.TryGetValue(propertyName, out var propertyErrors) 
+            ? propertyErrors 
+            : Enumerable.Empty<string>();
     }
 
-    // 触发错误变更事件
     protected virtual void OnErrorsChanged(string propertyName)
     {
         ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
-        OnPropertyChanged(nameof(HasErrors)); // 通知HasErrors属性变化
+        OnPropertyChanged(nameof(HasErrors));
     }
 
-    // 设置错误
     protected void SetErrors(string propertyName, IEnumerable<string>? errors)
     {
-        var errorsArray = errors as string[] ?? errors.ToArray();
+        var errorsArray = errors == null ? [] : errors as string[] ?? errors.ToArray();
         if (errorsArray.Any())
         {
             _errors[propertyName] = new List<string>(errorsArray);
@@ -50,7 +46,6 @@ public class ValidatableNotifyPropertyChangedObject : NotifyPropertyChangedObjec
         OnErrorsChanged(propertyName);
     }
 
-    // 清除所有错误
     protected void ClearErrors()
     {
         var propertyNames = _errors.Keys.ToList();
@@ -61,35 +56,47 @@ public class ValidatableNotifyPropertyChangedObject : NotifyPropertyChangedObjec
         }
     }
 
-    // 核心验证方法：使用FluentValidation验证器进行验证
-    protected void ValidateProperty<TValidator>(object value, [CallerMemberName] string propertyName = null)
-        where TValidator : AbstractValidator<ValidatableNotifyPropertyChangedObject>, new()
+    protected async Task ValidatePropertyAsync(object value, string propertyName)
     {
-        var validator = new TValidator();
-        // 注意：这里简化了，实际可能需要根据属性名进行更精细的验证
-        var context = new ValidationContext<ValidatableNotifyPropertyChangedObject>(this)
-        {
-            RootContextData =
-            {
-                ["PropertyName"] = propertyName
-            }
-        };
+        if(Validator == null) return;
 
-        var result = validator.Validate(context);
+        var validationResult = await Validator.ValidateAsync(this as T,
+            options => options.IncludeProperties(propertyName));
 
-        var propertyErrors = result.Errors
+        var propertyErrors = validationResult.Errors
             .Where(e => e.PropertyName == propertyName)
             .Select(e => e.ErrorMessage)
             .ToList();
-
         SetErrors(propertyName, propertyErrors);
     }
 
-    // 异步验证方法（可选）
-    protected virtual async Task ValidatePropertyAsync<TValidator>(object value, [CallerMemberName] string propertyName = null)
-        where TValidator : AbstractValidator<ValidatableNotifyPropertyChangedObject>, new()
+    protected void ValidateProperty(object value, string propertyName)
     {
-        await Task.CompletedTask;
-        ValidateProperty<TValidator>(value, propertyName);
+        if (Validator == null) return;
+
+        var validationResult = Validator.Validate(this as T,
+            options => options.IncludeProperties(propertyName));
+
+        var propertyErrors = validationResult.Errors
+            .Where(e => e.PropertyName == propertyName)
+            .Select(e => e.ErrorMessage)
+            .ToList();
+        SetErrors(propertyName, propertyErrors);
+    }
+
+    protected async Task<bool> ValidateAsync()
+    {
+        if(Validator == null) return true;
+        var validationResult = await Validator.ValidateAsync(this as T);
+        ClearErrors();
+        var propertyGroups = validationResult.Errors
+            .GroupBy(e => e.PropertyName);
+        foreach (var group in propertyGroups)
+        {
+            var propertyErrors = group.Select(e => e.ErrorMessage).ToList();
+            _errors[group.Key] = propertyErrors;
+            OnErrorsChanged(group.Key);
+        }
+        return !HasErrors;
     }
 }

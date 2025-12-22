@@ -2,7 +2,8 @@
 using System.Text.Json.Serialization;
 
 namespace SnowyRiver.WorkFlows;
-public class WorkStep<TKey, TSate>: ValidatableNotifyPropertyChangedObject<WorkStep<TKey, TSate>>
+public class WorkStep<TKey, TSate, T>: ValidatableNotifyPropertyChangedObject<T>
+    where T : WorkStep<TKey, TSate, T>
 {
     public TKey Id
     {

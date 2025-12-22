@@ -15,7 +15,7 @@ public abstract class ValidatableNotifyPropertyChangedObject<T> : NotifyProperty
 
     public bool HasErrors => _errors.Any(kv => kv.Value is { Count: > 0 });
 
-    public IEnumerable GetErrors(string? propertyName = null)
+    public virtual IEnumerable GetErrors(string? propertyName = null)
     {
         if (string.IsNullOrEmpty(propertyName))
         {
@@ -33,7 +33,7 @@ public abstract class ValidatableNotifyPropertyChangedObject<T> : NotifyProperty
         OnPropertyChanged(nameof(HasErrors));
     }
 
-    protected void SetErrors(string propertyName, IEnumerable<string>? errors)
+    protected virtual void SetErrors(string propertyName, IEnumerable<string>? errors)
     {
         var errorsArray = errors == null ? [] : errors as string[] ?? errors.ToArray();
         if (errorsArray.Any())
@@ -47,7 +47,7 @@ public abstract class ValidatableNotifyPropertyChangedObject<T> : NotifyProperty
         OnErrorsChanged(propertyName);
     }
 
-    protected void ClearErrors()
+    protected virtual void ClearErrors()
     {
         var propertyNames = _errors.Keys.ToList();
         _errors.Clear();
@@ -57,7 +57,7 @@ public abstract class ValidatableNotifyPropertyChangedObject<T> : NotifyProperty
         }
     }
 
-    protected async Task ValidatePropertyAsync([CallerMemberName]string? propertyName = null)
+    protected virtual async Task ValidatePropertyAsync([CallerMemberName]string? propertyName = null)
     {
         if(Validator == null) return;
 
@@ -71,7 +71,7 @@ public abstract class ValidatableNotifyPropertyChangedObject<T> : NotifyProperty
         SetErrors(propertyName, propertyErrors);
     }
 
-    protected void ValidateProperty([CallerMemberName]string? propertyName = null)
+    protected virtual void ValidateProperty([CallerMemberName]string? propertyName = null)
     {
         if (Validator == null) return;
 
@@ -85,7 +85,7 @@ public abstract class ValidatableNotifyPropertyChangedObject<T> : NotifyProperty
         SetErrors(propertyName, propertyErrors);
     }
 
-    protected async Task<bool> ValidateAsync()
+    protected virtual async Task<bool> ValidateAsync()
     {
         if(Validator == null) return true;
         var validationResult = await Validator.ValidateAsync(this as T);

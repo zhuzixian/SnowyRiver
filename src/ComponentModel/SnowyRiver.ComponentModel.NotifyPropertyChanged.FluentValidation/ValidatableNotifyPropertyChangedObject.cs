@@ -15,7 +15,7 @@ public abstract class ValidatableNotifyPropertyChangedObject<T> : NotifyProperty
 
     public bool HasErrors => _errors.Any(kv => kv.Value is { Count: > 0 });
 
-    public IEnumerable GetErrors(string? propertyName)
+    public IEnumerable GetErrors(string? propertyName = null)
     {
         if (string.IsNullOrEmpty(propertyName))
         {

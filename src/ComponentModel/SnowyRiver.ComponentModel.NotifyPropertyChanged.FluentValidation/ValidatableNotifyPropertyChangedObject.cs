@@ -15,6 +15,58 @@ public abstract class ValidatableNotifyPropertyChangedObject<T> : NotifyProperty
 
     public bool HasErrors => _errors.Any(kv => kv.Value is { Count: > 0 });
 
+    /// <summary>
+    /// 动态更改验证器
+    /// </summary>
+    public virtual void ChangeValidator(IValidator<T>? newValidator)
+    {
+        Validator = newValidator;
+
+        // 清除之前的错误
+        ClearErrors();
+
+        // 重新验证所有属性
+        if (newValidator != null)
+        {
+            ValidateAllProperties();
+        }
+    }
+
+    /// <summary>
+    /// 异步动态更改验证器
+    /// </summary>
+    public virtual async Task ChangeValidatorAsync(IValidator<T>? newValidator)
+    {
+        Validator = newValidator;
+
+        // 清除之前的错误
+        ClearErrors();
+
+        // 异步重新验证所有属性
+        if (newValidator != null)
+        {
+            await ValidateAsync();
+        }
+    }
+
+    /// <summary>
+    /// 验证所有属性
+    /// </summary>
+    protected virtual void ValidateAllProperties()
+    {
+        if (Validator == null) return;
+
+        var validationResult = Validator.Validate(this as T);
+        var propertyGroups = validationResult.Errors
+            .GroupBy(e => e.PropertyName);
+
+        foreach (var group in propertyGroups)
+        {
+            var propertyErrors = group.Select(e => e.ErrorMessage).ToList();
+            SetErrors(group.Key, propertyErrors);
+        }
+    }
+
     public virtual IEnumerable GetErrors(string? propertyName = null)
     {
         if (string.IsNullOrEmpty(propertyName))

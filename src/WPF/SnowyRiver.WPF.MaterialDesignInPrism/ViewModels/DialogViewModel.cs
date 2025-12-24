@@ -44,17 +44,15 @@ public class DialogViewModel(IRegionManager regionManager): RegionDialogViewMode
         base.OnDialogOpened(parameters);
     }
 
-    private string _message = string.Empty;
     public string Message
     {
-        get => _message;
-        set => SetProperty(ref _message, value);
-    }
+        get;
+        set => SetProperty(ref field, value);
+    } = string.Empty;
 
-    private ObservableCollection<string> _buttons=[];
     public ObservableCollection<string> Buttons
     {
-        get => _buttons;
-        set => SetProperty(ref _buttons, value);
-    }
+        get;
+        set => SetProperty(ref field, value);
+    } = [];
 }

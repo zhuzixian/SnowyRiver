@@ -58,19 +58,25 @@ public class DialogHostService(IContainerExtension containerExtension)
         }
     }
 
-    public virtual Task<IDialogResult?> ShowMaterialDesignDialogAsync(string title, string message, string[] buttons, string identifierName = "Root")
+    public virtual async Task<string?> ShowMaterialDesignDialogAsync(string title, string message, string[] buttons, string identifierName = "Root")
     {
-        return ShowMaterialDesignDialogAsync(nameof(DialogView), title, message, buttons, identifierName);
+        return await ShowMaterialDesignDialogAsync(nameof(DialogView), title, message, buttons, identifierName);
     }
 
-    public virtual Task<IDialogResult?> ShowMaterialDesignDialogAsync(string view, string title, string message, string[] buttons, string identifierName = "Root")
+    public virtual async Task<string?> ShowMaterialDesignDialogAsync(string view, string title, string message, string[] buttons, string identifierName = "Root")
     {
-        return ShowMaterialDesignDialogAsync(view,
+        var dialogResult =  await ShowMaterialDesignDialogAsync(view,
             new DialogParameters
             {
                 { nameof(DialogViewModel.Title), title },
                 { nameof(DialogViewModel.Message), message },
                 { nameof(DialogViewModel.Buttons), buttons }
             }, identifierName);
+        if (dialogResult != null && dialogResult.Parameters.TryGetValue<string>(nameof(DialogResult), out var result))
+        {
+            return result;
+        }
+
+        return null;
     }
 }

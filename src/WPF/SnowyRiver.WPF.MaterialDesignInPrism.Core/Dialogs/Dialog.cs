@@ -1,5 +1,5 @@
 ﻿namespace SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs;
-public class DialogButton
+public static class Dialog
 {
     public const string Confirm = "确认";
     public const string Cancel = "取消";

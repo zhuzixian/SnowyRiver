@@ -3,7 +3,6 @@ using MaterialDesignThemes.Wpf;
 using SnowyRiver.WPF.MaterialDesignInPrism.Common;
 using SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs;
 using SnowyRiver.WPF.MaterialDesignInPrism.ViewModels;
-using SnowyRiver.WPF.MaterialDesignInPrism.Views;
 
 namespace SnowyRiver.WPF.MaterialDesignInPrism.Service;
 /// <summary>
@@ -14,7 +13,8 @@ public class DialogHostService(IContainerExtension containerExtension)
 {
     private readonly IContainerExtension _containerExtension = containerExtension;
 
-    public async Task<IDialogResult?> ShowMaterialDesignDialogAsync(string name, IDialogParameters? parameters = null, string identifierName = "Root")
+    public async Task<IDialogResult?> ShowMaterialDesignDialogAsync(
+        string name, object dialogIdentifier, IDialogParameters? parameters = null)
     {
         parameters ??= new DialogParameters();
 
@@ -28,7 +28,7 @@ public class DialogHostService(IContainerExtension containerExtension)
         if (dialogContent.DataContext is not IDialogHostAware viewModel)
             throw new NullReferenceException("A dialog's ViewModel must implement the IDialogAware interface");
 
-        viewModel.IdentifierName = identifierName;
+        viewModel.IdentifierName = dialogIdentifier;
 
         var result = await DialogHost.Show(dialogContent, viewModel.IdentifierName, DialogOpenedEventHandler);
         if (result is IDialogResult dialogResult)
@@ -58,20 +58,31 @@ public class DialogHostService(IContainerExtension containerExtension)
         }
     }
 
-    public virtual async Task<string?> ShowMaterialDesignDialogAsync(string title, string message, string[] buttons, string identifierName = "Root")
+    public virtual void Close(object? dialogIdentifier = null, object? parameter = null)
     {
-        return await ShowMaterialDesignDialogAsync(nameof(DialogView), title, message, buttons, identifierName);
+        if (DialogHost.IsDialogOpen(dialogIdentifier))
+        {
+            DialogHost.Close(dialogIdentifier, parameter);
+        }
     }
 
-    public virtual async Task<string?> ShowMaterialDesignDialogAsync(string view, string title, string message, string[] buttons, string identifierName = "Root")
+    public bool IsOpen(object dialogIdentifier)
+    {
+        return DialogHost.IsDialogOpen(dialogIdentifier);
+    }
+
+    public virtual async Task<string?> ShowMaterialDesignDialogAsync(string view, string title, 
+        string message, string[] buttons, 
+        object dialogIdentifier)
     {
         var dialogResult =  await ShowMaterialDesignDialogAsync(view,
+            dialogIdentifier,
             new DialogParameters
             {
                 { nameof(DialogViewModel.Title), title },
                 { nameof(DialogViewModel.Message), message },
                 { nameof(DialogViewModel.Buttons), buttons }
-            }, identifierName);
+            });
         if (dialogResult != null && dialogResult.Parameters.TryGetValue<string>(nameof(DialogResult), out var result))
         {
             return result;

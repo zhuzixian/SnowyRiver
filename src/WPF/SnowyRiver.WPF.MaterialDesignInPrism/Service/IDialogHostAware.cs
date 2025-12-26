@@ -8,7 +8,7 @@
         /// <summary>
         /// DialogHost顶级节点
         /// </summary>
-        string? IdentifierName { get; set; }
+        object? IdentifierName { get; set; }
 
         /// <summary>
         /// 页面初始化前传递参数事件

@@ -13,10 +13,10 @@ namespace SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs
         void Close(object? dialogIdentifier = null, object? parameter = null);
 
 
-        Task<IDialogResult?> ShowMaterialDesignDialogAsync(string name, object dialogIdentifier, IDialogParameters? parameters = null);
-        Task<string?> ShowMaterialDesignDialogAsync(string name, string title, string message, string[] buttons,
+        Task<IDialogResult?> ShowDialogAsync(string name, object dialogIdentifier, IDialogParameters? parameters = null);
+        Task<string?> ShowDialogAsync(string name, string title, string message, string[] buttons,
             object dialogIdentifier);
-        Task<string?> ShowMaterialDesignDialogAsync(string title, string message, string[] buttons,
+        Task<string?> ShowDialogAsync(string title, string message, string[] buttons,
             object dialogIdentifier);
 
         bool IsOpen()
@@ -24,20 +24,20 @@ namespace SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs
             return IsOpen(DefaultDialogIdentifier);
         }
 
-        Task<IDialogResult?> ShowMaterialDesignDialogAsync(string name, IDialogParameters? parameters = null)
+        Task<IDialogResult?> ShowDialogAsync(string name, IDialogParameters? parameters = null)
         {
-            return ShowMaterialDesignDialogAsync(name, DefaultDialogIdentifier, parameters);
+            return ShowDialogAsync(name, DefaultDialogIdentifier, parameters);
         }
 
-        Task<string?> ShowMaterialDesignDialogAsync(string name, string title, string message, string[] buttons)
+        Task<string?> ShowDialogAsync(string name, string title, string message, string[] buttons)
         {
-            return ShowMaterialDesignDialogAsync(name, title, message, buttons, DefaultDialogIdentifier);
+            return ShowDialogAsync(name, title, message, buttons, DefaultDialogIdentifier);
         }
 
 
-        Task<string?> ShowMaterialDesignDialogAsync(string title, string message, string[] buttons)
+        Task<string?> ShowDialogAsync(string title, string message, string[] buttons)
         {
-            return ShowMaterialDesignDialogAsync(title, message, buttons, DefaultDialogIdentifier);
+            return ShowDialogAsync(title, message, buttons, DefaultDialogIdentifier);
         }
 
 

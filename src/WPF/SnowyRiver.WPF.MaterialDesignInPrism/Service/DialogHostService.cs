@@ -14,7 +14,7 @@ public class DialogHostService(IContainerExtension containerExtension)
 {
     private readonly IContainerExtension _containerExtension = containerExtension;
 
-    public async Task<IDialogResult?> ShowMaterialDesignDialogAsync(
+    public async Task<IDialogResult?> ShowDialogAsync(
         string name, object dialogIdentifier, IDialogParameters? parameters = null)
     {
         parameters ??= new DialogParameters();
@@ -72,16 +72,16 @@ public class DialogHostService(IContainerExtension containerExtension)
         return DialogHost.IsDialogOpen(dialogIdentifier);
     }
 
-    public virtual async Task<string?> ShowMaterialDesignDialogAsync(string title, string message, string[] buttons, object dialogIdentifier)
+    public virtual async Task<string?> ShowDialogAsync(string title, string message, string[] buttons, object dialogIdentifier)
     {
-        return await ShowMaterialDesignDialogAsync(nameof(DialogView), title, message, buttons, dialogIdentifier);
+        return await ShowDialogAsync(nameof(DialogView), title, message, buttons, dialogIdentifier);
     }
 
-    public virtual async Task<string?> ShowMaterialDesignDialogAsync(string view, string title, 
+    public virtual async Task<string?> ShowDialogAsync(string view, string title, 
         string message, string[] buttons, 
         object dialogIdentifier)
     {
-        var dialogResult =  await ShowMaterialDesignDialogAsync(view,
+        var dialogResult =  await ShowDialogAsync(view,
             dialogIdentifier,
             new DialogParameters
             {

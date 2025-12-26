@@ -1,8 +1,9 @@
-﻿using System.Windows;
-using MaterialDesignThemes.Wpf;
+﻿using MaterialDesignThemes.Wpf;
 using SnowyRiver.WPF.MaterialDesignInPrism.Common;
 using SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs;
 using SnowyRiver.WPF.MaterialDesignInPrism.ViewModels;
+using SnowyRiver.WPF.MaterialDesignInPrism.Views;
+using System.Windows;
 
 namespace SnowyRiver.WPF.MaterialDesignInPrism.Service;
 /// <summary>
@@ -69,6 +70,11 @@ public class DialogHostService(IContainerExtension containerExtension)
     public bool IsOpen(object dialogIdentifier)
     {
         return DialogHost.IsDialogOpen(dialogIdentifier);
+    }
+
+    public virtual async Task<string?> ShowMaterialDesignDialogAsync(string title, string message, string[] buttons, object dialogIdentifier)
+    {
+        return await ShowMaterialDesignDialogAsync(nameof(DialogView), title, message, buttons, dialogIdentifier);
     }
 
     public virtual async Task<string?> ShowMaterialDesignDialogAsync(string view, string title, 

@@ -16,6 +16,8 @@ namespace SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs
         Task<IDialogResult?> ShowMaterialDesignDialogAsync(string name, object dialogIdentifier, IDialogParameters? parameters = null);
         Task<string?> ShowMaterialDesignDialogAsync(string name, string title, string message, string[] buttons,
             object dialogIdentifier);
+        Task<string?> ShowMaterialDesignDialogAsync(string title, string message, string[] buttons,
+            object dialogIdentifier);
 
         bool IsOpen()
         {
@@ -31,9 +33,11 @@ namespace SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs
         {
             return ShowMaterialDesignDialogAsync(name, title, message, buttons, DefaultDialogIdentifier);
         }
+
+
         Task<string?> ShowMaterialDesignDialogAsync(string title, string message, string[] buttons)
         {
-            return ShowMaterialDesignDialogAsync(title, title, message, buttons, DefaultDialogIdentifier);
+            return ShowMaterialDesignDialogAsync(title, message, buttons, DefaultDialogIdentifier);
         }
 
 

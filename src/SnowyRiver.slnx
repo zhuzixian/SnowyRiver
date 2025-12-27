@@ -19,6 +19,7 @@
     <Project Path="Commons/SnowyRiver.Commons/SnowyRiver.Commons.csproj" />
     <Project Path="Commons/SnowyRiver.Converters/SnowyRiver.Converters.csproj" />
     <Project Path="Commons/SnowyRiver.Exceptions/SnowyRiver.Exceptions.csproj" />
+    <Project Path="Commons/SnowyRiver.Notices/SnowyRiver.Notices.csproj" Id="27085ea9-d2d9-442d-b379-8bb6fb072d72" />
     <Project Path="Commons/SnowyRiver.Polly/SnowyRiver.Polly.csproj" />
     <Project Path="Commons/SnowyRiver.Products.Abstractions/SnowyRiver.Products.Abstractions.csproj" Id="09cdba1e-8c8c-4e94-9d70-b02f90359bcd" />
     <Project Path="Commons/SnowyRiver.Products/SnowyRiver.Products.csproj" />

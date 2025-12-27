@@ -1,4 +1,5 @@
 ﻿using MaterialDesignThemes.Wpf;
+using SnowyRiver.Notices;
 using SnowyRiver.WPF.MaterialDesignInPrism.Common;
 using SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs;
 using SnowyRiver.WPF.MaterialDesignInPrism.ViewModels;
@@ -72,12 +73,7 @@ public class DialogHostService(IContainerExtension containerExtension)
         return DialogHost.IsDialogOpen(dialogIdentifier);
     }
 
-    public virtual async Task<string?> ShowDialogAsync(string title, string message, string[] buttons, object dialogIdentifier)
-    {
-        return await ShowDialogAsync(nameof(DialogView), title, message, buttons, dialogIdentifier);
-    }
-
-    public virtual async Task<string?> ShowDialogAsync(string view, string title, 
+    public virtual async Task<string?> ShowAsync(string view, string title, 
         string message, string[] buttons, 
         object dialogIdentifier)
     {
@@ -95,5 +91,16 @@ public class DialogHostService(IContainerExtension containerExtension)
         }
 
         return null;
+    }
+
+    public Task<string?> ShowAsync(string title, string message, string[] buttons)
+    {
+        return ShowAsync(title, message, buttons, INotifier.DefaultIdentifier);
+    }
+
+    public Task<string?> ShowAsync(string title, string message, string[] buttons,
+        object dialogIdentifier)
+    {
+        return ShowAsync(nameof(DialogView), title, message, buttons, dialogIdentifier);
     }
 }

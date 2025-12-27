@@ -1,5 +1,5 @@
-﻿namespace SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs;
-public static class Dialog
+﻿namespace SnowyRiver.Notices;
+public static class NotifyOptions
 {
     public const string Confirm = "确认";
     public const string Cancel = "取消";

@@ -1,4 +1,5 @@
-﻿using SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs;
+﻿using SnowyRiver.Notices;
+using SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs;
 using SnowyRiver.WPF.MaterialDesignInPrism.Service;
 using SnowyRiver.WPF.MaterialDesignInPrism.ViewModels;
 using SnowyRiver.WPF.MaterialDesignInPrism.Views;
@@ -10,6 +11,7 @@ public class SnowyRiverMaterialDesignModule : IModule
     public void RegisterTypes(IContainerRegistry containerRegistry)
     {
         containerRegistry.RegisterSingleton<IDialogHostService, DialogHostService>();
+        containerRegistry.RegisterSingleton<INotifier>(containerProvider => containerProvider.Resolve<IDialogHostService>());
         containerRegistry.RegisterDialogWindow<MaterialDesignMetroDialogWindow>();
         containerRegistry.RegisterDialog<DialogView, DialogViewModel>();
     }

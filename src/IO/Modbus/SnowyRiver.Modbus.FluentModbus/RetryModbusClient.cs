@@ -7,7 +7,7 @@ namespace SnowyRiver.Modbus.FluentModbus;
 
 public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy):IModbusClient
 {
-    protected DateTime LastAccessTime = DateTime.MinValue;
+    public DateTime LastAccessTime { get; protected set; } = DateTime.MinValue;
 
     public TimeSpan MinAccessIntervalTime { get; set; } = TimeSpan.MinValue;
 

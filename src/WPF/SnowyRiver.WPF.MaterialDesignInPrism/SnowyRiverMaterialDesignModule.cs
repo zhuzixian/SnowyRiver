@@ -11,7 +11,8 @@ public class SnowyRiverMaterialDesignModule : IModule
     public void RegisterTypes(IContainerRegistry containerRegistry)
     {
         containerRegistry.RegisterSingleton<IDialogHostService, DialogHostService>();
-        containerRegistry.RegisterSingleton<INotifier>(containerProvider => containerProvider.Resolve<IDialogHostService>());
+        containerRegistry.RegisterSingleton<INotifier>(
+            containerProvider => containerProvider.Resolve<IDialogHostService>());
         containerRegistry.RegisterDialogWindow<MaterialDesignMetroDialogWindow>();
         containerRegistry.RegisterDialog<DialogView, DialogViewModel>();
     }

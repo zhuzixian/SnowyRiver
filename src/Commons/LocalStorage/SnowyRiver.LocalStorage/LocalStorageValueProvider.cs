@@ -6,7 +6,7 @@ public abstract class LocalStorageValueProvider<T>(
     ILocalStorageService localStorageService)
     :NotifyPropertyChangedObject, ILocalStorageValueProvider<T>
 {
-    public async Task InitializeAsync(CancellationToken cancellationToken = default)
+    public virtual async Task InitializeAsync(CancellationToken cancellationToken = default)
     {
         await RefreshAsync(cancellationToken);
     }

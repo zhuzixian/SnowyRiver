@@ -11,12 +11,12 @@ public abstract class LocalStorageValueProvider<T>(
         await RefreshAsync(cancellationToken);
     }
 
-    public async Task SaveAsync(CancellationToken cancellationToken = default)
+    public virtual async Task SaveAsync(CancellationToken cancellationToken = default)
     {
         await localStorageService.SetItemAsync(Key, Value, cancellationToken);
     }
 
-    public async Task RefreshAsync(CancellationToken cancellationToken = default)
+    public virtual async Task RefreshAsync(CancellationToken cancellationToken = default)
     {
         Value = await localStorageService.GetItemAsync<T?>(Key, cancellationToken);
     }

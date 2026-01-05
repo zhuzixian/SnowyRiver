@@ -22,21 +22,25 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter>: RegionDia
 
     protected virtual void FilterOnPropertyChanged(object? sender, PropertyChangedEventArgs args)
     {
-        _ = RefreshAsync();
+        if (args.PropertyName == nameof(Filter.PageSize))
+        {
+            Filter.PageIndex = 1;
+        }
+        else
+        {
+            _ = RefreshAsync();
+        }
     }
 
-    private DelegateCommand? _refreshCommand;
-
     public DelegateCommand? RefreshCommand
-        => _refreshCommand ??= new DelegateCommand(() => _ = HandleRefreshCommandAsync(),
+        => field ??= new DelegateCommand(() => _ = HandleRefreshCommandAsync(),
                 () => !IsRefreshing)
             .ObservesProperty(() => IsRefreshing);
 
-    private bool _isRefreshing;
     public bool IsRefreshing
     {
-        get => _isRefreshing;
-        set => SetProperty(ref _isRefreshing, value);
+        get;
+        set => SetProperty(ref field, value);
     }
 
     private async Task HandleRefreshCommandAsync(CancellationToken cancellationToken = default)
@@ -68,10 +72,8 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter>: RegionDia
     protected abstract Task<PagedObservableCollection<TRecord>> GetRecordsAsync(CancellationToken cancellation = default);
 
 
-    private DelegateCommand? _navigateToFirstPageCommand;
-
     public DelegateCommand? NavigateToFirstPageCommand
-        => _navigateToFirstPageCommand ??= new DelegateCommand(() => _ = NavigateToFirstPageAsync(),
+        => field ??= new DelegateCommand(() => _ = NavigateToFirstPageAsync(),
         () => !IsRefreshing)
             .ObservesProperty(() => IsRefreshing);
 
@@ -80,9 +82,8 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter>: RegionDia
         await NavigateToPageAsync(1, cancellationToken);
     }
 
-    private DelegateCommand? _navigateToPreviousPageCommand;
     public DelegateCommand NavigateToPreviousPageCommand
-        => _navigateToPreviousPageCommand ??= new DelegateCommand(() => _ = NavigateToPreviousPageAsync(),
+        => field ??= new DelegateCommand(() => _ = NavigateToPreviousPageAsync(),
             () => !IsRefreshing)
     .ObservesProperty(() => IsRefreshing);
 
@@ -91,9 +92,8 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter>: RegionDia
         await NavigateToPageAsync(Math.Max(1, Filter.PageIndex - 1), cancellationToken);
     }
 
-    private DelegateCommand? _navigateToNextPageCommand;
     public DelegateCommand? NavigateToNextPageCommand
-        => _navigateToNextPageCommand ??= new DelegateCommand(() => _ = NavigateToNextPageAsync(),
+        => field ??= new DelegateCommand(() => _ = NavigateToNextPageAsync(),
                 () => !IsRefreshing)
             .ObservesProperty(() => IsRefreshing);
 
@@ -102,9 +102,8 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter>: RegionDia
         await NavigateToPageAsync(Math.Min(Records.TotalPages, Filter.PageIndex + 1), cancellationToken);
     }
 
-    private DelegateCommand? _navigateToLastPageCommand;
     public DelegateCommand? NavigateToLastPageCommand
-        => _navigateToLastPageCommand ??= new DelegateCommand(() => _ = NavigateToLastPageAsync(),
+        => field ??= new DelegateCommand(() => _ = NavigateToLastPageAsync(),
                 () => !IsRefreshing)
             .ObservesProperty(() => IsRefreshing);
 
@@ -119,9 +118,8 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter>: RegionDia
         return Task.CompletedTask;
     }
 
-    private DelegateCommand? _saveRecordsAsCommand;
     public DelegateCommand SaveRecordsAsCommand
-        => _saveRecordsAsCommand ??= new DelegateCommand(() => _ = HandleSaveRecordsAsAsync(),
+        => field ??= new DelegateCommand(() => _ = HandleSaveRecordsAsAsync(),
                 () => !ISavingRecordsAs && Records.Items.Any())
             .ObservesProperty(() => ISavingRecordsAs);
 
@@ -143,32 +141,29 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter>: RegionDia
         await Task.CompletedTask;
     }
 
-    private bool _isSavingRecordsAs;
     public bool ISavingRecordsAs
     {
-        get => _isSavingRecordsAs;
-        set => SetProperty(ref _isSavingRecordsAs, value);
+        get;
+        set => SetProperty(ref field, value);
     }
 
-    private PagedObservableCollection<TRecord> _records = new();
     public PagedObservableCollection<TRecord> Records
     {
-        get => _records;
-        set => SetProperty(ref _records, value);
-    }
+        get;
+        set => SetProperty(ref field, value);
+    } = new();
 
-    private TRecordFilter _filter = new();
     public TRecordFilter Filter
     {
-        get => _filter;
+        get;
         set
         {
             var oldValue = Filter;
-            if (SetProperty(ref _filter, value))
+            if (SetProperty(ref field, value))
             {
                 Filter.PropertyChanged += FilterOnPropertyChanged;
                 oldValue.PropertyChanged -= FilterOnPropertyChanged;
             }
         }
-    }
+    } = new();
 }

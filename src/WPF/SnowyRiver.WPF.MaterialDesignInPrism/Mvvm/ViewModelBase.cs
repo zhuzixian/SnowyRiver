@@ -1,7 +1,4 @@
-﻿using Prism.Mvvm;
-using Prism.Navigation;
-
-namespace SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
+﻿namespace SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 public abstract class ViewModelBase : BindableBase, IDestructible
 {
     protected ViewModelBase()

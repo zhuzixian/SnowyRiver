@@ -2,12 +2,11 @@
 public class RegionViewModelBase(IRegionManager regionManager)
     : ViewModelBase, IConfirmNavigationRequest
 {
-    private IRegionManager _regionManager = regionManager;
     public IRegionManager RegionManager
     {
-        get => _regionManager; 
-        protected set => SetProperty(ref _regionManager, value);
-    }
+        get;
+        protected set => SetProperty(ref field, value);
+    } = regionManager;
 
     public virtual void ConfirmNavigationRequest(NavigationContext navigationContext, Action<bool> continuationCallback)
     {

@@ -3,33 +3,27 @@
 namespace SnowyRiver.ComponentModel.NotifyPropertyChanged;
 public class QueryFilter : NotifyPropertyChangedObject, IQueryFilter
 {
-    private DateTime? _startTime = DateTime.Today;
-
     public DateTime? StartTime
     {
-        get => _startTime;
-        set => SetProperty(ref _startTime, value);
-    }
+        get;
+        set => SetProperty(ref field, value);
+    } = DateTime.Today;
 
-    private DateTime? _endTime;
     public DateTime? EndTime
     {
-        get => _endTime;
-        set => SetProperty(ref _endTime, value);
+        get;
+        set => SetProperty(ref field, value);
     }
 
-    private int _pageIndex = 1;
     public int PageIndex
     {
-        get => _pageIndex;
-        set => SetProperty(ref _pageIndex, value);
-    }
-
-    private int _pageSize = 16;
+        get;
+        set => SetProperty(ref field, value);
+    } = 1;
 
     public int PageSize
     {
-        get => _pageSize;
-        set => SetProperty(ref _pageSize, value);
-    }
+        get;
+        set => SetProperty(ref field, value);
+    } = 16;
 }

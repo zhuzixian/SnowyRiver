@@ -22,7 +22,8 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter>: RegionDia
 
     protected virtual void FilterOnPropertyChanged(object? sender, PropertyChangedEventArgs args)
     {
-        if (args.PropertyName == nameof(Filter.PageSize))
+        var totalPageCount = Filter.PageSize > 0 ? (int)Math.Ceiling(Records.TotalCount / (decimal)Filter.PageSize) : 0;
+        if (args.PropertyName == nameof(Filter.PageSize) && Filter.PageIndex > totalPageCount)
         {
             Filter.PageIndex = 1;
         }

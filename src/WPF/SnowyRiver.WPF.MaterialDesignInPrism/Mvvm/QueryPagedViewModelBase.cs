@@ -166,5 +166,5 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter>: RegionDia
                 oldValue.PropertyChanged -= FilterOnPropertyChanged;
             }
         }
-    } = new();
+    }
 }

@@ -23,7 +23,7 @@ public class DbMigratorViewModel(IRegionManager regionManager) : SplashContentVi
                         {
                             nameof(LoginViewModel.NextAction), () =>
                             {
-                                RegionManager.RequestNavigate(RegionNames.SplashContentRegion, ViewNames.InitializationView,
+                                RegionManager.RequestNavigate(RegionNames.SplashContentRegion, NextView,
                                     navigationContext.Parameters);
                             }
                         }
@@ -40,6 +40,8 @@ public class DbMigratorViewModel(IRegionManager regionManager) : SplashContentVi
 
         }
     }
+
+    protected virtual string? NextView => ViewNames.InitializationView;
 
     protected override string ViewName => ViewNames.DbMigratorView;
 

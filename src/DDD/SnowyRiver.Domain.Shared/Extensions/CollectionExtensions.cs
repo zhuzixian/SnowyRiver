@@ -6,7 +6,7 @@ public static class CollectionExtensions
 {
     extension<T>(Collection<T> source) where T : IHasSortId, new()
     {
-        public void InsertPrevious(T? nullableSelectedItem)
+        public void InsertPreviousAndUpdateSortId(T? nullableSelectedItem)
         {
             if (nullableSelectedItem != null)
             {
@@ -22,7 +22,7 @@ public static class CollectionExtensions
             }
         }
 
-        public void InsertNext(T? nullableSelectedItem)
+        public void InsertNextAndUpdateSortId(T? nullableSelectedItem)
         {
             if (nullableSelectedItem != null)
             {
@@ -38,7 +38,18 @@ public static class CollectionExtensions
             }
         }
 
-        public void Remove(T? nullableSelectedItem)
+        public void AddAndUpdateSortId(T? nullableNewItem)
+        {
+            if (nullableNewItem is {} newItem)
+            {
+                newItem.SortId = source.Any()
+                    ?  source.Max(x => x.SortId) + 1
+                    : 1;
+                source.Add(newItem);
+            }
+        }
+
+        public void RemoveAndUpdateSortId(T? nullableSelectedItem)
         {
             if (nullableSelectedItem is { } selectedStep)
             {

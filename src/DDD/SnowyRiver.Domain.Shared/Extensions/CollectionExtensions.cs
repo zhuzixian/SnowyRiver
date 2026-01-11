@@ -66,16 +66,24 @@ public static class CollectionExtensions
         }
     }
 
-    public static void FillSortId<T>(this IEnumerable<T> records, IQueryFilter? filter = null)
-        where T:IHasSortId
+    extension<T>(IEnumerable<T> records) where T:IHasSortId
     {
-        var recordsArray = records as T[] ?? records.ToArray();
-        var baseSortId = filter == null 
-            ? 1
-            : (filter.PageIndex - 1) * filter.PageSize;
-        for (var i = 0; i < recordsArray.Length; i++)
+        public void FillSortId(IQueryFilter? filter = null)
         {
-            recordsArray[i].SortId = baseSortId + i + 1;
+            var startSortId = filter == null 
+                ? 1
+                : (filter.PageIndex - 1) * filter.PageSize;
+            records.FillSortId(startSortId);
+        }
+
+        public void FillSortId(int? startId = 1)
+        {
+            var recordsArray = records as T[] ?? records.ToArray();
+            var baseSortId = startId ?? 1;
+            for (var i = 0; i < recordsArray.Length; i++)
+            {
+                recordsArray[i].SortId = baseSortId + i;
+            }
         }
     }
 }

@@ -31,7 +31,7 @@ public class DbMigratorViewModel(IRegionManager regionManager) : SplashContentVi
             }
             else
             {
-                RegionManager.RequestNavigate(RegionNames.SplashContentRegion, ViewNames.InitializationView,
+                RegionManager.RequestNavigate(RegionNames.SplashContentRegion, NextView,
                     navigationContext.Parameters);
             }
         }

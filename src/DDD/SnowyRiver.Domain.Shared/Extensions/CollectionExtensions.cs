@@ -55,11 +55,13 @@ public static class CollectionExtensions
         }
     }
 
-    public static void FillSortId<T>(this IEnumerable<T> records, IQueryFilter filter)
+    public static void FillSortId<T>(this IEnumerable<T> records, IQueryFilter? filter = null)
         where T:IHasSortId
     {
         var recordsArray = records as T[] ?? records.ToArray();
-        var baseSortId = (filter.PageIndex - 1) * filter.PageSize;
+        var baseSortId = filter == null 
+            ? 1
+            : (filter.PageIndex - 1) * filter.PageSize;
         for (var i = 0; i < recordsArray.Length; i++)
         {
             recordsArray[i].SortId = baseSortId + i + 1;

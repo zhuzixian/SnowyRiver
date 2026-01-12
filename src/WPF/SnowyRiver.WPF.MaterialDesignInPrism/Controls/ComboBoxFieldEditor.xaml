@@ -1,0 +1,26 @@
+﻿<controls:FieldEditor x:Class="SnowyRiver.WPF.MaterialDesignInPrism.Controls.ComboBoxFieldEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:controls="clr-namespace:SnowyRiver.WPF.MaterialDesignInPrism.Controls"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="{Binding Header, RelativeSource={RelativeSource AncestorType=controls:ComboBoxFieldEditor}}"
+                   Style="{Binding HeaderStyle, RelativeSource={RelativeSource AncestorType=controls:ComboBoxFieldEditor}}"/>
+        <ComboBox Grid.Column="1"  ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource AncestorType=controls:ComboBoxFieldEditor}}"
+                  DisplayMemberPath="{Binding DisplayMemberPath, RelativeSource={RelativeSource AncestorType=controls:ComboBoxFieldEditor}}"
+                  SelectedItem="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType=controls:ComboBoxFieldEditor}}"
+                 Text="{Binding Value, 
+                        RelativeSource={RelativeSource AncestorType=controls:ComboBoxFieldEditor},
+                        UpdateSourceTrigger=PropertyChanged}"
+                 Style="{Binding ValueStyle, RelativeSource={RelativeSource AncestorType=controls:ComboBoxFieldEditor}}"
+                 IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource AncestorType=controls:ComboBoxFieldEditor}}"/>
+        <TextBlock Grid.Column="2" Text="{Binding Unit, RelativeSource={RelativeSource AncestorType=controls:ComboBoxFieldEditor}}"
+                   Style="{Binding UnitStyle, RelativeSource={RelativeSource AncestorType=controls:ComboBoxFieldEditor}}"/>
+    </Grid>
+</controls:FieldEditor>

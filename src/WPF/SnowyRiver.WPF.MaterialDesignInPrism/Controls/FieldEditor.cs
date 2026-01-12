@@ -37,8 +37,8 @@ public class FieldEditor : UserControl
 
     public Style ValueStyle
     {
-        get => (Style)GetValue(HeaderStyleProperty);
-        set => SetValue(HeaderStyleProperty, value);
+        get => (Style)GetValue(ValueStyleProperty);
+        set => SetValue(ValueStyleProperty, value);
     }
 
     public static readonly DependencyProperty UnitStyleProperty = DependencyProperty.Register(

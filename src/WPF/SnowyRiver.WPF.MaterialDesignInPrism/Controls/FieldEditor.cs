@@ -6,7 +6,7 @@ namespace SnowyRiver.WPF.MaterialDesignInPrism.Controls;
 public class FieldEditor : UserControl
 {
     public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
-        nameof(Header), typeof(string), typeof(ComboBoxFieldEditor), new PropertyMetadata(default(string)));
+        nameof(Header), typeof(string), typeof(FieldEditor), new PropertyMetadata(default(string)));
 
     public string Header
     {
@@ -15,7 +15,7 @@ public class FieldEditor : UserControl
     }
 
     public static readonly DependencyProperty UnitProperty = DependencyProperty.Register(
-        nameof(Unit), typeof(string), typeof(TextFieldEditor), new PropertyMetadata(default(string)));
+        nameof(Unit), typeof(string), typeof(FieldEditor), new PropertyMetadata(default(string)));
 
     public string Unit
     {
@@ -24,7 +24,7 @@ public class FieldEditor : UserControl
     }
 
     public static readonly DependencyProperty HeaderStyleProperty = DependencyProperty.Register(
-        nameof(HeaderStyle), typeof(Style), typeof(TextFieldEditor), new PropertyMetadata(default(Style)));
+        nameof(HeaderStyle), typeof(Style), typeof(FieldEditor), new PropertyMetadata(default(Style)));
 
     public Style HeaderStyle
     {
@@ -33,7 +33,7 @@ public class FieldEditor : UserControl
     }
 
     public static readonly DependencyProperty ValueStyleProperty = DependencyProperty.Register(
-        nameof(ValueStyle), typeof(Style), typeof(TextFieldEditor), new PropertyMetadata(default(Style)));
+        nameof(ValueStyle), typeof(Style), typeof(FieldEditor), new PropertyMetadata(default(Style)));
 
     public Style ValueStyle
     {
@@ -42,7 +42,7 @@ public class FieldEditor : UserControl
     }
 
     public static readonly DependencyProperty UnitStyleProperty = DependencyProperty.Register(
-        nameof(UnitStyle), typeof(Style), typeof(TextFieldEditor), new PropertyMetadata(default(Style)));
+        nameof(UnitStyle), typeof(Style), typeof(FieldEditor), new PropertyMetadata(default(Style)));
 
     public Style UnitStyle
     {
@@ -51,7 +51,7 @@ public class FieldEditor : UserControl
     }
 
     public static readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register(
-        nameof(IsReadOnly), typeof(bool), typeof(TextFieldEditor), new PropertyMetadata(false));
+        nameof(IsReadOnly), typeof(bool), typeof(FieldEditor), new PropertyMetadata(false));
 
     public bool IsReadOnly
     {

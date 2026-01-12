@@ -9,15 +9,6 @@ public partial class ComboBoxFieldEditor
         InitializeComponent();
     }
 
-    public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
-        nameof(Value), typeof(string), typeof(ComboBoxFieldEditor), new PropertyMetadata(default(string)));
-
-    public string Value
-    {
-        get => (string)GetValue(ValueProperty);
-        set => SetValue(ValueProperty, value);
-    }
-
     public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register(
         nameof(ItemsSource), typeof(IEnumerable), typeof(ComboBoxFieldEditor), new PropertyMetadata(default(IEnumerable)));
 

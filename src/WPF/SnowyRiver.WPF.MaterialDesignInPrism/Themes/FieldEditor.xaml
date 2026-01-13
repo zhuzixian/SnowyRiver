@@ -1,0 +1,29 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:SnowyRiver.WPF.MaterialDesignInPrism.Controls">
+    <Style x:Key="SnowyRiver.Styles.FieldEditor.Header" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+    <Style x:Key="SnowyRiver.Styles.TextFieldEditor.Value" TargetType="TextBox" BasedOn="{StaticResource MahApps.Styles.TextBox}">
+        <Setter Property="Margin" Value="6, 0"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+    <Style x:Key="SnowyRiver.Styles.ComboBoxFieldEditor.Value" TargetType="TextBox" BasedOn="{StaticResource MahApps.Styles.ComboBox}">
+        <Setter Property="Margin" Value="6, 0"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+    <Style x:Key="SnowyRiver.Styles.FieldEditor.Unit" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+    </Style>
+    <Style x:Key="SnowyRiver.Styles.TextFieldEditor" TargetType="controls:TextFieldEditor">
+        <Setter Property="HeaderStyle" Value="{StaticResource SnowyRiver.Styles.FieldEditor.Header}"/>
+        <Setter Property="ValueStyle" Value="{StaticResource SnowyRiver.Styles.TextFieldEditor.Value}"/>
+        <Setter Property="UnitStyle" Value="{StaticResource SnowyRiver.Styles.FieldEditor.Unit}"/>
+    </Style>
+    <Style x:Key="SnowyRiver.Styles.ComboBoxFieldEditor" TargetType="controls:ComboBoxFieldEditor">
+        <Setter Property="HeaderStyle" Value="{StaticResource SnowyRiver.Styles.FieldEditor.Header}"/>
+        <Setter Property="ValueStyle" Value="{StaticResource SnowyRiver.Styles.ComboBoxFieldEditor.Value}"/>
+        <Setter Property="UnitStyle" Value="{StaticResource SnowyRiver.Styles.FieldEditor.Unit}"/>
+    </Style>
+</ResourceDictionary>

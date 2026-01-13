@@ -68,7 +68,7 @@ public static class CollectionExtensions
 
     extension<T>(IEnumerable<T> records) where T:IHasSortId
     {
-        public void FillSortId(IQueryFilter? filter = null)
+        public void FillSortId(IQueryFilter? filter)
         {
             var startSortId = filter == null 
                 ? 1
@@ -76,13 +76,12 @@ public static class CollectionExtensions
             records.FillSortId(startSortId);
         }
 
-        public void FillSortId(int? startId = 1)
+        public void FillSortId(int startId = 1)
         {
             var recordsArray = records as T[] ?? records.ToArray();
-            var baseSortId = startId ?? 1;
             for (var i = 0; i < recordsArray.Length; i++)
             {
-                recordsArray[i].SortId = baseSortId + i;
+                recordsArray[i].SortId = startId + i;
             }
         }
     }

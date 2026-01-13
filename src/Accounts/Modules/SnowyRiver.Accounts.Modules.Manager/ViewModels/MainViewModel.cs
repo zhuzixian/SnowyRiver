@@ -34,17 +34,15 @@ public class MainViewModel(IRegionManager regionManager) : RegionViewModelBase(r
         }
     }
 
-    private bool _teamsEnable = true;
     public bool TeamsEnable
     {
-        get => _teamsEnable;
-        set => SetProperty(ref _teamsEnable, value);
-    }
+        get;
+        set => SetProperty(ref field, value);
+    } = true;
 
-    private bool _permissionsEnable = true;
     public bool PermissionsEnable
     {
-        get => _permissionsEnable;
-        set => SetProperty(ref _permissionsEnable, value);
-    }
+        get;
+        set => SetProperty(ref field, value);
+    } = true;
 }

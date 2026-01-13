@@ -48,19 +48,17 @@ public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
 
     public Action? NextAction { get; protected set; }
 
-    private DelegateCommand? _confirmCommand;
-    public override DelegateCommand ConfirmCommand => _confirmCommand ??= new DelegateCommand(() => _ = ConfirmAsync(),
+    public override DelegateCommand ConfirmCommand => field ??= new DelegateCommand(() => _ = ConfirmAsync(),
             () => !string.IsNullOrWhiteSpace(Login.UserName) && !string.IsNullOrWhiteSpace(Login.Password))
         .ObservesProperty(() => Login.UserName)
         .ObservesProperty(() => Login.Password);
 
     public virtual bool EnableRememberMe { get; } = true;
 
-    private bool _isLoggingIn;
     public bool IsLoggingIn
     {
-        get => _isLoggingIn;
-        set => SetProperty(ref _isLoggingIn, value);
+        get;
+        set => SetProperty(ref field, value);
     }
 
     protected override async Task ConfirmAsync(CancellationToken cancellationToken = default)
@@ -120,23 +118,19 @@ public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
         Environment.Exit(-1);
     }
 
-    private Login? _login;
-    public Login Login => _login ??= new Login();
+    public Login Login => field ??= new Login();
 
-    private bool _rememberMe;
     public bool RememberMe
     {
-        get => _rememberMe;
-        set => SetProperty(ref _rememberMe, value);
+        get;
+        set => SetProperty(ref field, value);
     }
-
-    private string _message = string.Empty;
 
     public string Message
     {
-        get => _message;
-        set => SetProperty(ref _message, value);
-    }
+        get;
+        set => SetProperty(ref field, value);
+    } = string.Empty;
 
     protected virtual string RememberMeCacheKey => "Accounts.RememberMe";
 }

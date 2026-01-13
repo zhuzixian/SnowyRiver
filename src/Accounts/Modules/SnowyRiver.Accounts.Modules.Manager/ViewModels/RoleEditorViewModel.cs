@@ -89,11 +89,9 @@ public class RoleEditorViewModel(
 
     private IList<PermissionEntity> _permissionEntities = [];
 
-    private ObservableCollection<Permission> _permissions = [];
     public ObservableCollection<Permission> Permissions
     {
-        get => _permissions;
-        set => SetProperty(ref _permissions, value);
-    }
-       
+        get;
+        set => SetProperty(ref field, value);
+    } = [];
 }

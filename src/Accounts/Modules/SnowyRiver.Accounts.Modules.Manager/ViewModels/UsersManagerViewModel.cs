@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using EntityFrameworkCore.QueryBuilder.Interfaces;
 using EntityFrameworkCore.Repository.Interfaces;
-using EntityFrameworkCore.UnitOfWork.Interfaces;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using Prism.Navigation;
@@ -47,11 +46,10 @@ public class UsersManagerViewModel(IUnitOfWorkFactory unitOfWorkFactory, IMapper
         return Task.FromResult(query);
     }
 
-    private bool _teamsEnable;
     public bool TeamsEnable
     {
-        get => _teamsEnable;
-        set => SetProperty(ref _teamsEnable, value);
+        get;
+        set => SetProperty(ref field, value);
     }
 
     protected override string EditorView =>  ViewNames.UserEditorView;

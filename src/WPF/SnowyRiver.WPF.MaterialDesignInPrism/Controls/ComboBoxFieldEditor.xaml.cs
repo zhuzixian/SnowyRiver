@@ -35,4 +35,20 @@ public partial class ComboBoxFieldEditor
         set => SetValue(SelectedItemProperty, value);
     }
 
+    public static readonly DependencyProperty SelectedValueProperty = DependencyProperty.Register(
+        nameof(SelectedValue), typeof(object), typeof(ComboBoxFieldEditor), new PropertyMetadata(default(object)));
+    public object SelectedValue
+    {
+        get => GetValue(SelectedValueProperty);
+        set => SetValue(SelectedValueProperty, value);
+    }
+
+    public static readonly DependencyProperty SelectedValuePathProperty = DependencyProperty.Register(
+        nameof(SelectedValuePath), typeof(string), typeof(ComboBoxFieldEditor), new PropertyMetadata(default(string)));
+
+    public string SelectedValuePath
+    {
+        get => (string)GetValue(SelectedValuePathProperty);
+        set => SetValue(SelectedValuePathProperty, value);
+    }
 }

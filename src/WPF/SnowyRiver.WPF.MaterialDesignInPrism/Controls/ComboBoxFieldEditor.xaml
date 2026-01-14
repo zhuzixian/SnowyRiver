@@ -14,7 +14,11 @@
                    Style="{Binding HeaderStyle, RelativeSource={RelativeSource AncestorType=controls:ComboBoxFieldEditor}}"/>
         <ComboBox Grid.Column="1"  ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource AncestorType=controls:ComboBoxFieldEditor}}"
                   DisplayMemberPath="{Binding DisplayMemberPath, RelativeSource={RelativeSource AncestorType=controls:ComboBoxFieldEditor}}"
-                  SelectedItem="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType=controls:ComboBoxFieldEditor}}"
+                  SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged,  Mode=TwoWay,
+            RelativeSource={RelativeSource AncestorType=controls:ComboBoxFieldEditor}}"
+                  SelectedValue="{Binding SelectedValue, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay,
+            RelativeSource={RelativeSource AncestorType=controls:ComboBoxFieldEditor}}"
+                    SelectedValuePath="{Binding SelectedValuePath, RelativeSource={RelativeSource AncestorType=controls:ComboBoxFieldEditor}}"
                  Style="{Binding ValueStyle, RelativeSource={RelativeSource AncestorType=controls:ComboBoxFieldEditor}}"
                  IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource AncestorType=controls:ComboBoxFieldEditor}}"/>
         <TextBlock Grid.Column="2" Text="{Binding Unit, RelativeSource={RelativeSource AncestorType=controls:ComboBoxFieldEditor}}"

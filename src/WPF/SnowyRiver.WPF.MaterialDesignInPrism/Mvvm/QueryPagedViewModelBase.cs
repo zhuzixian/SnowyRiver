@@ -90,7 +90,8 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter>: RegionDia
 
     protected async Task NavigateToPreviousPageAsync(CancellationToken cancellationToken = default)
     {
-        await NavigateToPageAsync(Math.Max(1, Filter.PageIndex - 1), cancellationToken);
+        var pageIndex = Filter?.PageIndex - 1 ?? 1;
+        await NavigateToPageAsync(Math.Max(1, pageIndex), cancellationToken);
     }
 
     public DelegateCommand? NavigateToNextPageCommand
@@ -115,7 +116,7 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter>: RegionDia
 
     protected virtual Task NavigateToPageAsync(int pageIndex, CancellationToken cancellationToken = default)
     {
-        Filter.PageIndex = pageIndex;
+        Filter?.PageIndex = pageIndex;
         return Task.CompletedTask;
     }
 
@@ -154,7 +155,7 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter>: RegionDia
         set => SetProperty(ref field, value);
     } = new();
 
-    public TRecordFilter Filter
+    public TRecordFilter? Filter
     {
         get;
         set
@@ -162,8 +163,8 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter>: RegionDia
             var oldValue = Filter;
             if (SetProperty(ref field, value))
             {
-                Filter.PropertyChanged += FilterOnPropertyChanged;
-                oldValue.PropertyChanged -= FilterOnPropertyChanged;
+                Filter?.PropertyChanged += FilterOnPropertyChanged;
+                oldValue?.PropertyChanged -= FilterOnPropertyChanged;
             }
         }
     }

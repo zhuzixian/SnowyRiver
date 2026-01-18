@@ -8,4 +8,5 @@ public interface ILocalStorageValueProvider<T>:INotifyPropertyChanged
     Task RefreshAsync(CancellationToken cancellationToken = default);
 
     public T? Value { get; set; }
+    public T? DefaultValue { get; set; }
 }

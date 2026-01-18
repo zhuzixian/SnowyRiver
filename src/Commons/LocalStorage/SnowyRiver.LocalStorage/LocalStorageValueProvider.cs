@@ -6,7 +6,6 @@ public class LocalStorageValueProvider<T>
     :NotifyPropertyChangedObject, ILocalStorageValueProvider<T>
 {
     private readonly ILocalStorageService _localStorageService;
-    private readonly T? _default;
     public LocalStorageValueProvider(
         ILocalStorageService localStorageService,
         string? key = null,
@@ -20,7 +19,7 @@ public class LocalStorageValueProvider<T>
 
         if (defaultValue != null)
         {
-            _default = defaultValue;
+            DefaultValue = defaultValue;
         }
     }
 
@@ -43,7 +42,7 @@ public class LocalStorageValueProvider<T>
         }
         else
         {
-            Value = _default;
+            Value = DefaultValue;
         }
     }
 
@@ -52,6 +51,12 @@ public class LocalStorageValueProvider<T>
     {
         get;
         set => Set(ref field, value);
+    }
+
+    public T? DefaultValue
+    {
+        get; 
+        set;
     }
 
     protected virtual string Key { get; }

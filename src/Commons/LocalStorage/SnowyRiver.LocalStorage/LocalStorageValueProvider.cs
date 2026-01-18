@@ -36,14 +36,8 @@ public class LocalStorageValueProvider<T>
 
     public virtual async Task RefreshAsync(CancellationToken cancellationToken = default)
     {
-        if (await _localStorageService.ContainKeyAsync(Key, cancellationToken))
-        {
-            Value = await _localStorageService.GetItemAsync<T?>(Key, cancellationToken);
-        }
-        else
-        {
-            Value = DefaultValue;
-        }
+        Value = await _localStorageService.GetItemAsync<T?>(Key, cancellationToken);
+        Value ??= DefaultValue;
     }
 
 

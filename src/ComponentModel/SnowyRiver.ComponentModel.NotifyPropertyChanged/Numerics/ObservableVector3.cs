@@ -11,7 +11,7 @@ public class ObservableVector3<T> : ObservableVector2<T>
         Z = z;
     }
 
-    public T Z
+    public T? Z
     {
         get;
         set => Set(ref field, value);

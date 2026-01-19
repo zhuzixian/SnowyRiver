@@ -12,13 +12,13 @@ public class ObservableVector2<T> : NotifyPropertyChangedObject
         Y = y;
     }
 
-    public T X
+    public T? X
     {
         get;
         set => Set(ref field, value);
     }
 
-    public T Y
+    public T? Y
     {
         get;
         set => Set(ref field, value);

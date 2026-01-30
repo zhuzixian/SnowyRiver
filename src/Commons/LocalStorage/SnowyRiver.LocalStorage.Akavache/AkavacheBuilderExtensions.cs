@@ -17,8 +17,31 @@ public static class AkavacheBuilderExtensions
             throw new ArgumentNullException(nameof(builder));
         }
 
-        CacheDatabase.Initialize<T>(configure, applicationName, fileLocationOption);
+        if (fileLocationOption == FileLocationOption.Legacy && !string.IsNullOrWhiteSpace(applicationName))
+        {
+            var localMachineDirectory = Path.Combine(Environment.GetFolderPath(
+                Environment.SpecialFolder.LocalApplicationData), applicationName, "BlobCache");
+            if (!string.IsNullOrWhiteSpace(localMachineDirectory) && !Directory.Exists(localMachineDirectory))
+            {
+                Directory.CreateDirectory(localMachineDirectory);
+            }
 
+            var userAccountDirectory = Path.Combine(Environment.GetFolderPath(
+                    Environment.SpecialFolder.ApplicationData), applicationName, "BlobCache");
+            if (!string.IsNullOrWhiteSpace(userAccountDirectory) && !Directory.Exists(userAccountDirectory))
+            {
+                Directory.CreateDirectory(userAccountDirectory);
+            }
+
+            var secureDirectory = Path.Combine(Environment.GetFolderPath(
+                Environment.SpecialFolder.ApplicationData), applicationName, "SecretCache");
+            if (!string.IsNullOrWhiteSpace(secureDirectory) && !Directory.Exists(secureDirectory))
+            {
+                Directory.CreateDirectory(secureDirectory);
+            }
+        }
+
+        CacheDatabase.Initialize<T>(configure, applicationName, fileLocationOption);
         return builder;
     }
 }

@@ -22,7 +22,7 @@
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.10" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.10" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.10" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="10.0.1" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="10.0.2" />
     <PackageVersion Include="EntityFrameworkCore.Data.UnitOfWork" Version="9.0.0" />
     <PackageVersion Include="NLog.Extensions.Logging" Version="6.1.0" />
     <PackageVersion Include="Nito.AsyncEx" Version="5.1.2" />
@@ -34,7 +34,7 @@
     <PackageVersion Include="WPFLocalizeExtension" Version="3.10.0" />
     <PackageVersion Include="AsmResolver.DotNet" Version="5.5.1" />
     <PackageVersion Include="System.Reflection.Metadata" Version="10.0.1" />
-    <PackageVersion Include="System.IO.Ports" Version="10.0.1" />
+    <PackageVersion Include="System.IO.Ports" Version="10.0.2" />
     <PackageVersion Include="MahApps.Metro" Version="2.4.11" />
     <PackageVersion Include="MaterialDesignColors" Version="5.3.0" />
     <PackageVersion Include="MaterialDesignThemes" Version="5.3.0" />
@@ -45,6 +45,6 @@
     <PackageVersion Include="MathConverter" Version="2.2.1" />
     <PackageVersion Include="DryIoc.Microsoft.DependencyInjection" Version="6.2.0" />
     <PackageVersion Include="Xunit.StaFact" Version="3.0.13" />
-    <PackageVersion Include="xunit.v3" Version="3.2.1" />
+    <PackageVersion Include="xunit.v3" Version="3.2.2" />
   </ItemGroup>
 </Project>

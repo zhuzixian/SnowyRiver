@@ -57,8 +57,8 @@ public class AuthenticationService<TTeam, TRole, TUser, TPermission,
     {
         using var unitOfWork = unitOfWorkFactory.Create();
         return unitOfWork.Repository<TUserEntity>().MultipleResultQuery()
-            .Include(x => x.Include(user => user.Teams))
-            .Include(x => x.Include(user => user.Roles)
+            .Include(x => x.Include(user => user.Teams)
+                .Include(user => user.Roles)
                 .ThenInclude(role => role.Permissions))
             .AndFilter(user => user.Name == username);
     }

@@ -1,6 +1,7 @@
-﻿using System.Text;
+﻿using System.Security.Cryptography;
+using System.Text;
 
-namespace System.Security.Cryptography;
+namespace SnowyRiver.Security.Cryptography;
 
 public class HashHelper
 {

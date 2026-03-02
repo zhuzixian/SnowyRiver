@@ -81,7 +81,7 @@
     <Project Path="OpenCv/SnowyRiver.OpenCvSharp.Extensions/SnowyRiver.OpenCvSharp.Extensions.csproj" />
   </Folder>
   <Folder Name="/Security/">
-    <Project Path="Security/System.Security.Cryptography/System.Security.Cryptography.csproj" Id="657fb7dd-d609-443a-adc4-1b59de12b834" />
+    <Project Path="Security/SnowyRiver.Security.Cryptography/SnowyRiver.Security.Cryptography.csproj" />
   </Folder>
   <Folder Name="/Tests/" />
   <Folder Name="/Tests/Documents/">

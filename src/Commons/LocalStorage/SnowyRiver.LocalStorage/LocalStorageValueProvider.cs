@@ -2,10 +2,28 @@
 using SnowyRiver.LocalStorage.Interface;
 
 namespace SnowyRiver.LocalStorage;
-public abstract class LocalStorageValueProvider<T>(
-    ILocalStorageService localStorageService)
+public class LocalStorageValueProvider<T>
     :NotifyPropertyChangedObject, ILocalStorageValueProvider<T>
 {
+    private readonly ILocalStorageService _localStorageService;
+    public LocalStorageValueProvider(
+        ILocalStorageService localStorageService,
+        string? key = null,
+        T? defaultValue = default)
+    {
+        _localStorageService = localStorageService;
+        if (!string.IsNullOrWhiteSpace(key))
+        {
+            Key = key;
+        }
+
+        if (defaultValue != null)
+        {
+            DefaultValue = defaultValue;
+        }
+    }
+
+
     public virtual async Task InitializeAsync(CancellationToken cancellationToken = default)
     {
         await RefreshAsync(cancellationToken);
@@ -13,23 +31,27 @@ public abstract class LocalStorageValueProvider<T>(
 
     public virtual async Task SaveAsync(CancellationToken cancellationToken = default)
     {
-        await localStorageService.SetItemAsync(Key, Value, cancellationToken);
+        await _localStorageService.SetItemAsync(Key, Value, cancellationToken);
     }
 
     public virtual async Task RefreshAsync(CancellationToken cancellationToken = default)
     {
-        Value = await localStorageService.GetItemAsync<T?>(Key, cancellationToken);
+        Value = await _localStorageService.GetItemAsync<T?>(Key, cancellationToken);
+        Value ??= DefaultValue;
     }
 
-
-    private T? _value;
 
     public T? Value
     {
-        get => _value; 
-        set => Set(ref _value, value);
+        get;
+        set => Set(ref field, value);
     }
 
+    public T? DefaultValue
+    {
+        get; 
+        set;
+    }
 
-    protected abstract string Key { get; }
+    protected virtual string Key { get; }
 }

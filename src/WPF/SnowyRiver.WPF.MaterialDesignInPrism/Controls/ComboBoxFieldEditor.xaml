@@ -1,4 +1,4 @@
-﻿<controls:FieldEditor x:Class="SnowyRiver.WPF.MaterialDesignInPrism.Controls.ComboBoxFieldEditor"
+﻿<UserControl x:Class="SnowyRiver.WPF.MaterialDesignInPrism.Controls.ComboBoxFieldEditor"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
@@ -24,4 +24,4 @@
         <TextBlock Grid.Column="2" Text="{Binding Unit, RelativeSource={RelativeSource AncestorType=controls:ComboBoxFieldEditor}}"
                    Style="{Binding UnitStyle, RelativeSource={RelativeSource AncestorType=controls:ComboBoxFieldEditor}}"/>
     </Grid>
-</controls:FieldEditor>
+</UserControl>

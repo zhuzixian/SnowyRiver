@@ -7,7 +7,7 @@ public class LocalStorageProvider : ILocalStorageProvider
 {
     public async ValueTask<bool> ContainKeyAsync(string key, CancellationToken cancellationToken = default)
     {
-        var allKeys = await CacheDatabase.LocalMachine.GetAllKeys();
+        var allKeys = await CacheDatabase.LocalMachine.GetAllKeys().ToList();
         return allKeys.Contains(key);
     }
 

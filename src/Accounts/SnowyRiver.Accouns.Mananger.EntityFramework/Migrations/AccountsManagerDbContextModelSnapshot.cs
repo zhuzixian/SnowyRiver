@@ -15,7 +15,7 @@ namespace SnowyRiver.Accounts.Manager.EntityFramework.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
+            modelBuilder.HasAnnotation("ProductVersion", "9.0.13");
 
             modelBuilder.Entity("Accounts_RolePermissions", b =>
                 {
@@ -68,7 +68,13 @@ namespace SnowyRiver.Accounts.Manager.EntityFramework.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Alias")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("CreationTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsDeleted")

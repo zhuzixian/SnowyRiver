@@ -9,6 +9,11 @@ public class Role<TUser, TRole, TTeam, TPermission> : HasNameCreationTimeSoftDel
     where TPermission : Permission<TUser, TRole, TTeam, TPermission>
 {
     /// <summary>
+    /// 命名
+    /// </summary>
+    public string? Alias { get; set; }
+
+    /// <summary>
     /// 权限范围
     /// </summary>
     public PermissionsScope Scope { get; set; }

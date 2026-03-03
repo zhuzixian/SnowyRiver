@@ -1,9 +1,9 @@
-﻿<controls:FieldEditor x:Class="SnowyRiver.WPF.MaterialDesignInPrism.Controls.TextFieldEditor"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:prism="http://prismlibrary.com/"
-             xmlns:controls="clr-namespace:SnowyRiver.WPF.MaterialDesignInPrism.Controls"
-             prism:ViewModelLocator.AutoWireViewModel="True">
+﻿<UserControl x:Class="SnowyRiver.WPF.MaterialDesignInPrism.Controls.TextFieldEditor"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:prism="http://prismlibrary.com/"
+                          xmlns:controls="clr-namespace:SnowyRiver.WPF.MaterialDesignInPrism.Controls"
+                          prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -21,4 +21,4 @@
         <TextBlock Grid.Column="2" Text="{Binding Unit, RelativeSource={RelativeSource AncestorType=controls:TextFieldEditor}}"
                    Style="{Binding UnitStyle, RelativeSource={RelativeSource AncestorType=controls:TextFieldEditor}}"/>
     </Grid>
-</controls:FieldEditor>
+</UserControl>

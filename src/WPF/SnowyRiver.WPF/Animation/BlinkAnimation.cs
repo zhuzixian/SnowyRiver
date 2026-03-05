@@ -38,7 +38,7 @@ public class BlinkAnimation : Animatable
             var frame2 = new DiscreteDoubleKeyFrame(1.0, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.75)));
 
             doubleAnimation.KeyFrames.Add(frame1);
-            doubleAnimation.KeyFrames.Add(frame1);
+            doubleAnimation.KeyFrames.Add(frame2);
 
             BeginAnimation(BlinkOpacityProperty, doubleAnimation);
         }

@@ -10,25 +10,25 @@ using Prism.Navigation.Regions;
 using SnowyRiver.Accounts.Domain.Helpers;
 using SnowyRiver.Accounts.Services.Interfaces;
 using SnowyRiver.EF.DataAccess.Abstractions;
-using UserEntity = SnowyRiver.Accounts.Domain.Entities.User;
-using RoleEntity = SnowyRiver.Accounts.Domain.Entities.Role;
-using TeamEntity = SnowyRiver.Accounts.Domain.Entities.Team;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
 public class UserEditorViewModelBase<
     TUser, TUserEntity, 
     TRole, TRoleEntity,
-    TTeam, TTeamEntity>(
+    TTeam, TTeamEntity,
+    TPermission, TPermissionEntity>(
     IUnitOfWorkFactory unitOfWorkFactory, 
     IMapper mapper,
     IRegionManager regionManager)
     : EditorViewModel<TUser, TUserEntity>(unitOfWorkFactory, mapper, regionManager)
-    where TUserEntity : UserEntity
-    where TUser : User, new()
-    where TRoleEntity: RoleEntity
-    where TRole : Role, new()
-    where TTeamEntity : TeamEntity
-    where TTeam : Team, new()
+    where TUserEntity : SnowyRiver.Accounts.Domain.Entities.User<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
+    where TUser : User<TUser, TRole, TTeam, TPermission>, new()
+    where TRoleEntity: SnowyRiver.Accounts.Domain.Entities.Role<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
+    where TRole : Role<TUser, TRole, TTeam, TPermission>, new()
+    where TTeamEntity : SnowyRiver.Accounts.Domain.Entities.Team<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
+    where TTeam : Team<TUser, TRole, TTeam, TPermission>, new()
+    where TPermissionEntity : SnowyRiver.Accounts.Domain.Entities.Permission<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
+    where TPermission : Permission<TUser, TRole, TTeam, TPermission>, new()
 {
     public override async void OnNavigatedTo(NavigationContext navigationContext)
     {
@@ -113,7 +113,7 @@ public class UserEditorViewModelBase<
         await MapToEntityAsync(entity);
     }
 
-    private async Task MapToEntityAsync(UserEntity entity)
+    private async Task MapToEntityAsync(TUserEntity entity)
     {
         entity.Roles.Clear();
         foreach (var role in Roles)

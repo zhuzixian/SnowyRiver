@@ -11,14 +11,14 @@ using SnowyRiver.Accounts.Manager.EntityFramework;
 namespace SnowyRiver.Accounts.Manager.EntityFramework.Migrations
 {
     [DbContext(typeof(AccountsManagerDbContext))]
-    [Migration("20260219020205_Initial")]
+    [Migration("20260306062505_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "9.0.13");
+            modelBuilder.HasAnnotation("ProductVersion", "10.0.3");
 
             modelBuilder.Entity("Accounts_RolePermissions", b =>
                 {
@@ -96,6 +96,9 @@ namespace SnowyRiver.Accounts.Manager.EntityFramework.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Alias")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreationTime")

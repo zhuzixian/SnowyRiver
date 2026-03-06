@@ -13,45 +13,7 @@ using UserEntity = SnowyRiver.Accounts.Domain.Entities.User;
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
 public class UsersManagerViewModel(IUnitOfWorkFactory unitOfWorkFactory, IMapper mapper,
     IDialogHostService dialog,
-    IRegionManager regionManager) : ManagerViewModel<User, UserEntity>(
+    IRegionManager regionManager) : UsersManagerViewModelBase<User, UserEntity>(
         unitOfWorkFactory, mapper, dialog, regionManager)
 {
-    public override async void OnNavigatedTo(NavigationContext navigationContext)
-    {
-        if (navigationContext.Parameters.TryGetValue<bool>(nameof(TeamsEnable), out var teamsEnable))
-        {
-            TeamsEnable = teamsEnable;
-        }
-        base.OnNavigatedTo(navigationContext);
-    }
-
-    protected override async Task NavigateToPermissionEditorViewAsync(User model)
-    {
-        var parameters = new NavigationParameters
-        {
-            { "Model", model },
-            { nameof(TeamsEnable),  TeamsEnable },
-        };
-        RegionManager.RequestNavigate(ManagerViewRegion, EditorView, parameters);
-        await Task.CompletedTask;
-    }
-
-    protected override Task<IMultipleResultQuery<UserEntity>> GetQueryAsync(IRepository<UserEntity> repository)
-    {
-        var query = repository.MultipleResultQuery()
-            .OrderByDescending(x => x.CreationTime)
-            .Include(x => x.Include(u => u.Teams))
-            .Include(x => x.Include(u => u.Roles)
-                .ThenInclude(r => r.Permissions));
-        return Task.FromResult(query);
-    }
-
-    public bool TeamsEnable
-    {
-        get;
-        set => SetProperty(ref field, value);
-    }
-
-    protected override string EditorView =>  ViewNames.UserEditorView;
-    protected override string ManagerViewRegion => RegionNames.UsersManagerViewRegion;
 }

@@ -9,8 +9,6 @@ namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
 public class TeamsManagerViewModel(IUnitOfWorkFactory unitOfWorkFactory, IMapper mapper, 
     IDialogHostService dialog,
     IRegionManager regionManager) 
-    : ManagerViewModel<Team, TeamEntity>(unitOfWorkFactory, mapper, dialog, regionManager)
+    : TeamsManagerViewModelBase<Team, TeamEntity>(unitOfWorkFactory, mapper, dialog, regionManager)
 {
-    protected override string EditorView => ViewNames.TeamEditorView;
-    protected override string ManagerViewRegion => RegionNames.TeamsManagerViewRegion;
 }

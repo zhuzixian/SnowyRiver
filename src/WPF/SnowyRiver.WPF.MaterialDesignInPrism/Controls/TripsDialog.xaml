@@ -4,6 +4,13 @@
              xmlns:prism="http://prismlibrary.com/"
              xmlns:controls="clr-namespace:SnowyRiver.WPF.MaterialDesignInPrism.Controls"
              prism:ViewModelLocator.AutoWireViewModel="True">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/SnowyRiver.WPF.MaterialDesignInPrism;component/Themes/Dilalog.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -11,20 +18,13 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Text="{Binding Title, RelativeSource={RelativeSource AncestorType=controls:TripsDialog}}"
-                   HorizontalAlignment="Center"
-                   Foreground="{DynamicResource MaterialDesign.Brush.Primary}"
-                   Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                   Style="{StaticResource SnowyRiver.Styles.Dialog.Title}"/>
         <TextBlock Grid.Row="1" Text="{Binding Message, RelativeSource={RelativeSource AncestorType=controls:TripsDialog}}"
                    TextWrapping="Wrap" VerticalAlignment="Center"/>
         <ItemsControl Grid.Row="2" ItemsSource="{Binding Buttons, RelativeSource={RelativeSource AncestorType=controls:TripsDialog}}"
                       HorizontalAlignment="Right">
             <ItemsControl.Resources>
-                <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatMidBgButton}">
-                    <Setter Property="Margin" Value="12, 0"/>
-                    <Setter Property="Width" Value="100"/>
-                    <Setter Property="Height" Value="42"/>
-                    <Setter Property="Foreground" Value="{DynamicResource MaterialDesign.Brush.Primary.Dark.Foreground}"/>
-                </Style>
+                <Style TargetType="Button" BasedOn="{StaticResource SnowyRiver.Styles.Dialog.Button}"/>
             </ItemsControl.Resources>
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

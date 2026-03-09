@@ -20,8 +20,9 @@
             </ToolBar>
         </ToolBarTray>
         <UniformGrid Grid.Row="1" Columns="2">
-            <controls:TextInput Text="{lex:Loc Name}" Value="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                Margin="64"/>
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                <snowyRiverControls:TextFieldEditor Header="{lex:Loc Name}" Value="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            </StackPanel>
             <controls:ListInput Header="{lex:Loc Permissions}" ItemsSource="{Binding Permissions}"
                                 Margin="64"/>
         </UniformGrid>

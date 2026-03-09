@@ -183,4 +183,7 @@
   <data name="RememberMe" xml:space="preserve">
     <value>记住我</value>
   </data>
+  <data name="Code" xml:space="preserve">
+    <value>编码</value>
+  </data>
 </root>

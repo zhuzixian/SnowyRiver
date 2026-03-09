@@ -2,6 +2,7 @@
 using Akavache.Sqlite3;
 using Akavache.SystemTextJson;
 using EntityFrameworkCore.UnitOfWork.Extensions;
+using Mapster;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,8 +15,10 @@ using SnowyRiver.Accounts.Manager.EntityFramework;
 using SnowyRiver.Accounts.Manager.ViewModels;
 using SnowyRiver.Accounts.Manager.Views;
 using SnowyRiver.Accounts.Modules.Manager;
+using SnowyRiver.Accounts.Modules.Manager.Views;
 using SnowyRiver.Accounts.Services;
 using SnowyRiver.Accounts.Services.Interfaces;
+using SnowyRiver.EF.DataAccess.Extensions;
 using SnowyRiver.Reflection;
 using SnowyRiver.WPF.MaterialDesignInPrism;
 using SnowyRiver.WPF.Modules.Splash;
@@ -26,8 +29,6 @@ using System.Globalization;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using Mapster;
-using SnowyRiver.EF.DataAccess.Extensions;
 
 namespace SnowyRiver.Accounts.Manager
 {
@@ -122,6 +123,7 @@ namespace SnowyRiver.Accounts.Manager
             base.ConfigureModuleCatalog(moduleCatalog);
             moduleCatalog.AddModule<AccountManagerModule>();
             moduleCatalog.AddModule<SnowyRiverSplashModule>();
+            moduleCatalog.AddModule<AccountsManagerAppModule>();
         }
     }
 }

@@ -36,6 +36,8 @@
                 <DataGridTextColumn Header="{lex:Loc SortId}" Binding="{Binding SortId}"/>
                 <DataGridTextColumn Header="{lex:Loc Name}" Binding="{Binding Name}"
                                   Width="*"/>
+                <DataGridTextColumn Header="{lex:Loc Code}" Binding="{Binding Code}"
+                                    Width="*"/>
                 <DataGridTextColumn Header="{lex:Loc CreationTime}" Binding="{Binding CreationTime,StringFormat=yyyy-MM-dd HH:mm:ss}"   
                                   Width="*"
                                   />

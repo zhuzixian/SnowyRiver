@@ -1,36 +1,32 @@
 ﻿using SnowyRiver.ComponentModel.NotifyPropertyChanged;
+using SnowyRiver.Domain.Shared.Entities;
 
 namespace SnowyRiver.Accounts.Services.Interfaces;
-public class EntityModel : NotifyPropertyChangedObject
+public class EntityModel : NotifyPropertyChangedObject,IHasSortId
 {
     public Guid Id { get; set; }
 
-    private DateTime _creationTime = DateTime.Now;
-
     public DateTime CreationTime
     {
-        get => _creationTime;
-        set => Set(ref _creationTime, value);
-    }
+        get;
+        set => Set(ref field, value);
+    } = DateTime.Now;
 
-    private int _sortId;
     public int SortId
     {
-        get => _sortId;
-        set => SetProperty(ref _sortId, value);
+        get;
+        set => SetProperty(ref field, value);
     }
 
-    private string _name = string.Empty;
     public string Name
     {
-        get => _name;
-        set => SetProperty(ref _name, value);
-    }
+        get;
+        set => SetProperty(ref field, value);
+    } = string.Empty;
 
-    private bool _isSelected;
     public bool IsSelected
     {
-        get => _isSelected;
-        set => SetProperty(ref _isSelected, value);
+        get;
+        set => SetProperty(ref field, value);
     }
 }

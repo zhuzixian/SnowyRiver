@@ -10,6 +10,7 @@ using Prism.Navigation;
 using Prism.Navigation.Regions;
 using SnowyRiver.Accounts.Services.Interfaces;
 using SnowyRiver.Domain.Entities;
+using SnowyRiver.Domain.Shared.Extensions;
 using SnowyRiver.EF.DataAccess.Abstractions;
 using SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs;
 using SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
@@ -74,10 +75,7 @@ public abstract class ManagerViewModel<TModel, TEntity>(IUnitOfWorkFactory unitO
         var result = await repository.SearchAsync(query);
         Models = await mapper.From(result)
             .AdaptToTypeAsync<ObservableCollection<TModel>>();
-        for (var i = 0; i < Models.Count; i++)
-        {
-            Models[i].SortId = i + 1;
-        }
+        Models.FillSortId();
     }
 
     protected virtual Task<IMultipleResultQuery<TEntity>> GetQueryAsync(IRepository<TEntity> repository)

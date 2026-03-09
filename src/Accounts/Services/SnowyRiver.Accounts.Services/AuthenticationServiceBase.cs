@@ -68,26 +68,21 @@ public class AuthenticationService<TTeam, TRole, TUser, TPermission,
         await Task.CompletedTask;
     }
 
-    private bool _isAuthenticated;
-
     public bool IsAuthenticated
     {
-        get => _isAuthenticated;
-        set => Set(ref _isAuthenticated, value);
+        get;
+        set => Set(ref field, value);
     }
-
-    private TUser? _user;
 
     public TUser? User
     {
-        get => _user;
-        protected set => Set(ref _user, value);
+        get;
+        protected set => Set(ref field, value);
     }
 
-    private TTeam? _selectedTeam;
     public TTeam? SelectedTeam
     {
-        get => _selectedTeam;
-        set => Set(ref _selectedTeam, value);
+        get;
+        set => Set(ref field, value);
     }
 }

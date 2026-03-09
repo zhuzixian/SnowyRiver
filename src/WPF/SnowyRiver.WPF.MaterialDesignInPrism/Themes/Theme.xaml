@@ -1,0 +1,6 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/SnowyRiver.WPF.MaterialDesignInPrism;component/Themes/FieldEditor.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/SnowyRiver.WPF.MaterialDesignInPrism;component/Themes/dilalog.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

@@ -7,17 +7,21 @@ public class Permission<TUser, TRole, TTeam, TPermission> : EntityModel
     where TRole : Role<TUser, TRole, TTeam, TPermission>
     where TPermission : Permission<TUser, TRole, TTeam, TPermission>
 {
-    private ObservableCollection<TRole> _roles = [];
     public ObservableCollection<TRole> Roles
     {
-        get => _roles;
-        set => Set(ref _roles, value);
+        get;
+        set => Set(ref field, value);
+    } = [];
+
+    public string? Code
+    {
+        get;
+        set => Set(ref field, value);
     }
 
-    private string? _alias;
     public string? Alias
     {
-        get => _alias;
-        set => SetProperty(ref _alias, value);
+        get;
+        set => SetProperty(ref field, value);
     }
 }

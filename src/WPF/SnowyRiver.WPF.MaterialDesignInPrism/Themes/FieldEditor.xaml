@@ -9,6 +9,10 @@
         <Setter Property="Margin" Value="6, 0"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
+    <Style x:Key="SnowyRiver.Styles.PassWordFieldEditor.Value" TargetType="PasswordBox" BasedOn="{StaticResource MahApps.Styles.PasswordBox}">
+        <Setter Property="Margin" Value="6, 0"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
     <Style x:Key="SnowyRiver.Styles.ComboBoxFieldEditor.Value" TargetType="ComboBox" BasedOn="{StaticResource MahApps.Styles.ComboBox}">
         <Setter Property="Margin" Value="6, 0"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -17,13 +21,31 @@
         <Setter Property="VerticalAlignment" Value="Bottom"/>
     </Style>
     <Style x:Key="SnowyRiver.Styles.TextFieldEditor" TargetType="controls:TextFieldEditor">
+        <Setter Property="Margin" Value="0, 6"/>
         <Setter Property="HeaderStyle" Value="{StaticResource SnowyRiver.Styles.FieldEditor.Header}"/>
         <Setter Property="ValueStyle" Value="{StaticResource SnowyRiver.Styles.TextFieldEditor.Value}"/>
         <Setter Property="UnitStyle" Value="{StaticResource SnowyRiver.Styles.FieldEditor.Unit}"/>
     </Style>
+    <Style x:Key="SnowyRiver.Styles.PasswordFieldEditor" TargetType="controls:PasswordFieldEditor">
+        <Setter Property="Margin" Value="0, 6"/>
+        <Setter Property="HeaderStyle" Value="{StaticResource SnowyRiver.Styles.FieldEditor.Header}"/>
+        <Setter Property="ValueStyle" Value="{StaticResource SnowyRiver.Styles.PassWordFieldEditor.Value}"/>
+        <Setter Property="UnitStyle" Value="{StaticResource SnowyRiver.Styles.FieldEditor.Unit}"/>
+    </Style>
     <Style x:Key="SnowyRiver.Styles.ComboBoxFieldEditor" TargetType="controls:ComboBoxFieldEditor">
+        <Setter Property="Margin" Value="0, 6"/>
         <Setter Property="HeaderStyle" Value="{StaticResource SnowyRiver.Styles.FieldEditor.Header}"/>
         <Setter Property="ValueStyle" Value="{StaticResource SnowyRiver.Styles.ComboBoxFieldEditor.Value}"/>
         <Setter Property="UnitStyle" Value="{StaticResource SnowyRiver.Styles.FieldEditor.Unit}"/>
+    </Style>
+
+    <Style x:Key="{x:Type controls:TextFieldEditor}" TargetType="controls:TextFieldEditor"
+           BasedOn="{StaticResource SnowyRiver.Styles.TextFieldEditor}">
+    </Style>
+    <Style x:Key="{x:Type controls:PasswordFieldEditor}" TargetType="controls:PasswordFieldEditor"
+           BasedOn="{StaticResource SnowyRiver.Styles.PasswordFieldEditor}">
+    </Style>
+    <Style x:Key="{x:Type controls:ComboBoxFieldEditor}" TargetType="controls:ComboBoxFieldEditor"
+           BasedOn="{StaticResource SnowyRiver.Styles.ComboBoxFieldEditor}">
     </Style>
 </ResourceDictionary>

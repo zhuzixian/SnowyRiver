@@ -16,9 +16,4 @@ public class PermissionEditorViewModel(
     IRegionManager regionManager)
     : PermissionEditorViewModelBase<User, UserEntity, Role, RoleEntity, Team, TeamEntity, Permission, PermissionEntity>(unitOfWorkFactory, mapper, regionManager)
 {
-    protected override async Task MapToEntityAsync(Permission model, PermissionEntity entity)
-    {
-        await base.MapToEntityAsync(model, entity);
-        entity.Name = model.Name;
-    }
 }

@@ -64,12 +64,7 @@ public class EditorViewModel<TModel, TEntity>(
 
     protected virtual async Task MapToEntityAsync(TModel model, TEntity entity)
     {
-        if (entity.Id == Guid.Empty)
-        {
-            entity.Id = model.Id;
-        }
-
-        await Task.CompletedTask;
+        await mapper.From(model).AdaptToAsync(entity);
     }
 
     public DelegateCommand BackCommand

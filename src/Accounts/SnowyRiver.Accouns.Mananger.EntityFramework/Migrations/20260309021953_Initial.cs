@@ -19,12 +19,20 @@ namespace SnowyRiver.Accounts.Manager.EntityFramework.Migrations
                     IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false),
                     CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
+                    SortId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Code = table.Column<string>(type: "TEXT", nullable: true),
+                    ParentId = table.Column<Guid>(type: "TEXT", nullable: true),
                     Alias = table.Column<string>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Accounts_Permissions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Accounts_Permissions_Accounts_Permissions_ParentId",
+                        column: x => x.ParentId,
+                        principalTable: "Accounts_Permissions",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -36,6 +44,7 @@ namespace SnowyRiver.Accounts.Manager.EntityFramework.Migrations
                     CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false),
                     Alias = table.Column<string>(type: "TEXT", nullable: true),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
                     Scope = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -68,7 +77,8 @@ namespace SnowyRiver.Accounts.Manager.EntityFramework.Migrations
                     Name = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false),
                     UserId = table.Column<int>(type: "INTEGER", nullable: false),
                     Password = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false),
-                    PasswordSalt = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false)
+                    PasswordSalt = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false),
+                    IsActive = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -147,6 +157,11 @@ namespace SnowyRiver.Accounts.Manager.EntityFramework.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Accounts_Permissions_ParentId",
+                table: "Accounts_Permissions",
+                column: "ParentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Accounts_RolePermissions_RolesId",

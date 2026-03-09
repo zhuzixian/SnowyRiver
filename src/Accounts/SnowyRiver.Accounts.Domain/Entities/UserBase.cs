@@ -12,6 +12,8 @@ public class User<TUser, TRole, TTeam, TPermission> : HasNameCreationTimeSoftDel
     public string Password { get; set; } = string.Empty;
     public string PasswordSalt { get; set; } = string.Empty;
 
+    public bool IsActive { get; set; } = true;
+
     public List<TRole> Roles { get; set; } = [];
     public List<TTeam> Teams { get; set; } = [];
 }

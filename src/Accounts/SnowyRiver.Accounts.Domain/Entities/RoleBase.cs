@@ -14,6 +14,11 @@ public class Role<TUser, TRole, TTeam, TPermission> : HasNameCreationTimeSoftDel
     public string? Alias { get; set; }
 
     /// <summary>
+    /// 描述
+    /// </summary>
+    public string? Description { get; set; }
+
+    /// <summary>
     /// 权限范围
     /// </summary>
     public PermissionsScope Scope { get; set; }

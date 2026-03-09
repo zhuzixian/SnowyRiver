@@ -24,9 +24,4 @@ public class TeamEditorViewModelBase<
     where TPermissionEntity : SnowyRiver.Accounts.Domain.Entities.Permission<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
     where TPermission : Permission<TUser, TRole, TTeam, TPermission>, new()
 {
-    protected override async Task MapToEntityAsync(TTeam model, TTeamEntity entity)
-    {
-        await base.MapToEntityAsync(model, entity);
-        entity.Name = model.Name;
-    }
 }

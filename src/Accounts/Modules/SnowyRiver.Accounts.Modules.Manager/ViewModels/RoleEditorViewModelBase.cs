@@ -69,7 +69,6 @@ public class RoleEditorViewModelBase<
     protected override async Task MapToEntityAsync(TRole model, TRoleEntity entity)
     {
         await base.MapToEntityAsync(model, entity);
-        entity.Name = model.Name;
         await MapToEntityAsync(entity);
     }
 

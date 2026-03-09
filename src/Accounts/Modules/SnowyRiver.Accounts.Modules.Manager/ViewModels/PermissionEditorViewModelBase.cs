@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using MapsterMapper;
 using Prism.Navigation.Regions;
 using SnowyRiver.Accounts.Services.Interfaces;
 using SnowyRiver.EF.DataAccess.Abstractions;
-using PermissionEntity = SnowyRiver.Accounts.Domain.Entities.Permission;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
 public class PermissionEditorViewModelBase<
@@ -24,9 +24,9 @@ public class PermissionEditorViewModelBase<
     where TPermissionEntity : SnowyRiver.Accounts.Domain.Entities.Permission<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
     where TPermission : Permission<TUser, TRole, TTeam, TPermission>, new()
 {
-    protected override async Task MapToEntityAsync(TPermission model, TPermissionEntity entity)
+    public virtual ObservableCollection<string>? PermissionCodes
     {
-        await base.MapToEntityAsync(model, entity);
-        entity.Name = model.Name;
+        get;
+        protected set => SetProperty(ref field, value);
     }
 }

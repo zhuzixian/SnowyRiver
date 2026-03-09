@@ -71,6 +71,9 @@ namespace SnowyRiver.Accounts.Manager.EntityFramework.Migrations
                     b.Property<string>("Alias")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Code")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("TEXT");
 
@@ -84,7 +87,15 @@ namespace SnowyRiver.Accounts.Manager.EntityFramework.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid?>("ParentId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("SortId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
 
                     b.ToTable("Accounts_Permissions", (string)null);
                 });
@@ -99,6 +110,9 @@ namespace SnowyRiver.Accounts.Manager.EntityFramework.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreationTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsDeleted")
@@ -150,6 +164,9 @@ namespace SnowyRiver.Accounts.Manager.EntityFramework.Migrations
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("INTEGER");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("INTEGER");
@@ -223,6 +240,20 @@ namespace SnowyRiver.Accounts.Manager.EntityFramework.Migrations
                         .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("SnowyRiver.Accounts.Domain.Entities.Permission", b =>
+                {
+                    b.HasOne("SnowyRiver.Accounts.Domain.Entities.Permission", "Parent")
+                        .WithMany("Children")
+                        .HasForeignKey("ParentId");
+
+                    b.Navigation("Parent");
+                });
+
+            modelBuilder.Entity("SnowyRiver.Accounts.Domain.Entities.Permission", b =>
+                {
+                    b.Navigation("Children");
                 });
 #pragma warning restore 612, 618
         }

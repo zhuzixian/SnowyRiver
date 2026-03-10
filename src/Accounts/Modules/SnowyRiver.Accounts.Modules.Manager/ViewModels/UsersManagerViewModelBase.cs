@@ -62,7 +62,7 @@ public class UsersManagerViewModelBase<
     {
         get;
         set => SetProperty(ref field, value);
-    }
+    } = true;
 
     protected override string EditorView =>  ViewNames.UserEditorView;
     protected override string ManagerViewRegion => RegionNames.UsersManagerViewRegion;

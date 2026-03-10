@@ -1,8 +1,10 @@
 ﻿using EntityFrameworkCore.UnitOfWork.Interfaces;
 using Mapster;
 using MapsterMapper;
+using Microsoft.EntityFrameworkCore;
 using Prism.Navigation.Regions;
 using SnowyRiver.Accounts.Services.Interfaces;
+using SnowyRiver.Domain.Entities;
 using SnowyRiver.EF.DataAccess.Abstractions;
 using System;
 using System.Collections.Generic;
@@ -10,7 +12,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
 
@@ -60,16 +61,15 @@ public class RoleEditorViewModelBase<
 
     protected override async Task AddAsync(IUnitOfWork unitOfWork, CancellationToken cancellationToken = default)
     {
-        var permissionEntities = await GetPermissionEntitiesAsync(unitOfWork, cancellationToken);
         var entity = await mapper.From(Model)
             .AdaptToTypeAsync<TRoleEntity>();
-        entity.Permissions = permissionEntities.ToList();
+        await UpdateAsync(unitOfWork, entity.Permissions, Permissions, cancellationToken);
         await unitOfWork.Repository<TRoleEntity>().AddAsync(entity, cancellationToken);
     }
 
+
     protected override async Task UpdateAsync(IUnitOfWork unitOfWork, CancellationToken cancellationToken = default)
     {
-        var permissionEntities = await GetPermissionEntitiesAsync(unitOfWork, cancellationToken);
         var roleRepository = unitOfWork.Repository<TRoleEntity>();
         var entity = await roleRepository.SingleOrDefaultAsync(roleRepository.SingleResultQuery()
                 .Include(x => x.Include(e => e.Permissions))
@@ -77,20 +77,8 @@ public class RoleEditorViewModelBase<
         if (entity != null)
         {
             entity.Name = Model.Name;
-            entity.Permissions.Clear();
-            entity.Permissions.AddRange(permissionEntities);
+            await UpdateAsync(unitOfWork, entity.Permissions, Permissions, cancellationToken);
         }
-    }
-
-    private async Task<IList<TPermissionEntity>> GetPermissionEntitiesAsync(IUnitOfWork unitOfWork, CancellationToken cancellationToken = default)
-    {
-        var permissionRepository = unitOfWork.Repository<TPermissionEntity>();
-        var selectedPermissionIds = Permissions.Where(p => p.IsSelected)
-            .Select(p => p.Id)
-            .Distinct();
-        var permissionEntities = await permissionRepository.SearchAsync(permissionRepository.MultipleResultQuery()
-        .AndFilter(x => selectedPermissionIds.Contains(x.Id)), cancellationToken);
-        return permissionEntities;
     }
 
     public ObservableCollection<TPermission> Permissions

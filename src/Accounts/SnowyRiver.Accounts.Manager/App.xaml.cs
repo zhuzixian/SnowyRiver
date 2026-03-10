@@ -97,9 +97,11 @@ namespace SnowyRiver.Accounts.Manager
                 config.AddNLog();
             });
 
-            var config = TypeAdapterConfig.GlobalSettings;
-            services.AddSingleton(config);
-            services.AddScoped<IMapper, ServiceMapper>();
+            var typeAdapterConfig = TypeAdapterConfig.GlobalSettings
+                .AddAccountsManager();
+            typeAdapterConfig.Default.PreserveReference(true);
+            services.AddSingleton(typeAdapterConfig);
+            services.AddSingleton<IMapper, ServiceMapper>();
 
             services.AddDbContext<AccountsManagerDbContext>(options => options.AddAccountsManagerOptions());
             services.AddScoped<DbContext, AccountsManagerDbContext>();

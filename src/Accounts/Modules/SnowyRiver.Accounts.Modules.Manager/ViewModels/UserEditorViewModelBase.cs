@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
-using EntityFrameworkCore.UnitOfWork.Interfaces;
+﻿using EntityFrameworkCore.UnitOfWork.Interfaces;
 using Mapster;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +6,11 @@ using Prism.Navigation.Regions;
 using SnowyRiver.Accounts.Domain.Helpers;
 using SnowyRiver.Accounts.Services.Interfaces;
 using SnowyRiver.EF.DataAccess.Abstractions;
+using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
 public class UserEditorViewModelBase<
@@ -45,12 +45,12 @@ public class UserEditorViewModelBase<
             using var unitOfWork = UnitOfWorkFactory.Create();
             var roleRepository = unitOfWork.Repository<TRoleEntity>();
             var roleQuery = roleRepository.MultipleResultQuery()
-                .Include(source => source.Include(x => x.Users));
+                .Include(source => 
+                    source.Include(x => x.Users));
             var roles = await roleRepository.SearchAsync(roleQuery);
             if (roles != null)
             {
-                _roleEntities = roles;
-                Roles = await Mapper.From(_roleEntities)
+                Roles = await Mapper.From(roles)
                     .AdaptToTypeAsync<ObservableCollection<TRole>>();
                 foreach (var role in Roles)
                 {
@@ -64,12 +64,11 @@ public class UserEditorViewModelBase<
             var teams = await teamRepository.SearchAsync(teamQuery);
             if (teams != null)
             {
-                _teamEntities = teams;
-                Teams = await Mapper.From(_teamEntities)
+                Teams = await Mapper.From(teams)
                     .AdaptToTypeAsync<ObservableCollection<TTeam>>();
                 foreach (var team in Teams)
                 {
-                    team.IsSelected = Model.Roles.Any(x => x.Id == team.Id);
+                    team.IsSelected = Model.Teams.Any(x => x.Id == team.Id);
                 }
             }
         }
@@ -79,69 +78,44 @@ public class UserEditorViewModelBase<
         }
     }
 
-    protected async Task<TUserEntity> MapToEntityAsync(TUser model, IUnitOfWork unitOfWork)
+    protected override async Task AddAsync(IUnitOfWork unitOfWork, CancellationToken cancellationToken = default)
     {
-        var entity =  await Mapper.From(model)
+        var entity = await mapper.From(Model)
             .AdaptToTypeAsync<TUserEntity>();
-        await MapToEntityAsync(entity);
+        await UpdateAsync(unitOfWork, entity, cancellationToken);
+        await unitOfWork.Repository<TUserEntity>().AddAsync(entity, cancellationToken);
+    }
+
+    protected override async Task UpdateAsync(IUnitOfWork unitOfWork, CancellationToken cancellationToken = default)
+    {
+        var userRepository = unitOfWork.Repository<TUserEntity>();
+        var entity = await userRepository.SingleOrDefaultAsync(
+            userRepository.SingleResultQuery()
+                .Include(x => x.Include(e => e.Teams)
+                    .Include(e => e.Roles))
+                .AndFilter(x => x.Id == Model.Id), cancellationToken);
+        if (entity != null)
+        {
+            entity.Name = Model.Name;
+
+            await UpdateAsync(unitOfWork,entity,  cancellationToken);
+        }
+    }
+
+    protected async Task UpdateAsync(IUnitOfWork unitOfWork, TUserEntity entity, CancellationToken cancellationToken = default)
+    {
         if (string.IsNullOrWhiteSpace(entity.PasswordSalt))
         {
             entity.PasswordSalt = PasswordHelper.CreateSalt();
         }
 
-        if (!string.IsNullOrWhiteSpace(model.NewPassword))
+        if (!string.IsNullOrWhiteSpace(Model.NewPassword))
         {
-            entity.Password = PasswordHelper.CreatePassword(model.NewPassword, entity.PasswordSalt);
+            entity.Password = PasswordHelper.CreatePassword(Model.NewPassword, entity.PasswordSalt);
         }
 
-        return entity;
-    }
-
-
-    protected async Task MapToEntityAsync(TUser model, TUserEntity entity, IUnitOfWork unitOfWork)
-    {
-//        await base.MapToEntityAsync(model, entity, unitOfWork);
-        entity.Name = model.Name;
-        if (string.IsNullOrWhiteSpace(entity.PasswordSalt))
-        {
-            entity.PasswordSalt = PasswordHelper.CreateSalt();
-        }
-
-        if (!string.IsNullOrWhiteSpace(model.NewPassword))
-        {
-            entity.Password = PasswordHelper.CreatePassword(model.NewPassword, entity.PasswordSalt);
-        }
-        await MapToEntityAsync(entity);
-    }
-
-    private async Task MapToEntityAsync(TUserEntity entity)
-    {
-        entity.Roles.Clear();
-        foreach (var role in Roles)
-        {
-            if (role.IsSelected)
-            {
-                var roleEntity = _roleEntities.First(x => x.Id == role.Id);
-                if (entity.Roles.All(x => x.Id != roleEntity.Id))
-                {
-                    entity.Roles.Add(roleEntity);
-                }
-
-                if (roleEntity.Users.All(x => x.Id != entity.Id))
-                {
-                    roleEntity.Users.Add(entity);
-                }
-            }
-        }
-
-        if (entity.UserId == 0)
-        {
-            using var unitOfWork = UnitOfWorkFactory.Create();
-            var repository = unitOfWork.Repository<TUserEntity>();
-            var maxUserId = await repository.MaxAsync(x => x.UserId);
-            entity.UserId = maxUserId + 1;
-        }
-        await Task.CompletedTask;
+        await UpdateAsync(unitOfWork, entity.Roles, Roles, cancellationToken);
+        await UpdateAsync(unitOfWork, entity.Teams, Teams, cancellationToken);
     }
 
     public bool TeamsEnable
@@ -150,7 +124,6 @@ public class UserEditorViewModelBase<
         set => SetProperty(ref field, value);
     } = true;
 
-    private IList<TRoleEntity> _roleEntities = [];
 
     public ObservableCollection<TRole> Roles
     {
@@ -158,7 +131,6 @@ public class UserEditorViewModelBase<
         set => SetProperty(ref field, value);
     } = [];
 
-    private IList<TTeamEntity> _teamEntities = [];
 
     public ObservableCollection<TTeam> Teams
     {

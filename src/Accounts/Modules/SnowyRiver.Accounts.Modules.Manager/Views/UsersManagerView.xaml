@@ -5,11 +5,11 @@
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:controls="clr-namespace:SnowyRiver.WPF.MaterialDesignInPrism.Controls;assembly=SnowyRiver.WPF.MaterialDesignInPrism"
-             xmlns:views="clr-namespace:SnowyRiver.Accounts.Modules.Manager.Views"
+             xmlns:proxies="clr-namespace:SnowyRiver.WPF.Proxies;assembly=SnowyRiver.WPF"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
         <Grid.Resources>
-            <FrameworkElement x:Key="ProxyElement" DataContext="{Binding}"/>
+            <proxies:DataBindingProxy x:Key="DataContextBindingProxy" Data="{Binding .}"/>
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -24,7 +24,6 @@
             </ToolBar>
         </ToolBarTray>
         <Grid Grid.Row="1">
-            <ContentControl Visibility="Collapsed" Content="{StaticResource ProxyElement}"/>
             <DataGrid ItemsSource="{Binding Models}" SelectedItem="{Binding SelectedModel}" 
                       AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Resources>
@@ -45,16 +44,38 @@
                     <DataGridTemplateColumn Header="{lex:Loc Roles}" Width="2*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <ListBox ItemsSource="{Binding Roles}" DisplayMemberPath="Name"/>
+                                <ItemsControl ItemsSource="{Binding Roles}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <materialDesign:Chip Content="{Binding Name}" />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn Header="{lex:Loc Teams}" Width="2*"
-                                            Visibility="{Binding DataContext.TeamsEnable,Source={StaticResource ProxyElement},
-                                                Converter={StaticResource BooleanToVisibilityConverter}}">
+                                            Visibility="{Binding Data.TeamsEnable,
+                        Source={StaticResource DataContextBindingProxy}, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <ListBox ItemsSource="{Binding Teams}" DisplayMemberPath="Name" />
+                                <ItemsControl ItemsSource="{Binding Teams}" >
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <materialDesign:Chip Content="{Binding Name}" />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl> 
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading;
 using EntityFrameworkCore.UnitOfWork.Interfaces;
 using Prism.Commands;
@@ -73,6 +76,43 @@ public class EditorViewModel<TModel, TEntity>(
             .AddAsync(entity, cancellationToken);
     }
 
+    protected static async Task<IList<T1>> GetEntitiesAsync<T1, T2>(IUnitOfWork unitOfWork,
+        ObservableCollection<T2> models,
+        CancellationToken cancellationToken = default)
+        where T1 : HasNameCreationTimeSoftDeleteEntity<Guid>
+        where T2 : EntityModel
+    {
+        var repository = unitOfWork.Repository<T1>();
+        var selectedIds = models.Where(p => p.IsSelected)
+            .Select(p => p.Id)
+            .Distinct();
+        var entities = await repository.SearchAsync(repository.MultipleResultQuery()
+            .AndFilter(x => selectedIds.Contains(x.Id)), cancellationToken);
+        return entities;
+    }
+
+    protected async Task UpdateAsync<T1, T2>(IUnitOfWork unitOfWork, List<T1> list,
+        ObservableCollection<T2> collection,
+        CancellationToken cancellationToken = default)
+        where T1 : HasNameCreationTimeSoftDeleteEntity<Guid>
+        where T2 : EntityModel
+    {
+        var entities = await GetEntitiesAsync<T1, T2>(unitOfWork, collection, cancellationToken);
+        var existingIds = list.Select(p => p.Id).ToHashSet();
+        var newIds = entities.Select(p => p.Id).ToHashSet();
+
+        var toRemoveList = list.Where(p => !newIds.Contains(p.Id)).ToList();
+        foreach (var item in toRemoveList)
+        {
+            list.Remove(item);
+        }
+
+        var toAddList = entities.Where(p => !existingIds.Contains(p.Id)).ToList();
+        foreach (var item in toAddList)
+        {
+            list.Add(item);
+        }
+    }
 
     public DelegateCommand BackCommand
         => field ??= new DelegateCommand(() => _ =  BackAsync());

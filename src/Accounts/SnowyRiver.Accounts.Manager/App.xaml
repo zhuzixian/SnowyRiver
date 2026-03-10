@@ -22,7 +22,7 @@
                 <!-- Material Design: MahApps Compatibility -->
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.MahApps;component/Themes/MaterialDesignTheme.MahApps.Defaults.xaml" />
 
-                <ResourceDictionary Source="pack://application:,,,/SnowyRiver.WPF.MaterialDesignInPrism;component/Themes/FieldEditor.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/SnowyRiver.WPF.MaterialDesignInPrism;component/Themes/Theme.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/SnowyRiver.Accounts.Modules.Manager;component/Styles/Base.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

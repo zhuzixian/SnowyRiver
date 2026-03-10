@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using EntityFrameworkCore.UnitOfWork.Interfaces;
 using Prism.Commands;
 using Prism.Navigation.Regions;
@@ -33,44 +34,50 @@ public class EditorViewModel<TModel, TEntity>(
             ? model : new TModel();
     }
 
-    public DelegateCommand SaveCommand => field ??= new DelegateCommand(async () => await SaveAsync());
+    public DelegateCommand SaveCommand => field ??= new DelegateCommand(() => _ = SaveAsync());
 
-    private async Task SaveAsync()
+    protected async Task SaveAsync(CancellationToken cancellationToken = default)
     {
-        using var unitOfWork = UnitOfWorkFactory.Create();
-        var repository = unitOfWork.Repository<TEntity>();
-        if (Model.Id != Guid.Empty)
+        try
         {
-            var query = repository.SingleResultQuery()
-                .AndFilter(entity => entity.Id == Model.Id);
-            var entity = await repository.SingleOrDefaultAsync(query);
-            await MapToEntityAsync(Model, entity);
-            repository.Update(entity);
+            using var unitOfWork = UnitOfWorkFactory.Create();
+            if (Model.Id != Guid.Empty)
+            {
+                await UpdateAsync(unitOfWork, cancellationToken);
+            }
+            else
+            {
+                await AddAsync(unitOfWork, cancellationToken);
+            }
+
+            await unitOfWork.SaveChangesAsync(cancellationToken: cancellationToken);
         }
-        else
+        catch (Exception e)
         {
-            var entity = await MapToEntityAsync(Model);
-            await repository.AddAsync(entity);
+            //
         }
-        await unitOfWork.SaveChangesAsync();
-        await BackAsync();
+       
+        await BackAsync(cancellationToken);
     }
 
-    protected virtual async Task<TEntity> MapToEntityAsync(TModel model)
+    protected virtual async Task UpdateAsync(IUnitOfWork unitOfWork, CancellationToken cancellationToken = default)
     {
-        return await Mapper.From(model)
+        await Task.CompletedTask;
+    }
+
+    protected virtual async Task AddAsync(IUnitOfWork unitOfWork, CancellationToken cancellationToken = default)
+    {
+        var entity = await mapper.From(Model)
             .AdaptToTypeAsync<TEntity>();
+        await unitOfWork.Repository<TEntity>()
+            .AddAsync(entity, cancellationToken);
     }
 
-    protected virtual async Task MapToEntityAsync(TModel model, TEntity entity)
-    {
-        await mapper.From(model).AdaptToAsync(entity);
-    }
 
     public DelegateCommand BackCommand
-        => field ??= new DelegateCommand(async () => await BackAsync());
+        => field ??= new DelegateCommand(() => _ =  BackAsync());
 
-    private async Task BackAsync()
+    private async Task BackAsync(CancellationToken cancellationToken = default)
     {
         _journal?.GoBack();
         await Task.CompletedTask;

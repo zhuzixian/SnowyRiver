@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:controls="clr-namespace:SnowyRiver.Accounts.Modules.Manager.Controls" >
+                    xmlns:controls="clr-namespace:SnowyRiver.Accounts.Modules.Manager.Controls"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style TargetType="TextBox" BasedOn="{StaticResource MahApps.Styles.TextBox}">
         <Setter Property="FontSize" Value="24"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -22,4 +23,5 @@
         <Setter Property="FontSize" Value="24"/>
         <Setter Property="HeaderHeight" Value="64"/>
     </Style>
+  
 </ResourceDictionary>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using EntityFrameworkCore.UnitOfWork.Interfaces;
 using Mapster;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
@@ -78,7 +79,7 @@ public class UserEditorViewModelBase<
         }
     }
 
-    protected override async Task<TUserEntity> MapToEntityAsync(TUser model)
+    protected async Task<TUserEntity> MapToEntityAsync(TUser model, IUnitOfWork unitOfWork)
     {
         var entity =  await Mapper.From(model)
             .AdaptToTypeAsync<TUserEntity>();
@@ -97,9 +98,9 @@ public class UserEditorViewModelBase<
     }
 
 
-    protected override async Task MapToEntityAsync(TUser model, TUserEntity entity)
+    protected async Task MapToEntityAsync(TUser model, TUserEntity entity, IUnitOfWork unitOfWork)
     {
-        await base.MapToEntityAsync(model, entity);
+//        await base.MapToEntityAsync(model, entity, unitOfWork);
         entity.Name = model.Name;
         if (string.IsNullOrWhiteSpace(entity.PasswordSalt))
         {

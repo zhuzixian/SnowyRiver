@@ -23,8 +23,10 @@
                    SelectedItem="{Binding SelectedModel}"
                    AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="{lex:Loc SortId}" Binding="{Binding SortId}"/>
-                <DataGridTextColumn Header="{lex:Loc Name}" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="{lex:Loc SortId}" Binding="{Binding SortId}"
+                                    ElementStyle="{StaticResource SnowyRiver.Styles.TextBlock.Center}"/>
+                <DataGridTextColumn Header="{lex:Loc Name}" Binding="{Binding Name}"
+                                    ElementStyle="{StaticResource SnowyRiver.Styles.TextBlock.Center}"/>
                 <!--
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>

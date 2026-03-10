@@ -7,7 +7,6 @@ using Prism.Navigation.Regions;
 using SnowyRiver.Accounts.Services.Interfaces;
 using SnowyRiver.EF.DataAccess.Abstractions;
 using SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs;
-using RoleEntity = SnowyRiver.Accounts.Domain.Entities.Role;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
 public class RolesManagerViewModelBase<

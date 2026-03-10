@@ -1,9 +1,11 @@
-﻿using System.Collections.ObjectModel;
-using System.Threading.Tasks;
+﻿using EntityFrameworkCore.UnitOfWork.Interfaces;
 using MapsterMapper;
 using Prism.Navigation.Regions;
 using SnowyRiver.Accounts.Services.Interfaces;
 using SnowyRiver.EF.DataAccess.Abstractions;
+using System.Collections.ObjectModel;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
 public class PermissionEditorViewModelBase<
@@ -28,5 +30,17 @@ public class PermissionEditorViewModelBase<
     {
         get;
         protected set => SetProperty(ref field, value);
+    }
+
+    protected override async Task UpdateAsync(IUnitOfWork unitOfWork, CancellationToken cancellationToken = default)
+    {
+        await unitOfWork.Repository<TPermissionEntity>()
+            .UpdateAsync(x => x.Id == Model.Id,
+                b =>
+                {
+                    b.SetProperty(x => x.Code, Model.Code);
+                    b.SetProperty(x => x.Name, Model.Name);
+                },
+                cancellationToken);
     }
 }

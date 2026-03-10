@@ -121,7 +121,7 @@
     <value>用户</value>
   </data>
   <data name="Teams" xml:space="preserve">
-    <value>用户组</value>
+    <value>团队</value>
   </data>
   <data name="Roles" xml:space="preserve">
     <value>角色</value>

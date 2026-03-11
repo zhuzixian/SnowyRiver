@@ -1,5 +1,6 @@
 ﻿using SnowyRiver.ComponentModel.NotifyPropertyChanged.FluentValidation;
 using System.Text.Json.Serialization;
+using SnowyRiver.ComponentModel.NotifyPropertyChanged;
 
 namespace SnowyRiver.WorkFlows;
 public class WorkStep<TKey, TSate, T>: ValidatableNotifyPropertyChangedObject<T>
@@ -11,18 +12,21 @@ public class WorkStep<TKey, TSate, T>: ValidatableNotifyPropertyChangedObject<T>
         set => Set(ref field, value);
     }
 
+    [TrackHistory]
     public int SortId
     {
         get;
         set => Set(ref field, value);
     }
 
+    [TrackHistory]
     public bool Enable
     {
         get;
         set => Set(ref field, value);
     }
 
+    [TrackHistory]
     public string Name
     {
         get;
@@ -53,6 +57,7 @@ public class WorkStep<TKey, TSate, T>: ValidatableNotifyPropertyChangedObject<T>
     /// <summary>
     /// 执行次数
     /// </summary>
+    [TrackHistory]
     public int CycleCount
     {
         get;

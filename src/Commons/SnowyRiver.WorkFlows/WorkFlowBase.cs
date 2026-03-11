@@ -1,6 +1,7 @@
 ﻿using SnowyRiver.ComponentModel.NotifyPropertyChanged.FluentValidation;
 using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
+using SnowyRiver.ComponentModel.NotifyPropertyChanged;
 
 namespace SnowyRiver.WorkFlows;
 public class WorkFlow<TKey, TState, TStepKey, TStep, TStepState, T>
@@ -15,18 +16,21 @@ public class WorkFlow<TKey, TState, TStepKey, TStep, TStepState, T>
         set => Set(ref field, value);
     }
 
+    [TrackHistory]
     public string Name
     {
         get;
         set => Set(ref field, value);
     } = string.Empty;
 
+    [TrackHistory]
     public ObservableCollection<TStep> Steps
     {
         get;
         set => Set(ref field, value);
     } = [];
 
+    [TrackHistory]
     public bool Enable
     {
         get;

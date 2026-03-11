@@ -67,6 +67,7 @@ public abstract class JsonConfiguration:TrackedNotifyPropertyChangedObject
             config.OnReading();
             config.Path = path;
             config.Options = options;
+            config.ClearHistory();
         }
         return config;
     }
@@ -85,6 +86,7 @@ public abstract class JsonConfiguration:TrackedNotifyPropertyChangedObject
         config.Options = options;
         if (options.SaveNew)
             config.Save();
+        config.ClearHistory();
         return config;
     }
 

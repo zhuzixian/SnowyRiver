@@ -85,7 +85,7 @@ public class TrackedNotifyPropertyChangedObject : NotifyPropertyChangedObject
         return false;
     }
 
-     private bool ShouldTrackProperty(string? propertyName)
+    public bool ShouldTrackProperty(string? propertyName)
     {
         if (propertyName == null) return false;
 

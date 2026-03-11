@@ -5,7 +5,7 @@ namespace SnowyRiver.ComponentModel.NotifyPropertyChanged;
 
 using System.Runtime.CompilerServices;
 
-public class NotifyPropertyChangedObjectWithHistory : NotifyPropertyChangedObject
+public class TrackedNotifyPropertyChangedObject : NotifyPropertyChangedObject
 {
     private readonly Dictionary<string, bool> _propertyTrackingCache = new();
     private readonly Stack<PropertyChangeRecord> _undoStack = new();
@@ -30,8 +30,13 @@ public class NotifyPropertyChangedObjectWithHistory : NotifyPropertyChangedObjec
     /// <summary>
     /// Gets the previous value of a specific property from the undo history.
     /// </summary>
-    public object? GetPreviousValue(string propertyName)
+    public object? GetPreviousValue(string? propertyName)
     {
+        if (propertyName == null)
+        {
+            return null;
+        }
+
         var record = _undoStack.FirstOrDefault(r => r.PropertyName == propertyName);
         return record?.Value;
     }

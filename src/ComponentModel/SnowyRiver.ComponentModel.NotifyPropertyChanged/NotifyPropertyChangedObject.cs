@@ -27,6 +27,16 @@ public class NotifyPropertyChangedObject : INotifyPropertyChanged
         RaisePropertyChanged(propertyName);
     }
 
+    public object? GetValue(string? propertyName)
+    {
+        if (propertyName == null)
+        {
+            return null;
+        }
+
+        var property = GetType().GetProperty(propertyName);
+        return property?.CanRead == true ? property.GetValue(this) : null;
+    }
 
     protected virtual bool Set<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
     {

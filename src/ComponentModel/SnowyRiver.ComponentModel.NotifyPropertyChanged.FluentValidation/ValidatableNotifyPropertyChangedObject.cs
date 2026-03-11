@@ -5,7 +5,7 @@ using FluentValidation;
 
 namespace SnowyRiver.ComponentModel.NotifyPropertyChanged.FluentValidation;
 
-public abstract class ValidatableNotifyPropertyChangedObject<T> : NotifyPropertyChangedObject, INotifyDataErrorInfo
+public abstract class ValidatableNotifyPropertyChangedObject<T> : NotifyPropertyChangedObjectWithHistory, INotifyDataErrorInfo
     where T : ValidatableNotifyPropertyChangedObject<T>
 {
     protected virtual IValidator<T>? Validator { get; set; }

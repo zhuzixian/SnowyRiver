@@ -30,10 +30,7 @@ public class NotifyPropertyChangedObject : INotifyPropertyChanged
 
     protected virtual bool Set<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
     {
-        if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-        field = value;
-        OnPropertyChanged(propertyName);
-        return true;
+        return SetProperty(ref field, value, propertyName);
     }
 
     /// <summary>
@@ -74,13 +71,13 @@ public class NotifyPropertyChangedObject : INotifyPropertyChanged
     protected virtual bool SetProperty<T>(ref T storage, T value, Action? onChanged,
         [CallerMemberName] string? propertyName = null)
     {
-        if (EqualityComparer<T>.Default.Equals(storage, value)) return false;
+        if(SetProperty(ref storage, value, propertyName))
+        {
+            onChanged?.Invoke();
+            return true;
+        }
 
-        storage = value;
-        onChanged?.Invoke();
-        RaisePropertyChanged(propertyName);
-
-        return true;
+        return false;
     }
 
     /// <summary>

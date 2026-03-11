@@ -1,9 +1,13 @@
-﻿namespace SnowyRiver.ComponentModel.NotifyPropertyChanged;
+﻿using System.Reflection;
+using System.Text.Json.Serialization;
+
+namespace SnowyRiver.ComponentModel.NotifyPropertyChanged;
 
 using System.Runtime.CompilerServices;
 
 public class NotifyPropertyChangedObjectWithHistory : NotifyPropertyChangedObject
 {
+    private readonly Dictionary<string, bool> _propertyTrackingCache = new();
     private readonly Stack<PropertyChangeRecord> _undoStack = new();
     private readonly Stack<PropertyChangeRecord> _redoStack = new();
     private bool _isUndoRedoOperation;
@@ -14,11 +18,13 @@ public class NotifyPropertyChangedObjectWithHistory : NotifyPropertyChangedObjec
     /// <summary>
     /// Gets the undo history as a read-only collection.
     /// </summary>
+    [JsonIgnore]
     public IReadOnlyCollection<PropertyChangeRecord> UndoHistory => _undoStack.ToList().AsReadOnly();
 
     /// <summary>
     /// Gets the redo history as a read-only collection.
     /// </summary>
+    [JsonIgnore]
     public IReadOnlyCollection<PropertyChangeRecord> RedoHistory => _redoStack.ToList().AsReadOnly();
 
     /// <summary>
@@ -56,43 +62,35 @@ public class NotifyPropertyChangedObjectWithHistory : NotifyPropertyChangedObjec
     /// <returns>True if the value was changed, false otherwise.</returns>
     protected override bool SetProperty<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
     {
-        if (EqualityComparer<T>.Default.Equals(field, value))
-            return false;
-
-        // Record the old value before changing it
-        if (!_isUndoRedoOperation && propertyName != null)
+        if (base.SetProperty(ref field, value, propertyName))
         {
-            _undoStack.Push(new PropertyChangeRecord(propertyName, field));
-            _redoStack.Clear();
-            OnPropertyChanged(nameof(UndoHistory));
-            OnPropertyChanged(nameof(CanUndo));
-            OnPropertyChanged(nameof(RedoHistory));
-            OnPropertyChanged(nameof(CanRedo));
+            if (!_isUndoRedoOperation && propertyName != null && ShouldTrackProperty(propertyName))
+            {
+                _undoStack.Push(new PropertyChangeRecord(propertyName, field));
+                _redoStack.Clear();
+                RaisePropertyChanged(() => UndoHistory);
+                RaisePropertyChanged(() => CanUndo);
+                RaisePropertyChanged(() => RedoHistory);
+                RaisePropertyChanged(() => CanRedo);
+            }
+
+            return true;
         }
 
-        field = value;
-        OnPropertyChanged(propertyName);
-        return true;
+        return false;
     }
 
-    protected override void OnPropertyChanged(string? propertyName)
+     private bool ShouldTrackProperty(string? propertyName)
     {
-        if (!_isUndoRedoOperation && propertyName != null)
-        {
-            var property = GetType().GetProperty(propertyName);
-            if (property != null && property is { CanRead: true, CanWrite: true })
-            {
-                var currentValue = property.GetValue(this);
-                _undoStack.Push(new PropertyChangeRecord(propertyName, currentValue));
-                _redoStack.Clear();
-                OnPropertyChanged(nameof(UndoHistory));
-                OnPropertyChanged(nameof(CanUndo));
-                OnPropertyChanged(nameof(RedoHistory));
-                OnPropertyChanged(nameof(CanRedo));
-            }
-        }
+        if (propertyName == null) return false;
 
-        base.OnPropertyChanged(propertyName);
+        if (_propertyTrackingCache.TryGetValue(propertyName, out var shouldTrack))
+            return shouldTrack;
+
+        var property = GetType().GetProperty(propertyName);
+        shouldTrack = property?.GetCustomAttribute<TrackHistoryAttribute>() != null;
+        _propertyTrackingCache[propertyName] = shouldTrack;
+        return shouldTrack;
     }
 
     public void Undo()
@@ -108,12 +106,11 @@ public class NotifyPropertyChangedObjectWithHistory : NotifyPropertyChangedObjec
             {
                 var currentValue = property.GetValue(this);
                 property.SetValue(this, record.Value);
-                _redoStack.Push(new PropertyChangeRecord(record.PropertyName, currentValue));
-                OnPropertyChanged(nameof(UndoHistory));
-                OnPropertyChanged(nameof(CanUndo));
-                OnPropertyChanged(nameof(RedoHistory));
-                OnPropertyChanged(nameof(CanRedo));
-                OnPropertyChanged(record.PropertyName);
+                _redoStack.Push(record with { Value = currentValue });
+                RaisePropertyChanged(() => UndoHistory);
+                RaisePropertyChanged(() => CanUndo);
+                RaisePropertyChanged(() => RedoHistory);
+                RaisePropertyChanged(() => CanRedo);
             }
         }
         finally
@@ -136,11 +133,10 @@ public class NotifyPropertyChangedObjectWithHistory : NotifyPropertyChangedObjec
                 var currentValue = property.GetValue(this);
                 property.SetValue(this, record.Value);
                 _undoStack.Push(new PropertyChangeRecord(record.PropertyName, currentValue));
-                OnPropertyChanged(nameof(UndoHistory));
-                OnPropertyChanged(nameof(CanUndo));
-                OnPropertyChanged(nameof(RedoHistory));
-                OnPropertyChanged(nameof(CanRedo));
-                OnPropertyChanged(record.PropertyName);
+                RaisePropertyChanged(() => UndoHistory);
+                RaisePropertyChanged(() => CanUndo);
+                RaisePropertyChanged(() => RedoHistory);
+                RaisePropertyChanged(() => CanRedo);
             }
         }
         finally
@@ -153,11 +149,15 @@ public class NotifyPropertyChangedObjectWithHistory : NotifyPropertyChangedObjec
     {
         _undoStack.Clear();
         _redoStack.Clear();
-        OnPropertyChanged(nameof(UndoHistory));
-        OnPropertyChanged(nameof(CanUndo));
-        OnPropertyChanged(nameof(RedoHistory));
-        OnPropertyChanged(nameof(CanRedo));
+        RaisePropertyChanged(() => UndoHistory);
+        RaisePropertyChanged(() => CanUndo);
+        RaisePropertyChanged(() => RedoHistory);
+        RaisePropertyChanged(() => CanRedo);
     }
 
     public record PropertyChangeRecord(string PropertyName, object? Value);
 }
+
+[AttributeUsage(AttributeTargets.Property)]
+public class TrackHistoryAttribute : Attribute { }
+

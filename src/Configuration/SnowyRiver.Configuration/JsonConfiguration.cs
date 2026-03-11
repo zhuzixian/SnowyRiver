@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 using SnowyRiver.ComponentModel.NotifyPropertyChanged;
 
 namespace SnowyRiver.Configuration;
-public abstract class JsonConfiguration:NotifyPropertyChangedObject
+public abstract class JsonConfiguration:NotifyPropertyChangedObjectWithHistory
 {
     [JsonIgnore] 
     public string Path { get; set; } = string.Empty;

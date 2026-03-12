@@ -48,10 +48,18 @@ public class RetryModbusRtuClient(
 
 
     public Task<TResult> ExecuteAsync<TResult>(Func<SerialPort?, CancellationToken, Task<TResult>> task, 
+        bool isUpdateLastAccessTime = true,
         CancellationToken cancellationToken = default)
     {
         return ExecuteAsync(async () => 
                 await task.Invoke(_serialPort, cancellationToken), 
-            cancellationToken);
+                isUpdateLastAccessTime, cancellationToken);
+    }
+
+    public Task ExecuteAsync(Func<SerialPort?, CancellationToken, Task> task, bool isUpdateLastAccessTime = true, CancellationToken cancellationToken = default)
+    {
+        return ExecuteAsync(async () =>
+                await task.Invoke(_serialPort, cancellationToken),
+            isUpdateLastAccessTime, cancellationToken);
     }
 }

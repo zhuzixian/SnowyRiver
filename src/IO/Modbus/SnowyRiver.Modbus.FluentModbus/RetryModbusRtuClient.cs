@@ -1,6 +1,6 @@
 ﻿using FluentModbus;
 using Polly.Retry;
-using System.IO.Ports;
+using SnowyRiver.IO.SerialPort;
 
 namespace SnowyRiver.Modbus.FluentModbus;
 
@@ -11,7 +11,7 @@ public class RetryModbusRtuClient(
     :RetryModbusClient(modbusClient, retryPolicy),
         IModbusRtuClient
 {
-    private SerialPort? _serialPort;
+    private ISerialPort _serialPort;
 
     public void Connect()
     {
@@ -20,7 +20,7 @@ public class RetryModbusRtuClient(
 
     public void Connect(string port)
     {
-        Connect(new SerialPort(port, options.BaudRate, options.Parity)
+        Connect(new ModbusRtuSerialPort(port, options.BaudRate, options.Parity)
         {
             ReadTimeout = options.ReadTimeout,
             WriteTimeout = options.WriteTimeout,
@@ -28,16 +28,15 @@ public class RetryModbusRtuClient(
         });
     }
 
-    public void Connect(SerialPort port)
+    public void Connect(ModbusRtuSerialPort port)
     {
-        _serialPort = port;
-        var serialPort = new SnowyRiverModbusRtuSerialPort(port);
-        Initialize(serialPort, options.Endian);
+        Initialize(port, options.Endian);
     }
 
 
-    public void Initialize(IModbusRtuSerialPort serialPort, ModbusEndianness endianness)
+    public void Initialize(ModbusRtuSerialPort serialPort, ModbusEndianness endianness)
     {
+        _serialPort = serialPort;
         modbusClient.Initialize(serialPort, endianness);
     }
 
@@ -47,7 +46,7 @@ public class RetryModbusRtuClient(
     }
 
 
-    public Task<TResult> ExecuteAsync<TResult>(Func<SerialPort?, CancellationToken, Task<TResult>> task, 
+    public Task<TResult> ExecuteAsync<TResult>(Func<ISerialPort?, CancellationToken, Task<TResult>> task, 
         CancellationToken cancellationToken = default)
     {
         return ExecuteAsync(async () => 

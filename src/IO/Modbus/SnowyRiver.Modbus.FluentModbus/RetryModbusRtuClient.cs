@@ -1,6 +1,6 @@
 ﻿using FluentModbus;
 using Polly.Retry;
-using System.IO.Ports;
+using SnowyRiver.IO.SerialPort;
 
 namespace SnowyRiver.Modbus.FluentModbus;
 
@@ -11,7 +11,7 @@ public class RetryModbusRtuClient(
     :RetryModbusClient(modbusClient, retryPolicy),
         IModbusRtuClient
 {
-    private SerialPort? _serialPort;
+    private ISerialPort? _serialPort;
 
     public void Connect()
     {
@@ -20,7 +20,7 @@ public class RetryModbusRtuClient(
 
     public void Connect(string port)
     {
-        Connect(new SerialPort(port, options.BaudRate, options.Parity)
+        Connect(new ModbusRtuSerialPort(port, options.BaudRate, options.Parity)
         {
             ReadTimeout = options.ReadTimeout,
             WriteTimeout = options.WriteTimeout,
@@ -28,11 +28,10 @@ public class RetryModbusRtuClient(
         });
     }
 
-    public void Connect(SerialPort port)
+    public void Connect(ModbusRtuSerialPort port)
     {
         _serialPort = port;
-        var serialPort = new SnowyRiverModbusRtuSerialPort(port);
-        Initialize(serialPort, options.Endian);
+        Initialize(port, options.Endian);
     }
 
 
@@ -47,7 +46,7 @@ public class RetryModbusRtuClient(
     }
 
 
-    public Task<TResult> ExecuteAsync<TResult>(Func<SerialPort?, CancellationToken, Task<TResult>> task, 
+    public Task<TResult> ExecuteAsync<TResult>(Func<ISerialPort?, CancellationToken, Task<TResult>> task, 
         bool isUpdateLastAccessTime = true,
         CancellationToken cancellationToken = default)
     {
@@ -56,7 +55,7 @@ public class RetryModbusRtuClient(
                 isUpdateLastAccessTime, cancellationToken);
     }
 
-    public Task ExecuteAsync(Func<SerialPort?, CancellationToken, Task> task, bool isUpdateLastAccessTime = true, CancellationToken cancellationToken = default)
+    public Task ExecuteAsync(Func<ISerialPort?, CancellationToken, Task> task, bool isUpdateLastAccessTime = true, CancellationToken cancellationToken = default)
     {
         return ExecuteAsync(async () =>
                 await task.Invoke(_serialPort, cancellationToken),

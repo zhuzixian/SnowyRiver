@@ -14,6 +14,7 @@ public class DialogHostService(IContainerExtension containerExtension)
     : DialogService(containerExtension), IDialogHostService
 {
     private readonly IContainerExtension _containerExtension = containerExtension;
+    private readonly Dictionary<object, Notify> _notifications = new Dictionary<object, Notify>();
 
     public async Task<IDialogResult?> ShowDialogAsync(
         string name, object dialogIdentifier, IDialogParameters? parameters = null)
@@ -73,10 +74,12 @@ public class DialogHostService(IContainerExtension containerExtension)
         return DialogHost.IsDialogOpen(dialogIdentifier);
     }
 
+
     public virtual async Task<string?> ShowAsync(string view, string title, 
         string message, string[] buttons, 
         object dialogIdentifier)
     {
+        _notifications[dialogIdentifier] = new Notify(title, message, buttons);
         var dialogResult =  await ShowDialogAsync(view,
             dialogIdentifier,
             new DialogParameters
@@ -85,6 +88,7 @@ public class DialogHostService(IContainerExtension containerExtension)
                 { nameof(DialogViewModel.Message), message },
                 { nameof(DialogViewModel.Buttons), buttons }
             });
+        _notifications.Remove(dialogIdentifier);
         if (dialogResult != null && dialogResult.Parameters.TryGetValue<string>(nameof(DialogResult), out var result))
         {
             return result;
@@ -102,5 +106,28 @@ public class DialogHostService(IContainerExtension containerExtension)
         object dialogIdentifier)
     {
         return ShowAsync(nameof(DialogView), title, message, buttons, dialogIdentifier);
+    }
+
+    public Task<(string Title, string Message, string[] Options)?> GetAsync()
+    {
+        return GetAsync(INotifier.DefaultIdentifier);
+    }
+
+    public async Task<(string Title, string Message, string[] Options)?> GetAsync(object identifier)
+    {
+        if (_notifications.TryGetValue(identifier, out var notify))
+        {
+            return await Task.FromResult((notify.Title, notify.Message, notify.Options));
+        }
+
+        return null;
+    }
+
+
+    public class Notify(string title, string message, string[] options)
+    {
+        public string Title => title;
+        public string Message => message;
+        public string[] Options => options;
     }
 }

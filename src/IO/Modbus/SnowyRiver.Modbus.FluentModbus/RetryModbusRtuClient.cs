@@ -1,6 +1,6 @@
 ﻿using FluentModbus;
 using Polly.Retry;
-using SnowyRiver.IO.SerialPort;
+using System.IO.Ports;
 
 namespace SnowyRiver.Modbus.FluentModbus;
 
@@ -11,7 +11,7 @@ public class RetryModbusRtuClient(
     :RetryModbusClient(modbusClient, retryPolicy),
         IModbusRtuClient
 {
-    private ISerialPort _serialPort;
+    private SerialPort? _serialPort;
 
     public void Connect()
     {
@@ -20,7 +20,7 @@ public class RetryModbusRtuClient(
 
     public void Connect(string port)
     {
-        Connect(new ModbusRtuSerialPort(port, options.BaudRate, options.Parity)
+        Connect(new SerialPort(port, options.BaudRate, options.Parity)
         {
             ReadTimeout = options.ReadTimeout,
             WriteTimeout = options.WriteTimeout,
@@ -28,15 +28,16 @@ public class RetryModbusRtuClient(
         });
     }
 
-    public void Connect(ModbusRtuSerialPort port)
+    public void Connect(SerialPort port)
     {
-        Initialize(port, options.Endian);
+        _serialPort = port;
+        var serialPort = new SnowyRiverModbusRtuSerialPort(port);
+        Initialize(serialPort, options.Endian);
     }
 
 
-    public void Initialize(ModbusRtuSerialPort serialPort, ModbusEndianness endianness)
+    public void Initialize(IModbusRtuSerialPort serialPort, ModbusEndianness endianness)
     {
-        _serialPort = serialPort;
         modbusClient.Initialize(serialPort, endianness);
     }
 
@@ -46,11 +47,19 @@ public class RetryModbusRtuClient(
     }
 
 
-    public Task<TResult> ExecuteAsync<TResult>(Func<ISerialPort?, CancellationToken, Task<TResult>> task, 
+    public Task<TResult> ExecuteAsync<TResult>(Func<SerialPort?, CancellationToken, Task<TResult>> task, 
+        bool isUpdateLastAccessTime = true,
         CancellationToken cancellationToken = default)
     {
         return ExecuteAsync(async () => 
                 await task.Invoke(_serialPort, cancellationToken), 
-            cancellationToken);
+                isUpdateLastAccessTime, cancellationToken);
+    }
+
+    public Task ExecuteAsync(Func<SerialPort?, CancellationToken, Task> task, bool isUpdateLastAccessTime = true, CancellationToken cancellationToken = default)
+    {
+        return ExecuteAsync(async () =>
+                await task.Invoke(_serialPort, cancellationToken),
+            isUpdateLastAccessTime, cancellationToken);
     }
 }

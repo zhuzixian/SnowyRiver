@@ -43,6 +43,8 @@ public interface ISerialPort : IDisposable
     void Write(char[] buffer, int offset, int count);
     void WriteLine(string text);
 
+    Task<string> ReadLineAsync(CancellationToken cancellationToken = default);
     Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken token = default);
+    Task WriteLineAsync(string text, CancellationToken cancellationToken = default);
     Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken token = default);
 }

@@ -77,6 +77,73 @@ public class SerialPort : System.IO.Ports.SerialPort,ISerialPort
         }
     }
 
+    public async Task<string> ReadLineAsync(CancellationToken cancellationToken = default)
+    {
+        using var timeoutCts = new CancellationTokenSource(ReadTimeout);
+
+        await using (timeoutCts.Token.Register(() =>
+        {
+            if (IsOpen) DiscardInBuffer();
+        }))
+        await using (cancellationToken.Register(() => timeoutCts.Cancel()))
+        {
+            var result = new System.Text.StringBuilder();
+            var newLine = NewLine;
+            var buffer = new byte[1];
+
+            while (true)
+            {
+                try
+                {
+                    if (cancellationToken.IsCancellationRequested)
+                    {
+                        throw new OperationCanceledException(cancellationToken);
+                    }
+
+                    if (timeoutCts.IsCancellationRequested)
+                    {
+                        throw new TimeoutException("The asynchronous read operation timed out.");
+                    }
+
+                    if (BytesToRead <= 0)
+                    {
+                        await Task.Delay(TimeSpan.FromMilliseconds(1), cancellationToken);
+                        continue;
+                    }
+
+
+                    var bytesRead = await BaseStream.ReadAsync(buffer, 0, 1, timeoutCts.Token);
+                    if (bytesRead == 0) continue;
+
+                    var ch = Encoding.GetString(buffer, 0, 1);
+                    result.Append(ch);
+
+                    if (result.Length >= newLine.Length &&
+                        result.ToString(result.Length - newLine.Length, newLine.Length) == newLine)
+                    {
+                        return result.ToString(0, result.Length - newLine.Length);
+                    }
+                }
+                catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+                {
+                    throw;
+                }
+                catch (OperationCanceledException) when (timeoutCts.IsCancellationRequested)
+                {
+                    throw new TimeoutException("The asynchronous read operation timed out.");
+                }
+                catch (IOException) when (timeoutCts.IsCancellationRequested && !cancellationToken.IsCancellationRequested)
+                {
+                    throw new TimeoutException("The asynchronous read operation timed out.");
+                }
+                catch (IOException)
+                {
+                    // 忽略并继续
+                }
+            }
+        }
+    }
+
     public async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken token = default)
     {
         // https://github.com/AndreasAmMueller/Modbus/blob/a6d11080c2f5a1205681c881f3ba163d2ac84a1f/src/Modbus.Serial/Util/Extensions.cs#L69
@@ -105,5 +172,12 @@ public class SerialPort : System.IO.Ports.SerialPort,ISerialPort
                 throw new TimeoutException("The asynchronous write operation timed out.");
             }
         }
+    }
+
+    public async Task WriteLineAsync(string text, CancellationToken token = default)
+    {
+        var line = text + NewLine;
+        var bytes = Encoding.GetBytes(line);
+        await WriteAsync(bytes, 0, bytes.Length, token);
     }
 }

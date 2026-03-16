@@ -143,6 +143,10 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter>: RegionDia
         await Task.CompletedTask;
     }
 
+    protected virtual void OnPagedResultChanged()
+    {
+    }
+
     public bool ISavingRecordsAs
     {
         get;
@@ -152,7 +156,13 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter>: RegionDia
     public PagedObservableCollection<TRecord>? PagedResult
     {
         get;
-        protected set => SetProperty(ref field, value);
+        protected set
+        {
+            if (SetProperty(ref field, value))
+            {
+                OnPagedResultChanged();
+            }
+        }
     }
 
     public TRecordFilter? Filter

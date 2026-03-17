@@ -22,8 +22,8 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter>: RegionDia
 
     protected virtual void FilterOnPropertyChanged(object? sender, PropertyChangedEventArgs args)
     {
-        var totalPageCount = Filter?.PageSize > 0 && PagedResult?.TotalCount > 0 
-            ? (int)Math.Ceiling(PagedResult.TotalCount / (decimal)Filter.PageSize) : 0;
+        var totalPageCount = Filter?.PageSize > 0 && Records?.TotalCount > 0 
+            ? (int)Math.Ceiling(Records.TotalCount / (decimal)Filter.PageSize) : 0;
         if (args.PropertyName == nameof(Filter.PageSize) && Filter?.PageIndex > totalPageCount)
         {
             Filter.PageIndex = 1;
@@ -60,7 +60,7 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter>: RegionDia
 
     protected virtual async Task RefreshAsync(CancellationToken cancellationToken = default)
     {
-        PagedResult = await GetRecordsAsync(cancellationToken);
+        Records = await GetRecordsAsync(cancellationToken);
     }
 
     protected abstract Task<PagedObservableCollection<TRecord>> GetRecordsAsync(CancellationToken cancellation = default);
@@ -94,9 +94,9 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter>: RegionDia
 
     protected async Task NavigateToNextPageAsync(CancellationToken cancellationToken = default)
     {
-        if (PagedResult != null && Filter != null)
+        if (Records != null && Filter != null)
         {
-            await NavigateToPageAsync(Math.Min(PagedResult.TotalPages, Filter.PageIndex + 1), cancellationToken);
+            await NavigateToPageAsync(Math.Min(Records.TotalPages, Filter.PageIndex + 1), cancellationToken);
         }
     }
 
@@ -107,9 +107,9 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter>: RegionDia
 
     protected async Task NavigateToLastPageAsync(CancellationToken cancellationToken = default)
     {
-        if (PagedResult != null)
+        if (Records != null)
         {
-            await NavigateToPageAsync(PagedResult.TotalPages, cancellationToken);
+            await NavigateToPageAsync(Records.TotalPages, cancellationToken);
         }
     }
 
@@ -121,9 +121,9 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter>: RegionDia
 
     public DelegateCommand SaveRecordsAsCommand
         => field ??= new DelegateCommand(() => _ = HandleSaveRecordsAsAsync(),
-                () => !ISavingRecordsAs && PagedResult != null && PagedResult.Items.Any())
+                () => !ISavingRecordsAs && Records != null && Records.Items.Any())
             .ObservesProperty(() => ISavingRecordsAs)
-            .ObservesProperty(() => PagedResult);
+            .ObservesProperty(() => Records);
 
     private async Task HandleSaveRecordsAsAsync(CancellationToken cancellationToken = default)
     {
@@ -143,7 +143,7 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter>: RegionDia
         await Task.CompletedTask;
     }
 
-    protected virtual void OnPagedResultChanged()
+    protected virtual void OnRecordsChanged()
     {
     }
 
@@ -153,14 +153,14 @@ public abstract class QueryPagedViewModelBase<TRecord, TRecordFilter>: RegionDia
         set => SetProperty(ref field, value);
     }
 
-    public PagedObservableCollection<TRecord>? PagedResult
+    public PagedObservableCollection<TRecord>? Records
     {
         get;
         protected set
         {
             if (SetProperty(ref field, value))
             {
-                OnPagedResultChanged();
+                OnRecordsChanged();
             }
         }
     }

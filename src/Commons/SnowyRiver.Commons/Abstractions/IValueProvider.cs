@@ -1,6 +1,6 @@
 ﻿namespace SnowyRiver.Commons.Abstractions;
 
-public interface IValueProvider<out T>
+public interface IValueProvider<T>
 {
-    public T? Value { get; }
+    public T? Value { get; set; }
 }

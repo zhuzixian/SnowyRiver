@@ -2,10 +2,10 @@
 using SnowyRiver.Commons.Abstractions;
 
 namespace SnowyRiver.LocalStorage.Interface;
-public interface ILocalStorageValueProvider<out T>:IValueProvider<T>, INotifyPropertyChanged
+public interface ILocalStorageValueProvider<T>:IValueProvider<T>, INotifyPropertyChanged
 {
     Task InitializeAsync(CancellationToken cancellationToken = default);
     Task SaveAsync(CancellationToken cancellationToken = default);
     Task RefreshAsync(CancellationToken cancellationToken = default);
-    public T? DefaultValue { get; }
+    public T? DefaultValue { get; set; }
 }

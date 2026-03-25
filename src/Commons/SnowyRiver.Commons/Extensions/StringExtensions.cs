@@ -2,7 +2,7 @@
 
 public static class StringExtensions
 {
-    extension(string value)
+    extension(string? value)
     {
         public bool IsNullOrWhiteSpace()
         {

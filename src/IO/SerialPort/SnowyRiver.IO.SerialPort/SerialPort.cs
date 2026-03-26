@@ -32,23 +32,22 @@ public class SerialPort : System.IO.Ports.SerialPort,ISerialPort
 
         /* _serialPort.DiscardInBuffer is essential here to cancel the operation */
         await using var timeoutRegistration = timeoutCts.Token.Register(() => {
-            if (!IsOpen && !DiscardInBufferOnReadTimeout)
+            if (IsOpen && DiscardInBufferOnReadTimeout)
             {
-                return;
-            }
-
-            try
-            {
-                DiscardInBuffer();
-            }
-            catch (InvalidOperationException)
-            {
+                try
+                {
+                    DiscardInBuffer();
+                }
+                catch (InvalidOperationException)
+                {
+                }
             }
         });
         await using var cancellationRegistration = token.Register(timeoutCts.Cancel);
 
         try
         {
+            await WaitToReadAsync(timeoutCts.Token);
             return await BaseStream.ReadAsync(buffer, offset, count, timeoutCts.Token);
         }
         catch (OperationCanceledException) when (token.IsCancellationRequested)
@@ -131,17 +130,15 @@ public class SerialPort : System.IO.Ports.SerialPort,ISerialPort
         /* _serialPort.DiscardInBuffer is essential here to cancel the operation */
         await using var timeoutRegistration = timeoutCts.Token.Register(() =>
         {
-            if (!IsOpen && !DiscardOutBufferOnWriteTimeout)
+            if (IsOpen && DiscardOutBufferOnWriteTimeout)
             {
-                return;
-            }
-
-            try
-            {
-                DiscardOutBuffer();
-            }
-            catch (InvalidOperationException)
-            {
+                try
+                {
+                    DiscardOutBuffer();
+                }
+                catch (InvalidOperationException)
+                {
+                }
             }
         });
         await using var cancellationRegistration = token.Register(timeoutCts.Cancel);
@@ -169,6 +166,14 @@ public class SerialPort : System.IO.Ports.SerialPort,ISerialPort
         var line = text + NewLine;
         var bytes = Encoding.GetBytes(line);
         await WriteAsync(bytes, 0, bytes.Length, token);
+    }
+
+    protected async Task WaitToReadAsync(CancellationToken token = default)
+    {
+        while (BytesToWrite > 0 && IsOpen)
+        {
+            await Task.Delay(1, token);
+        }
     }
 
     public virtual bool DiscardOutBufferOnWriteTimeout => false;

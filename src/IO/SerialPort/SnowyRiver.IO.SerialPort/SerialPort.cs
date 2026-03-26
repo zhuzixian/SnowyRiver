@@ -2,8 +2,11 @@
 
 public class SerialPort : System.IO.Ports.SerialPort,ISerialPort
 {
+    private const string AsyncReadTimeoutMessage = "The asynchronous read operation timed out.";
+    private const string AsyncWriteTimeoutMessage = "The asynchronous write operation timed out.";
 
-    public SerialPort():base() { }
+    public SerialPort()
+    { }
 
     public SerialPort(System.ComponentModel.IContainer container) : base(container) { }
 
@@ -28,52 +31,37 @@ public class SerialPort : System.IO.Ports.SerialPort,ISerialPort
         using var timeoutCts = new CancellationTokenSource(ReadTimeout);
 
         /* _serialPort.DiscardInBuffer is essential here to cancel the operation */
-        await using (timeoutCts.Token.Register(() =>
-                     {
-                         if (IsOpen) DiscardInBuffer();
-                     }))
-        await using (token.Register(() => timeoutCts.Cancel()))
-        {
-            while (true)
+        await using var timeoutRegistration = timeoutCts.Token.Register(() => {
+            if (!IsOpen && !DiscardInBufferOnReadTimeout)
             {
-                try
-                {
-                    if (token.IsCancellationRequested)
-                    {
-                        throw new OperationCanceledException(token);
-                    }
-
-                    if (timeoutCts.IsCancellationRequested)
-                    {
-                        throw new TimeoutException("The asynchronous read operation timed out.");
-                    }
-
-                    if (BytesToRead <= 0)
-                    {
-                        await Task.Delay(TimeSpan.FromMilliseconds(1), token);
-                        continue;
-                    }
-
-                    return await BaseStream.ReadAsync(buffer, offset, count, timeoutCts.Token);
-                }
-                catch (OperationCanceledException) when (token.IsCancellationRequested)
-                {
-                    throw;
-                }
-                catch (OperationCanceledException) when (timeoutCts.IsCancellationRequested)
-                {
-                    throw new TimeoutException("The asynchronous read operation timed out.");
-                }
-                catch (IOException) when (timeoutCts.IsCancellationRequested && !token.IsCancellationRequested)
-                {
-                    throw new TimeoutException("The asynchronous read operation timed out.");
-                }
-                catch (IOException)
-                {
-                    //
-                }
+                return;
             }
 
+            try
+            {
+                DiscardInBuffer();
+            }
+            catch (InvalidOperationException)
+            {
+            }
+        });
+        await using var cancellationRegistration = token.Register(timeoutCts.Cancel);
+
+        try
+        {
+            return await BaseStream.ReadAsync(buffer, offset, count, timeoutCts.Token);
+        }
+        catch (OperationCanceledException) when (token.IsCancellationRequested)
+        {
+            throw;
+        }
+        catch (OperationCanceledException) when (timeoutCts.IsCancellationRequested)
+        {
+            throw new TimeoutException(AsyncReadTimeoutMessage);
+        }
+        catch (IOException) when (timeoutCts.IsCancellationRequested && !token.IsCancellationRequested)
+        {
+            throw new TimeoutException(AsyncReadTimeoutMessage);
         }
     }
 
@@ -81,42 +69,30 @@ public class SerialPort : System.IO.Ports.SerialPort,ISerialPort
     {
         using var timeoutCts = new CancellationTokenSource(ReadTimeout);
 
-        await using (timeoutCts.Token.Register(() =>
-        {
-            if (IsOpen) DiscardInBuffer();
-        }))
-        await using (cancellationToken.Register(() => timeoutCts.Cancel()))
-        {
-            var result = new System.Text.StringBuilder();
-            var newLine = NewLine;
-            var buffer = new byte[1];
+        await using var cancellationRegistration = cancellationToken.Register(timeoutCts.Cancel);
 
+        var result = new System.Text.StringBuilder();
+        var newLine = NewLine;
+        var byteBuffer = new byte[1];
+        var decoder = Encoding.GetDecoder();
+        var charBuffer = new char[Encoding.GetMaxCharCount(1)];
+
+        try
+        {
             while (true)
             {
                 try
                 {
-                    if (cancellationToken.IsCancellationRequested)
-                    {
-                        throw new OperationCanceledException(cancellationToken);
-                    }
+                    var bytesRead = await BaseStream.ReadAsync(byteBuffer, 0, 1, timeoutCts.Token);
+                    if (bytesRead == 0) continue;
 
-                    if (timeoutCts.IsCancellationRequested)
+                    var charsDecoded = decoder.GetChars(byteBuffer, 0, bytesRead, charBuffer, 0, flush: false);
+                    if (charsDecoded <= 0)
                     {
-                        throw new TimeoutException("The asynchronous read operation timed out.");
-                    }
-
-                    if (BytesToRead <= 0)
-                    {
-                        await Task.Delay(TimeSpan.FromMilliseconds(1), cancellationToken);
                         continue;
                     }
 
-
-                    var bytesRead = await BaseStream.ReadAsync(buffer, 0, 1, timeoutCts.Token);
-                    if (bytesRead == 0) continue;
-
-                    var ch = Encoding.GetString(buffer, 0, 1);
-                    result.Append(ch);
+                    result.Append(charBuffer, 0, charsDecoded);
 
                     if (result.Length >= newLine.Length &&
                         result.ToString(result.Length - newLine.Length, newLine.Length) == newLine)
@@ -124,23 +100,24 @@ public class SerialPort : System.IO.Ports.SerialPort,ISerialPort
                         return result.ToString(0, result.Length - newLine.Length);
                     }
                 }
-                catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
-                {
-                    throw;
-                }
-                catch (OperationCanceledException) when (timeoutCts.IsCancellationRequested)
-                {
-                    throw new TimeoutException("The asynchronous read operation timed out.");
-                }
-                catch (IOException) when (timeoutCts.IsCancellationRequested && !cancellationToken.IsCancellationRequested)
-                {
-                    throw new TimeoutException("The asynchronous read operation timed out.");
-                }
                 catch (IOException)
                 {
-                    // 忽略并继续
+                    if (timeoutCts.IsCancellationRequested && !cancellationToken.IsCancellationRequested)
+                    {
+                        throw new TimeoutException(AsyncReadTimeoutMessage);
+                    }
+
+                    throw;
                 }
             }
+        }
+        catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+        {
+            throw;
+        }
+        catch (OperationCanceledException) when (timeoutCts.IsCancellationRequested)
+        {
+            throw new TimeoutException(AsyncReadTimeoutMessage);
         }
     }
 
@@ -152,25 +129,38 @@ public class SerialPort : System.IO.Ports.SerialPort,ISerialPort
         using var timeoutCts = new CancellationTokenSource(WriteTimeout);
 
         /* _serialPort.DiscardInBuffer is essential here to cancel the operation */
-        await using (timeoutCts.Token.Register(DiscardOutBuffer))
-        await using (token.Register(() => timeoutCts.Cancel()))
+        await using var timeoutRegistration = timeoutCts.Token.Register(() =>
         {
+            if (!IsOpen && !DiscardOutBufferOnWriteTimeout)
+            {
+                return;
+            }
+
             try
             {
-                await BaseStream.WriteAsync(buffer, offset, count, timeoutCts.Token);
+                DiscardOutBuffer();
             }
-            catch (OperationCanceledException) when (token.IsCancellationRequested)
+            catch (InvalidOperationException)
             {
-                throw;
             }
-            catch (OperationCanceledException) when (timeoutCts.IsCancellationRequested)
-            {
-                throw new TimeoutException("The asynchronous write operation timed out.");
-            }
-            catch (IOException) when (timeoutCts.IsCancellationRequested && !token.IsCancellationRequested)
-            {
-                throw new TimeoutException("The asynchronous write operation timed out.");
-            }
+        });
+        await using var cancellationRegistration = token.Register(timeoutCts.Cancel);
+
+        try
+        {
+            await BaseStream.WriteAsync(buffer, offset, count, timeoutCts.Token);
+        }
+        catch (OperationCanceledException) when (token.IsCancellationRequested)
+        {
+            throw;
+        }
+        catch (OperationCanceledException) when (timeoutCts.IsCancellationRequested)
+        {
+            throw new TimeoutException(AsyncWriteTimeoutMessage);
+        }
+        catch (IOException) when (timeoutCts.IsCancellationRequested && !token.IsCancellationRequested)
+        {
+            throw new TimeoutException(AsyncWriteTimeoutMessage);
         }
     }
 
@@ -180,4 +170,7 @@ public class SerialPort : System.IO.Ports.SerialPort,ISerialPort
         var bytes = Encoding.GetBytes(line);
         await WriteAsync(bytes, 0, bytes.Length, token);
     }
+
+    public virtual bool DiscardOutBufferOnWriteTimeout => false;
+    public virtual bool DiscardInBufferOnReadTimeout => false;
 }

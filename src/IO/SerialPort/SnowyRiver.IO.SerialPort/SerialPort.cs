@@ -174,6 +174,8 @@ public class SerialPort : System.IO.Ports.SerialPort,ISerialPort
         {
             await Task.Delay(1, token);
         }
+
+        await Task.Delay(10, token);
     }
 
     public virtual bool DiscardOutBufferOnWriteTimeout => false;

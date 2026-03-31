@@ -18,6 +18,9 @@ public interface IModbusClient
     public Task<Memory<byte>> ReadCoilsAsync(int unitIdentifier, int startingAddress, int quantity,
         CancellationToken cancellationToken = default);
 
+    Task<bool[]> ReadCoilsAsBoolArrayAsync(int unitIdentifier, int startingAddress, int quantity,
+        CancellationToken cancellationToken);
+
     public Task<byte[]> ReadDiscreteInputsAsync(int unitIdentifier, int startingAddress, int quantity,
         CancellationToken cancellationToken = default);
 

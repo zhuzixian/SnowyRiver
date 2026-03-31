@@ -202,4 +202,21 @@ public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy
             return memoryData.Span.ToArray();
         }, cancellationToken:cancellationToken);
     }
+
+    public async Task<bool[]> ReadCoilsAsBoolArrayAsync(int unitIdentifier, int startingAddress, int quantity, CancellationToken cancellationToken)
+    {
+        var values = new bool[quantity];
+        var bytes = await ReadCoilsAsync(unitIdentifier, startingAddress, quantity, cancellationToken);
+        for (var i = 0; i < quantity; i++)
+        {
+            var byteIndex = i / 8;
+            var bitIndex = i % 8;
+
+            if (byteIndex < bytes.Length)
+            {
+                values[i] = (bytes.Span[byteIndex] & (1 << bitIndex)) != 0;
+            }
+        }
+        return values;
+    }
 }

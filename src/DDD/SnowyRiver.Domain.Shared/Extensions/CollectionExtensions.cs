@@ -72,7 +72,7 @@ public static class CollectionExtensions
         {
             var startSortId = filter == null 
                 ? 1
-                : (filter.PageIndex - 1) * filter.PageSize;
+                : (filter.PageIndex - 1) * filter.PageSize + 1;
             records.FillSortId(startSortId);
         }
 

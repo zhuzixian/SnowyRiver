@@ -88,6 +88,9 @@
   <Folder Name="/Tests/Documents/">
     <Project Path="Tests/SnowyRiver.Documents.Xps.Tests/SnowyRiver.Documents.Xps.Tests.csproj" />
   </Folder>
+  <Folder Name="/Tests/IO/">
+    <Project Path="Tests/IO/SnowyRiver.IO.SerialPort.Tests/SnowyRiver.IO.SerialPort.Tests.csproj" />
+  </Folder>
   <Folder Name="/WPF/">
     <Project Path="WPF/SnowyRiver.WPF.Converters/SnowyRiver.WPF.Converters.csproj" />
     <Project Path="WPF/SnowyRiver.WPF.Localized/SnowyRiver.WPF.Localized.csproj" />

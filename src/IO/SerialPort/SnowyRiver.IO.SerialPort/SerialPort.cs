@@ -47,8 +47,26 @@ public class SerialPort : System.IO.Ports.SerialPort,ISerialPort
 
         try
         {
-            await WaitToReadAsync(timeoutCts.Token);
-            return await BaseStream.ReadAsync(buffer, offset, count, timeoutCts.Token);
+            try
+            {
+                await WaitToReadAsync(count, timeoutCts.Token);
+            }
+            catch (OperationCanceledException) when (token.IsCancellationRequested)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                //
+            }
+
+            var readCount = BytesToRead > count ? count : BytesToRead;
+            if (readCount > 0)
+            {
+                return await BaseStream.ReadAsync(buffer, offset, readCount, token);
+            }
+
+            throw new TimeoutException();
         }
         catch (OperationCanceledException) when (token.IsCancellationRequested)
         {
@@ -168,14 +186,12 @@ public class SerialPort : System.IO.Ports.SerialPort,ISerialPort
         await WriteAsync(bytes, 0, bytes.Length, token);
     }
 
-    protected async Task WaitToReadAsync(CancellationToken token = default)
+    protected async Task WaitToReadAsync(int count, CancellationToken token = default)
     {
-        while (BytesToWrite > 0 && IsOpen)
+        while (BytesToRead < count && IsOpen)
         {
             await Task.Delay(1, token);
         }
-
-        await Task.Delay(10, token);
     }
 
     public virtual bool DiscardOutBufferOnWriteTimeout => false;

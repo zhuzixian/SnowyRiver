@@ -5,7 +5,7 @@ public class SerialPortTests
     [Fact]
     public async Task Test_ReadAsync_Timeout()
     {
-        var port = new SerialPort("Com7", 115200);
+        var port = new SerialPort("Com5", 115200);
         port.Open();
         var buffer = new byte[102];
         port.ReadTimeout = (int)TimeSpan.FromSeconds(5).TotalMilliseconds;

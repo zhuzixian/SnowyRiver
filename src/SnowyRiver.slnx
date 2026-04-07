@@ -88,8 +88,12 @@
   <Folder Name="/Tests/Documents/">
     <Project Path="Tests/SnowyRiver.Documents.Xps.Tests/SnowyRiver.Documents.Xps.Tests.csproj" />
   </Folder>
-  <Folder Name="/Tests/IO/">
-    <Project Path="Tests/IO/SnowyRiver.IO.SerialPort.Tests/SnowyRiver.IO.SerialPort.Tests.csproj" />
+  <Folder Name="/Tests/IO/" />
+  <Folder Name="/Tests/IO/Modbus/">
+    <Project Path="Tests/IO/Modbus/SnowyRiver.IO.Modbus.FluentModbus.Tests/SnowyRiver.IO.Modbus.FluentModbus.Tests.csproj" Id="9914f2ff-a589-4007-a401-a31bcc638fef" />
+  </Folder>
+  <Folder Name="/Tests/IO/SerialPort/">
+    <Project Path="Tests/IO/SerialPort/SnowyRiver.IO.SerialPort.Tests/SnowyRiver.IO.SerialPort.Tests.csproj" />
   </Folder>
   <Folder Name="/WPF/">
     <Project Path="WPF/SnowyRiver.WPF.Converters/SnowyRiver.WPF.Converters.csproj" />

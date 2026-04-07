@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\IO\SerialPort\SnowyRiver.IO.SerialPort\SnowyRiver.IO.SerialPort.csproj" />
+    <ProjectReference Include="..\..\..\..\IO\SerialPort\SnowyRiver.IO.SerialPort\SnowyRiver.IO.SerialPort.csproj" />
   </ItemGroup>
 
   <ItemGroup>

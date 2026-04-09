@@ -1,7 +1,4 @@
-﻿using SnowyRiver.Accounts.Domain.Shared.Entities;
-using SnowyRiver.Domain.Entities;
-
-namespace SnowyRiver.Accounts.Domain.Entities;
+﻿namespace SnowyRiver.Accounts.Domain.Entities;
 
 public class HasUserEntity<TUser, TRole, TTeam, TPermission> : UserAssociationEntityBase
     where TTeam : Team<TUser, TRole, TTeam, TPermission>

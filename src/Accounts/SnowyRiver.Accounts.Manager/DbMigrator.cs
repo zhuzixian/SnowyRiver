@@ -26,7 +26,6 @@ namespace SnowyRiver.Accounts.Manager
                     Name = defaultUserName,
                     Password = passwordHash,
                     PasswordSalt = passwordSalt,
-                    Number = 100001,
                 };
                 dbContext.Users.Add(user);
             }

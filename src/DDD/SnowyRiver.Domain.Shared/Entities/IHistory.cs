@@ -1,6 +1,6 @@
 ﻿namespace SnowyRiver.Domain.Shared.Entities;
 
-public interface IEntityHistory<TEntity, TEntityId> : IHasCreationTime
+public interface IHistory<TEntity, TEntityId> : IAudited
     where TEntity : IEntity<TEntityId>
 {
     TEntityId? EntityId { get; set; }

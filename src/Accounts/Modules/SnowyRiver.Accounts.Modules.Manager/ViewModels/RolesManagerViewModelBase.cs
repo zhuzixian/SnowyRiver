@@ -18,7 +18,7 @@ public class RolesManagerViewModelBase<
     IMapper mapper,
     IDialogHostService dialog,
     IRegionManager regionManager) 
-    : ManagerViewModel<TRole, TRoleEntity>(unitOfWorkFactory, mapper, dialog, regionManager)
+    : ManagerViewModel<TRole, TRoleEntity, TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>(unitOfWorkFactory, mapper, dialog, regionManager)
     where TUserEntity : SnowyRiver.Accounts.Domain.Entities.User<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
     where TUser : User<TUser, TRole, TTeam, TPermission>, new()
     where TRoleEntity : SnowyRiver.Accounts.Domain.Entities.Role<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>

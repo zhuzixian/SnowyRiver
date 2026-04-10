@@ -21,7 +21,7 @@ public class UserEditorViewModelBase<
     IUnitOfWorkFactory unitOfWorkFactory, 
     IMapper mapper,
     IRegionManager regionManager)
-    : EditorViewModel<TUser, TUserEntity>(unitOfWorkFactory, mapper, regionManager)
+    : EditorViewModel<TUser, TUserEntity, TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>(unitOfWorkFactory, mapper, regionManager)
     where TUserEntity : SnowyRiver.Accounts.Domain.Entities.User<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
     where TUser : User<TUser, TRole, TTeam, TPermission>, new()
     where TRoleEntity: SnowyRiver.Accounts.Domain.Entities.Role<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>

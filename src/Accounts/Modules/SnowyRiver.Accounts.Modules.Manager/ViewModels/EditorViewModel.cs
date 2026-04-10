@@ -10,16 +10,22 @@ using SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 using System.Threading.Tasks;
 using Mapster;
 using MapsterMapper;
+using SnowyRiver.Accounts.Domain.Entities;
 using SnowyRiver.Accounts.Services.Interfaces;
 using SnowyRiver.Domain.Entities;
 using SnowyRiver.EF.DataAccess.Abstractions;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
-public class EditorViewModel<TModel, TEntity>(
+public class EditorViewModel<TModel, TEntity,
+    TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>(
     IUnitOfWorkFactory unitOfWorkFactory, 
     IMapper mapper,
     IRegionManager regionManager) 
     : RegionViewModelBase(regionManager)
+    where TTeamEntity : Domain.Entities.Team<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
+    where TUserEntity : Domain.Entities.User<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
+    where TRoleEntity : Domain.Entities.Role<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
+    where TPermissionEntity : Domain.Entities.Permission<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
     where TModel : EntityModel, new()
     where TEntity : Entity<Guid>
 {
@@ -79,7 +85,7 @@ public class EditorViewModel<TModel, TEntity>(
     protected static async Task<IList<T1>> GetEntitiesAsync<T1, T2>(IUnitOfWork unitOfWork,
         ObservableCollection<T2> models,
         CancellationToken cancellationToken = default)
-        where T1 : HasNameCreationTimeSoftDeleteEntity<Guid>
+        where T1 : NamedAccountAuditedEntity<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
         where T2 : EntityModel
     {
         var repository = unitOfWork.Repository<T1>();
@@ -94,7 +100,7 @@ public class EditorViewModel<TModel, TEntity>(
     protected async Task UpdateAsync<T1, T2>(IUnitOfWork unitOfWork, List<T1> list,
         ObservableCollection<T2> collection,
         CancellationToken cancellationToken = default)
-        where T1 : HasNameCreationTimeSoftDeleteEntity<Guid>
+        where T1 : NamedAccountAuditedEntity<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
         where T2 : EntityModel
     {
         var entities = await GetEntitiesAsync<T1, T2>(unitOfWork, collection, cancellationToken);

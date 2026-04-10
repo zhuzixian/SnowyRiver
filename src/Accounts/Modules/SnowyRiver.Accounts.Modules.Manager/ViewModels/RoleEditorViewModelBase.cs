@@ -4,10 +4,8 @@ using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using Prism.Navigation.Regions;
 using SnowyRiver.Accounts.Services.Interfaces;
-using SnowyRiver.Domain.Entities;
 using SnowyRiver.EF.DataAccess.Abstractions;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
@@ -23,7 +21,7 @@ public class RoleEditorViewModelBase<
     IUnitOfWorkFactory unitOfWorkFactory,
     IMapper mapper,
     IRegionManager regionManager)
-    : EditorViewModel<TRole, TRoleEntity>(unitOfWorkFactory, mapper, regionManager)
+    : EditorViewModel<TRole, TRoleEntity, TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>(unitOfWorkFactory, mapper, regionManager)
     where TUserEntity : SnowyRiver.Accounts.Domain.Entities.User<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
     where TUser : User<TUser, TRole, TTeam, TPermission>, new()
     where TRoleEntity : SnowyRiver.Accounts.Domain.Entities.Role<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>

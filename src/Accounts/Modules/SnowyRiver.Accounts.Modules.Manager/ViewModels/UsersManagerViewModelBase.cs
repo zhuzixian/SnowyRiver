@@ -8,7 +8,6 @@ using Prism.Navigation.Regions;
 using SnowyRiver.Accounts.Services.Interfaces;
 using SnowyRiver.EF.DataAccess.Abstractions;
 using SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs;
-using UserEntity = SnowyRiver.Accounts.Domain.Entities.User;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
 public class UsersManagerViewModelBase<
@@ -17,7 +16,7 @@ public class UsersManagerViewModelBase<
     TTeam, TTeamEntity,
     TPermission, TPermissionEntity>(IUnitOfWorkFactory unitOfWorkFactory, IMapper mapper,
     IDialogHostService dialog,
-    IRegionManager regionManager) : ManagerViewModel<TUser, TUserEntity>(
+    IRegionManager regionManager) : ManagerViewModel<TUser, TUserEntity, TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>(
         unitOfWorkFactory, mapper, dialog, regionManager)
     where TUserEntity : SnowyRiver.Accounts.Domain.Entities.User<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
     where TUser : User<TUser, TRole, TTeam, TPermission>, new()

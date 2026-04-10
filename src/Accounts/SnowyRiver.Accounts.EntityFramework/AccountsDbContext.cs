@@ -27,8 +27,6 @@ public class AccountsDbContext(DbContextOptions options) : DbContext(options)
         {
             b.ToTable(DbTablePrefix + "Users", DbSchema);
             b.HasKey(x => x.Id);
-            b.HasAlternateKey(x => x.UserId);
-            b.Property(x => x.UserId).ValueGeneratedOnAdd();
             b.Property(x => x.Name).IsRequired().HasMaxLength(64);
             b.Property(x => x.Password).IsRequired().HasMaxLength(64);
             b.Property(x => x.PasswordSalt).IsRequired().HasMaxLength(64);

@@ -37,7 +37,6 @@ public class AuthenticationService<TTeam, TRole, TUser, TPermission,
                 {
                     User = await mapper.From(matchedUser)
                         .AdaptToTypeAsync<TUser>();
-                    IsAuthenticated = true;
                     return (true, LoginFailedReason.Succeed);
                 }
 
@@ -64,14 +63,14 @@ public class AuthenticationService<TTeam, TRole, TUser, TPermission,
 
     public async Task LogoutAsync()
     {
-        IsAuthenticated = false;
+        User = null;
         await Task.CompletedTask;
     }
 
-    public bool IsAuthenticated
+    public async Task ChangeTeamAsync(TTeam team, CancellationToken cancellationToken = default)
     {
-        get;
-        set => Set(ref field, value);
+        Team = team;
+        await Task.CompletedTask;
     }
 
     public TUser? User
@@ -80,9 +79,12 @@ public class AuthenticationService<TTeam, TRole, TUser, TPermission,
         protected set => Set(ref field, value);
     }
 
-    public TTeam? SelectedTeam
+    public TTeam? Team
     {
         get;
-        set => Set(ref field, value);
+        protected set => Set(ref field, value);
     }
+
+    public Guid? TeamId => Team?.Id;
+    public Guid? UserId => User?.Id;
 }

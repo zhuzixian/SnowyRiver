@@ -8,19 +8,24 @@ using MapsterMapper;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Navigation.Regions;
+using SnowyRiver.Accounts.Domain.Entities;
 using SnowyRiver.Accounts.Services.Interfaces;
-using SnowyRiver.Domain.Entities;
 using SnowyRiver.Domain.Shared.Extensions;
 using SnowyRiver.EF.DataAccess.Abstractions;
 using SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs;
 using SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
-public abstract class ManagerViewModel<TModel, TEntity>(IUnitOfWorkFactory unitOfWorkFactory, 
+public abstract class ManagerViewModel<TModel, TEntity,
+    TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>(IUnitOfWorkFactory unitOfWorkFactory, 
     IMapper mapper,
     IDialogHostService dialog,
     IRegionManager regionManager): RegionViewModelBase(regionManager)
-    where TEntity: HasNameCreationTimeSoftDeleteEntity<Guid>
+    where TTeamEntity : Domain.Entities.Team<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
+    where TUserEntity : Domain.Entities.User<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
+    where TRoleEntity : Domain.Entities.Role<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
+    where TPermissionEntity : Domain.Entities.Permission<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
+    where TEntity: NamedAccountAuditedEntity<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
     where TModel : EntityModel, new()
 {
     public override async void OnNavigatedTo(NavigationContext navigationContext)

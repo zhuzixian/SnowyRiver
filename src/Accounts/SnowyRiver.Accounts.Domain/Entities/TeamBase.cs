@@ -1,6 +1,4 @@
-﻿using SnowyRiver.Domain.Entities;
-
-namespace SnowyRiver.Accounts.Domain.Entities;
+﻿namespace SnowyRiver.Accounts.Domain.Entities;
 public class Team<TUser, TRole, TTeam, TPermission> 
     : NamedAccountAuditedEntity<TUser, TRole, TTeam, TPermission>
     where TTeam : Team<TUser, TRole, TTeam, TPermission>

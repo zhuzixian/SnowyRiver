@@ -74,7 +74,8 @@ public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
                     : LocalizationProvider.GetLocalizedValueFromCurrentAssembly("LoginPasswordVerificationFailed");
                 if (authenticationService.User != null && authenticationService.User.Teams.Any())
                 {
-                    authenticationService.SelectedTeam = authenticationService.User.Teams.First();
+                    var team = authenticationService.User.Teams.First();
+                    await authenticationService.ChangeTeamAsync(team, cancellationToken);
                 }
             }
             else

@@ -12,7 +12,7 @@ public class TeamEditorViewModelBase<
     IUnitOfWorkFactory unitOfWorkFactory, 
     IMapper mapper,
     IRegionManager regionManager)
-    : EditorViewModel<TTeam, TTeamEntity>(unitOfWorkFactory, mapper, regionManager)
+    : EditorViewModel<TTeam, TTeamEntity, TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>(unitOfWorkFactory, mapper, regionManager)
     where TUserEntity : SnowyRiver.Accounts.Domain.Entities.User<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
     where TUser : User<TUser, TRole, TTeam, TPermission>, new()
     where TRoleEntity : SnowyRiver.Accounts.Domain.Entities.Role<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>

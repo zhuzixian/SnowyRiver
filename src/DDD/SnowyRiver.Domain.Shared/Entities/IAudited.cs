@@ -1,5 +1,5 @@
 ﻿namespace SnowyRiver.Domain.Shared.Entities;
 
-public interface IAudited : ICreationAudited, IModificationAudited,IHasUser,IHasTeam
+public interface IAudited : ICreationAudited, IModificationAudited
 {
 }

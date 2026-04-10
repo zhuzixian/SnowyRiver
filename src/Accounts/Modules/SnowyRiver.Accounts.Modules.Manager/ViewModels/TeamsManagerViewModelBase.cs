@@ -13,7 +13,7 @@ public class TeamsManagerViewModelBase<
     TPermission, TPermissionEntity>(IUnitOfWorkFactory unitOfWorkFactory, IMapper mapper, 
     IDialogHostService dialog,
     IRegionManager regionManager) 
-    : ManagerViewModel<TTeam, TTeamEntity>(unitOfWorkFactory, mapper, dialog, regionManager)
+    : ManagerViewModel<TTeam, TTeamEntity, TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>(unitOfWorkFactory, mapper, dialog, regionManager)
     where TUserEntity : SnowyRiver.Accounts.Domain.Entities.User<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
     where TUser : User<TUser, TRole, TTeam, TPermission>, new()
     where TRoleEntity : SnowyRiver.Accounts.Domain.Entities.Role<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>

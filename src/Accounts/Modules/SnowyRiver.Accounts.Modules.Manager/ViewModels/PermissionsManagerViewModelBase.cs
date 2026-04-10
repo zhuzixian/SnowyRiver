@@ -15,7 +15,7 @@ public class PermissionsManagerViewModelBase<
     IMapper mapper,
     IDialogHostService dialog,
     IRegionManager regionManager)
-    : ManagerViewModel<TPermission, TPermissionEntity>(unitOfWorkFactory, mapper, dialog, regionManager)
+    : ManagerViewModel<TPermission, TPermissionEntity, TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>(unitOfWorkFactory, mapper, dialog, regionManager)
     where TUserEntity : SnowyRiver.Accounts.Domain.Entities.User<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
     where TUser : User<TUser, TRole, TTeam, TPermission>, new()
     where TRoleEntity : SnowyRiver.Accounts.Domain.Entities.Role<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>

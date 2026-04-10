@@ -4,11 +4,11 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Version>10.0.2</Version>
+    <Version>10.0.3</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\" />
+    <ProjectReference Include="..\..\DDD\SnowyRiver.Domain.Shared\SnowyRiver.Domain.Shared.csproj" />
   </ItemGroup>
 
 </Project>

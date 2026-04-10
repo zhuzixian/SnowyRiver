@@ -6,6 +6,6 @@ public class AuditedEntity<T> : HasCreationTimeEntity<T>, IAuditedEntity<T>, ISo
 {
     public Guid? CreatorUserId { get; set; }
     public DateTime? LastModificationTime { get; set; }
-    public long? LastModifierUserId { get; set; }
+    public Guid? LastModifierUserId { get; set; }
     public bool IsDeleted { get; set; }
 }

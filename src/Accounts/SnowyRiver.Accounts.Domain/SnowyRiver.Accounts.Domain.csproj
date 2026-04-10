@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="Entities\UserHistory.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\DDD\SnowyRiver.Domain.Shared\SnowyRiver.Domain.Shared.csproj" />
     <ProjectReference Include="..\..\DDD\SnowyRiver.Domain\SnowyRiver.Domain.csproj" />
     <ProjectReference Include="..\SnowyRiver.Accounts.Domain.Shared\SnowyRiver.Accounts.Domain.Shared.csproj" />

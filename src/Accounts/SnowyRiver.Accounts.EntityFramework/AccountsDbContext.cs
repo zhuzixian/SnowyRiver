@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SnowyRiver.Accounts.Domain.Entities;
-using SnowyRiver.Domain.Shared.Entities;
+using SnowyRiver.EF;
 using System;
 
 namespace SnowyRiver.Accounts.EntityFramework;
 
 public class AccountsDbContext<TUser, TRole, TTeam, TPermission,
     TUserHistory, TRoleHistory, TTeamHistory, TPermissionHistory>(DbContextOptions options) 
-    : DbContext(options)
+    : SnowyRiverDbContext(options)
     where TTeam : Team<TUser, TRole, TTeam, TPermission>
     where TUser : User<TUser, TRole, TTeam, TPermission>
     where TRole : Role<TUser, TRole, TTeam, TPermission>
@@ -17,8 +17,7 @@ public class AccountsDbContext<TUser, TRole, TTeam, TPermission,
     where TTeamHistory: TeamHistoryBase<TUser, TRole, TTeam, TPermission>
     where TPermissionHistory: PermissionHistoryBase<TUser, TRole, TTeam, TPermission>
 {
-    protected virtual string DbTablePrefix => "Accounts_";
-    protected virtual string? DbSchema => null;
+    protected override string DbTablePrefix => "Accounts_";
 
     public DbSet<TUser> Users { get; set; }
     public DbSet<TRole> Roles { get; set; }
@@ -70,22 +69,9 @@ public class AccountsDbContext<TUser, TRole, TTeam, TPermission,
                 .UsingEntity(DbTablePrefix + "UserTeams");
         });
 
-        ConfigEntityHistory<TUser, TUserHistory>(modelBuilder, "UserHistories");
-        ConfigEntityHistory<TRole, TRoleHistory>(modelBuilder, "RoleHistories");
-        ConfigEntityHistory<TTeam, TTeamHistory>(modelBuilder, "TeamHistories");
-        ConfigEntityHistory<TPermission, TPermissionHistory>(modelBuilder, "PermissionHistory");
-    }
-
-    protected virtual void ConfigEntityHistory<TEntity, TEntityHistory>(
-        ModelBuilder modelBuilder, string tableName)
-        where TEntityHistory : AccountEntityHistory<TEntity, Guid, TUser, TRole, TTeam, TPermission>
-        where TEntity : IEntity<Guid>
-    {
-        modelBuilder.Entity<TEntityHistory>(b =>
-        {
-            b.ToTable(DbTablePrefix + tableName, DbSchema);
-            b.HasKey(x => x.Id);
-            b.Property(e => e.SnapShot).HasColumnType("json");
-        });
+        ConfigEntityHistory<TUser, Guid, TUserHistory>(modelBuilder, "UserHistories");
+        ConfigEntityHistory<TRole, Guid, TRoleHistory>(modelBuilder, "RoleHistories");
+        ConfigEntityHistory<TTeam, Guid,  TTeamHistory>(modelBuilder, "TeamHistories");
+        ConfigEntityHistory<TPermission, Guid, TPermissionHistory>(modelBuilder, "PermissionHistory");
     }
 }

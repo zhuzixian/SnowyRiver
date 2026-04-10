@@ -2,8 +2,8 @@
 
 namespace SnowyRiver.Domain.Entities;
 
-public class EntityHistory<TEntity, TEntityId> : TeamAuditedEntity<TEntityId>, 
-    IHistory<TEntity, TEntityId>
+public class EntityHistory<TEntity, TEntityId> : TeamAuditedEntity<Guid>, 
+    IEntityHistory<TEntity, TEntityId>
     where TEntity : IEntity<TEntityId>
 {
     public TEntityId? EntityId { get; set; }

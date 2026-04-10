@@ -2,7 +2,7 @@
 
 namespace SnowyRiver.Accounts.Domain.Entities;
 
-public class HasUserEntityHistory<TEntity, TEntityId, TUser, TRole, TTeam, TPermission>
+public class UserEntityHistory<TEntity, TEntityId, TUser, TRole, TTeam, TPermission>
     : UserEntityHistoryBase<TEntity, TEntityId>
     where TUser : User<TUser, TRole, TTeam, TPermission>
     where TRole : Role<TUser, TRole, TTeam, TPermission>

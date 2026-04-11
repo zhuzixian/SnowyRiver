@@ -101,6 +101,7 @@
     <Project Path="WPF/SnowyRiver.WPF.MarkupExtension/SnowyRiver.WPF.MarkupExtension.csproj" />
     <Project Path="WPF/SnowyRiver.WPF.MaterialDesignInPrism.Core/SnowyRiver.WPF.MaterialDesignInPrism.Core.csproj" />
     <Project Path="WPF/SnowyRiver.WPF.MaterialDesignInPrism/SnowyRiver.WPF.MaterialDesignInPrism.csproj" />
+    <Project Path="WPF/SnowyRiver.WPF.Prism.JsonConfigs/SnowyRiver.WPF.Prism.JsonConfigs.csproj" />
     <Project Path="WPF/SnowyRiver.WPF/SnowyRiver.WPF.csproj" />
   </Folder>
   <Folder Name="/WPF/Controls/">

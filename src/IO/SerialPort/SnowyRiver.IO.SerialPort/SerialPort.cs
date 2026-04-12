@@ -59,46 +59,30 @@ public class SerialPort : System.IO.Ports.SerialPort, ISerialPort
 
     public async Task<string> ReadLineAsync(CancellationToken cancellationToken = default)
     {
-        using var timeoutCts = new CancellationTokenSource(ReadTimeout);
-
-        await using var cancellationRegistration = cancellationToken.Register(timeoutCts.Cancel);
-
         var result = new System.Text.StringBuilder();
         var newLine = NewLine;
         var byteBuffer = new byte[1];
         var decoder = Encoding.GetDecoder();
         var charBuffer = new char[Encoding.GetMaxCharCount(1)];
 
-        try
+        while (true)
         {
-            while (true)
+            var bytesRead = await ReadAsync(byteBuffer, 0, 1, cancellationToken);
+            if (bytesRead == 0) continue;
+
+            var charsDecoded = decoder.GetChars(byteBuffer, 0, bytesRead, charBuffer, 0, flush: false);
+            if (charsDecoded <= 0)
             {
-                await WaitToReadAsync(1, cancellationToken);
-                var bytesRead = await BaseStream.ReadAsync(byteBuffer, 0, 1, timeoutCts.Token);
-                if (bytesRead == 0) continue;
-
-                var charsDecoded = decoder.GetChars(byteBuffer, 0, bytesRead, charBuffer, 0, flush: false);
-                if (charsDecoded <= 0)
-                {
-                    continue;
-                }
-
-                result.Append(charBuffer, 0, charsDecoded);
-
-                if (result.Length >= newLine.Length &&
-                    result.ToString(result.Length - newLine.Length, newLine.Length) == newLine)
-                {
-                    return result.ToString(0, result.Length - newLine.Length);
-                }
+                continue;
             }
-        }
-        catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
-        {
-            throw;
-        }
-        catch (OperationCanceledException) when (timeoutCts.IsCancellationRequested)
-        {
-            throw new TimeoutException(ReadTimeoutMessage);
+
+            result.Append(charBuffer, 0, charsDecoded);
+
+            if (result.Length >= newLine.Length &&
+                result.ToString(result.Length - newLine.Length, newLine.Length) == newLine)
+            {
+                return result.ToString(0, result.Length - newLine.Length);
+            }
         }
     }
 

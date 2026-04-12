@@ -6,4 +6,5 @@
 public interface ICreationAudited:IHasCreationTime
 {
     Guid? CreatorUserId { get; set; }
+    Guid? CreatorTeamId { get; set; }
 }

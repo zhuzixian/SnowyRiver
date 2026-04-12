@@ -5,7 +5,7 @@ using Nito.AsyncEx;
 
 namespace SnowyRiver.AsyncEx;
 
-public static class Executor
+public static partial class Executor
 {
     public static async Task ExecuteAsync(AsyncLock locker, Func<Task> action, CancellationToken cancellationToken = default)
     {
@@ -99,41 +99,6 @@ public static class Executor
         finally
         {
             locker.Release();
-        }
-    }
-
-    public static async Task WaitForConditionAsync(
-        Func<bool> predicate,
-        TimeSpan? timeout = null,
-        CancellationToken cancellationToken = default)
-    {
-        ArgumentNullException.ThrowIfNull(predicate);
-
-        if (predicate()) return;
-
-        using var timeoutCts = timeout.HasValue
-            ? CancellationTokenSource.CreateLinkedTokenSource(cancellationToken)
-            : null;
-
-        if (timeout.HasValue)
-        {
-            timeoutCts!.CancelAfter(timeout.Value);
-        }
-
-        var effectiveToken = timeoutCts?.Token ?? cancellationToken;
-
-        using var timer = new PeriodicTimer(TimeSpan.FromMilliseconds(50));
-
-        try
-        {
-            while (await timer.WaitForNextTickAsync(effectiveToken).ConfigureAwait(false))
-            {
-                if (predicate()) return;
-            }
-        }
-        catch (OperationCanceledException) when (timeout.HasValue && !cancellationToken.IsCancellationRequested)
-        {
-            throw new TimeoutException($"The condition was not met within the specified timeout of {timeout.Value}.");
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SnowyRiver.Accounts.Domain.Entities;
+using SnowyRiver.Domain.Shared.Entities;
 using SnowyRiver.EF;
 using System;
 
@@ -73,5 +74,29 @@ public class AccountsDbContextBase<TUser, TRole, TTeam, TPermission,
         ConfigEntityHistory<TRole, Guid, TRoleHistory>(modelBuilder, "RoleHistories");
         ConfigEntityHistory<TTeam, Guid,  TTeamHistory>(modelBuilder, "TeamHistories");
         ConfigEntityHistory<TPermission, Guid, TPermissionHistory>(modelBuilder, "PermissionHistory");
+    }
+
+    protected new void ConfigEntityHistory<TEntity, TEntityId, TEntityHistory>(
+        ModelBuilder modelBuilder, string tableName)
+        where TEntityHistory: AccountEntityHistory<TEntity, TEntityId, TUser, TRole, TTeam, TPermission>
+        where TEntity: IEntity<TEntityId>
+    {
+        base.ConfigEntityHistory<TEntity, TEntityId, TEntityHistory>(modelBuilder, tableName);
+
+        modelBuilder.Entity<TEntityHistory>(b =>
+        {
+            b.HasOne(x => x.Team).WithMany()
+                .HasForeignKey(x => x.TeamId);
+            b.HasOne(x => x.User).WithMany()
+                .HasForeignKey(x => x.UserId);
+            b.HasOne(x => x.LastModifierTeam).WithMany()
+                .HasForeignKey(x => x.LastModifierTeamId);
+            b.HasOne(x => x.LastModifierUser).WithMany()
+                .HasForeignKey(x => x.LastModifierUserId);
+            b.HasOne(x => x.CreatorTeam).WithMany()
+                .HasForeignKey(x => x.CreatorTeamId);
+            b.HasOne(x => x.CreatorUser).WithMany()
+                .HasForeignKey(x => x.CreatorUserId);
+        });
     }
 }

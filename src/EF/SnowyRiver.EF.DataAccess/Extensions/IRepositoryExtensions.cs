@@ -10,7 +10,8 @@ public static class RepositoryExtensions
         public async Task<T?> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate,
             CancellationToken cancellationToken = default)
         {
-            return await repository.FirstOrDefaultAsync(repository.MultipleResultQuery()
+            return await repository.FirstOrDefaultAsync(
+                repository.MultipleResultQuery()
                 .AndFilter(predicate), cancellationToken);
         }
 

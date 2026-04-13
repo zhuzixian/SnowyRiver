@@ -2,7 +2,9 @@
 
 namespace SnowyRiver.Domain.Entities;
 
-public class NamedAuditedEntity<T> : AuditedEntity<T>, IHasName
+public class NamedAuditedEntity<TId, TUser, TTeam> 
+    : AuditedEntity<TId, TUser, TTeam>,
+        IHasName
 {
     public string? Name { get; set; }
 }

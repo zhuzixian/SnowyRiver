@@ -85,7 +85,7 @@ public class EditorViewModel<TModel, TEntity,
     protected static async Task<IList<T1>> GetEntitiesAsync<T1, T2>(IUnitOfWork unitOfWork,
         ObservableCollection<T2> models,
         CancellationToken cancellationToken = default)
-        where T1 : NamedAccountAuditedEntity<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
+        where T1 : AccountNamedAuditedEntity<TUserEntity, TTeamEntity>
         where T2 : EntityModel
     {
         var repository = unitOfWork.Repository<T1>();
@@ -100,7 +100,7 @@ public class EditorViewModel<TModel, TEntity,
     protected async Task UpdateAsync<T1, T2>(IUnitOfWork unitOfWork, List<T1> list,
         ObservableCollection<T2> collection,
         CancellationToken cancellationToken = default)
-        where T1 : NamedAccountAuditedEntity<TUserEntity, TRoleEntity, TTeamEntity, TPermissionEntity>
+        where T1 : AccountNamedAuditedEntity<TUserEntity, TTeamEntity>
         where T2 : EntityModel
     {
         var entities = await GetEntitiesAsync<T1, T2>(unitOfWork, collection, cancellationToken);

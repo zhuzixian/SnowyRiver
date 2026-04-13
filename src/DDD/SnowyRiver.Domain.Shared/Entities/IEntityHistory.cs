@@ -1,6 +1,7 @@
 ﻿namespace SnowyRiver.Domain.Shared.Entities;
 
-public interface IEntityHistory<TEntity, TEntityId> : ITeamAuditedEntity<Guid>
+public interface IEntityHistory<TEntity, TEntityId, TUser, TTeam> 
+    : ITeamAuditedEntity<Guid, TUser, TTeam>
     where TEntity : IEntity<TEntityId>
 {
     TEntityId? EntityId { get; set; }

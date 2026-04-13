@@ -1,6 +1,6 @@
 ﻿namespace SnowyRiver.Domain.Shared.Entities;
 
-public interface IHasUser
+public interface IHasUserId
 {
     Guid? UserId { get; set; }
 }

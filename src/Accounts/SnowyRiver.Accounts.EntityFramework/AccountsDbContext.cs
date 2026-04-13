@@ -5,4 +5,7 @@ namespace SnowyRiver.Accounts.EntityFramework;
 
 public class AccountsDbContext(DbContextOptions options)
     : AccountsDbContextBase<User, Role, Team, Permission, UserHistory, RoleHistory, TeamHistory, PermissionHistory>(
-        options);
+        options)
+{
+
+}

@@ -1,5 +1,6 @@
 ﻿namespace SnowyRiver.Domain.Shared.Entities;
 
-public interface ITeamAuditedEntity<T> : IAuditedEntity<T>,IHasUser,IHasTeam
+public interface ITeamAuditedEntity<TId, TUser, TTeam> 
+    : IAudited<TUser, TTeam>, IHasTeam<TTeam>,IHasUser<TUser>
 {
 }

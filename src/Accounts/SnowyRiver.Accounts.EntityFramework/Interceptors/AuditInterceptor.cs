@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SnowyRiver.Accounts.Domain.Entities;
 using SnowyRiver.Domain.Shared.Services;
-using SnowyRiver.Accounts.Domain.Shared.Entities;
 
 namespace SnowyRiver.Accounts.EntityFramework.Interceptors;
 
@@ -16,7 +15,7 @@ public class AuditInterceptor<TUser, TRole, TTeam, TPermission>(ICurrentUserServ
     {
         base.UpdateAuditFields(context);
 
-        var accountAuditedEntries = context.ChangeTracker.Entries<IAccountAuditedEntity<TUser, TTeam>>();
+        var accountAuditedEntries = context.ChangeTracker.Entries<AccountAuditedEntity<TUser, TTeam>>();
         foreach (var entry in accountAuditedEntries)
         {
             entry.Entity.CreatorTeam = null;
@@ -25,7 +24,7 @@ public class AuditInterceptor<TUser, TRole, TTeam, TPermission>(ICurrentUserServ
             entry.Entity.LastModifierUser = null;
         }
 
-        var teamAccountAuditedEntries = context.ChangeTracker.Entries<IAccountAuditedEntity<TUser, TTeam>>();
+        var teamAccountAuditedEntries = context.ChangeTracker.Entries<AccountTeamAuditedEntity<TUser, TTeam>>();
         foreach (var entry in teamAccountAuditedEntries)
         {
             entry.Entity.Team = null;

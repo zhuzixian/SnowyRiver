@@ -5,17 +5,16 @@ using SnowyRiver.EF;
 using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SnowyRiver.Accounts.Domain.Shared.Entities;
 
 namespace SnowyRiver.Accounts.EntityFramework;
 
 public class AccountsDbContextBase<TUser, TRole, TTeam, TPermission,
     TUserHistory, TRoleHistory, TTeamHistory, TPermissionHistory>(DbContextOptions options) 
     : SnowyRiverDbContext(options)
-    where TTeam : Team<TUser, TRole, TTeam, TPermission>
+    where TTeam : Team<TUser, TRole, TTeam, TPermission> 
     where TUser : User<TUser, TRole, TTeam, TPermission>
     where TRole : Role<TUser, TRole, TTeam, TPermission>
-    where TPermission : Permission<TUser, TRole, TTeam, TPermission>
+    where TPermission : Permission<TUser, TRole, TTeam, TPermission> 
     where TUserHistory: UserHistoryBase<TUser, TRole, TTeam, TPermission>
     where TRoleHistory: RoleHistoryBase<TUser, TRole, TTeam, TPermission>
     where TTeamHistory: TeamHistoryBase<TUser, TRole, TTeam, TPermission>
@@ -72,7 +71,7 @@ public class AccountsDbContextBase<TUser, TRole, TTeam, TPermission,
         b.ToTable(DbTablePrefix + "Permissions", DbSchema);
         b.HasKey(x => x.Id);
 
-        ConfigureAccountAuditForeignKeys(b);
+        ConfigureAccountAuditForeign(b);
     }
 
     protected virtual void ConfigUser(EntityTypeBuilder<TUser> b)
@@ -84,7 +83,7 @@ public class AccountsDbContextBase<TUser, TRole, TTeam, TPermission,
         b.Property(x => x.PasswordSalt).IsRequired().HasMaxLength(64);
         b.HasMany(e => e.Roles).WithMany(e => e.Users)
             .UsingEntity(DbTablePrefix + "UserRoles");
-        ConfigureAccountAuditForeignKeys(b);
+        ConfigureAccountAuditForeign(b);
     }
 
     protected virtual void ConfigRole(EntityTypeBuilder<TRole> b)
@@ -94,7 +93,7 @@ public class AccountsDbContextBase<TUser, TRole, TTeam, TPermission,
         b.Property(x => x.Name).IsRequired().HasMaxLength(64);
         b.HasMany(e => e.Permissions).WithMany(e => e.Roles)
             .UsingEntity(DbTablePrefix + "RolePermissions");
-        ConfigureAccountAuditForeignKeys(b);
+        ConfigureAccountAuditForeign(b);
     }
 
     protected virtual void ConfigTeam(EntityTypeBuilder<TTeam> b)
@@ -104,17 +103,14 @@ public class AccountsDbContextBase<TUser, TRole, TTeam, TPermission,
         b.Property(x => x.Name).IsRequired().HasMaxLength(64);
         b.HasMany(e => e.Users).WithMany(e => e.Teams)
             .UsingEntity(DbTablePrefix + "UserTeams");
-        ConfigureAccountAuditForeignKeys(b);
+        ConfigureAccountAuditForeign(b);
     }
 
 
-    protected static void ConfigureAccountAuditForeignKeys<TEntity>(EntityTypeBuilder<TEntity> b)
-        where TEntity : class, IAccountAuditedEntity<TUser,TTeam>
+    protected static void ConfigureAccountAuditForeign<TEntity>(
+        EntityTypeBuilder<TEntity> b)
+        where TEntity : class, IAudited<TUser, TTeam>
     {
-        b.HasOne(x => x.Team).WithMany()
-            .HasForeignKey(x => x.TeamId);
-        b.HasOne(x => x.User).WithMany()
-            .HasForeignKey(x => x.UserId);
         b.HasOne(x => x.LastModifierTeam).WithMany()
             .HasForeignKey(x => x.LastModifierTeamId);
         b.HasOne(x => x.LastModifierUser).WithMany()
@@ -125,10 +121,10 @@ public class AccountsDbContextBase<TUser, TRole, TTeam, TPermission,
             .HasForeignKey(x => x.CreatorUserId);
     }
 
-    protected virtual void ConfigAccountEntityEntityHistory<TEntityHistory,
-        TEntity, TEntityId>(
-        EntityTypeBuilder<TEntityHistory> b, string tableName)
-        where TEntityHistory : class, IAccountEntityHistory<TEntity, TEntityId, TUser, TTeam> where TEntity : IEntity<TEntityId>
+    protected virtual void ConfigAccountEntityEntityHistory< TEntityHistory, TEntity, TEntityId>( EntityTypeBuilder<TEntityHistory> b, string tableName)
+        where TEntityHistory : class, ITeamAuditedEntity<Guid, TUser, TTeam>,
+        IAudited<TUser, TTeam>, IEntity<Guid>
+        where TEntity : IEntity<TEntityId>
     {
         b.ToTable(DbTablePrefix + tableName, DbSchema);
         b.HasKey(x => x.Id);
@@ -138,12 +134,12 @@ public class AccountsDbContextBase<TUser, TRole, TTeam, TPermission,
             .HasForeignKey(x => x.TeamId);
         b.HasOne(x => x.User).WithMany()
             .HasForeignKey(x => x.UserId);
-        ConfigureAccountAuditForeignKeys(b);
+        ConfigureAccountAuditForeign(b);
     }
 
     protected virtual void EnsureAutoHistory<TEntity, TEntityId, TEntityHistory>()
         where TEntity : class, IEntity<TEntityId>
-        where TEntityHistory : class, IEntityHistory<TEntity, TEntityId>, new()
+        where TEntityHistory : class, IEntityHistory<TEntity, TEntityId, TUser, TTeam>, new()
     {
         var entries = ChangeTracker.Entries<TEntity>()
             .Where(e => e.State is EntityState.Added or EntityState.Modified

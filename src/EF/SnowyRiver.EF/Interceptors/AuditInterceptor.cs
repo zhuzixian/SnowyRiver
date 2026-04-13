@@ -54,13 +54,13 @@ public class AuditInterceptor(ICurrentUserServices currentUserServices): SaveCha
             }
         }
 
-        var teamEntries = context.ChangeTracker.Entries<IHasTeam>();
+        var teamEntries = context.ChangeTracker.Entries<IHasTeamId>();
         foreach (var entry in teamEntries)
         {
             entry.Entity.TeamId = currentUserServices.TeamId;
         }
 
-        var userEntries = context.ChangeTracker.Entries<IHasUser>();
+        var userEntries = context.ChangeTracker.Entries<IHasUserId>();
         foreach (var entry in userEntries)
         {
             entry.Entity.UserId = currentUserServices.UserId;

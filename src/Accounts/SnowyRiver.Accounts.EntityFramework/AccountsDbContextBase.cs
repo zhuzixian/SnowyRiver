@@ -125,7 +125,7 @@ public class AccountsDbContextBase<TUser, TRole, TTeam, TPermission,
             .HasForeignKey(x => x.CreatorUserId);
     }
 
-    protected void ConfigAccountEntityEntityHistory<TEntityHistory,
+    protected virtual void ConfigAccountEntityEntityHistory<TEntityHistory,
         TEntity, TEntityId>(
         EntityTypeBuilder<TEntityHistory> b, string tableName)
         where TEntityHistory : class, IAccountEntityHistory<TEntity, TEntityId, TUser, TTeam> where TEntity : IEntity<TEntityId>

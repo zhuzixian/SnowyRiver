@@ -2,7 +2,7 @@
 
 namespace SnowyRiver.Domain.Entities;
 
-public class EntityHistory<TEntity, TEntityId> : TeamAuditedEntity<Guid>, 
+public class EntityHistory<TEntity, TEntityId, TUser, TTeam> : TeamAuditedEntity<Guid, TUser, TTeam>, 
     IEntityHistory<TEntity, TEntityId>
     where TEntity : IEntity<TEntityId>
 {

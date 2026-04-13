@@ -7,21 +7,21 @@ public static class RepositoryExtensions
 {
     extension<T>(IRepository<T> repository) where T : class
     {
-        public async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate,
+        public async Task<T?> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate,
             CancellationToken cancellationToken = default)
         {
             return await repository.FirstOrDefaultAsync(repository.MultipleResultQuery()
                 .AndFilter(predicate), cancellationToken);
         }
 
-        public async Task<T> LastOrDefaultAsync(Expression<Func<T, bool>> predicate,
+        public async Task<T?> LastOrDefaultAsync(Expression<Func<T, bool>> predicate,
             CancellationToken cancellationToken = default)
         {
             return await repository.LastOrDefaultAsync(repository.MultipleResultQuery()
                 .AndFilter(predicate), cancellationToken);
         }
 
-        public async Task<T> SingleOrDefaultAsync(Expression<Func<T, bool>> predicate,
+        public async Task<T?> SingleOrDefaultAsync(Expression<Func<T, bool>> predicate,
             CancellationToken cancellationToken = default)
         {
             return await repository.SingleOrDefaultAsync(repository.SingleResultQuery()
@@ -33,7 +33,6 @@ public static class RepositoryExtensions
             return await repository.SearchAsync(repository.MultipleResultQuery()
                 .AndFilter(predicate), cancellationToken);
         }
-
 
     }
 }

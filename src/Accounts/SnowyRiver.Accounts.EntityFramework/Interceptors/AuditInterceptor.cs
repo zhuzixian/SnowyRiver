@@ -25,7 +25,7 @@ public class AuditInterceptor<TUser, TRole, TTeam, TPermission>(ICurrentUserServ
             entry.Entity.LastModifierUser = null;
         }
 
-        var teamAccountAuditedEntries = context.ChangeTracker.Entries<ITeamAccountAuditedEntity<TUser, TTeam>>();
+        var teamAccountAuditedEntries = context.ChangeTracker.Entries<IAccountAuditedEntity<TUser, TTeam>>();
         foreach (var entry in teamAccountAuditedEntries)
         {
             entry.Entity.Team = null;

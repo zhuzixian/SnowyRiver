@@ -1,10 +1,11 @@
-﻿using SnowyRiver.Domain.Entities;
+﻿using SnowyRiver.Accounts.Domain.Shared.Entities;
+using SnowyRiver.Domain.Entities;
 using SnowyRiver.Domain.Shared.Entities;
 
 namespace SnowyRiver.Accounts.Domain.Entities;
 
 public class AccountEntityHistory<TEntity, TEntityId, TUser, TRole, TTeam, TPermission>
-    : EntityHistory<TEntity, TEntityId>
+    : EntityHistory<TEntity, TEntityId>,IAccountAuditedEntity<TUser, TTeam>
     where TUser : User<TUser, TRole, TTeam, TPermission>
     where TRole : Role<TUser, TRole, TTeam, TPermission>
     where TPermission : Permission<TUser, TRole, TTeam, TPermission>

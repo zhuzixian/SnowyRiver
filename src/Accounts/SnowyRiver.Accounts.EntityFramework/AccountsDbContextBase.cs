@@ -3,6 +3,8 @@ using SnowyRiver.Accounts.Domain.Entities;
 using SnowyRiver.Domain.Shared.Entities;
 using SnowyRiver.EF;
 using System;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using SnowyRiver.Accounts.Domain.Shared.Entities;
 
 namespace SnowyRiver.Accounts.EntityFramework;
 
@@ -49,6 +51,7 @@ public class AccountsDbContextBase<TUser, TRole, TTeam, TPermission,
             b.Property(x => x.PasswordSalt).IsRequired().HasMaxLength(64);
             b.HasMany(e => e.Roles).WithMany(e => e.Users)
                 .UsingEntity(DbTablePrefix + "UserRoles");
+            ConfigureAccountAuditForeignKeys(b);
         });
 
 
@@ -59,6 +62,7 @@ public class AccountsDbContextBase<TUser, TRole, TTeam, TPermission,
             b.Property(x => x.Name).IsRequired().HasMaxLength(64);
             b.HasMany(e => e.Permissions).WithMany(e => e.Roles)
                 .UsingEntity(DbTablePrefix + "RolePermissions");
+            ConfigureAccountAuditForeignKeys(b);
         });
 
         modelBuilder.Entity<TTeam>(b =>
@@ -68,6 +72,7 @@ public class AccountsDbContextBase<TUser, TRole, TTeam, TPermission,
             b.Property(x => x.Name).IsRequired().HasMaxLength(64);
             b.HasMany(e => e.Users).WithMany(e => e.Teams)
                 .UsingEntity(DbTablePrefix + "UserTeams");
+            ConfigureAccountAuditForeignKeys(b);
         });
 
         ConfigEntityHistory<TUser, Guid, TUserHistory>(modelBuilder, "UserHistories");
@@ -89,14 +94,20 @@ public class AccountsDbContextBase<TUser, TRole, TTeam, TPermission,
                 .HasForeignKey(x => x.TeamId);
             b.HasOne(x => x.User).WithMany()
                 .HasForeignKey(x => x.UserId);
-            b.HasOne(x => x.LastModifierTeam).WithMany()
-                .HasForeignKey(x => x.LastModifierTeamId);
-            b.HasOne(x => x.LastModifierUser).WithMany()
-                .HasForeignKey(x => x.LastModifierUserId);
-            b.HasOne(x => x.CreatorTeam).WithMany()
-                .HasForeignKey(x => x.CreatorTeamId);
-            b.HasOne(x => x.CreatorUser).WithMany()
-                .HasForeignKey(x => x.CreatorUserId);
+            ConfigureAccountAuditForeignKeys(b);
         });
+    }
+
+    private static void ConfigureAccountAuditForeignKeys<TEntity>(EntityTypeBuilder<TEntity> b)
+        where TEntity : class, IAccountAuditedEntity<TUser,TTeam>
+    {
+        b.HasOne(x => x.LastModifierTeam).WithMany()
+            .HasForeignKey(x => x.LastModifierTeamId);
+        b.HasOne(x => x.LastModifierUser).WithMany()
+            .HasForeignKey(x => x.LastModifierUserId);
+        b.HasOne(x => x.CreatorTeam).WithMany()
+            .HasForeignKey(x => x.CreatorTeamId);
+        b.HasOne(x => x.CreatorUser).WithMany()
+            .HasForeignKey(x => x.CreatorUserId);
     }
 }

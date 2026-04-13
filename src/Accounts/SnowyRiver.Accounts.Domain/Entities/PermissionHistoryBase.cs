@@ -1,9 +1,7 @@
-﻿using SnowyRiver.Domain.Entities;
-
-namespace SnowyRiver.Accounts.Domain.Entities;
+﻿namespace SnowyRiver.Accounts.Domain.Entities;
 
 public class PermissionHistoryBase<TUser, TRole, TTeam, TPermission> 
-    : AccountEntityHistory<User, TUser, TTeam>
+    : AccountEntityHistory<TPermission, TUser, TTeam>
     where TTeam : Team<TUser, TRole, TTeam, TPermission>
     where TUser : User<TUser, TRole, TTeam, TPermission>
     where TRole : Role<TUser, TRole, TTeam, TPermission>

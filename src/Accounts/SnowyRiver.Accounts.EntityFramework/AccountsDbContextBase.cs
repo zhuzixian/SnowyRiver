@@ -15,10 +15,10 @@ public class AccountsDbContextBase<TUser, TRole, TTeam, TPermission,
     where TUser : User<TUser, TRole, TTeam, TPermission>
     where TRole : Role<TUser, TRole, TTeam, TPermission>
     where TPermission : Permission<TUser, TRole, TTeam, TPermission> 
-    where TUserHistory: UserHistoryBase<TUser, TRole, TTeam, TPermission>
-    where TRoleHistory: RoleHistoryBase<TUser, TRole, TTeam, TPermission>
-    where TTeamHistory: TeamHistoryBase<TUser, TRole, TTeam, TPermission>
-    where TPermissionHistory: PermissionHistoryBase<TUser, TRole, TTeam, TPermission>
+    where TUserHistory: AccountEntityHistory<TUser, TUser, TTeam> 
+    where TRoleHistory: AccountEntityHistory<TRole, TUser, TTeam>
+    where TTeamHistory: AccountEntityHistory<TTeam, TUser, TTeam>
+    where TPermissionHistory: AccountEntityHistory<TPermission, TUser, TTeam>
 {
     protected override string DbTablePrefix => "Accounts_";
 
@@ -43,25 +43,25 @@ public class AccountsDbContextBase<TUser, TRole, TTeam, TPermission,
 
         modelBuilder.Entity<TUserHistory>(b =>
         {
-            ConfigAccountEntityEntityHistory<TUserHistory, TUser, Guid>(
+            ConfigAccountEntityHistory<TUserHistory, TUser, Guid>(
                 b, "UserHistories");
         });
 
         modelBuilder.Entity<TRoleHistory>(b =>
         {
-            ConfigAccountEntityEntityHistory<TRoleHistory, TRole, Guid>(
+            ConfigAccountEntityHistory<TRoleHistory, TRole, Guid>(
                 b, "RoleHistories");
         });
 
         modelBuilder.Entity<TTeamHistory>(b =>
         {
-            ConfigAccountEntityEntityHistory<TTeamHistory, TTeam, Guid>(
+            ConfigAccountEntityHistory<TTeamHistory, TTeam, Guid>(
                 b, "TeamHistories");
         });
 
         modelBuilder.Entity<TPermissionHistory>(b =>
         {
-            ConfigAccountEntityEntityHistory<TPermissionHistory, TPermission, Guid>(
+            ConfigAccountEntityHistory<TPermissionHistory, TPermission, Guid>(
                 b, "PermissionHistories");
         });
     }
@@ -121,14 +121,15 @@ public class AccountsDbContextBase<TUser, TRole, TTeam, TPermission,
             .HasForeignKey(x => x.CreatorUserId);
     }
 
-    protected virtual void ConfigAccountEntityEntityHistory< TEntityHistory, TEntity, TEntityId>( EntityTypeBuilder<TEntityHistory> b, string tableName)
-        where TEntityHistory : class, ITeamAuditedEntity<TUser, TTeam>,
+    protected virtual void ConfigAccountEntityHistory< TEntityHistory, TEntity, TEntityId>(
+        EntityTypeBuilder<TEntityHistory> b, string tableName)
+        where TEntityHistory : AccountEntityHistory<TEntity, TUser, TTeam>,
         IAudited<TUser, TTeam>, IEntity<Guid>
-        where TEntity : IEntity<TEntityId>
+        where TEntity : IEntity<Guid>
     {
         b.ToTable(DbTablePrefix + tableName, DbSchema);
         b.HasKey(x => x.Id);
-        //b.Property(e => e.SnapShot).HasColumnType("json");
+//        b.Property(e => e.SnapShot).HasColumnType("json");
 
         b.HasOne(x => x.Team).WithMany()
             .HasForeignKey(x => x.TeamId);

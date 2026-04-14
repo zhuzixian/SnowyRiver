@@ -82,7 +82,10 @@ public class AccountsDbContextBase<TUser, TRole, TTeam, TPermission,
         b.Property(x => x.Password).IsRequired().HasMaxLength(64);
         b.Property(x => x.PasswordSalt).IsRequired().HasMaxLength(64);
         b.HasMany(e => e.Roles).WithMany(e => e.Users)
-            .UsingEntity(DbTablePrefix + "UserRoles");
+            .UsingEntity(DbTablePrefix + "UserRoles",
+                r => r.HasOne(typeof(Role)).WithMany().HasForeignKey("RoleId").HasPrincipalKey(nameof(Role.Id)),
+                l => l.HasOne(typeof(User)).WithMany().HasForeignKey("UserId").HasPrincipalKey(nameof(User.Id)),
+                j => j.HasKey("UserId", "RoleId"));
         ConfigureAccountAudit(b);
     }
 
@@ -102,7 +105,10 @@ public class AccountsDbContextBase<TUser, TRole, TTeam, TPermission,
         b.HasKey(x => x.Id);
         b.Property(x => x.Name).IsRequired().HasMaxLength(64);
         b.HasMany(e => e.Users).WithMany(e => e.Teams)
-            .UsingEntity(DbTablePrefix + "UserTeams");
+            .UsingEntity(DbTablePrefix + "UserTeams",
+                r => r.HasOne(typeof(User)).WithMany().HasForeignKey("UserId").HasPrincipalKey(nameof(User.Id)),
+                l => l.HasOne(typeof(Team)).WithMany().HasForeignKey("TeamId").HasPrincipalKey(nameof(Team.Id)),
+                j => j.HasKey("UserId", "TeamId"));
         ConfigureAccountAudit(b);
     }
 

@@ -34,30 +34,30 @@ namespace SnowyRiver.Accounts.Manager.EntityFramework.Migrations
 
             modelBuilder.Entity("Accounts_UserRoles", b =>
                 {
-                    b.Property<Guid>("RolesId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("UsersId")
+                    b.Property<Guid>("RoleId")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("RolesId", "UsersId");
+                    b.HasKey("UserId", "RoleId");
 
-                    b.HasIndex("UsersId");
+                    b.HasIndex("RoleId");
 
                     b.ToTable("Accounts_UserRoles");
                 });
 
             modelBuilder.Entity("Accounts_UserTeams", b =>
                 {
-                    b.Property<Guid>("TeamsId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("UsersId")
+                    b.Property<Guid>("TeamId")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("TeamsId", "UsersId");
+                    b.HasKey("UserId", "TeamId");
 
-                    b.HasIndex("UsersId");
+                    b.HasIndex("TeamId");
 
                     b.ToTable("Accounts_UserTeams");
                 });
@@ -549,13 +549,13 @@ namespace SnowyRiver.Accounts.Manager.EntityFramework.Migrations
                 {
                     b.HasOne("SnowyRiver.Accounts.Domain.Entities.Role", null)
                         .WithMany()
-                        .HasForeignKey("RolesId")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("SnowyRiver.Accounts.Domain.Entities.User", null)
                         .WithMany()
-                        .HasForeignKey("UsersId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -564,13 +564,13 @@ namespace SnowyRiver.Accounts.Manager.EntityFramework.Migrations
                 {
                     b.HasOne("SnowyRiver.Accounts.Domain.Entities.Team", null)
                         .WithMany()
-                        .HasForeignKey("TeamsId")
+                        .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("SnowyRiver.Accounts.Domain.Entities.User", null)
                         .WithMany()
-                        .HasForeignKey("UsersId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

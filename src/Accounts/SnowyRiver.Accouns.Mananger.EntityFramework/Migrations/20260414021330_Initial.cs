@@ -283,21 +283,21 @@ namespace SnowyRiver.Accounts.Manager.EntityFramework.Migrations
                 name: "Accounts_UserRoles",
                 columns: table => new
                 {
-                    RolesId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    UsersId = table.Column<Guid>(type: "TEXT", nullable: false)
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    RoleId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Accounts_UserRoles", x => new { x.RolesId, x.UsersId });
+                    table.PrimaryKey("PK_Accounts_UserRoles", x => new { x.UserId, x.RoleId });
                     table.ForeignKey(
-                        name: "FK_Accounts_UserRoles_Accounts_Roles_RolesId",
-                        column: x => x.RolesId,
+                        name: "FK_Accounts_UserRoles_Accounts_Roles_RoleId",
+                        column: x => x.RoleId,
                         principalTable: "Accounts_Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Accounts_UserRoles_Accounts_Users_UsersId",
-                        column: x => x.UsersId,
+                        name: "FK_Accounts_UserRoles_Accounts_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Accounts_Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -307,21 +307,21 @@ namespace SnowyRiver.Accounts.Manager.EntityFramework.Migrations
                 name: "Accounts_UserTeams",
                 columns: table => new
                 {
-                    TeamsId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    UsersId = table.Column<Guid>(type: "TEXT", nullable: false)
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TeamId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Accounts_UserTeams", x => new { x.TeamsId, x.UsersId });
+                    table.PrimaryKey("PK_Accounts_UserTeams", x => new { x.UserId, x.TeamId });
                     table.ForeignKey(
-                        name: "FK_Accounts_UserTeams_Accounts_Teams_TeamsId",
-                        column: x => x.TeamsId,
+                        name: "FK_Accounts_UserTeams_Accounts_Teams_TeamId",
+                        column: x => x.TeamId,
                         principalTable: "Accounts_Teams",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Accounts_UserTeams_Accounts_Users_UsersId",
-                        column: x => x.UsersId,
+                        name: "FK_Accounts_UserTeams_Accounts_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Accounts_Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -538,9 +538,9 @@ namespace SnowyRiver.Accounts.Manager.EntityFramework.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Accounts_UserRoles_UsersId",
+                name: "IX_Accounts_UserRoles_RoleId",
                 table: "Accounts_UserRoles",
-                column: "UsersId");
+                column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Accounts_Users_CreatorTeamId",
@@ -563,9 +563,9 @@ namespace SnowyRiver.Accounts.Manager.EntityFramework.Migrations
                 column: "LastModifierUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Accounts_UserTeams_UsersId",
+                name: "IX_Accounts_UserTeams_TeamId",
                 table: "Accounts_UserTeams",
-                column: "UsersId");
+                column: "TeamId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Accounts_PermissionHistories_Accounts_Permissions_SnapShotId",

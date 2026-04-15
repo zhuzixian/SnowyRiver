@@ -1,10 +1,8 @@
 ﻿namespace SnowyRiver.Domain.Shared.Entities;
 
 public interface IAudited<TUser, TTeam>
-    : ICreationAudited, IModificationAudited
+    : ICreationAudited, IModificationAudited,IHasCreatorUser<TUser>, IHasCreatorTeam<TTeam>,
+        IHasLastModifierUser<TUser>, IHasLastModifierTeam<TTeam>
 {
-    TUser? CreatorUser { get; set; }
-    TTeam? CreatorTeam { get; set; }
-    TUser? LastModifierUser { get; set; }
-    TTeam? LastModifierTeam { get; set; }
+  
 }

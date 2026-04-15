@@ -11,7 +11,7 @@ using SnowyRiver.Accounts.Manager.EntityFramework;
 namespace SnowyRiver.Accounts.Manager.EntityFramework.Migrations
 {
     [DbContext(typeof(AccountsManagerDbContext))]
-    [Migration("20260414021330_Initial")]
+    [Migration("20260414095339_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

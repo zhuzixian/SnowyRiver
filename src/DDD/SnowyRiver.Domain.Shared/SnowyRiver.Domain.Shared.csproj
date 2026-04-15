@@ -4,8 +4,12 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Version>10.0.21</Version>
+    <Version>10.0.22</Version>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Entities\IHasLastModifierUser.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\ComponentModel\SnowyRiver.ComponentModel.Interface\SnowyRiver.ComponentModel.Interface.csproj" />

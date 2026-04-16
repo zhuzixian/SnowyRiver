@@ -3,7 +3,6 @@ using SnowyRiver.Accounts.Domain.Entities;
 using SnowyRiver.Domain.Shared.Entities;
 using SnowyRiver.EF;
 using System;
-using System.Linq;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace SnowyRiver.Accounts.EntityFramework;
@@ -144,26 +143,5 @@ public class AccountsDbContextBase<TUser, TRole, TTeam, TPermission,
         ConfigureAccountAudit(b);
     }
 
-    protected virtual void EnsureAutoHistory<TEntity, TEntityId, TEntityHistory>()
-        where TEntity : class, IEntity<TEntityId>
-        where TEntityHistory : class, IEntityHistory<TEntity, TEntityId, TUser, TTeam>, new()
-    {
-        var entries = ChangeTracker.Entries<TEntity>()
-            .Where(e => e.State is EntityState.Added or EntityState.Modified
-                or EntityState.Deleted)
-            .ToList();
-
-        foreach (var entityEntry in entries)
-        {
-            var entity = entityEntry.Entity;
-            var history = new TEntityHistory
-            {
-                EntityId = entity.Id,
-                Action = entityEntry.State.ToString(),
-                SnapShot = entity,
-                CreationTime = DateTime.Now,
-            };
-            Set<TEntityHistory>().Add(history);
-        }
-    }
+   
 }

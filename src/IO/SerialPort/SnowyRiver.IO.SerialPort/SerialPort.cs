@@ -21,6 +21,13 @@ public class SerialPort : System.IO.Ports.SerialPort, ISerialPort
     public SerialPort(string portName, int baudRate, System.IO.Ports.Parity parity, int dataBits, System.IO.Ports.StopBits stopBits)
         : base(portName, baudRate, parity, dataBits, stopBits) { }
 
+    public SerialPort(SerialPortOptions options)
+        : base(options.PortName, options.BaudRate, options.Parity, options.DataBits, options.StopBits)
+    {
+        ReadTimeout = options.ReadTimeout;
+        WriteTimeout = options.WriteTimeout;
+        NewLine = options.NewLine;
+    }
 
     public async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken token = default)
     {

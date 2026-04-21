@@ -1,7 +1,5 @@
 ﻿using EntityFrameworkCore.Repository.Interfaces;
 using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore;
-using SnowyRiver.EF.Extensions;
 
 namespace SnowyRiver.EF.DataAccess.Extensions;
 
@@ -36,16 +34,5 @@ public static class RepositoryExtensions
             return await repository.SearchAsync(repository.MultipleResultQuery()
                 .AndFilter(predicate), cancellationToken);
         }
-    }
-
-    public static async Task<TEntity> AddWithoutNavigationsAsync<TEntity>(
-        this IRepository<TEntity> repository,
-        TEntity entity,
-        DbContext context,
-        CancellationToken cancellationToken = default)
-        where TEntity : class
-    {
-        entity.DetachNavigations(context);
-        return await repository.AddAsync(entity, cancellationToken);
     }
 }

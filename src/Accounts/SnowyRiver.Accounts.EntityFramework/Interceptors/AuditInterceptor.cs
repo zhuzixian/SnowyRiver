@@ -23,42 +23,6 @@ public class AuditInterceptor<TUser, TRole, TTeam, TPermission,
     {
         base.UpdateAuditFields(context);
 
-        var creatorUserEntries = context.ChangeTracker.Entries<IHasCreatorUser<TUser>>();
-        foreach (var entry in creatorUserEntries)
-        {
-            entry.Entity.CreatorUser = null;
-        }
-
-        var creatorTeamEntries = context.ChangeTracker.Entries<IHasCreatorTeam<TTeam>>();
-        foreach (var entry in creatorTeamEntries)
-        {
-            entry.Entity.CreatorTeam = null;
-        }
-
-        var lastModifierUserEntries = context.ChangeTracker.Entries<IHasLastModifierUser<TUser>>();
-        foreach (var entry in lastModifierUserEntries)
-        {
-            entry.Entity.LastModifierUser = null;
-        }
-
-        var lastModifierTeamEntries = context.ChangeTracker.Entries<IHasLastModifierTeam<TTeam>>();
-        foreach (var entry in lastModifierTeamEntries)
-        {
-            entry.Entity.LastModifierTeam = null;
-        }
-
-        var teamEntries = context.ChangeTracker.Entries<IHasTeam<TTeam>>();
-        foreach (var entry in teamEntries)
-        {
-            entry.Entity.Team = null;
-        }
-
-        var userEntries = context.ChangeTracker.Entries<IHasUser<TUser>>();
-        foreach (var entry in userEntries)
-        {
-            entry.Entity.User = null;
-        }
-
         EnsureAutoHistory<TUser, Guid, TUserHistory>(context);
         EnsureAutoHistory<TTeam, Guid, TTeamHistory>(context);
         EnsureAutoHistory<TRole, Guid, TRoleHistory>(context);

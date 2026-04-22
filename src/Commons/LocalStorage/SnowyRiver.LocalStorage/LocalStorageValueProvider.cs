@@ -3,7 +3,7 @@ using SnowyRiver.LocalStorage.Interface;
 
 namespace SnowyRiver.LocalStorage;
 public class LocalStorageValueProvider<T>
-    :NotifyPropertyChangedObject, ILocalStorageValueProvider<T>
+    : ValueProvider<T>, ILocalStorageValueProvider<T>
 {
     private readonly ILocalStorageService _localStorageService;
     public LocalStorageValueProvider(
@@ -38,13 +38,6 @@ public class LocalStorageValueProvider<T>
     {
         Value = await _localStorageService.GetItemAsync<T?>(Key, cancellationToken);
         Value ??= DefaultValue;
-    }
-
-
-    public T? Value
-    {
-        get;
-        set => Set(ref field, value);
     }
 
     public T? DefaultValue

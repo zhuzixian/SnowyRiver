@@ -4,7 +4,7 @@ namespace SnowyRiver.WPF.Prism.JsonConfigs;
 
 public static class IContainerRegistryExtensions
 {
-    public static IContainerRegistry RegisterJsonConfig<T>(
+    public static IContainerRegistry RegisterOptionsFromJsonFile<T>(
         this IContainerRegistry containerRegistry,
         string fileName)
         where T: JsonConfiguration, new()

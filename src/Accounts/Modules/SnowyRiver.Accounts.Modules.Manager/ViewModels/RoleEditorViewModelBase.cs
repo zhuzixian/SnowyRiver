@@ -59,7 +59,7 @@ public class RoleEditorViewModelBase<
 
     protected override async Task AddAsync(IUnitOfWork unitOfWork, CancellationToken cancellationToken = default)
     {
-        var entity = await mapper.From(Model)
+        var entity = await Mapper.From(Model)
             .AdaptToTypeAsync<TRoleEntity>();
         await UpdateAsync(unitOfWork, entity.Permissions, Permissions, cancellationToken);
         await unitOfWork.Repository<TRoleEntity>().AddAsync(entity, cancellationToken);

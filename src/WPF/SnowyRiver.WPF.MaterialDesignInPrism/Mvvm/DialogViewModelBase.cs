@@ -2,32 +2,43 @@
 using SnowyRiver.WPF.MaterialDesignInPrism.Service;
 
 namespace SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
-public class DialogViewModelBase : ViewModelBase, IDialogHostAware,IDialogAware
+
+public class DialogViewModelBase : DialogViewModelBase<object>
+{
+    protected override Task<object?> ConfirmAsync(CancellationToken cancellationToken = default)
+    {
+        return Task.FromResult<object?>(null);
+    }
+}
+
+public abstract class DialogViewModelBase<T> : ViewModelBase, IDialogHostAware, IDialogAware
 {
     public virtual object? IdentifierName { get; set; } = null;
 
-    public virtual DelegateCommand ConfirmCommand => field ??= new DelegateCommand(async () =>
+    public virtual bool CanConfirm => true;
+    public virtual bool CanCancel => true;
+
+    public virtual DelegateCommand ConfirmCommand => field 
+        ??= new DelegateCommand(async () =>
     {
-        await ConfirmAsync();
-        Close(new DialogResult(ButtonResult.OK));
-    });
+        var value = await ConfirmAsync();
+        Close(new Models.DialogResult<T>(ButtonResult.OK, value));
+    })
+    .ObservesCanExecute(() => CanConfirm);
 
     public virtual DelegateCommand CancelCommand => field ??= new DelegateCommand(async () =>
     {
         await CancelAsync();
-        Close(new DialogResult(ButtonResult.Cancel));
-    });
-
+        Close(new Models.DialogResult<T>(ButtonResult.Cancel));
+    })
+    .ObservesCanExecute(() => CanCancel);
 
     protected virtual async Task CancelAsync(CancellationToken cancellationToken = default)
     {
         await Task.CompletedTask;
     }
 
-    protected virtual async Task ConfirmAsync(CancellationToken cancellationToken = default)
-    {
-        await Task.CompletedTask;
-    }
+    protected abstract Task<T?> ConfirmAsync(CancellationToken cancellationToken = default);
 
     protected virtual void Close(IDialogResult result)
     {

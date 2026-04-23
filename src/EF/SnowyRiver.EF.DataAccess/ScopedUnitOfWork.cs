@@ -88,11 +88,11 @@ public class ScopedUnitOfWork : IUnitOfWork
     public Task RollbackAsync(CancellationToken cancellationToken = new())
         => _innerUnitOfWork.RollbackAsync(cancellationToken);
 
-    public Task<IList<T>> FromSqlAsync<T>(string sql, IEnumerable<object> parameters = null,
+    public Task<IList<T>> FromSqlAsync<T>(string sql, IEnumerable<object>? parameters = null,
         CancellationToken cancellationToken = new()) where T : class
         => _innerUnitOfWork.FromSqlAsync<T>(sql, parameters, cancellationToken);
 
-    public Task<int> ExecuteSqlCommandAsync(string sql, IEnumerable<object> parameters = null,
+    public Task<int> ExecuteSqlCommandAsync(string sql, IEnumerable<object>? parameters = null,
         CancellationToken cancellationToken = new())
         => _innerUnitOfWork.ExecuteSqlCommandAsync(sql, parameters, cancellationToken);
 

@@ -241,14 +241,13 @@ public class ObservableCollectionEx<T> : ObservableCollection<T>
     /// </summary>
     public int CountBy(Func<T, bool> predicate)
     {
-        if (predicate == null) throw new ArgumentNullException(nameof(predicate));
-        return this.Count(predicate);
+        return predicate == null ? throw new ArgumentNullException(nameof(predicate)) : this.Count(predicate);
     }
 
     /// <summary>
     /// 对整个集合执行排序
     /// </summary>
-    public void Sort(Comparison<T>? comparison = null)
+    public void Sort(Comparison<T?>? comparison = null)
     {
         using (BeginBulkOperation())
         {
@@ -291,11 +290,11 @@ public class ObservableCollectionEx<T> : ObservableCollection<T>
         }
     }
 
-    private class ComparisonComparer<TItem>(Comparison<TItem?> comparison) : IComparer<TItem>
+    private class ComparisonComparer<TItem>(Comparison<TItem?>? comparison) : IComparer<TItem>
     {
         public int Compare(TItem? x, TItem? y)
         {
-            return comparison(x, y);
+            return comparison?.Invoke(x, y) ?? 0;
         }
     }
 

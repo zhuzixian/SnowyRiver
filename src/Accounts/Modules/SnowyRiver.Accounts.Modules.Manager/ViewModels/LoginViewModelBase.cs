@@ -14,7 +14,7 @@ using SnowyRiver.Accounts.Services.Interfaces;
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
 public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
     IAuthenticationService<TUser, TTeam, TRole, TPermission> authenticationService, 
-        IRegionManager regionManager) : RegionDialogViewModelBase(regionManager)
+        IRegionManager regionManager) : RegionDialogViewModelBase<bool>(regionManager)
     where TTeam : Team<TUser, TRole, TTeam, TPermission>
     where TUser : User<TUser, TRole, TTeam, TPermission>
     where TRole : Role<TUser, TRole, TTeam, TPermission>
@@ -61,7 +61,7 @@ public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
         set => SetProperty(ref field, value);
     }
 
-    protected override async Task ConfirmAsync(CancellationToken cancellationToken = default)
+    protected override async Task<bool> ConfirmAsync(CancellationToken cancellationToken = default)
     {
         try
         {
@@ -77,6 +77,8 @@ public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
                     var team = authenticationService.User.Teams.First();
                     await authenticationService.ChangeTeamAsync(team, cancellationToken);
                 }
+
+                return false;
             }
             else
             {
@@ -90,11 +92,13 @@ public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
                 }
 
                 NextAction?.Invoke();
+                return true;
             }
         }
         catch (Exception e)
         {
             Message = e.Message;
+            return false;
         }
         finally
         {

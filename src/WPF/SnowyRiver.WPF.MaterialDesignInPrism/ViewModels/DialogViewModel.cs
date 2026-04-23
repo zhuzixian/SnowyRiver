@@ -2,7 +2,16 @@
 using System.Collections.ObjectModel;
 
 namespace SnowyRiver.WPF.MaterialDesignInPrism.ViewModels;
-public class DialogViewModel(IRegionManager regionManager): RegionDialogViewModelBase(regionManager)
+
+public class DialogViewModel(IRegionManager regionManager) : DialogViewModel<object>(regionManager)
+{
+    protected override async Task<object?> ConfirmAsync(CancellationToken cancellationToken = default)
+    {
+        return await Task.FromResult<object?>(null);
+    }
+}
+
+public abstract class DialogViewModel<T>(IRegionManager regionManager): RegionDialogViewModelBase<T>(regionManager)
 {
     public override void OnNavigatedTo(NavigationContext navigationContext)
     {

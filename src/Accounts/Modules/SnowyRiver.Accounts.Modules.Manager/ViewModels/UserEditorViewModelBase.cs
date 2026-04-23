@@ -80,7 +80,7 @@ public class UserEditorViewModelBase<
 
     protected override async Task AddAsync(IUnitOfWork unitOfWork, CancellationToken cancellationToken = default)
     {
-        var entity = await mapper.From(Model)
+        var entity = await Mapper.From(Model)
             .AdaptToTypeAsync<TUserEntity>();
         await UpdateAsync(unitOfWork, entity, cancellationToken);
         await unitOfWork.Repository<TUserEntity>().AddAsync(entity, cancellationToken);

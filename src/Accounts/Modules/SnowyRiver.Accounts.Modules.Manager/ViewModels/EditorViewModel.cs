@@ -30,7 +30,7 @@ public class EditorViewModel<TModel, TEntity,
     where TEntity : Entity<Guid>
 {
     protected readonly IUnitOfWorkFactory UnitOfWorkFactory = unitOfWorkFactory;
-    protected readonly IMapper Mapper = mapper;
+    protected IMapper Mapper => mapper;
 
     private IRegionNavigationJournal? _journal;
 

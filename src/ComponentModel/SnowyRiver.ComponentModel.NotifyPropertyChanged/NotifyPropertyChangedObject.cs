@@ -16,7 +16,7 @@ public class NotifyPropertyChangedObject : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, args);
     }
 
-    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
@@ -38,7 +38,7 @@ public class NotifyPropertyChangedObject : INotifyPropertyChanged
         return property?.CanRead == true ? property.GetValue(this) : null;
     }
 
-    protected virtual bool Set<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+    protected virtual bool Set<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
     {
         return SetProperty(ref field, value, propertyName);
     }

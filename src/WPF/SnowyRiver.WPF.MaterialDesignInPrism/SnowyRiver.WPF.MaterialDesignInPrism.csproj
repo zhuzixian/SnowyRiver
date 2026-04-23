@@ -4,7 +4,7 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Version>10.0.36</Version>
+    <Version>10.0.38</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="DryIoc.Microsoft.DependencyInjection" />
@@ -17,5 +17,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\ComponentModel\SnowyRiver.ComponentModel.NotifyPropertyChanged\SnowyRiver.ComponentModel.NotifyPropertyChanged.csproj" />
     <ProjectReference Include="..\SnowyRiver.WPF.MaterialDesignInPrism.Core\SnowyRiver.WPF.MaterialDesignInPrism.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Examples\" />
   </ItemGroup>
 </Project>

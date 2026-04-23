@@ -15,10 +15,8 @@ public class DialogViewModel(IRegionManager regionManager) : MaterialDesignInPri
         }
     }
 
-    private DelegateCommand<string>? _command;
-
     public DelegateCommand<string> Command =>
-        _command ??= new DelegateCommand<string>((value) => _ = ExecuteAsync(value));
+        field ??= new DelegateCommand<string>((value) => _ = ExecuteAsync(value));
 
     protected virtual Task ExecuteAsync(string value, CancellationToken cancellationChangeToken = default)
     {

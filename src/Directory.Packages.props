@@ -17,12 +17,12 @@
     <PackageVersion Include="Mapster" Version="10.0.7" />
     <PackageVersion Include="Mapster.Async" Version="10.0.7" />
     <PackageVersion Include="Mapster.DependencyInjection" Version="10.0.7" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="10.0.6" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.6" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.6" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.6" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.6" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="10.0.6" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="10.0.7" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.7" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.7" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.7" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.7" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="10.0.7" />
     <PackageVersion Include="EntityFrameworkCore.Data.UnitOfWork" Version="10.0.0" />
     <PackageVersion Include="NLog.Extensions.Logging" Version="6.1.2" />
     <PackageVersion Include="Nito.AsyncEx" Version="5.1.2" />
@@ -34,7 +34,7 @@
     <PackageVersion Include="WPFLocalizeExtension" Version="3.10.0" />
     <PackageVersion Include="AsmResolver.DotNet" Version="5.5.1" />
     <PackageVersion Include="System.Reflection.Metadata" Version="10.0.1" />
-    <PackageVersion Include="System.IO.Ports" Version="10.0.6" />
+    <PackageVersion Include="System.IO.Ports" Version="10.0.7" />
     <PackageVersion Include="MahApps.Metro" Version="2.4.11" />
     <PackageVersion Include="MaterialDesignColors" Version="5.3.1" />
     <PackageVersion Include="MaterialDesignThemes" Version="5.3.1" />

@@ -5,7 +5,11 @@ namespace SnowyRiver.IO.SerialPort;
 
 public class SerialPortOptions : JsonConfiguration
 {
-    public bool IsMock { get; set; }
+    public bool IsMock
+    {
+        get;
+        set => Set(ref field, value);
+    }
 
     public string PortName
     {

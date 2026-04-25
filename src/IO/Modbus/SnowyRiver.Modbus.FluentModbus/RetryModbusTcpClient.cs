@@ -1,7 +1,6 @@
 ﻿using FluentModbus;
 using Polly.Retry;
 using System.Net;
-using System.Net.Sockets;
 
 namespace SnowyRiver.Modbus.FluentModbus;
 
@@ -15,5 +14,10 @@ public class RetryModbusTcpClient(
     {
         var tcpClient = CreateTcpClient(modbusClient.ConnectTimeout, remoteEndpoint);
         modbusClient.Initialize(tcpClient, endianness);
+    }
+
+    public override void Close()
+    {
+        modbusClient.Disconnect();
     }
 }

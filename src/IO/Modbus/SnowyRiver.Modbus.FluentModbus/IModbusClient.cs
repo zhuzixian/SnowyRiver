@@ -1,6 +1,8 @@
 ﻿namespace SnowyRiver.Modbus.FluentModbus;
 public interface IModbusClient
 {
+    public void Connect();
+    public void Close();
     public bool IsConnected { get; }
     public DateTime LastAccessTime { get;}
     public Task<T[]> ReadHoldingRegistersAsync<T>(int unitIdentifier, int startingAddress, int count,

@@ -13,7 +13,7 @@ public class RetryModbusRtuClient(
 {
     private ISerialPort? _serialPort;
 
-    public void Connect()
+    public override void Connect()
     {
        Connect(options.PortName);
     }
@@ -34,13 +34,12 @@ public class RetryModbusRtuClient(
         Initialize(port, options.Endian);
     }
 
-
     public void Initialize(IModbusRtuSerialPort serialPort, ModbusEndianness endianness)
     {
         modbusClient.Initialize(serialPort, endianness);
     }
 
-    public void Close()
+    public override void Close()
     {
         modbusClient.Close();
     }

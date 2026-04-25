@@ -1,7 +1,11 @@
 ﻿namespace SnowyRiver.WPF.MaterialDesignInPrism.Mvvm;
 
-public abstract class RegionDialogViewModelBase(IRegionManager regionManager) : RegionDialogViewModelBase<object>(regionManager)
+public class RegionDialogViewModelBase(IRegionManager regionManager) : RegionDialogViewModelBase<object>(regionManager)
 {
+    protected override Task<object?> ConfirmAsync(CancellationToken cancellationToken = default)
+    {
+        return Task.FromResult<object?>(null);
+    }
 }
 
 public abstract class RegionDialogViewModelBase<T>(IRegionManager regionManager) : DialogViewModelBase<T>, IConfirmNavigationRequest

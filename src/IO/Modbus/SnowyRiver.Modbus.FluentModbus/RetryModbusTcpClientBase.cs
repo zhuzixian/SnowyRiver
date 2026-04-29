@@ -13,7 +13,7 @@ public abstract class RetryModbusTcpClientBase(
     :RetryModbusClient(modbusClient, retryPolicy)
 {
 
-    public void Connect()
+    public override void Connect()
     {
         var endPoint = new IPEndPoint(IPAddress.Loopback, 502);
         if (options.RemoteEndpoint.IsNotNullOrWhiteSpace())
@@ -24,6 +24,7 @@ public abstract class RetryModbusTcpClientBase(
         }
         Connect(endPoint, options.Endian);
     }
+
 
     protected abstract void Connect(IPEndPoint remoteEndpoint, ModbusEndianness endianness);
 

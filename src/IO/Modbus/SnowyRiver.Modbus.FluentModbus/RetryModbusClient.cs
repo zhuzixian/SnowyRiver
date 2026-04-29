@@ -5,7 +5,7 @@ using SnowyRiver.Polly;
 
 namespace SnowyRiver.Modbus.FluentModbus;
 
-public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy):IModbusClient
+public abstract class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy):IModbusClient
 {
     public DateTime LastAccessTime { get; protected set; } = DateTime.MinValue;
 
@@ -52,6 +52,9 @@ public class RetryModbusClient(ModbusClient client, AsyncRetryPolicy retryPolicy
             await Task.Delay(TimeSpan.FromMilliseconds(5), cancellationToken);
         }
     }
+
+    public abstract void Connect();
+    public abstract void Close();
 
     public bool IsConnected => client.IsConnected;
 

@@ -1,9 +1,9 @@
 ﻿namespace SnowyRiver.MediaTypes;
 
-public class MediaType(string name, string mediaType, string extension)
+public class MediaType(string name, string contentType, string extension)
 {
     public string Name => name;
-    public string Type => mediaType;
+    public string ContentType => contentType;
     public string Extension => extension;
 
     // Image

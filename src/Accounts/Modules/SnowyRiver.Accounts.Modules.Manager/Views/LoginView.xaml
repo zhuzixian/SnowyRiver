@@ -7,7 +7,8 @@
              prism:ViewModelLocator.AutoWireViewModel="True"
              lex:LocalizeDictionary.DesignCulture="zh-CN"
              lex:ResxLocalizationProvider.DefaultAssembly="SnowyRiver.Accounts.Modules.Manager"
-             lex:ResxLocalizationProvider.DefaultDictionary="Resources">
+             lex:ResxLocalizationProvider.DefaultDictionary="Resources"
+             MinWidth="600" MinHeight="371">
     <controls:Login Message="{Binding Message}"
                     UserName="{Binding Login.UserName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                     Password="{Binding Login.Password, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"

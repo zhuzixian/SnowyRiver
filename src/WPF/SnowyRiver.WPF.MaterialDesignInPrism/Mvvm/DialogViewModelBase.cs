@@ -42,7 +42,14 @@ public abstract class DialogViewModelBase<T> : ViewModelBase, IDialogHostAware, 
 
     protected virtual void Close(IDialogResult result)
     {
-        DialogHost.Close(IdentifierName, result);
+        try
+        {
+            DialogHost.Close(IdentifierName, result);
+        }
+        catch (InvalidOperationException)
+        {
+            // DialogHost already closed, ignore
+        }
     }
 
     public virtual bool CanCloseDialog() => true;

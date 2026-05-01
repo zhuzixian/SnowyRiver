@@ -7,6 +7,7 @@
                            xmlns:core="clr-namespace:SnowyRiver.Accounts.Core;assembly=SnowyRiver.Accounts.Core"
                            xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
                            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                           xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
                            prism:ViewModelLocator.AutoWireViewModel="True"
                            lex:LocalizeDictionary.DesignCulture="zh-CN"
                            lex:ResxLocalizationProvider.DefaultAssembly="SnowyRiver.Accounts.Manager"
@@ -18,6 +19,37 @@
             <b:InvokeCommandAction Command="{Binding HandleLoadedCommand}" />
         </b:EventTrigger>
     </b:Interaction.Triggers>
+    <windows:MaterialDesignMetroWindow.RightWindowCommands>
+        <mah:WindowCommands>
+            <mah:WindowCommands.Resources>
+                <Style TargetType="materialDesign:PackIcon">
+                    <Setter Property="Margin" Value="0, 0, 6, 0"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                </Style>
+                <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                </Style>
+                <materialDesign:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+                <materialDesign:BooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"
+                                                             FalseValue="Visible" TrueValue="Collapsed"/>
+            </mah:WindowCommands.Resources>
+            <Button Command="{Binding NavigationToAccountCommand}"
+                    Visibility="{Binding Authentication.IsAuthenticated,
+                    Converter={StaticResource BooleanToVisibilityConverter}}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Account"/>
+                    <TextBlock Text="{Binding Authenticator.User.Name}"/>
+                </StackPanel>
+            </Button>
+            <Button Command="{Binding NavigationToLoginCommand}"
+                    Visibility="{Binding Authentication.IsAuthenticated,
+                    Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Account"/>
+                </StackPanel>
+            </Button>
+        </mah:WindowCommands>
+    </windows:MaterialDesignMetroWindow.RightWindowCommands>
     <materialDesign:DialogHost Identifier="Root">
         <Grid>
             <ContentControl prism:RegionManager.RegionName="{x:Static core:AccountsRegionNames.AccountsManagerViewRegion}" />

@@ -8,45 +8,59 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Threading;
 using Akavache;
+using Prism.Dialogs;
 using SnowyRiver.Accounts.Modules.Manager.Models;
 using SnowyRiver.Accounts.Services.Interfaces;
 
 namespace SnowyRiver.Accounts.Modules.Manager.ViewModels;
+
 public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
-    IAuthenticationService<TUser, TTeam, TRole, TPermission> authenticationService, 
+    IAuthenticationService<TUser, TTeam, TRole, TPermission> authenticationService,
         IRegionManager regionManager) : RegionDialogViewModelBase<bool>(regionManager)
     where TTeam : Team<TUser, TRole, TTeam, TPermission>
     where TUser : User<TUser, TRole, TTeam, TPermission>
     where TRole : Role<TUser, TRole, TTeam, TPermission>
     where TPermission : Permission<TUser, TRole, TTeam, TPermission>
 {
-    public override async void OnNavigatedTo(NavigationContext navigationContext)
+    public override void OnNavigatedTo(NavigationContext navigationContext)
     {
-        try
+        _ = LoadRememberUserAsync();
+        if (navigationContext.Parameters.TryGetValue<Action>(nameof(NextAction), out var nextAction))
         {
-            if (navigationContext.Parameters.TryGetValue<Action>(nameof(NextAction), out var nextAction))
-            {
-                NextAction = nextAction;
-            }
-
-            base.OnNavigatedTo(navigationContext);
-
-            var cacheLogin = await CacheDatabase.LocalMachine.GetObject<Login>(RememberMeCacheKey)
-                .Catch(Observable.Return(default(Login?)));
-            if (cacheLogin != null)
-            {
-                Login.UserName = cacheLogin.UserName;
-                Login.Password = cacheLogin.Password;
-                RememberMe = true;
-            }
+            NextAction = nextAction;
         }
-        catch (Exception e)
+
+        if (navigationContext.Parameters.TryGetValue<Action>(nameof(CancelAction), out var cancelAction))
         {
-            //
+            CancelAction = cancelAction;
+        }
+
+        base.OnNavigatedTo(navigationContext);
+
+    }
+
+    public override void OnDialogOpened(IDialogParameters parameters)
+    {
+        _ = LoadRememberUserAsync();
+        base.OnDialogOpened(parameters);
+        NextAction = () => Close(new DialogResult(ButtonResult.OK));
+        CancelAction = () => Close(new DialogResult(ButtonResult.Cancel));
+    }
+
+    protected async Task LoadRememberUserAsync(CancellationToken cancellationToken = default)
+    {
+        var cacheLogin = await CacheDatabase.LocalMachine.GetObject<Login>(RememberMeCacheKey)
+            .Catch(Observable.Return(default(Login?)));
+        if (cacheLogin != null)
+        {
+            Login.UserName = cacheLogin.UserName;
+            Login.Password = cacheLogin.Password;
+            RememberMe = true;
         }
     }
 
     public Action? NextAction { get; protected set; }
+    public Action? CancelAction { get; protected set; } = () =>  Environment.Exit(-1);
 
     public override DelegateCommand ConfirmCommand => field ??= new DelegateCommand(() => _ = ConfirmAsync(),
             () => !string.IsNullOrWhiteSpace(Login.UserName) && !string.IsNullOrWhiteSpace(Login.Password))
@@ -106,21 +120,17 @@ public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
         }
     }
 
-    protected virtual async Task<(bool, LoginFailedReason)> LoginAsync(string username, string password, 
+    protected virtual async Task<(bool, LoginFailedReason)> LoginAsync(string username, string password,
         CancellationToken cancellationToken = default)
     {
         return await authenticationService.LoginAsync(username, password, cancellationToken);
     }
 
-    protected virtual async Task HandleNextAsync()
-    {
-        await Task.CompletedTask;
-    }
 
     protected override async Task CancelAsync(CancellationToken cancellationToken = default)
     {
+        CancelAction?.Invoke();
         await Task.CompletedTask;
-        Environment.Exit(-1);
     }
 
     public Login Login => field ??= new Login();

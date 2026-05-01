@@ -10,7 +10,8 @@ public partial class ComboBoxFieldEditor
     }
 
     public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register(
-        nameof(ItemsSource), typeof(IEnumerable), typeof(ComboBoxFieldEditor), new PropertyMetadata(default(IEnumerable)));
+        nameof(ItemsSource), typeof(IEnumerable), typeof(ComboBoxFieldEditor), new FrameworkPropertyMetadata(null,
+            FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
     public IEnumerable ItemsSource
     {

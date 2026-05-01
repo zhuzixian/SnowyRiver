@@ -9,7 +9,8 @@ public partial class TextFieldEditor
     }
 
     public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
-        nameof(Value), typeof(string), typeof(TextFieldEditor), new PropertyMetadata(default(string)));
+        nameof(Value), typeof(string), typeof(TextFieldEditor), new FrameworkPropertyMetadata(
+            null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
     public string Value
     {
@@ -69,5 +70,23 @@ public partial class TextFieldEditor
     {
         get => (bool)GetValue(IsReadOnlyProperty);
         set => SetValue(IsReadOnlyProperty, value);
+    }
+
+    public static readonly DependencyProperty HeaderSizeGroupProperty =
+        DependencyProperty.Register(nameof(HeaderSizeGroup), typeof(string), typeof(TextFieldEditor), new PropertyMetadata(null));
+
+    public string HeaderSizeGroup
+    {
+        get => (string)GetValue(HeaderSizeGroupProperty);
+        set => SetValue(HeaderSizeGroupProperty, value);
+    }
+
+    public static readonly DependencyProperty UnitSizeGroupProperty =
+        DependencyProperty.Register(nameof(UnitSizeGroup), typeof(string), typeof(TextFieldEditor), new PropertyMetadata(null));
+
+    public string UnitSizeGroup
+    {
+        get => (string)GetValue(UnitSizeGroupProperty);
+        set => SetValue(UnitSizeGroupProperty, value);
     }
 }

@@ -6,9 +6,11 @@
                           prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"
+                              SharedSizeGroup="{Binding HeaderSizeGroup, RelativeSource={RelativeSource AncestorType=controls:TextFieldEditor}}"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"
+                              SharedSizeGroup="{Binding UnitSizeGroup, RelativeSource={RelativeSource AncestorType=controls:TextFieldEditor}}"/>
         </Grid.ColumnDefinitions>
         <TextBlock Text="{Binding Header, RelativeSource={RelativeSource AncestorType=controls:TextFieldEditor}}"
                    Style="{Binding HeaderStyle, RelativeSource={RelativeSource AncestorType=controls:TextFieldEditor}}"/>

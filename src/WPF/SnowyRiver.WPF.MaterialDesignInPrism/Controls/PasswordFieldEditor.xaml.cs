@@ -9,7 +9,8 @@ public partial class PasswordFieldEditor
     }
 
     public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
-        nameof(Value), typeof(string), typeof(PasswordFieldEditor), new PropertyMetadata(default(string)));
+        nameof(Value), typeof(string), typeof(PasswordFieldEditor), new FrameworkPropertyMetadata(default(string),
+            FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
     public string Value
     {

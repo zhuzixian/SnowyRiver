@@ -43,7 +43,7 @@ public class LoginViewModel<TUser, TTeam, TRole, TPermission>(
     {
         _ = LoadRememberUserAsync();
         base.OnDialogOpened(parameters);
-        CancelAction = null;
+        NextAction = () => Close(new DialogResult(ButtonResult.OK));
     }
 
     protected async Task LoadRememberUserAsync(CancellationToken cancellationToken = default)

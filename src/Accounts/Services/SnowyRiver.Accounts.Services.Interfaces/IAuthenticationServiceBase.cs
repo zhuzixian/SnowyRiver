@@ -12,7 +12,7 @@ public interface IAuthenticationService<out TUser, TTeam, TRole,  TPermission>
     Task<(bool, LoginFailedReason)> LoginAsync(string username, string password,
         CancellationToken cancellationToken = default);
     Task LogoutAsync();
-    bool IsAuthenticated => User != null;
+    bool IsAuthenticated { get; }
     Task ChangeTeamAsync(TTeam team, CancellationToken cancellationToken = default);
 }
 

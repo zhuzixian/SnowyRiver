@@ -67,6 +67,8 @@ public class AuthenticationService<TTeam, TRole, TUser, TPermission,
         await Task.CompletedTask;
     }
 
+    public bool IsAuthenticated => User != null;
+
     public async Task ChangeTeamAsync(TTeam team, CancellationToken cancellationToken = default)
     {
         Team = team;
@@ -76,7 +78,13 @@ public class AuthenticationService<TTeam, TRole, TUser, TPermission,
     public TUser? User
     {
         get;
-        protected set => Set(ref field, value);
+        protected set
+        {
+            if (Set(ref field, value))
+            {
+                RaisePropertyChanged(nameof(IsAuthenticated));
+            }
+        }
     }
 
     public TTeam? Team

@@ -2,13 +2,10 @@
 
 public record Rect : Rect<int>;
 
-public record Rect<T> where T : struct
+public record Rect<T>:Size<T> where T : struct
 {
     public T X { get; set; }
 
     public T Y { get; set; }
 
-    public T Width { get; set; }
-
-    public T Height { get; set; }
 }

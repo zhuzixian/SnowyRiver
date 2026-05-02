@@ -1,19 +1,19 @@
 ﻿namespace SnowyRiver.ComponentModel.NotifyPropertyChanged;
 
-public class ObservableRect : ObservableRect<int>
+public class ObservableSize : ObservableSize<int>
 {
 }
 
-public class ObservableRect<T> : ObservableSize<T>
-    where T : struct
+public class ObservableSize<T>:NotifyPropertyChangedObject
+    where T:struct
 {
-    public T X
+    public T Width
     {
         get;
         set => Set(ref field, value);
     }
 
-    public T Y
+    public T Height
     {
         get;
         set => Set(ref field, value);

@@ -10,7 +10,7 @@ public abstract class RetryModbusTcpClientBase(
     ModbusTcpClientOptions options, 
     AsyncRetryPolicy retryPolicy,
     ModbusClient modbusClient)
-    :RetryModbusClient(modbusClient, retryPolicy)
+    :RetryModbusClient(options, modbusClient, retryPolicy)
 {
     private TcpClient? _tcpClient;
 

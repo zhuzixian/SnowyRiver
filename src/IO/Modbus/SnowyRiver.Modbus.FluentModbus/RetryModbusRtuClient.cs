@@ -8,7 +8,7 @@ public class RetryModbusRtuClient(
     ModbusRtuClientOptions options, 
     AsyncRetryPolicy retryPolicy,
     ModbusRtuClient modbusClient)
-    :RetryModbusClient(modbusClient, retryPolicy),
+    :RetryModbusClient(options, modbusClient, retryPolicy),
         IModbusRtuClient
 {
     private ISerialPort? _serialPort;
@@ -49,14 +49,14 @@ public class RetryModbusRtuClient(
         bool isUpdateLastAccessTime = true,
         CancellationToken cancellationToken = default)
     {
-        return ExecuteAsync(async () => 
+        return ExecuteAsync(async _ => 
                 await task.Invoke(_serialPort, cancellationToken), 
                 isUpdateLastAccessTime, cancellationToken);
     }
 
     public Task ExecuteAsync(Func<ISerialPort?, CancellationToken, Task> task, bool isUpdateLastAccessTime = true, CancellationToken cancellationToken = default)
     {
-        return ExecuteAsync(async () =>
+        return ExecuteAsync(async _ =>
                 await task.Invoke(_serialPort, cancellationToken),
             isUpdateLastAccessTime, cancellationToken);
     }

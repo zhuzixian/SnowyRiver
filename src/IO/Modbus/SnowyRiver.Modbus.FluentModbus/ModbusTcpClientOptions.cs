@@ -2,7 +2,7 @@
 using SnowyRiver.Configuration;
 
 namespace SnowyRiver.Modbus.FluentModbus;
-public class ModbusTcpClientOptions:JsonConfiguration
+public class ModbusTcpClientOptions:JsonConfiguration, ITimeoutProvider
 {
     public bool IsMock
     {
@@ -23,15 +23,9 @@ public class ModbusTcpClientOptions:JsonConfiguration
         set => Set(ref field, value);
     } = ModbusEndianness.LittleEndian;
 
-    public TimeSpan? ReadTimeout
+    public TimeSpan Timeout
     {
         get;
         set => Set(ref field, value);
-    }
-
-    public TimeSpan? WriteTimeout
-    {
-        get;
-        set => Set(ref field, value);
-    }
+    } = System.Threading.Timeout.InfiniteTimeSpan;
 }

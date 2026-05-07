@@ -1,7 +1,7 @@
 ﻿using FluentModbus;
 using Polly.Retry;
 using System.Net;
-using System.Net.Sockets;
+
 namespace SnowyRiver.Modbus.FluentModbus;
 
 public class RetryModbusRtuOverTcpClient(

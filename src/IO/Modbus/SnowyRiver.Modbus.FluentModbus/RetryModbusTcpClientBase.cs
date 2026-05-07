@@ -12,6 +12,7 @@ public abstract class RetryModbusTcpClientBase(
     ModbusClient modbusClient)
     :RetryModbusClient(modbusClient, retryPolicy)
 {
+    private TcpClient? _tcpClient;
 
     public override void Connect()
     {
@@ -30,14 +31,21 @@ public abstract class RetryModbusTcpClientBase(
 
     protected TcpClient CreateTcpClient(int connectTimeout, IPEndPoint remoteEndpoint)
     {
-        var tcpClient = new TcpClient();
-        if (!tcpClient.ConnectAsync(remoteEndpoint.Address, remoteEndpoint.Port)
+        _tcpClient?.Dispose();
+        _tcpClient = new TcpClient();
+        if (!_tcpClient.ConnectAsync(remoteEndpoint.Address, remoteEndpoint.Port)
                 .Wait(connectTimeout))
         {
             throw new TimeoutException($"Failed to connect to the Modbus server at {
                 remoteEndpoint} within the specified timeout of {connectTimeout} milliseconds.");
         }
 
-        return tcpClient;
+        return _tcpClient;
+    }
+
+    public override void Close()
+    {
+        _tcpClient?.Dispose();
+        _tcpClient = null;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using FluentModbus;
 using Polly.Retry;
 using System.Net;
+using System.Net.Sockets;
 namespace SnowyRiver.Modbus.FluentModbus;
 
 public class RetryModbusRtuOverTcpClient(
@@ -10,10 +11,10 @@ public class RetryModbusRtuOverTcpClient(
     : RetryModbusTcpClientBase(options, retryPolicy, modbusOverTcpClient)
 {
     private readonly ModbusRtuOverTcpClient _modbusRtuOverTcpClient = modbusOverTcpClient;
-
     public override void Close()
     {
         _modbusRtuOverTcpClient.Disconnect();
+        base.Close();
     }
 
     protected override void Connect(IPEndPoint remoteEndpoint, ModbusEndianness endianness)

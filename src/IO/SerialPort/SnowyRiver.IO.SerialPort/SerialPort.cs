@@ -8,6 +8,9 @@ public class SerialPort : System.IO.Ports.SerialPort, ISerialPort
     private const string ReadTimeoutMessage = "The read operation timed out.";
     private const string WriteTimeoutMessage = "The write operation timed out.";
 
+    private readonly int _readTimeoutMs;
+    private readonly int _writeTimeoutMs;
+
     public SerialPort()
     { }
 
@@ -27,8 +30,14 @@ public class SerialPort : System.IO.Ports.SerialPort, ISerialPort
     public SerialPort(SerialPortOptions options)
         : base(options.PortName, options.BaudRate, options.Parity, options.DataBits, options.StopBits)
     {
-        ReadTimeout = options.ReadTimeout;
-        WriteTimeout = options.WriteTimeout;
+        // 自己用 CancellationToken 做超时,基类不要再下发 SET_TIMEOUTS
+        ReadTimeout = InfiniteTimeout;
+        WriteTimeout = InfiniteTimeout;
+
+        // 把用户在 options 里配置的超时存到自己的字段,给 ReadAsync/WriteAsync 用
+        _readTimeoutMs = options.ReadTimeout;
+        _writeTimeoutMs = options.WriteTimeout;
+
         NewLine = options.NewLine;
         // 如 SerialPortOptions 包含以下属性,一并应用(按需取消注释)
         // Handshake = options.Handshake;
@@ -42,10 +51,10 @@ public class SerialPort : System.IO.Ports.SerialPort, ISerialPort
     public async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken = default)
     {
         using var cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-        var hasTimeout = ReadTimeout > 0;
+        var hasTimeout = _readTimeoutMs > 0;
         if (hasTimeout)
         {
-            cts.CancelAfter(ReadTimeout);
+            cts.CancelAfter(_readTimeoutMs);
         }
         try
         {
@@ -129,8 +138,8 @@ public class SerialPort : System.IO.Ports.SerialPort, ISerialPort
         if (!IsOpen) throw new InvalidOperationException("Serial port is not open.");
 
         using var cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-        var hasTimeout = WriteTimeout > 0;
-        if (hasTimeout) cts.CancelAfter(WriteTimeout);
+        var hasTimeout = _writeTimeoutMs > 0;
+        if (hasTimeout) cts.CancelAfter(_writeTimeoutMs);
 
         try
         {

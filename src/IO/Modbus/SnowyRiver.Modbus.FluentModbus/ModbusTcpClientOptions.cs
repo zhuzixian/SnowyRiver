@@ -22,4 +22,16 @@ public class ModbusTcpClientOptions:JsonConfiguration
         get;
         set => Set(ref field, value);
     } = ModbusEndianness.LittleEndian;
+
+    public TimeSpan? ReadTimeout
+    {
+        get;
+        set => Set(ref field, value);
+    }
+
+    public TimeSpan? WriteTimeout
+    {
+        get;
+        set => Set(ref field, value);
+    }
 }

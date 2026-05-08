@@ -1,8 +1,11 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:controls="clr-namespace:SnowyRiver.WPF.MaterialDesignInPrism.Controls"
+                    xmlns:markup="http://schemas.microsoft.com/winfx/2006/xaml">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/SnowyRiver.WPF.MaterialDesignInPrism;component/Themes/TextBlock.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/SnowyRiver.WPF.MaterialDesignInPrism;component/Themes/DataGrid.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/SnowyRiver.WPF.MaterialDesignInPrism;component/Themes/FieldEditor.xaml" />
         <ResourceDictionary Source="pack://application:,,,/SnowyRiver.WPF.MaterialDesignInPrism;component/Themes/Dilalog.xaml" />
     </ResourceDictionary.MergedDictionaries>
+
 </ResourceDictionary>

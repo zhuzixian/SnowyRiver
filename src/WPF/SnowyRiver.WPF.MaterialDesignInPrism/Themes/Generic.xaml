@@ -163,9 +163,11 @@
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon VerticalAlignment="Center" Kind="{TemplateBinding Kind}" />
                                 <TextBlock
+                                    x:Name="PART_Text"
                                     Margin="6,0,0,0"
                                     VerticalAlignment="Center"
-                                    Text="{TemplateBinding Text}" />
+                                    Text="{TemplateBinding Text}"
+                                    Visibility="Visible" />
                             </StackPanel>
                         </materialDesign:Ripple>
                     </Border>
@@ -177,7 +179,7 @@
                             <Setter TargetName="border" Property="Background" Value="{DynamicResource MaterialDesign.Brush.Button.FlatClick}" />
                             <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource MaterialDesign.Brush.Button.FlatClick}" />
                         </Trigger>
-                        <Trigger Property="Text" Value="{x:Static system:String.Empty}">
+                        <Trigger Property="Text" Value="">
                             <Setter TargetName="PART_Text" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                     </ControlTemplate.Triggers>

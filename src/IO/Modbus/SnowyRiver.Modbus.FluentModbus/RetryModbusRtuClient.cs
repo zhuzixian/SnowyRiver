@@ -60,4 +60,17 @@ public class RetryModbusRtuClient(
                 await task.Invoke(_serialPort, cancellationToken),
             isUpdateLastAccessTime, cancellationToken);
     }
+
+    public void Execute(Action<ISerialPort> action)
+    {
+        if (_serialPort is null)
+        {
+            throw new InvalidOperationException("Serial port is not connected.");
+        }
+
+        using (AsyncLocker.Lock())
+        {
+            action(_serialPort);
+        }
+    }
 }

@@ -80,6 +80,7 @@
   </Folder>
   <Folder Name="/OpenCV/">
     <Project Path="OpenCv/SnowyRiver.OpenCvSharp.Extensions/SnowyRiver.OpenCvSharp.Extensions.csproj" />
+    <Project Path="OpenCv/SnowyRiver.OpenCvSharp.SkiaSharp/SnowyRiver.OpenCvSharp.SkiaSharp.csproj" Id="99fcc1a9-a454-4397-a627-8bd2a210f5d2" />
   </Folder>
   <Folder Name="/Security/">
     <Project Path="Security/SnowyRiver.Security.Cryptography/SnowyRiver.Security.Cryptography.csproj" />

@@ -23,7 +23,7 @@ public static class MatExtensions
         // 转换颜色空间（如果需要）
         using var convertedMat = mat.Channels() == 3
             ? mat.CvtColor(ColorConversionCodes.BGR2RGBA)
-            : mat;
+            : mat.Clone();
 
         // 复制像素数据
         var bytes = new byte[convertedMat.Total() * convertedMat.ElemSize()];

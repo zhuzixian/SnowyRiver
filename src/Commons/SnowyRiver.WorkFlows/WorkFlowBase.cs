@@ -7,7 +7,7 @@ namespace SnowyRiver.WorkFlows;
 public class WorkFlow<TKey, TState, TStepKey, TStep, TStepState, T>
     : ValidatableNotifyPropertyChangedObject<T>
     where T: WorkFlow<TKey, TState, TStepKey, TStep, TStepState, T>
-     where TStep : WorkStep<TStepKey, TStepState, TStep>
+     where TStep : WorkStep<TStepKey, TStepState>
 
 {
     public TKey Id

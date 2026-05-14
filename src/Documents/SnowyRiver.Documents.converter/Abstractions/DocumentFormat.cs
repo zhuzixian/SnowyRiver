@@ -11,6 +11,8 @@ public enum DocFormat
     Word,
     /// <summary>Microsoft Excel 工作簿（.xlsx）。</summary>
     Excel,
+    /// <summary>Microsoft PowerPoint 演示文稿（.pptx）。</summary>
+    PowerPoint,
     /// <summary>便携式文档格式（.pdf）。</summary>
     Pdf,
     /// <summary>XML 纸张规格文档（.xps）。</summary>

@@ -64,7 +64,7 @@
   </Folder>
   <Folder Name="/Demo/WPF/Tests/" />
   <Folder Name="/Documents/">
-    <Project Path="Documents/SnowyRiver.Documents.converter/SnowyRiver.Documents.Converter.csproj" DisplayName="SnowyRiver.Documents.Converter" />
+    <Project Path="Documents/SnowyRiver.Documents.Converter/SnowyRiver.Documents.Converter.csproj" />
     <Project Path="Documents/SnowyRiver.Documents.Xps/SnowyRiver.Documents.Xps.csproj" />
   </Folder>
   <Folder Name="/EF/">
@@ -81,14 +81,15 @@
   </Folder>
   <Folder Name="/OpenCV/">
     <Project Path="OpenCv/SnowyRiver.OpenCvSharp.Extensions/SnowyRiver.OpenCvSharp.Extensions.csproj" />
-    <Project Path="OpenCv/SnowyRiver.OpenCvSharp.SkiaSharp/SnowyRiver.OpenCvSharp.SkiaSharp.csproj"  />
+    <Project Path="OpenCv/SnowyRiver.OpenCvSharp.SkiaSharp/SnowyRiver.OpenCvSharp.SkiaSharp.csproj" />
   </Folder>
   <Folder Name="/Security/">
     <Project Path="Security/SnowyRiver.Security.Cryptography/SnowyRiver.Security.Cryptography.csproj" />
   </Folder>
   <Folder Name="/Tests/" />
   <Folder Name="/Tests/Documents/">
-    <Project Path="Tests/SnowyRiver.Documents.Xps.Tests/SnowyRiver.Documents.Xps.Tests.csproj" />
+    <Project Path="Tests/Documents/SnowyRiver.Documents.Converter.Tests/SnowyRiver.Documents.Converter.Tests.csproj" />
+    <Project Path="Tests/Documents/SnowyRiver.Documents.Xps.Tests/SnowyRiver.Documents.Xps.Tests.csproj" />
   </Folder>
   <Folder Name="/Tests/IO/" />
   <Folder Name="/Tests/IO/Modbus/">

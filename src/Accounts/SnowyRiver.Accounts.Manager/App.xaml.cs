@@ -54,8 +54,7 @@ namespace SnowyRiver.Accounts.Manager
             {
                 AppBuilder.CreateSplatBuilder()
                     .WithAkavacheCacheDatabase<SystemJsonSerializer>(builder =>
-                        builder.WithApplicationName(AppDomain.CurrentDomain.FriendlyName)
-                            .WithSqliteDefaults());
+                        builder.WithSqliteDefaults(), AppDomain.CurrentDomain.FriendlyName);
                 WPFLocalizeExtension.Engine.LocalizeDictionary.Instance.Culture = CultureInfo.CurrentCulture;
 
                 try

@@ -64,11 +64,12 @@
   </Folder>
   <Folder Name="/Demo/WPF/Tests/" />
   <Folder Name="/Documents/">
+    <Project Path="Documents/SnowyRiver.Documents.Converter/SnowyRiver.Documents.Converter.csproj" />
     <Project Path="Documents/SnowyRiver.Documents.Xps/SnowyRiver.Documents.Xps.csproj" />
   </Folder>
   <Folder Name="/EF/">
-    <Project Path="EF/SnowyRiver.EF.DataAccess.Abstractions/SnowyRiver.EF.DataAccess.Abstractions.csproj" Id="22b78efb-a60a-4404-8f07-0e8b0f5a893f" />
-    <Project Path="EF/SnowyRiver.EF.DataAccess/SnowyRiver.EF.DataAccess.csproj" Id="dbcf197d-7664-4db9-8071-673eba13e9f0" />
+    <Project Path="EF/SnowyRiver.EF.DataAccess.Abstractions/SnowyRiver.EF.DataAccess.Abstractions.csproj" />
+    <Project Path="EF/SnowyRiver.EF.DataAccess/SnowyRiver.EF.DataAccess.csproj" />
     <Project Path="EF/SnowyRiver.EF/SnowyRiver.EF.csproj" />
   </Folder>
   <Folder Name="/IO/" />
@@ -80,18 +81,19 @@
   </Folder>
   <Folder Name="/OpenCV/">
     <Project Path="OpenCv/SnowyRiver.OpenCvSharp.Extensions/SnowyRiver.OpenCvSharp.Extensions.csproj" />
-    <Project Path="OpenCv/SnowyRiver.OpenCvSharp.SkiaSharp/SnowyRiver.OpenCvSharp.SkiaSharp.csproj" Id="99fcc1a9-a454-4397-a627-8bd2a210f5d2" />
+    <Project Path="OpenCv/SnowyRiver.OpenCvSharp.SkiaSharp/SnowyRiver.OpenCvSharp.SkiaSharp.csproj" />
   </Folder>
   <Folder Name="/Security/">
     <Project Path="Security/SnowyRiver.Security.Cryptography/SnowyRiver.Security.Cryptography.csproj" />
   </Folder>
   <Folder Name="/Tests/" />
   <Folder Name="/Tests/Documents/">
-    <Project Path="Tests/SnowyRiver.Documents.Xps.Tests/SnowyRiver.Documents.Xps.Tests.csproj" />
+    <Project Path="Tests/Documents/SnowyRiver.Documents.Converter.Tests/SnowyRiver.Documents.Converter.Tests.csproj" />
+    <Project Path="Tests/Documents/SnowyRiver.Documents.Xps.Tests/SnowyRiver.Documents.Xps.Tests.csproj" />
   </Folder>
   <Folder Name="/Tests/IO/" />
   <Folder Name="/Tests/IO/Modbus/">
-    <Project Path="Tests/IO/Modbus/SnowyRiver.IO.Modbus.FluentModbus.Tests/SnowyRiver.IO.Modbus.FluentModbus.Tests.csproj" Id="9914f2ff-a589-4007-a401-a31bcc638fef" />
+    <Project Path="Tests/IO/Modbus/SnowyRiver.IO.Modbus.FluentModbus.Tests/SnowyRiver.IO.Modbus.FluentModbus.Tests.csproj" />
   </Folder>
   <Folder Name="/Tests/IO/SerialPort/">
     <Project Path="Tests/IO/SerialPort/SnowyRiver.IO.SerialPort.Tests/SnowyRiver.IO.SerialPort.Tests.csproj" />

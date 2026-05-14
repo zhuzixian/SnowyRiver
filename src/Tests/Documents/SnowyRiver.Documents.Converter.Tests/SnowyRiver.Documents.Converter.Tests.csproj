@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net10.0-windows</TargetFramework>
@@ -20,23 +20,16 @@
     </PackageReference>
     <PackageReference Include="Xunit.StaFact" />
     <PackageReference Include="xunit.v3" />
+    <PackageReference Include="DocumentFormat.OpenXml" />
+    <PackageReference Include="ClosedXML" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Documents\SnowyRiver.Documents.Xps\SnowyRiver.Documents.Xps.csproj" />
+    <ProjectReference Include="..\..\..\Documents\SnowyRiver.Documents.Converter\SnowyRiver.Documents.Converter.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Using Include="Xunit" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Assets\test2.xps">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\test1.xps">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>

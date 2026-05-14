@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net10.0;net10.0-windows</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Version>1.0.3</Version>
+  </PropertyGroup>
+
+  <!-- 仅在 Windows TFM 下启用 WPF 与 XPS 渲染相关代码。 -->
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net10.0-windows'">
+    <UseWPF>true</UseWPF>
+    <DefineConstants>$(DefineConstants);SR_WINDOWS</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="SnowyRiver.Documents.Converter.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ClosedXML" />
+    <PackageReference Include="QuestPDF" />
+    <PackageReference Include="DocumentFormat.OpenXml" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+    <PackageReference Include="SkiaSharp" />
+    <PackageReference Include="Svg.Skia" />
+  </ItemGroup>
+
+  <!-- PDFtoImage 用于 PDF→XPS 栅格化路径，仅 Windows TFM 需要。 -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0-windows'">
+    <PackageReference Include="PDFtoImage" />
+  </ItemGroup>
+
+</Project>

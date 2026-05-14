@@ -1,219 +1,265 @@
-using OfficeOpenXml;
-using OfficeOpenXml.Drawing.Chart;
-using System.Globalization;
+using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using C = DocumentFormat.OpenXml.Drawing.Charts;
 
 namespace SnowyRiver.Documents.Converter.Engines.Charts;
 
 /// <summary>
-/// 从 EPPlus 的 <see cref="ExcelChart"/> 提取出与具体绘图无关的通用 <see cref="ChartData"/>。
-/// 支持柱/条/折线/饼/环/面积/散点；不支持的类型返回 <c>null</c>。
+/// 直接从 OpenXML <see cref="ChartPart"/>（即 xl/charts/chart*.xml 的 c:chartSpace）提取
+/// 通用 <see cref="ChartData"/>。优点：完全开源 (MIT)，可商用，且数据来源是绘图缓存
+/// （c:numCache / c:strCache），即便引用的工作表数据缺失也能拿到原始数值。
+/// 为了兼容 OpenXml SDK 3.x 强类型属性差异，这里统一使用 GetFirstChild&lt;T&gt;() 与 Elements&lt;T&gt;()。
 /// </summary>
 internal static class ChartDataExtractor
 {
-    public static ChartData? Extract(ExcelChart chart)
+    public static ChartData? Extract(ChartPart part)
     {
-        if (chart == null) return null;
-        var workbook = chart.WorkSheet?.Workbook;
-        if (workbook == null) return null;
+        if (part?.ChartSpace == null) return null;
+        var chart = part.ChartSpace.GetFirstChild<C.Chart>();
+        var plotArea = chart?.GetFirstChild<C.PlotArea>();
+        if (chart == null || plotArea == null) return null;
 
         var data = new ChartData
         {
-            Kind = MapKind(chart.ChartType),
-            Title = SafeTitle(chart),
-            Legend = MapLegend(chart),
-            ShowDataLabels = TryHasDataLabel(chart),
+            Title = ExtractTitle(chart),
+            Legend = ExtractLegend(chart),
         };
 
-        if (data.Kind == ChartKind.Unknown) return null;
-
-        try
+        foreach (var element in plotArea.ChildElements)
         {
-            var sz = chart.Size;
-            if (sz != null)
+            switch (element)
             {
-                int px(long emu) => (int)Math.Max(1, emu / 9525);
-                if (sz.Width > 0) data.PixelWidth = px(sz.Width);
-                if (sz.Height > 0) data.PixelHeight = px(sz.Height);
+                case C.BarChart bar:
+                    data.Kind = (bar.GetFirstChild<C.BarDirection>()?.Val?.Value == C.BarDirectionValues.Bar)
+                        ? ChartKind.BarHorizontal : ChartKind.Column;
+                    FillCategorySeries(data, bar.Elements<C.BarChartSeries>());
+                    data.ShowDataLabels |= HasDataLabels(bar.GetFirstChild<C.DataLabels>());
+                    return Done(data);
+
+                case C.Bar3DChart bar3D:
+                    data.Kind = (bar3D.GetFirstChild<C.BarDirection>()?.Val?.Value == C.BarDirectionValues.Bar)
+                        ? ChartKind.BarHorizontal : ChartKind.Column;
+                    FillCategorySeries(data, bar3D.Elements<C.BarChartSeries>());
+                    data.ShowDataLabels |= HasDataLabels(bar3D.GetFirstChild<C.DataLabels>());
+                    return Done(data);
+
+                case C.LineChart line:
+                    data.Kind = ChartKind.Line;
+                    FillCategorySeries(data, line.Elements<C.LineChartSeries>());
+                    data.ShowDataLabels |= HasDataLabels(line.GetFirstChild<C.DataLabels>());
+                    return Done(data);
+
+                case C.Line3DChart line3D:
+                    data.Kind = ChartKind.Line;
+                    FillCategorySeries(data, line3D.Elements<C.LineChartSeries>());
+                    data.ShowDataLabels |= HasDataLabels(line3D.GetFirstChild<C.DataLabels>());
+                    return Done(data);
+
+                case C.AreaChart area:
+                    data.Kind = ChartKind.Area;
+                    FillCategorySeries(data, area.Elements<C.AreaChartSeries>());
+                    data.ShowDataLabels |= HasDataLabels(area.GetFirstChild<C.DataLabels>());
+                    return Done(data);
+
+                case C.Area3DChart area3D:
+                    data.Kind = ChartKind.Area;
+                    FillCategorySeries(data, area3D.Elements<C.AreaChartSeries>());
+                    data.ShowDataLabels |= HasDataLabels(area3D.GetFirstChild<C.DataLabels>());
+                    return Done(data);
+
+                case C.PieChart pie:
+                    data.Kind = ChartKind.Pie;
+                    FillPie(data, pie.Elements<C.PieChartSeries>());
+                    data.ShowDataLabels |= HasDataLabels(pie.GetFirstChild<C.DataLabels>());
+                    return Done(data);
+
+                case C.Pie3DChart pie3D:
+                    data.Kind = ChartKind.Pie;
+                    FillPie(data, pie3D.Elements<C.PieChartSeries>());
+                    data.ShowDataLabels |= HasDataLabels(pie3D.GetFirstChild<C.DataLabels>());
+                    return Done(data);
+
+                case C.DoughnutChart doughnut:
+                    data.Kind = ChartKind.Doughnut;
+                    FillPie(data, doughnut.Elements<C.PieChartSeries>());
+                    data.ShowDataLabels |= HasDataLabels(doughnut.GetFirstChild<C.DataLabels>());
+                    return Done(data);
+
+                case C.ScatterChart scatter:
+                    data.Kind = ChartKind.Scatter;
+                    FillScatter(data, scatter.Elements<C.ScatterChartSeries>());
+                    data.ShowDataLabels |= HasDataLabels(scatter.GetFirstChild<C.DataLabels>());
+                    return Done(data);
             }
         }
-        catch { }
-
-        try
-        {
-            int idx = 0;
-            foreach (var s in chart.Series)
-            {
-                var ser = new ChartSeries
-                {
-                    Name = SafeSeriesName(s),
-                    ColorArgb = OfficePalette.Get(idx++),
-                };
-
-                var values = ParseDoubles(workbook, s.Series);
-                ser.Values.AddRange(values);
-
-                if (data.Kind == ChartKind.Scatter)
-                {
-                    var xs = ParseDoubles(workbook, s.XSeries);
-                    if (xs.Count == 0)
-                        for (int i = 0; i < ser.Values.Count; i++) xs.Add(i + 1);
-                    ser.XValues.AddRange(xs);
-                }
-                else
-                {
-                    if (data.Categories.Count == 0)
-                    {
-                        var cats = ParseStrings(workbook, s.XSeries);
-                        if (cats.Count == 0)
-                            for (int i = 0; i < ser.Values.Count; i++)
-                                cats.Add((i + 1).ToString(CultureInfo.InvariantCulture));
-                        data.Categories.AddRange(cats);
-                    }
-                }
-
-                if (ser.Values.Count > 0) data.Series.Add(ser);
-            }
-        }
-        catch
-        {
-        }
-
-        if (data.Series.Count == 0) return null;
-        return data;
+        return null;
     }
 
-    private static ChartKind MapKind(eChartType t)
+    private static ChartData? Done(ChartData d) => d.Series.Count == 0 ? null : d;
+
+    private static string? ExtractTitle(C.Chart chart)
     {
-        var n = t.ToString();
-        if (n.StartsWith("Doughnut", StringComparison.Ordinal)) return ChartKind.Doughnut;
-        if (n.StartsWith("Pie", StringComparison.Ordinal)) return ChartKind.Pie;
-        if (n.StartsWith("BarOfPie", StringComparison.Ordinal)) return ChartKind.Pie;
-        if (n.StartsWith("Bar", StringComparison.Ordinal)) return ChartKind.BarHorizontal;
-        if (n.StartsWith("Column", StringComparison.Ordinal)) return ChartKind.Column;
-        if (n.StartsWith("Line", StringComparison.Ordinal)) return ChartKind.Line;
-        if (n.StartsWith("Area", StringComparison.Ordinal)) return ChartKind.Area;
-        if (n.StartsWith("XYScatter", StringComparison.Ordinal) || n.StartsWith("Scatter", StringComparison.Ordinal))
-            return ChartKind.Scatter;
-        return ChartKind.Unknown;
+        var t = chart.GetFirstChild<C.Title>();
+        if (t == null) return null;
+        var sb = new System.Text.StringBuilder();
+        foreach (var run in t.Descendants<DocumentFormat.OpenXml.Drawing.Text>())
+            sb.Append(run.Text);
+        var s = sb.ToString();
+        return string.IsNullOrWhiteSpace(s) ? null : s;
     }
 
-    private static LegendPos MapLegend(ExcelChart chart)
+    private static LegendPos ExtractLegend(C.Chart chart)
     {
-        try
+        var leg = chart.GetFirstChild<C.Legend>();
+        if (leg == null) return LegendPos.None;
+        var pos = leg.GetFirstChild<C.LegendPosition>()?.Val?.Value;
+        if (pos == null) return LegendPos.Right;
+        if (pos.Value == C.LegendPositionValues.Right) return LegendPos.Right;
+        if (pos.Value == C.LegendPositionValues.Left) return LegendPos.Left;
+        if (pos.Value == C.LegendPositionValues.Top) return LegendPos.Top;
+        if (pos.Value == C.LegendPositionValues.Bottom) return LegendPos.Bottom;
+        if (pos.Value == C.LegendPositionValues.TopRight) return LegendPos.Right;
+        return LegendPos.Right;
+    }
+
+    private static int ReadIndex(OpenXmlElement series, int fallback)
+    {
+        var idx = series.GetFirstChild<C.Index>()?.Val?.Value;
+        return idx.HasValue ? (int)idx.Value : fallback;
+    }
+
+    private static void FillCategorySeries<TSer>(ChartData data, IEnumerable<TSer> series)
+        where TSer : OpenXmlElement
+    {
+        int autoIdx = 0;
+        foreach (var s in series)
         {
-            var leg = chart.Legend;
-            if (leg == null) return LegendPos.None;
-            return leg.Position switch
+            var ser = new ChartSeries
             {
-                eLegendPosition.Right => LegendPos.Right,
-                eLegendPosition.Left => LegendPos.Left,
-                eLegendPosition.Top => LegendPos.Top,
-                eLegendPosition.Bottom => LegendPos.Bottom,
-                eLegendPosition.TopRight => LegendPos.Right,
-                _ => LegendPos.Right,
+                Name = ReadSeriesName(s.GetFirstChild<C.SeriesText>()),
+                ColorArgb = OfficePalette.Get(ReadIndex(s, autoIdx)),
             };
+            autoIdx++;
+            ser.Values.AddRange(ReadValues(s.GetFirstChild<C.Values>()));
+            if (data.Categories.Count == 0)
+                data.Categories.AddRange(ReadCategories(s.GetFirstChild<C.CategoryAxisData>(), ser.Values.Count));
+            if (ser.Values.Count > 0) data.Series.Add(ser);
         }
-        catch { return LegendPos.Right; }
     }
 
-    private static string? SafeTitle(ExcelChart chart)
+    private static void FillPie(ChartData data, IEnumerable<C.PieChartSeries> series)
     {
-        try { return chart.Title?.Text; }
-        catch { return null; }
-    }
-
-    private static bool TryHasDataLabel(ExcelChart chart)
-    {
-        try
+        var first = series.FirstOrDefault();
+        if (first == null) return;
+        var ser = new ChartSeries
         {
-            foreach (var s in chart.Series)
+            Name = ReadSeriesName(first.GetFirstChild<C.SeriesText>()),
+            ColorArgb = OfficePalette.Get(0),
+        };
+        ser.Values.AddRange(ReadValues(first.GetFirstChild<C.Values>()));
+        data.Categories.AddRange(ReadCategories(first.GetFirstChild<C.CategoryAxisData>(), ser.Values.Count));
+        if (ser.Values.Count > 0) data.Series.Add(ser);
+    }
+
+    private static void FillScatter(ChartData data, IEnumerable<C.ScatterChartSeries> series)
+    {
+        int autoIdx = 0;
+        foreach (var s in series)
+        {
+            var ser = new ChartSeries
             {
-                var dl = (s as ExcelChartSerie)?.GetType().GetProperty("DataLabel")?.GetValue(s);
-                if (dl == null) continue;
-                var show = dl.GetType().GetProperty("ShowValue")?.GetValue(dl) as bool?;
-                if (show == true) return true;
-            }
+                Name = ReadSeriesName(s.GetFirstChild<C.SeriesText>()),
+                ColorArgb = OfficePalette.Get(ReadIndex(s, autoIdx)),
+            };
+            autoIdx++;
+            var yVals = s.GetFirstChild<C.YValues>();
+            ser.Values.AddRange(ReadDoubleSource(yVals));
+            var xVals = s.GetFirstChild<C.XValues>();
+            ser.XValues.AddRange(ReadDoubleSource(xVals));
+            if (ser.XValues.Count == 0)
+                for (int i = 0; i < ser.Values.Count; i++) ser.XValues.Add(i + 1);
+            if (ser.Values.Count > 0) data.Series.Add(ser);
         }
-        catch { }
-        return false;
     }
 
-    private static string? SafeSeriesName(ExcelChartSerie s)
+    private static string? ReadSeriesName(C.SeriesText? st)
     {
-        try
+        if (st == null) return null;
+        var strRef = st.GetFirstChild<C.StringReference>();
+        if (strRef != null)
         {
-            if (!string.IsNullOrEmpty(s.Header)) return s.Header;
+            var cache = strRef.GetFirstChild<C.StringCache>();
+            var s = cache?.Elements<C.StringPoint>().FirstOrDefault()?.NumericValue?.Text;
+            if (!string.IsNullOrEmpty(s)) return s;
         }
-        catch { }
-        try { return s.HeaderAddress?.Address; }
-        catch { return null; }
+        var lit = st.GetFirstChild<C.NumericValue>()?.Text;
+        return string.IsNullOrEmpty(lit) ? null : lit;
     }
 
-    private static List<double> ParseDoubles(ExcelWorkbook wb, string? address)
+    private static IEnumerable<double> ReadValues(C.Values? v) => ReadDoubleSource(v);
+
+    /// <summary>从 c:val / c:xVal / c:yVal 中读 numCache 或 numLit。</summary>
+    private static IEnumerable<double> ReadDoubleSource(OpenXmlElement? container)
     {
-        var result = new List<double>();
-        var range = ResolveRange(wb, address);
-        if (range == null) return result;
-        foreach (var cell in range)
+        if (container == null) yield break;
+        OpenXmlElement? src = container.GetFirstChild<C.NumberReference>()?.GetFirstChild<C.NumberingCache>();
+        src ??= container.GetFirstChild<C.NumberLiteral>();
+        if (src == null) yield break;
+        foreach (var p in src.Elements<C.NumericPoint>().OrderBy(p => p.Index?.Value ?? uint.MaxValue))
         {
-            var v = cell.Value;
-            if (v == null) { result.Add(double.NaN); continue; }
-            switch (v)
-            {
-                case double d: result.Add(d); break;
-                case float f: result.Add(f); break;
-                case int i: result.Add(i); break;
-                case long l: result.Add(l); break;
-                case short sh: result.Add(sh); break;
-                case decimal m: result.Add((double)m); break;
-                case DateTime dt: result.Add(dt.ToOADate()); break;
-                case bool b: result.Add(b ? 1 : 0); break;
-                default:
-                    if (double.TryParse(v.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out var dd))
-                        result.Add(dd);
-                    else
-                        result.Add(double.NaN);
-                    break;
-            }
+            var t = p.NumericValue?.Text;
+            if (string.IsNullOrEmpty(t)) { yield return double.NaN; continue; }
+            if (double.TryParse(t, System.Globalization.NumberStyles.Any,
+                                System.Globalization.CultureInfo.InvariantCulture, out var d))
+                yield return d;
+            else yield return double.NaN;
         }
-        return result;
     }
 
-    private static List<string> ParseStrings(ExcelWorkbook wb, string? address)
+    private static IEnumerable<string> ReadCategories(C.CategoryAxisData? cat, int valuesCount)
     {
-        var result = new List<string>();
-        var range = ResolveRange(wb, address);
-        if (range == null) return result;
-        foreach (var cell in range)
-            result.Add(cell.Text ?? cell.Value?.ToString() ?? string.Empty);
-        return result;
+        if (cat == null) yield break;
+        // 字符串引用
+        var strCache = cat.GetFirstChild<C.StringReference>()?.GetFirstChild<C.StringCache>();
+        if (strCache != null)
+        {
+            foreach (var s in strCache.Elements<C.StringPoint>().OrderBy(p => p.Index?.Value ?? uint.MaxValue))
+                yield return s.NumericValue?.Text ?? string.Empty;
+            yield break;
+        }
+        // 字符串字面量
+        var strLit = cat.GetFirstChild<C.StringLiteral>();
+        if (strLit != null)
+        {
+            foreach (var s in strLit.Elements<C.StringPoint>().OrderBy(p => p.Index?.Value ?? uint.MaxValue))
+                yield return s.NumericValue?.Text ?? string.Empty;
+            yield break;
+        }
+        // 数值类别
+        var numCache = cat.GetFirstChild<C.NumberReference>()?.GetFirstChild<C.NumberingCache>();
+        if (numCache != null)
+        {
+            foreach (var p in numCache.Elements<C.NumericPoint>().OrderBy(p => p.Index?.Value ?? uint.MaxValue))
+                yield return p.NumericValue?.Text ?? string.Empty;
+            yield break;
+        }
+        var numLit = cat.GetFirstChild<C.NumberLiteral>();
+        if (numLit != null)
+        {
+            foreach (var p in numLit.Elements<C.NumericPoint>().OrderBy(p => p.Index?.Value ?? uint.MaxValue))
+                yield return p.NumericValue?.Text ?? string.Empty;
+            yield break;
+        }
+        for (int i = 0; i < valuesCount; i++)
+            yield return (i + 1).ToString(System.Globalization.CultureInfo.InvariantCulture);
     }
 
-    private static ExcelRange? ResolveRange(ExcelWorkbook wb, string? address)
+    private static bool HasDataLabels(C.DataLabels? dls)
     {
-        if (string.IsNullOrWhiteSpace(address)) return null;
-        try
-        {
-            // 解析 sheet 名（"Sheet1!$A$1:$A$10" 或带引号 "'My Sheet'!$A$1:$B$2"）
-            string? sheetName = null;
-            string rangePart = address;
-            int bang = address.LastIndexOf('!');
-            if (bang > 0)
-            {
-                sheetName = address.Substring(0, bang).Trim('\'', ' ');
-                rangePart = address.Substring(bang + 1);
-            }
-            var a = new ExcelAddress(rangePart);
-            ExcelWorksheet? ws = null;
-            if (!string.IsNullOrEmpty(sheetName))
-                ws = wb.Worksheets[sheetName];
-            ws ??= wb.Worksheets.FirstOrDefault();
-            if (ws == null) return null;
-            return ws.Cells[a.Start.Row, a.Start.Column, a.End.Row, a.End.Column];
-        }
-        catch
-        {
-            return null;
-        }
+        if (dls == null) return false;
+        return (dls.GetFirstChild<C.ShowValue>()?.Val?.Value ?? false)
+            || (dls.GetFirstChild<C.ShowCategoryName>()?.Val?.Value ?? false)
+            || (dls.GetFirstChild<C.ShowSeriesName>()?.Val?.Value ?? false)
+            || (dls.GetFirstChild<C.ShowPercent>()?.Val?.Value ?? false);
     }
 }

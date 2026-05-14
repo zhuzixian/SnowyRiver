@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EPPlus" />
+    <PackageReference Include="ClosedXML" />
     <PackageReference Include="QuestPDF" />
     <PackageReference Include="DocumentFormat.OpenXml" />
     <PackageReference Include="PDFtoImage" />

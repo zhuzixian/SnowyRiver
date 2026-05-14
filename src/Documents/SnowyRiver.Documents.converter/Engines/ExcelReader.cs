@@ -1,8 +1,7 @@
 using System.IO;
-using OfficeOpenXml;
-using OfficeOpenXml.Drawing;
-using OfficeOpenXml.Drawing.Chart;
-using OfficeOpenXml.Style;
+using ClosedXML.Excel;
+using ClosedXML.Excel.Drawings;
+using DocumentFormat.OpenXml.Packaging;
 using SnowyRiver.Documents.Converter.Abstractions;
 using SnowyRiver.Documents.Converter.Engines.Charts;
 using SnowyRiver.Documents.Converter.Model;
@@ -10,228 +9,251 @@ using SnowyRiver.Documents.Converter.Model;
 namespace SnowyRiver.Documents.Converter.Engines;
 
 /// <summary>
-/// 使用 EPPlus 读取 .xlsx 为 IR。
-/// 支持：每个工作表为一段以 PageBreak 隔开的内容；保留单元格字体/字号/颜色/背景/边框/对齐/合并；保留列宽与行高；
-/// 提取嵌入图片，图表使用 EPPlus 的 GetAsByteArray 渲染缓存。
+/// 使用 ClosedXML（MIT，可商用）读取 .xlsx 为 IR；
+/// 图表通过 <see cref="DocumentFormat.OpenXml"/> 直接读 ChartPart，再交给 SkiaSharp 自绘。
 /// </summary>
 internal static class ExcelReader
 {
-    static ExcelReader()
-    {
-        // EPPlus 8 必须显式声明许可。本项目按非商业组织使用许可。
-        ExcelPackage.License.SetNonCommercialOrganization("SnowyRiver");
-    }
-
     public static IrDocument Read(Stream source, ConversionOptions options)
     {
         var ir = new IrDocument
         {
             Title = options.Title,
             Author = options.Author,
-            // Excel 默认横向 A4
             PageWidthPt = 842,
             PageHeightPt = 595,
             MarginPt = 18,
         };
 
-        using var package = new ExcelPackage(source);
-        bool first = true;
-        foreach (var ws in package.Workbook.Worksheets)
+        // ClosedXML 与 SpreadsheetDocument 都需要可寻址流；如不是先复制到 MemoryStream。
+        Stream wbStream = source;
+        MemoryStream? owned = null;
+        if (!source.CanSeek)
         {
-            if (ws.Hidden != eWorkSheetHidden.Visible) continue;
-            if (!first) ir.Blocks.Add(IrBlock.NewPage());
-            first = false;
+            owned = new MemoryStream();
+            source.CopyTo(owned);
+            owned.Position = 0;
+            wbStream = owned;
+        }
+        long origPos = wbStream.Position;
 
-            // 工作表名作为标题
-            ir.Blocks.Add(IrBlock.Of(new IrParagraph
+        try
+        {
+            using var workbook = new XLWorkbook(wbStream);
+
+            // 复位流后，提前用 OpenXML 抽取所有图表 -> PNG，按工作表名分组。
+            var chartImages = options.RenderExcelCharts
+                ? ExtractChartsByOpenXml(wbStream, origPos, options)
+                : new Dictionary<string, List<byte[]>>(StringComparer.OrdinalIgnoreCase);
+
+            bool first = true;
+            foreach (var ws in workbook.Worksheets)
             {
-                IsHeading = true,
-                HeadingLevel = 1,
-                Runs = { new IrRun { Text = ws.Name, Bold = true, FontSize = 14 } },
-            }));
+                if (ws.Visibility != XLWorksheetVisibility.Visible) continue;
+                if (!first) ir.Blocks.Add(IrBlock.NewPage());
+                first = false;
 
-            if (ws.Dimension == null) continue;
-
-            int fromRow = ws.Dimension.Start.Row;
-            int toRow = ws.Dimension.End.Row;
-            int fromCol = ws.Dimension.Start.Column;
-            int toCol = ws.Dimension.End.Column;
-            int colCount = toCol - fromCol + 1;
-
-            var table = new IrTable();
-
-            // 列宽（EPPlus 列宽单位 ≈ 字符数，1 字符 ≈ 7px ≈ 5.25pt）
-            for (int c = fromCol; c <= toCol; c++)
-            {
-                var w = ws.Column(c).Width;
-                if (w <= 0) w = ws.DefaultColWidth;
-                table.ColumnWidthsPt.Add(w * 5.25);
-            }
-
-            // 预解析合并区域：建立 (row,col) -> (anchorRow, anchorCol, rowSpan, colSpan)
-            var anchors = new Dictionary<(int r, int c), (int rs, int cs)>();
-            var suppressedSet = new HashSet<(int r, int c)>();
-            foreach (var addr in ws.MergedCells)
-            {
-                if (addr == null) continue;
-                var range = new ExcelAddress(addr);
-                anchors[(range.Start.Row, range.Start.Column)] = (range.End.Row - range.Start.Row + 1, range.End.Column - range.Start.Column + 1);
-                for (int r = range.Start.Row; r <= range.End.Row; r++)
+                ir.Blocks.Add(IrBlock.Of(new IrParagraph
                 {
-                    for (int c = range.Start.Column; c <= range.End.Column; c++)
+                    IsHeading = true,
+                    HeadingLevel = 1,
+                    Runs = { new IrRun { Text = ws.Name, Bold = true, FontSize = 14 } },
+                }));
+
+                var used = ws.RangeUsed();
+                if (used != null)
+                {
+                    var firstAddr = used.RangeAddress.FirstAddress;
+                    var lastAddr = used.RangeAddress.LastAddress;
+                    int fromRow = firstAddr.RowNumber;
+                    int toRow = lastAddr.RowNumber;
+                    int fromCol = firstAddr.ColumnNumber;
+                    int toCol = lastAddr.ColumnNumber;
+
+                    var table = new IrTable();
+
+                    for (int c = fromCol; c <= toCol; c++)
                     {
-                        if (r == range.Start.Row && c == range.Start.Column) continue;
-                        suppressedSet.Add((r, c));
+                        var w = ws.Column(c).Width;
+                        if (w <= 0) w = workbook.ColumnWidth;
+                        table.ColumnWidthsPt.Add(w * 5.25);
                     }
+
+                    var anchors = new Dictionary<(int r, int c), (int rs, int cs)>();
+                    var suppressed = new HashSet<(int r, int c)>();
+                    foreach (var range in ws.MergedRanges)
+                    {
+                        var fr = range.RangeAddress.FirstAddress.RowNumber;
+                        var fc = range.RangeAddress.FirstAddress.ColumnNumber;
+                        var lr = range.RangeAddress.LastAddress.RowNumber;
+                        var lc = range.RangeAddress.LastAddress.ColumnNumber;
+                        anchors[(fr, fc)] = (lr - fr + 1, lc - fc + 1);
+                        for (int rr = fr; rr <= lr; rr++)
+                            for (int cc = fc; cc <= lc; cc++)
+                                if (rr != fr || cc != fc) suppressed.Add((rr, cc));
+                    }
+
+                    for (int r = fromRow; r <= toRow; r++)
+                    {
+                        var row = new IrRow();
+                        var rh = ws.Row(r).Height;
+                        if (rh > 0) row.HeightPt = rh;
+
+                        for (int c = fromCol; c <= toCol; c++)
+                        {
+                            var xc = ws.Cell(r, c);
+                            var cell = new IrCell { Text = xc.GetFormattedString() ?? string.Empty };
+                            if (suppressed.Contains((r, c))) cell.Suppressed = true;
+                            if (anchors.TryGetValue((r, c), out var span))
+                            {
+                                cell.RowSpan = span.rs;
+                                cell.ColSpan = span.cs;
+                            }
+
+                            var st = xc.Style;
+                            cell.Style = new IrCellStyle
+                            {
+                                BackgroundHex = ColorToHex(st.Fill.BackgroundColor),
+                                BorderHex = ExtractBorderColor(st.Border),
+                                BorderThickness = HasAnyBorder(st.Border) ? 0.5 : 0,
+                                HAlign = MapH(st.Alignment.Horizontal),
+                                VAlign = MapV(st.Alignment.Vertical),
+                                FontFamily = string.IsNullOrEmpty(st.Font.FontName) ? null : st.Font.FontName,
+                                FontSize = st.Font.FontSize > 0 ? st.Font.FontSize : null,
+                                Bold = st.Font.Bold,
+                                Italic = st.Font.Italic,
+                                FontColorHex = ColorToHex(st.Font.FontColor),
+                                WrapText = st.Alignment.WrapText,
+                            };
+                            row.Cells.Add(cell);
+                        }
+                        table.Rows.Add(row);
+                    }
+
+                    ir.Blocks.Add(IrBlock.Of(table));
+                }
+
+                foreach (var pic in ws.Pictures)
+                {
+                    try
+                    {
+                        using var ms = new MemoryStream();
+                        pic.ImageStream.Position = 0;
+                        pic.ImageStream.CopyTo(ms);
+                        ir.Blocks.Add(IrBlock.Of(new IrImage
+                        {
+                            Data = ms.ToArray(),
+                            Format = pic.Format.ToString().ToLowerInvariant(),
+                        }));
+                    }
+                    catch { }
+                }
+
+                if (chartImages.TryGetValue(ws.Name, out var imgs))
+                {
+                    foreach (var png in imgs)
+                        ir.Blocks.Add(IrBlock.Of(new IrImage { Data = png, Format = "png" }));
                 }
             }
-
-            for (int r = fromRow; r <= toRow; r++)
-            {
-                var row = new IrRow();
-                var rowObj = ws.Row(r);
-                if (rowObj.Height > 0) row.HeightPt = rowObj.Height;
-
-                for (int c = fromCol; c <= toCol; c++)
-                {
-                    var cellRange = ws.Cells[r, c];
-                    var cell = new IrCell { Text = cellRange.Text ?? string.Empty };
-                    if (suppressedSet.Contains((r, c)))
-                    {
-                        cell.Suppressed = true;
-                    }
-                    if (anchors.TryGetValue((r, c), out var span))
-                    {
-                        cell.RowSpan = span.rs;
-                        cell.ColSpan = span.cs;
-                    }
-
-                    var st = cellRange.Style;
-                    cell.Style = new IrCellStyle
-                    {
-                        BackgroundHex = ExtractFillColor(st.Fill),
-                        BorderHex = ExtractBorderColor(st.Border),
-                        BorderThickness = HasAnyBorder(st.Border) ? 0.5 : 0,
-                        HAlign = MapH(st.HorizontalAlignment),
-                        VAlign = MapV(st.VerticalAlignment),
-                        FontFamily = string.IsNullOrEmpty(st.Font.Name) ? null : st.Font.Name,
-                        FontSize = st.Font.Size > 0 ? st.Font.Size : null,
-                        Bold = st.Font.Bold,
-                        Italic = st.Font.Italic,
-                        FontColorHex = ExtractFontColor(st.Font.Color),
-                        WrapText = st.WrapText,
-                    };
-                    row.Cells.Add(cell);
-                }
-                table.Rows.Add(row);
-            }
-
-            ir.Blocks.Add(IrBlock.Of(table));
-
-            // 嵌入图片 / 图表
-            if (ws.Drawings != null)
-            {
-                foreach (var drawing in ws.Drawings)
-                {
-                    var bytes = TryGetDrawingBytes(drawing, options, out var format);
-                    if (bytes != null && bytes.Length > 0)
-                    {
-                        ir.Blocks.Add(IrBlock.Of(new IrImage { Data = bytes, Format = format }));
-                    }
-                }
-            }
+        }
+        finally
+        {
+            owned?.Dispose();
         }
 
         return ir;
     }
 
-    private static byte[]? TryGetDrawingBytes(ExcelDrawing drawing, ConversionOptions options, out string? format)
+    private static Dictionary<string, List<byte[]>> ExtractChartsByOpenXml(
+        Stream stream, long origPos, ConversionOptions options)
     {
-        format = null;
+        var map = new Dictionary<string, List<byte[]>>(StringComparer.OrdinalIgnoreCase);
         try
         {
-            if (drawing is ExcelPicture pic)
+            stream.Position = origPos;
+            using var doc = SpreadsheetDocument.Open(stream, isEditable: false);
+            var wbPart = doc.WorkbookPart;
+            if (wbPart?.Workbook?.Sheets == null) return map;
+
+            foreach (var sheet in wbPart.Workbook.Sheets.Elements<DocumentFormat.OpenXml.Spreadsheet.Sheet>())
             {
-                format = pic.Image?.Type?.ToString().ToLowerInvariant();
-                return pic.Image?.ImageBytes;
-            }
-            if (drawing is ExcelChart chart)
-            {
-                if (!options.RenderExcelCharts) return null;
-                var data = ChartDataExtractor.Extract(chart);
-                if (data == null) return null;
-                var png = ChartRenderer.Render(data, options.ChartRenderDpi, options.ChartFontFamily);
-                if (png != null && png.Length > 0)
+                var rid = sheet.Id?.Value;
+                var name = sheet.Name?.Value;
+                if (string.IsNullOrEmpty(rid) || string.IsNullOrEmpty(name)) continue;
+                if (wbPart.GetPartById(rid) is not WorksheetPart wsPart) continue;
+
+                var list = new List<byte[]>();
+                if (wsPart.DrawingsPart != null)
                 {
-                    format = "png";
-                    return png;
+                    foreach (var dp in wsPart.DrawingsPart.ChartParts)
+                    {
+                        try
+                        {
+                            var data = ChartDataExtractor.Extract(dp);
+                            if (data == null) continue;
+                            var png = ChartRenderer.Render(data, options.ChartRenderDpi, options.ChartFontFamily);
+                            if (png != null && png.Length > 0) list.Add(png);
+                        }
+                        catch { }
+                    }
                 }
+                if (list.Count > 0) map[name!] = list;
             }
         }
         catch
         {
-            // 部分图表类型 EPPlus 可能不支持，忽略
+            // 静默：图表抽取失败时跳过，不影响其余内容
         }
-        return null;
+        finally
+        {
+            try { stream.Position = origPos; } catch { }
+        }
+        return map;
     }
 
-    private static string? ExtractFillColor(ExcelFill fill)
-    {
-        if (fill == null || fill.PatternType == ExcelFillStyle.None) return null;
-        var rgb = fill.BackgroundColor?.Rgb;
-        if (string.IsNullOrEmpty(rgb)) return null;
-        return NormalizeRgb(rgb);
-    }
-
-    private static string? ExtractFontColor(ExcelColor color)
+    private static string? ColorToHex(XLColor? color)
     {
         if (color == null) return null;
-        var rgb = color.Rgb;
-        if (string.IsNullOrEmpty(rgb)) return null;
-        return NormalizeRgb(rgb);
+        try
+        {
+            var c = color.Color;
+            if (c.A == 0) return null;
+            return $"#{c.R:X2}{c.G:X2}{c.B:X2}";
+        }
+        catch { return null; }
     }
 
-    private static string? ExtractBorderColor(Border border)
+    private static string? ExtractBorderColor(IXLBorder b)
     {
-        if (border == null) return null;
-        var rgb = border.Top?.Color?.Rgb
-                  ?? border.Bottom?.Color?.Rgb
-                  ?? border.Left?.Color?.Rgb
-                  ?? border.Right?.Color?.Rgb;
-        if (string.IsNullOrEmpty(rgb)) return "#666666";
-        return NormalizeRgb(rgb);
+        if (b == null) return null;
+        return ColorToHex(b.TopBorderColor)
+            ?? ColorToHex(b.BottomBorderColor)
+            ?? ColorToHex(b.LeftBorderColor)
+            ?? ColorToHex(b.RightBorderColor)
+            ?? "#666666";
     }
 
-    private static bool HasAnyBorder(Border b)
+    private static bool HasAnyBorder(IXLBorder b)
     {
         if (b == null) return false;
-        return b.Top?.Style != ExcelBorderStyle.None
-               || b.Bottom?.Style != ExcelBorderStyle.None
-               || b.Left?.Style != ExcelBorderStyle.None
-               || b.Right?.Style != ExcelBorderStyle.None;
+        return b.TopBorder != XLBorderStyleValues.None
+            || b.BottomBorder != XLBorderStyleValues.None
+            || b.LeftBorder != XLBorderStyleValues.None
+            || b.RightBorder != XLBorderStyleValues.None;
     }
 
-    private static string? NormalizeRgb(string? rgb)
+    private static HorizontalAlign MapH(XLAlignmentHorizontalValues h) => h switch
     {
-        if (string.IsNullOrWhiteSpace(rgb)) return null;
-        var s = rgb.TrimStart('#');
-        if (s.Length == 8) s = s.Substring(2); // 去掉 alpha
-        if (s.Length != 6) return null;
-        return "#" + s.ToUpperInvariant();
-    }
-
-    private static HorizontalAlign MapH(ExcelHorizontalAlignment h) => h switch
-    {
-        ExcelHorizontalAlignment.Center or ExcelHorizontalAlignment.CenterContinuous => HorizontalAlign.Center,
-        ExcelHorizontalAlignment.Right => HorizontalAlign.Right,
-        ExcelHorizontalAlignment.Justify or ExcelHorizontalAlignment.Distributed => HorizontalAlign.Justify,
+        XLAlignmentHorizontalValues.Center or XLAlignmentHorizontalValues.CenterContinuous => HorizontalAlign.Center,
+        XLAlignmentHorizontalValues.Right => HorizontalAlign.Right,
+        XLAlignmentHorizontalValues.Justify or XLAlignmentHorizontalValues.Distributed => HorizontalAlign.Justify,
         _ => HorizontalAlign.Left,
     };
 
-    private static VerticalAlign MapV(ExcelVerticalAlignment v) => v switch
+    private static VerticalAlign MapV(XLAlignmentVerticalValues v) => v switch
     {
-        ExcelVerticalAlignment.Center => VerticalAlign.Middle,
-        ExcelVerticalAlignment.Bottom => VerticalAlign.Bottom,
+        XLAlignmentVerticalValues.Center => VerticalAlign.Middle,
+        XLAlignmentVerticalValues.Bottom => VerticalAlign.Bottom,
         _ => VerticalAlign.Top,
     };
 }

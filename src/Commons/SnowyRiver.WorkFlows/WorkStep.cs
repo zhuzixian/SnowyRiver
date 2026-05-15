@@ -1,6 +1,8 @@
-﻿namespace SnowyRiver.WorkFlows;
+﻿using SnowyRiver.Domain.Shared.WorkFlows;
 
-public class WorkStep : WorkStep<Guid, WorkState, WorkStep>;
+namespace SnowyRiver.WorkFlows;
 
-public class WorkStep<T> : WorkStep<Guid, WorkState, T>
+public class WorkStep : WorkStep<Guid, WorkState>;
+
+public class WorkStep<T> : WorkStep<Guid, WorkState>
     where T : WorkStep<T>;

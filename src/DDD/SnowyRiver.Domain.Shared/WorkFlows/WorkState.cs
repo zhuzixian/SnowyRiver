@@ -1,4 +1,4 @@
-﻿namespace SnowyRiver.WorkFlows;
+﻿namespace SnowyRiver.Domain.Shared.WorkFlows;
 public enum WorkState
 {
     Waiting,

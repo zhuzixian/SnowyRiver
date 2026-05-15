@@ -3,8 +3,7 @@ using System.Text.Json.Serialization;
 using SnowyRiver.ComponentModel.NotifyPropertyChanged;
 
 namespace SnowyRiver.WorkFlows;
-public class WorkStep<TKey, TSate, T>: ValidatableNotifyPropertyChangedObject<T>
-    where T : WorkStep<TKey, TSate, T>
+public class WorkStep<TKey, TSate>: ValidatableNotifyPropertyChangedObject<WorkStep<TKey, TSate>>
 {
     public TKey Id
     {

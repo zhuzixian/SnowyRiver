@@ -105,6 +105,69 @@ public sealed class DocumentConverter : IDocumentConverter
         }, cancellationToken);
     }
 
+    public byte[] Convert(
+        byte[] source,
+        DocFormat sourceFormat,
+        DocFormat targetFormat,
+        ConversionOptions? options = null)
+    {
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        using var sourceStream = new MemoryStream(source, writable: false);
+        using var targetStream = new MemoryStream();
+        Convert(sourceStream, sourceFormat, targetStream, targetFormat, options);
+        return targetStream.ToArray();
+    }
+
+    public byte[] Convert(
+        byte[] source,
+        DocFormat sourceFormat,
+        DocFormat targetFormat,
+        ConversionOptions? options,
+        CancellationToken cancellationToken)
+    {
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        using var sourceStream = new MemoryStream(source, writable: false);
+        using var targetStream = new MemoryStream();
+        Convert(sourceStream, sourceFormat, targetStream, targetFormat, options, cancellationToken);
+        return targetStream.ToArray();
+    }
+
+    public Task<byte[]> ConvertAsync(
+        byte[] source,
+        DocFormat sourceFormat,
+        DocFormat targetFormat,
+        ConversionOptions? options = null,
+        CancellationToken cancellationToken = default)
+    {
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        return Task.Run(() =>
+        {
+            using var sourceStream = new MemoryStream(source, writable: false);
+            using var targetStream = new MemoryStream();
+            ConvertCore(sourceStream, sourceFormat, targetStream, targetFormat, options, cancellationToken);
+            return targetStream.ToArray();
+        }, cancellationToken);
+    }
+
+    public Task<(byte[] data, ConversionResult diagnostics)> ConvertWithDiagnosticsAsync(
+        byte[] source,
+        DocFormat sourceFormat,
+        DocFormat targetFormat,
+        ConversionOptions? options = null,
+        IProgress<ConversionProgress>? progress = null,
+        CancellationToken cancellationToken = default)
+    {
+        if (source is null) throw new ArgumentNullException(nameof(source));
+        return Task.Run(() =>
+        {
+            using var sourceStream = new MemoryStream(source, writable: false);
+            using var targetStream = new MemoryStream();
+            var result = new ConversionResult();
+            ConvertCore(sourceStream, sourceFormat, targetStream, targetFormat, options, cancellationToken, result, progress);
+            return (targetStream.ToArray(), result);
+        }, cancellationToken);
+    }
+
     private static void ConvertCore(
         Stream source,
         DocFormat sourceFormat,

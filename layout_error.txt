@@ -1,0 +1,6330 @@
+The provided document content contains conflicting size constraints. For example, some elements may require more space than is available. 
+
+The layout issue is likely present in the following part of the document: 
+
+-> Document
+
+-> Page
+
+-> Page
+
+-> Content
+
+-> Content
+
+-> In method:   c => RenderTable(c, table, options)
+   Called from: RenderBlock
+   Source path: E:\repos\zhuzixian\SnowyRiver\src\Documents\SnowyRiver.Documents.Converter\Engines\PdfRenderer.cs
+   Line number: 532
+
+-> Content
+
+
+
+To learn more, please analyse the document measurement of the problematic location: 
+
+🚨 Table 🚨
+============
+Available Space: (Width: 566.654, Height: 801.775)
+Space Plan: Wrap
+Wrap Reason: The content requires more horizontal space than available.
+------------
+Extend Last Cells To Table Bottom: False
+Content Direction: LeftToRight
+Semantic Tree Manager: QuestPDF.Drawing.SemanticTreeManager
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 147.270, Height: 801.775)
+   Space Plan: FullRender (Width: 72.000, Height: 17.462)
+   -------------
+   Vertical: Top
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 147.270, Height: 801.775)
+      Space Plan: FullRender (Width: 72.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 141.270, Height: 795.775)
+         Space Plan: FullRender (Width: 66.000, Height: 11.462)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 血清蛋白电泳
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 297.253, Height: 801.775)
+   Space Plan: FullRender (Width: 134.461, Height: 26.531)
+   -------------
+   Vertical: Middle
+   Horizontal: Center
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 297.253, Height: 801.775)
+      Space Plan: FullRender (Width: 134.461, Height: 26.531)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 291.253, Height: 795.775)
+         Space Plan: FullRender (Width: 128.461, Height: 20.531)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 医院检验报告单
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 45.215, Height: 801.775)
+   Space Plan: FullRender (Width: 39.000, Height: 28.924)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 45.215, Height: 801.775)
+      Space Plan: FullRender (Width: 39.000, Height: 28.924)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 39.215, Height: 795.775)
+         Space Plan: FullRender (Width: 33.000, Height: 22.924)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 仪器类型：
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 88.799, Height: 801.775)
+   Space Plan: FullRender (Width: 66.049, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 88.799, Height: 801.775)
+      Space Plan: FullRender (Width: 66.049, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 82.799, Height: 795.775)
+         Space Plan: FullRender (Width: 60.049, Height: 11.462)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 电泳仪SEIBA
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 45.215, Height: 772.851)
+   Space Plan: FullRender (Width: 41.412, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 45.215, Height: 772.851)
+      Space Plan: FullRender (Width: 41.412, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 39.215, Height: 766.851)
+         Space Plan: FullRender (Width: 35.412, Height: 11.462)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 样本号:
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 88.799, Height: 772.851)
+   Space Plan: FullRender (Width: 23.386, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 88.799, Height: 772.851)
+      Space Plan: FullRender (Width: 23.386, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 82.799, Height: 766.851)
+         Space Plan: FullRender (Width: 17.386, Height: 11.462)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 738
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 49.853, Height: 755.389)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Top
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 49.853, Height: 755.389)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 43.853, Height: 749.389)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 97.418, Height: 755.389)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Top
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 97.418, Height: 755.389)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 91.418, Height: 749.389)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 36.520, Height: 755.389)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Middle
+   Horizontal: Center
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 36.520, Height: 755.389)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 30.520, Height: 749.389)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 106.914, Height: 755.389)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Middle
+   Horizontal: Center
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 106.914, Height: 755.389)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 100.914, Height: 749.389)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 46.658, Height: 755.389)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Middle
+   Horizontal: Center
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 46.658, Height: 755.389)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 40.658, Height: 749.389)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 87.162, Height: 755.389)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Middle
+   Horizontal: Center
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 87.162, Height: 755.389)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 81.162, Height: 749.389)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 20.000, Height: 755.389)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Middle
+   Horizontal: Center
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 20.000, Height: 755.389)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 14.000, Height: 749.389)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 45.215, Height: 755.389)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 45.215, Height: 755.389)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 39.215, Height: 749.389)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 88.799, Height: 755.389)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 88.799, Height: 755.389)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 82.799, Height: 749.389)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 49.853, Height: 737.927)
+   Space Plan: FullRender (Width: 39.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 49.853, Height: 737.927)
+      Space Plan: FullRender (Width: 39.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 43.853, Height: 731.927)
+         Space Plan: FullRender (Width: 33.000, Height: 11.462)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 姓名：
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 97.418, Height: 737.927)
+   Space Plan: FullRender (Width: 82.425, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 97.418, Height: 737.927)
+      Space Plan: FullRender (Width: 82.425, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 91.418, Height: 731.927)
+         Space Plan: FullRender (Width: 76.425, Height: 11.462)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: {{Patient.Name}}
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 36.520, Height: 737.927)
+   Space Plan: FullRender (Width: 28.000, Height: 28.924)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 36.520, Height: 737.927)
+      Space Plan: FullRender (Width: 28.000, Height: 28.924)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 30.520, Height: 731.927)
+         Space Plan: FullRender (Width: 22.000, Height: 22.924)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 病历号：
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 106.914, Height: 737.927)
+   Space Plan: FullRender (Width: 105.000, Height: 31.094)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 106.914, Height: 737.927)
+      Space Plan: FullRender (Width: 105.000, Height: 31.094)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 100.914, Height: 731.927)
+         Space Plan: FullRender (Width: 99.000, Height: 25.094)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: {{Patient.MedicalRecordNumber}}
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 46.658, Height: 737.927)
+   Space Plan: FullRender (Width: 39.000, Height: 31.094)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 46.658, Height: 737.927)
+      Space Plan: FullRender (Width: 39.000, Height: 31.094)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 40.658, Height: 731.927)
+         Space Plan: FullRender (Width: 33.000, Height: 25.094)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 病人类型：
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 107.162, Height: 737.927)
+   Space Plan: FullRender (Width: 28.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Center
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 107.162, Height: 737.927)
+      Space Plan: FullRender (Width: 28.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 101.162, Height: 731.927)
+         Space Plan: FullRender (Width: 22.000, Height: 11.462)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 住院
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 45.215, Height: 737.927)
+   Space Plan: FullRender (Width: 39.000, Height: 28.924)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 45.215, Height: 737.927)
+      Space Plan: FullRender (Width: 39.000, Height: 28.924)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 39.215, Height: 731.927)
+         Space Plan: FullRender (Width: 33.000, Height: 22.924)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 送检时间：
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 88.799, Height: 737.927)
+   Space Plan: FullRender (Width: 54.882, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 88.799, Height: 737.927)
+      Space Plan: FullRender (Width: 54.882, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 82.799, Height: 731.927)
+         Space Plan: FullRender (Width: 48.882, Height: 11.462)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 1/10/2026
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 49.853, Height: 706.834)
+   Space Plan: FullRender (Width: 39.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 49.853, Height: 706.834)
+      Space Plan: FullRender (Width: 39.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 43.853, Height: 700.834)
+         Space Plan: FullRender (Width: 33.000, Height: 11.462)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 性别：
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 97.418, Height: 706.834)
+   Space Plan: FullRender (Width: 88.838, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 97.418, Height: 706.834)
+      Space Plan: FullRender (Width: 88.838, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 91.418, Height: 700.834)
+         Space Plan: FullRender (Width: 82.838, Height: 11.462)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: {{Patient.Gender}}
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 36.520, Height: 706.834)
+   Space Plan: FullRender (Width: 28.000, Height: 28.924)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 36.520, Height: 706.834)
+      Space Plan: FullRender (Width: 28.000, Height: 28.924)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 30.520, Height: 700.834)
+         Space Plan: FullRender (Width: 22.000, Height: 22.924)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 科室：
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 106.914, Height: 706.834)
+   Space Plan: FullRender (Width: 104.286, Height: 28.924)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 106.914, Height: 706.834)
+      Space Plan: FullRender (Width: 104.286, Height: 28.924)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 100.914, Height: 700.834)
+         Space Plan: FullRender (Width: 98.286, Height: 22.924)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: {{Patient.Department}}
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 46.658, Height: 706.834)
+   Space Plan: FullRender (Width: 39.000, Height: 28.924)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 46.658, Height: 706.834)
+      Space Plan: FullRender (Width: 39.000, Height: 28.924)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 40.658, Height: 700.834)
+         Space Plan: FullRender (Width: 33.000, Height: 22.924)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 标本类型：
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 107.162, Height: 706.834)
+   Space Plan: FullRender (Width: 28.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Center
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 107.162, Height: 706.834)
+      Space Plan: FullRender (Width: 28.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 101.162, Height: 700.834)
+         Space Plan: FullRender (Width: 22.000, Height: 11.462)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 尿液
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 45.215, Height: 706.834)
+   Space Plan: FullRender (Width: 39.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 45.215, Height: 706.834)
+      Space Plan: FullRender (Width: 39.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 39.215, Height: 700.834)
+         Space Plan: FullRender (Width: 33.000, Height: 11.462)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 备注：
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 88.799, Height: 706.834)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 88.799, Height: 706.834)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 82.799, Height: 700.834)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 49.853, Height: 677.910)
+   Space Plan: FullRender (Width: 39.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 49.853, Height: 677.910)
+      Space Plan: FullRender (Width: 39.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 43.853, Height: 671.910)
+         Space Plan: FullRender (Width: 33.000, Height: 11.462)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 年龄：
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 97.418, Height: 677.910)
+   Space Plan: FullRender (Width: 72.961, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 97.418, Height: 677.910)
+      Space Plan: FullRender (Width: 72.961, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 91.418, Height: 671.910)
+         Space Plan: FullRender (Width: 66.961, Height: 11.462)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: {{Patient.Age}}
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 36.520, Height: 677.910)
+   Space Plan: FullRender (Width: 28.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 36.520, Height: 677.910)
+      Space Plan: FullRender (Width: 28.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 30.520, Height: 671.910)
+         Space Plan: FullRender (Width: 22.000, Height: 11.462)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 床号
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 106.914, Height: 677.910)
+   Space Plan: FullRender (Width: 81.142, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 106.914, Height: 677.910)
+      Space Plan: FullRender (Width: 81.142, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 100.914, Height: 671.910)
+         Space Plan: FullRender (Width: 75.142, Height: 11.462)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: {{Patient.BedId}}
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 46.658, Height: 677.910)
+   Space Plan: FullRender (Width: 39.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 46.658, Height: 677.910)
+      Space Plan: FullRender (Width: 39.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 40.658, Height: 671.910)
+         Space Plan: FullRender (Width: 33.000, Height: 11.462)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 诊断：
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 107.162, Height: 677.910)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Center
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 107.162, Height: 677.910)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 101.162, Height: 671.910)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 45.215, Height: 677.910)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 45.215, Height: 677.910)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 39.215, Height: 671.910)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 88.799, Height: 677.910)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 88.799, Height: 677.910)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 82.799, Height: 671.910)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 StyledBox
+   =============
+   Available Space: (Width: 49.853, Height: 660.448)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Border Left: 0.5
+   Border Top: 0.5
+   Border Right: 0.5
+   Border Bottom: 0.5
+   Border Radius Top Left: 0
+   Border Radius Top Right: 0
+   Border Radius Bottom Left: 0
+   Border Radius Bottom Right: 0
+   Border Alignment: -
+   Background Color: #00000000
+   Background Gradient Angle: -
+   Border Color: #000000
+   Border Gradient Angle: -
+   Shadow: -
+
+
+      🟢 Alignment
+      =============
+      Available Space: (Width: 49.853, Height: 660.448)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -------------
+      Vertical: Bottom
+      Horizontal: Left
+
+
+         🟢 Padding
+         ===========
+         Available Space: (Width: 49.853, Height: 660.448)
+         Space Plan: FullRender (Width: 6.000, Height: 17.462)
+         -----------
+         Top: 3
+         Right: 3
+         Bottom: 3
+         Left: 3
+
+
+            🟢 TextBlock
+            =============
+            Available Space: (Width: 43.853, Height: 654.448)
+            Space Plan: FullRender (Width: 0.000, Height: 11.462)
+            -------------
+            Alignment: -
+            Content Direction: LeftToRight
+            Line Clamp: -
+            Line Clamp Ellipsis: -
+            Paragraph Spacing: 0
+            Paragraph First Line Indentation: 0
+            Text: 
+
+
+   🟢 StyledBox
+   =============
+   Available Space: (Width: 97.418, Height: 660.448)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Border Left: 0.5
+   Border Top: 0.5
+   Border Right: 0.5
+   Border Bottom: 0.5
+   Border Radius Top Left: 0
+   Border Radius Top Right: 0
+   Border Radius Bottom Left: 0
+   Border Radius Bottom Right: 0
+   Border Alignment: -
+   Background Color: #00000000
+   Background Gradient Angle: -
+   Border Color: #000000
+   Border Gradient Angle: -
+   Shadow: -
+
+
+      🟢 Alignment
+      =============
+      Available Space: (Width: 97.418, Height: 660.448)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -------------
+      Vertical: Bottom
+      Horizontal: Left
+
+
+         🟢 Padding
+         ===========
+         Available Space: (Width: 97.418, Height: 660.448)
+         Space Plan: FullRender (Width: 6.000, Height: 17.462)
+         -----------
+         Top: 3
+         Right: 3
+         Bottom: 3
+         Left: 3
+
+
+            🟢 TextBlock
+            =============
+            Available Space: (Width: 91.418, Height: 654.448)
+            Space Plan: FullRender (Width: 0.000, Height: 11.462)
+            -------------
+            Alignment: -
+            Content Direction: LeftToRight
+            Line Clamp: -
+            Line Clamp Ellipsis: -
+            Paragraph Spacing: 0
+            Paragraph First Line Indentation: 0
+            Text: 
+
+
+   🟢 StyledBox
+   =============
+   Available Space: (Width: 36.520, Height: 660.448)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Border Left: 0.5
+   Border Top: 0.5
+   Border Right: 0.5
+   Border Bottom: 0.5
+   Border Radius Top Left: 0
+   Border Radius Top Right: 0
+   Border Radius Bottom Left: 0
+   Border Radius Bottom Right: 0
+   Border Alignment: -
+   Background Color: #00000000
+   Background Gradient Angle: -
+   Border Color: #000000
+   Border Gradient Angle: -
+   Shadow: -
+
+
+      🟢 Alignment
+      =============
+      Available Space: (Width: 36.520, Height: 660.448)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -------------
+      Vertical: Bottom
+      Horizontal: Left
+
+
+         🟢 Padding
+         ===========
+         Available Space: (Width: 36.520, Height: 660.448)
+         Space Plan: FullRender (Width: 6.000, Height: 17.462)
+         -----------
+         Top: 3
+         Right: 3
+         Bottom: 3
+         Left: 3
+
+
+            🟢 TextBlock
+            =============
+            Available Space: (Width: 30.520, Height: 654.448)
+            Space Plan: FullRender (Width: 0.000, Height: 11.462)
+            -------------
+            Alignment: -
+            Content Direction: LeftToRight
+            Line Clamp: -
+            Line Clamp Ellipsis: -
+            Paragraph Spacing: 0
+            Paragraph First Line Indentation: 0
+            Text: 
+
+
+   🟢 StyledBox
+   =============
+   Available Space: (Width: 106.914, Height: 660.448)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Border Left: 0.5
+   Border Top: 0.5
+   Border Right: 0.5
+   Border Bottom: 0.5
+   Border Radius Top Left: 0
+   Border Radius Top Right: 0
+   Border Radius Bottom Left: 0
+   Border Radius Bottom Right: 0
+   Border Alignment: -
+   Background Color: #00000000
+   Background Gradient Angle: -
+   Border Color: #000000
+   Border Gradient Angle: -
+   Shadow: -
+
+
+      🟢 Alignment
+      =============
+      Available Space: (Width: 106.914, Height: 660.448)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -------------
+      Vertical: Bottom
+      Horizontal: Left
+
+
+         🟢 Padding
+         ===========
+         Available Space: (Width: 106.914, Height: 660.448)
+         Space Plan: FullRender (Width: 6.000, Height: 17.462)
+         -----------
+         Top: 3
+         Right: 3
+         Bottom: 3
+         Left: 3
+
+
+            🟢 TextBlock
+            =============
+            Available Space: (Width: 100.914, Height: 654.448)
+            Space Plan: FullRender (Width: 0.000, Height: 11.462)
+            -------------
+            Alignment: -
+            Content Direction: LeftToRight
+            Line Clamp: -
+            Line Clamp Ellipsis: -
+            Paragraph Spacing: 0
+            Paragraph First Line Indentation: 0
+            Text: 
+
+
+   🟢 StyledBox
+   =============
+   Available Space: (Width: 46.658, Height: 660.448)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Border Left: 0.5
+   Border Top: 0.5
+   Border Right: 0.5
+   Border Bottom: 0.5
+   Border Radius Top Left: 0
+   Border Radius Top Right: 0
+   Border Radius Bottom Left: 0
+   Border Radius Bottom Right: 0
+   Border Alignment: -
+   Background Color: #00000000
+   Background Gradient Angle: -
+   Border Color: #000000
+   Border Gradient Angle: -
+   Shadow: -
+
+
+      🟢 Alignment
+      =============
+      Available Space: (Width: 46.658, Height: 660.448)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -------------
+      Vertical: Bottom
+      Horizontal: Left
+
+
+         🟢 Padding
+         ===========
+         Available Space: (Width: 46.658, Height: 660.448)
+         Space Plan: FullRender (Width: 6.000, Height: 17.462)
+         -----------
+         Top: 3
+         Right: 3
+         Bottom: 3
+         Left: 3
+
+
+            🟢 TextBlock
+            =============
+            Available Space: (Width: 40.658, Height: 654.448)
+            Space Plan: FullRender (Width: 0.000, Height: 11.462)
+            -------------
+            Alignment: -
+            Content Direction: LeftToRight
+            Line Clamp: -
+            Line Clamp Ellipsis: -
+            Paragraph Spacing: 0
+            Paragraph First Line Indentation: 0
+            Text: 
+
+
+   🟢 StyledBox
+   =============
+   Available Space: (Width: 87.162, Height: 660.448)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Border Left: 0.5
+   Border Top: 0.5
+   Border Right: 0.5
+   Border Bottom: 0.5
+   Border Radius Top Left: 0
+   Border Radius Top Right: 0
+   Border Radius Bottom Left: 0
+   Border Radius Bottom Right: 0
+   Border Alignment: -
+   Background Color: #00000000
+   Background Gradient Angle: -
+   Border Color: #000000
+   Border Gradient Angle: -
+   Shadow: -
+
+
+      🟢 Alignment
+      =============
+      Available Space: (Width: 87.162, Height: 660.448)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -------------
+      Vertical: Bottom
+      Horizontal: Left
+
+
+         🟢 Padding
+         ===========
+         Available Space: (Width: 87.162, Height: 660.448)
+         Space Plan: FullRender (Width: 6.000, Height: 17.462)
+         -----------
+         Top: 3
+         Right: 3
+         Bottom: 3
+         Left: 3
+
+
+            🟢 TextBlock
+            =============
+            Available Space: (Width: 81.162, Height: 654.448)
+            Space Plan: FullRender (Width: 0.000, Height: 11.462)
+            -------------
+            Alignment: -
+            Content Direction: LeftToRight
+            Line Clamp: -
+            Line Clamp Ellipsis: -
+            Paragraph Spacing: 0
+            Paragraph First Line Indentation: 0
+            Text: 
+
+
+   🟢 StyledBox
+   =============
+   Available Space: (Width: 20.000, Height: 660.448)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Border Left: 0.5
+   Border Top: 0.5
+   Border Right: 0.5
+   Border Bottom: 0.5
+   Border Radius Top Left: 0
+   Border Radius Top Right: 0
+   Border Radius Bottom Left: 0
+   Border Radius Bottom Right: 0
+   Border Alignment: -
+   Background Color: #00000000
+   Background Gradient Angle: -
+   Border Color: #000000
+   Border Gradient Angle: -
+   Shadow: -
+
+
+      🟢 Alignment
+      =============
+      Available Space: (Width: 20.000, Height: 660.448)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -------------
+      Vertical: Bottom
+      Horizontal: Left
+
+
+         🟢 Padding
+         ===========
+         Available Space: (Width: 20.000, Height: 660.448)
+         Space Plan: FullRender (Width: 6.000, Height: 17.462)
+         -----------
+         Top: 3
+         Right: 3
+         Bottom: 3
+         Left: 3
+
+
+            🟢 TextBlock
+            =============
+            Available Space: (Width: 14.000, Height: 654.448)
+            Space Plan: FullRender (Width: 0.000, Height: 11.462)
+            -------------
+            Alignment: -
+            Content Direction: LeftToRight
+            Line Clamp: -
+            Line Clamp Ellipsis: -
+            Paragraph Spacing: 0
+            Paragraph First Line Indentation: 0
+            Text: 
+
+
+   🟢 StyledBox
+   =============
+   Available Space: (Width: 45.215, Height: 660.448)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Border Left: 0.5
+   Border Top: 0.5
+   Border Right: 0.5
+   Border Bottom: 0.5
+   Border Radius Top Left: 0
+   Border Radius Top Right: 0
+   Border Radius Bottom Left: 0
+   Border Radius Bottom Right: 0
+   Border Alignment: -
+   Background Color: #00000000
+   Background Gradient Angle: -
+   Border Color: #000000
+   Border Gradient Angle: -
+   Shadow: -
+
+
+      🟢 Alignment
+      =============
+      Available Space: (Width: 45.215, Height: 660.448)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -------------
+      Vertical: Bottom
+      Horizontal: Left
+
+
+         🟢 Padding
+         ===========
+         Available Space: (Width: 45.215, Height: 660.448)
+         Space Plan: FullRender (Width: 6.000, Height: 17.462)
+         -----------
+         Top: 3
+         Right: 3
+         Bottom: 3
+         Left: 3
+
+
+            🟢 TextBlock
+            =============
+            Available Space: (Width: 39.215, Height: 654.448)
+            Space Plan: FullRender (Width: 0.000, Height: 11.462)
+            -------------
+            Alignment: -
+            Content Direction: LeftToRight
+            Line Clamp: -
+            Line Clamp Ellipsis: -
+            Paragraph Spacing: 0
+            Paragraph First Line Indentation: 0
+            Text: 
+
+
+   🟢 StyledBox
+   =============
+   Available Space: (Width: 88.799, Height: 660.448)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Border Left: 0.5
+   Border Top: 0.5
+   Border Right: 0.5
+   Border Bottom: 0.5
+   Border Radius Top Left: 0
+   Border Radius Top Right: 0
+   Border Radius Bottom Left: 0
+   Border Radius Bottom Right: 0
+   Border Alignment: -
+   Background Color: #00000000
+   Background Gradient Angle: -
+   Border Color: #000000
+   Border Gradient Angle: -
+   Shadow: -
+
+
+      🟢 Alignment
+      =============
+      Available Space: (Width: 88.799, Height: 660.448)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -------------
+      Vertical: Bottom
+      Horizontal: Left
+
+
+         🟢 Padding
+         ===========
+         Available Space: (Width: 88.799, Height: 660.448)
+         Space Plan: FullRender (Width: 6.000, Height: 17.462)
+         -----------
+         Top: 3
+         Right: 3
+         Bottom: 3
+         Left: 3
+
+
+            🟢 TextBlock
+            =============
+            Available Space: (Width: 82.799, Height: 654.448)
+            Space Plan: FullRender (Width: 0.000, Height: 11.462)
+            -------------
+            Alignment: -
+            Content Direction: LeftToRight
+            Line Clamp: -
+            Line Clamp Ellipsis: -
+            Paragraph Spacing: 0
+            Paragraph First Line Indentation: 0
+            Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 49.853, Height: 642.986)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 49.853, Height: 642.986)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 43.853, Height: 636.986)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 97.418, Height: 642.986)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 97.418, Height: 642.986)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 91.418, Height: 636.986)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 36.520, Height: 642.986)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 36.520, Height: 642.986)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 30.520, Height: 636.986)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 106.914, Height: 642.986)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 106.914, Height: 642.986)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 100.914, Height: 636.986)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 46.658, Height: 642.986)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 46.658, Height: 642.986)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 40.658, Height: 636.986)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 107.162, Height: 642.986)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Center
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 107.162, Height: 642.986)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 101.162, Height: 636.986)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 45.215, Height: 642.986)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 45.215, Height: 642.986)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 39.215, Height: 636.986)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 88.799, Height: 642.986)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 88.799, Height: 642.986)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 82.799, Height: 636.986)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 290.704, Height: 625.524)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Center
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 290.704, Height: 625.524)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 284.704, Height: 619.524)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 46.658, Height: 625.524)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 46.658, Height: 625.524)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 40.658, Height: 619.524)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 107.162, Height: 625.524)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Center
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 107.162, Height: 625.524)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 101.162, Height: 619.524)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 45.215, Height: 625.524)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 45.215, Height: 625.524)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 39.215, Height: 619.524)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 88.799, Height: 625.524)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 88.799, Height: 625.524)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 82.799, Height: 619.524)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 StyledBox
+   =============
+   Available Space: (Width: 46.658, Height: 608.062)
+   Space Plan: FullRender (Width: 39.000, Height: 28.924)
+   -------------
+   Border Left: 0.5
+   Border Top: 0.5
+   Border Right: 0.5
+   Border Bottom: 0.5
+   Border Radius Top Left: 0
+   Border Radius Top Right: 0
+   Border Radius Bottom Left: 0
+   Border Radius Bottom Right: 0
+   Border Alignment: -
+   Background Color: #00000000
+   Background Gradient Angle: -
+   Border Color: #000000
+   Border Gradient Angle: -
+   Shadow: -
+
+
+      🟢 Alignment
+      =============
+      Available Space: (Width: 46.658, Height: 608.062)
+      Space Plan: FullRender (Width: 39.000, Height: 28.924)
+      -------------
+      Vertical: Bottom
+      Horizontal: Center
+
+
+         🟢 Padding
+         ===========
+         Available Space: (Width: 46.658, Height: 608.062)
+         Space Plan: FullRender (Width: 39.000, Height: 28.924)
+         -----------
+         Top: 3
+         Right: 3
+         Bottom: 3
+         Left: 3
+
+
+            🟢 TextBlock
+            =============
+            Available Space: (Width: 40.658, Height: 602.062)
+            Space Plan: FullRender (Width: 33.000, Height: 22.924)
+            -------------
+            Alignment: Start
+            Content Direction: LeftToRight
+            Line Clamp: -
+            Line Clamp Ellipsis: -
+            Paragraph Spacing: 0
+            Paragraph First Line Indentation: 0
+            Text: 条带名称
+
+
+   🟢 StyledBox
+   =============
+   Available Space: (Width: 107.162, Height: 608.062)
+   Space Plan: FullRender (Width: 55.500, Height: 17.462)
+   -------------
+   Border Left: 0.5
+   Border Top: 0.5
+   Border Right: 0.5
+   Border Bottom: 0.5
+   Border Radius Top Left: 0
+   Border Radius Top Right: 0
+   Border Radius Bottom Left: 0
+   Border Radius Bottom Right: 0
+   Border Alignment: -
+   Background Color: #00000000
+   Background Gradient Angle: -
+   Border Color: #000000
+   Border Gradient Angle: -
+   Shadow: -
+
+
+      🟢 Alignment
+      =============
+      Available Space: (Width: 107.162, Height: 608.062)
+      Space Plan: FullRender (Width: 55.500, Height: 17.462)
+      -------------
+      Vertical: Bottom
+      Horizontal: Center
+
+
+         🟢 Padding
+         ===========
+         Available Space: (Width: 107.162, Height: 608.062)
+         Space Plan: FullRender (Width: 55.500, Height: 17.462)
+         -----------
+         Top: 3
+         Right: 3
+         Bottom: 3
+         Left: 3
+
+
+            🟢 TextBlock
+            =============
+            Available Space: (Width: 101.162, Height: 602.062)
+            Space Plan: FullRender (Width: 49.500, Height: 11.462)
+            -------------
+            Alignment: Start
+            Content Direction: LeftToRight
+            Line Clamp: -
+            Line Clamp Ellipsis: -
+            Paragraph Spacing: 0
+            Paragraph First Line Indentation: 0
+            Text: 相对含量%
+
+
+   🟢 StyledBox
+   =============
+   Available Space: (Width: 45.215, Height: 608.062)
+   Space Plan: FullRender (Width: 37.518, Height: 28.924)
+   -------------
+   Border Left: 0.5
+   Border Top: 0.5
+   Border Right: 0.5
+   Border Bottom: 0.5
+   Border Radius Top Left: 0
+   Border Radius Top Right: 0
+   Border Radius Bottom Left: 0
+   Border Radius Bottom Right: 0
+   Border Alignment: -
+   Background Color: #00000000
+   Background Gradient Angle: -
+   Border Color: #000000
+   Border Gradient Angle: -
+   Shadow: -
+
+
+      🟢 Alignment
+      =============
+      Available Space: (Width: 45.215, Height: 608.062)
+      Space Plan: FullRender (Width: 37.518, Height: 28.924)
+      -------------
+      Vertical: Bottom
+      Horizontal: Center
+
+
+         🟢 Padding
+         ===========
+         Available Space: (Width: 45.215, Height: 608.062)
+         Space Plan: FullRender (Width: 37.518, Height: 28.924)
+         -----------
+         Top: 3
+         Right: 3
+         Bottom: 3
+         Left: 3
+
+
+            🟢 TextBlock
+            =============
+            Available Space: (Width: 39.215, Height: 602.062)
+            Space Plan: FullRender (Width: 31.518, Height: 22.924)
+            -------------
+            Alignment: Start
+            Content Direction: LeftToRight
+            Line Clamp: -
+            Line Clamp Ellipsis: -
+            Paragraph Spacing: 0
+            Paragraph First Line Indentation: 0
+            Text: M蛋白含量
+
+
+   🟢 StyledBox
+   =============
+   Available Space: (Width: 88.799, Height: 608.062)
+   Space Plan: FullRender (Width: 39.000, Height: 17.462)
+   -------------
+   Border Left: 0.5
+   Border Top: 0.5
+   Border Right: 0.5
+   Border Bottom: 0.5
+   Border Radius Top Left: 0
+   Border Radius Top Right: 0
+   Border Radius Bottom Left: 0
+   Border Radius Bottom Right: 0
+   Border Alignment: -
+   Background Color: #00000000
+   Background Gradient Angle: -
+   Border Color: #000000
+   Border Gradient Angle: -
+   Shadow: -
+
+
+      🟢 Alignment
+      =============
+      Available Space: (Width: 88.799, Height: 608.062)
+      Space Plan: FullRender (Width: 39.000, Height: 17.462)
+      -------------
+      Vertical: Bottom
+      Horizontal: Center
+
+
+         🟢 Padding
+         ===========
+         Available Space: (Width: 88.799, Height: 608.062)
+         Space Plan: FullRender (Width: 39.000, Height: 17.462)
+         -----------
+         Top: 3
+         Right: 3
+         Bottom: 3
+         Left: 3
+
+
+            🟢 TextBlock
+            =============
+            Available Space: (Width: 82.799, Height: 602.062)
+            Space Plan: FullRender (Width: 33.000, Height: 11.462)
+            -------------
+            Alignment: Start
+            Content Direction: LeftToRight
+            Line Clamp: -
+            Line Clamp Ellipsis: -
+            Paragraph Spacing: 0
+            Paragraph First Line Indentation: 0
+            Text: 参考值
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 49.853, Height: 579.138)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 49.853, Height: 579.138)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 43.853, Height: 573.138)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 97.418, Height: 579.138)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 97.418, Height: 579.138)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 91.418, Height: 573.138)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 36.520, Height: 579.138)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 36.520, Height: 579.138)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 30.520, Height: 573.138)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 106.914, Height: 579.138)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 106.914, Height: 579.138)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 100.914, Height: 573.138)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 46.658, Height: 579.138)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Center
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 46.658, Height: 579.138)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 40.658, Height: 573.138)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 87.162, Height: 579.138)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Center
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 87.162, Height: 579.138)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 81.162, Height: 573.138)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 20.000, Height: 579.138)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Center
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 20.000, Height: 579.138)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 14.000, Height: 573.138)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 45.215, Height: 579.138)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Center
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 45.215, Height: 579.138)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 39.215, Height: 573.138)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 88.799, Height: 579.138)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Center
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 88.799, Height: 579.138)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 82.799, Height: 573.138)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 290.704, Height: 561.677)
+   Space Plan: FullRender (Width: 139.703, Height: 74.771)
+   -------------
+   Vertical: Bottom
+   Horizontal: Center
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 290.704, Height: 561.677)
+      Space Plan: FullRender (Width: 139.703, Height: 74.771)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 284.704, Height: 555.677)
+         Space Plan: FullRender (Width: 133.703, Height: 68.771)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: {
+  "IsXAxisVisible": false,
+  "IsYAxisVisible": false,
+  "IsHideAxesAndGrid": false,
+  "IsHideLegend": false
+}
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 46.658, Height: 561.677)
+   Space Plan: FullRender (Width: 43.710, Height: 28.924)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 46.658, Height: 561.677)
+      Space Plan: FullRender (Width: 43.710, Height: 28.924)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 40.658, Height: 555.677)
+         Space Plan: FullRender (Width: 37.710, Height: 22.924)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: {{item.Name}}
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 87.162, Height: 561.677)
+   Space Plan: FullRender (Width: 85.702, Height: 28.924)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 87.162, Height: 561.677)
+      Space Plan: FullRender (Width: 85.702, Height: 28.924)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 81.162, Height: 555.677)
+         Space Plan: FullRender (Width: 79.702, Height: 22.924)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: {{item.RelativeAbundance}}
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 20.000, Height: 561.677)
+   Space Plan: FullRender (Width: 17.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 20.000, Height: 561.677)
+      Space Plan: FullRender (Width: 17.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 14.000, Height: 555.677)
+         Space Plan: FullRender (Width: 11.000, Height: 11.462)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: ↑
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 45.215, Height: 561.677)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 45.215, Height: 561.677)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 39.215, Height: 555.677)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 88.799, Height: 561.677)
+   Space Plan: FullRender (Width: 56.596, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Center
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 88.799, Height: 561.677)
+      Space Plan: FullRender (Width: 56.596, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 82.799, Height: 555.677)
+         Space Plan: FullRender (Width: 50.596, Height: 11.462)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 59.8--72.4
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 46.658, Height: 532.753)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 46.658, Height: 532.753)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 40.658, Height: 526.753)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 87.162, Height: 532.753)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 87.162, Height: 532.753)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 81.162, Height: 526.753)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 20.000, Height: 532.753)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 20.000, Height: 532.753)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 14.000, Height: 526.753)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 45.215, Height: 532.753)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 45.215, Height: 532.753)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 39.215, Height: 526.753)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 88.799, Height: 532.753)
+   Space Plan: FullRender (Width: 36.798, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Center
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 88.799, Height: 532.753)
+      Space Plan: FullRender (Width: 36.798, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 82.799, Height: 526.753)
+         Space Plan: FullRender (Width: 30.798, Height: 11.462)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 1--3.2
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 46.658, Height: 515.291)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 46.658, Height: 515.291)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 40.658, Height: 509.291)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 87.162, Height: 515.291)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 87.162, Height: 515.291)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 81.162, Height: 509.291)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 20.000, Height: 515.291)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 20.000, Height: 515.291)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 14.000, Height: 509.291)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 45.215, Height: 515.291)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 45.215, Height: 515.291)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 39.215, Height: 509.291)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 88.799, Height: 515.291)
+   Space Plan: FullRender (Width: 50.800, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Center
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 88.799, Height: 515.291)
+      Space Plan: FullRender (Width: 50.800, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 82.799, Height: 509.291)
+         Space Plan: FullRender (Width: 44.800, Height: 11.462)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 7.4--12.6
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 46.658, Height: 497.829)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 46.658, Height: 497.829)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 40.658, Height: 491.829)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 87.162, Height: 497.829)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 87.162, Height: 497.829)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 81.162, Height: 491.829)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 20.000, Height: 497.829)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 20.000, Height: 497.829)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 14.000, Height: 491.829)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 45.215, Height: 497.829)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 45.215, Height: 497.829)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 39.215, Height: 491.829)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 88.799, Height: 497.829)
+   Space Plan: FullRender (Width: 50.800, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Center
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 88.799, Height: 497.829)
+      Space Plan: FullRender (Width: 50.800, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 82.799, Height: 491.829)
+         Space Plan: FullRender (Width: 44.800, Height: 11.462)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 7.5--12.9
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 46.658, Height: 480.367)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 46.658, Height: 480.367)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 40.658, Height: 474.367)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 87.162, Height: 480.367)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 87.162, Height: 480.367)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 81.162, Height: 474.367)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 20.000, Height: 480.367)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 20.000, Height: 480.367)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 14.000, Height: 474.367)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 45.215, Height: 480.367)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 45.215, Height: 480.367)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 39.215, Height: 474.367)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 88.799, Height: 480.367)
+   Space Plan: FullRender (Width: 37.093, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Center
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 88.799, Height: 480.367)
+      Space Plan: FullRender (Width: 37.093, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 82.799, Height: 474.367)
+         Space Plan: FullRender (Width: 31.093, Height: 11.462)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 8-15.8
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 46.658, Height: 462.905)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 46.658, Height: 462.905)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 40.658, Height: 456.905)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 87.162, Height: 462.905)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 87.162, Height: 462.905)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 81.162, Height: 456.905)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 20.000, Height: 462.905)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 20.000, Height: 462.905)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 14.000, Height: 456.905)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 45.215, Height: 462.905)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 45.215, Height: 462.905)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 39.215, Height: 456.905)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 88.799, Height: 462.905)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 88.799, Height: 462.905)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 82.799, Height: 456.905)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 46.658, Height: 445.443)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 46.658, Height: 445.443)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 40.658, Height: 439.443)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 87.162, Height: 445.443)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 87.162, Height: 445.443)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 81.162, Height: 439.443)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 20.000, Height: 445.443)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 20.000, Height: 445.443)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 14.000, Height: 439.443)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 45.215, Height: 445.443)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 45.215, Height: 445.443)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 39.215, Height: 439.443)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 88.799, Height: 445.443)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 88.799, Height: 445.443)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 82.799, Height: 439.443)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 46.658, Height: 427.981)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 46.658, Height: 427.981)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 40.658, Height: 421.981)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 87.162, Height: 427.981)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 87.162, Height: 427.981)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 81.162, Height: 421.981)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 20.000, Height: 427.981)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 20.000, Height: 427.981)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 14.000, Height: 421.981)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 45.215, Height: 427.981)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 45.215, Height: 427.981)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 39.215, Height: 421.981)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 88.799, Height: 427.981)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 88.799, Height: 427.981)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 82.799, Height: 421.981)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 46.658, Height: 410.519)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 46.658, Height: 410.519)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 40.658, Height: 404.519)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 87.162, Height: 410.519)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 87.162, Height: 410.519)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 81.162, Height: 404.519)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 20.000, Height: 410.519)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 20.000, Height: 410.519)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 14.000, Height: 404.519)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 45.215, Height: 410.519)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 45.215, Height: 410.519)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 39.215, Height: 404.519)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 88.799, Height: 410.519)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 88.799, Height: 410.519)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 82.799, Height: 404.519)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 46.658, Height: 393.057)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 46.658, Height: 393.057)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 40.658, Height: 387.057)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 87.162, Height: 393.057)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 87.162, Height: 393.057)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 81.162, Height: 387.057)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 20.000, Height: 393.057)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 20.000, Height: 393.057)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 14.000, Height: 387.057)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 45.215, Height: 393.057)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 45.215, Height: 393.057)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 39.215, Height: 387.057)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 88.799, Height: 393.057)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 88.799, Height: 393.057)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 82.799, Height: 387.057)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 46.658, Height: 375.595)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 46.658, Height: 375.595)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 40.658, Height: 369.595)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 87.162, Height: 375.595)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 87.162, Height: 375.595)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 81.162, Height: 369.595)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 20.000, Height: 375.595)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 20.000, Height: 375.595)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 14.000, Height: 369.595)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 45.215, Height: 375.595)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 45.215, Height: 375.595)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 39.215, Height: 369.595)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 88.799, Height: 375.595)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 88.799, Height: 375.595)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 82.799, Height: 369.595)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 46.658, Height: 358.134)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 46.658, Height: 358.134)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 40.658, Height: 352.134)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 87.162, Height: 358.134)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 87.162, Height: 358.134)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 81.162, Height: 352.134)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 20.000, Height: 358.134)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 20.000, Height: 358.134)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 14.000, Height: 352.134)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 45.215, Height: 358.134)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 45.215, Height: 358.134)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 39.215, Height: 352.134)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 88.799, Height: 358.134)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 88.799, Height: 358.134)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 82.799, Height: 352.134)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 49.853, Height: 340.672)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 49.853, Height: 340.672)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 43.853, Height: 334.672)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 97.418, Height: 340.672)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 97.418, Height: 340.672)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 91.418, Height: 334.672)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 36.520, Height: 340.672)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 36.520, Height: 340.672)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 30.520, Height: 334.672)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 106.914, Height: 340.672)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 106.914, Height: 340.672)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 100.914, Height: 334.672)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 46.658, Height: 340.672)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 46.658, Height: 340.672)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 40.658, Height: 334.672)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 87.162, Height: 340.672)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 87.162, Height: 340.672)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 81.162, Height: 334.672)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 20.000, Height: 340.672)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 20.000, Height: 340.672)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 14.000, Height: 334.672)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 45.215, Height: 340.672)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 45.215, Height: 340.672)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 39.215, Height: 334.672)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 88.799, Height: 340.672)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 88.799, Height: 340.672)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 82.799, Height: 334.672)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 49.853, Height: 323.210)
+   Space Plan: FullRender (Width: 39.000, Height: 28.924)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 49.853, Height: 323.210)
+      Space Plan: FullRender (Width: 39.000, Height: 28.924)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 43.853, Height: 317.210)
+         Space Plan: FullRender (Width: 33.000, Height: 22.924)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 检验意见：
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 528.685, Height: 323.210)
+   Space Plan: FullRender (Width: 112.036, Height: 17.462)
+   -------------
+   Vertical: Top
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 528.685, Height: 323.210)
+      Space Plan: FullRender (Width: 112.036, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 522.685, Height: 317.210)
+         Space Plan: FullRender (Width: 106.036, Height: 11.462)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: {{Report.Impression}}
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 49.853, Height: 294.286)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 49.853, Height: 294.286)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 43.853, Height: 288.286)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 StyledBox
+   =============
+   Available Space: (Width: 49.853, Height: 276.824)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Border Left: 0.5
+   Border Top: 0.5
+   Border Right: 0.5
+   Border Bottom: 0.5
+   Border Radius Top Left: 0
+   Border Radius Top Right: 0
+   Border Radius Bottom Left: 0
+   Border Radius Bottom Right: 0
+   Border Alignment: -
+   Background Color: #00000000
+   Background Gradient Angle: -
+   Border Color: #000000
+   Border Gradient Angle: -
+   Shadow: -
+
+
+      🟢 Alignment
+      =============
+      Available Space: (Width: 49.853, Height: 276.824)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -------------
+      Vertical: Bottom
+      Horizontal: Left
+
+
+         🟢 Padding
+         ===========
+         Available Space: (Width: 49.853, Height: 276.824)
+         Space Plan: FullRender (Width: 6.000, Height: 17.462)
+         -----------
+         Top: 3
+         Right: 3
+         Bottom: 3
+         Left: 3
+
+
+            🟢 TextBlock
+            =============
+            Available Space: (Width: 43.853, Height: 270.824)
+            Space Plan: FullRender (Width: 0.000, Height: 11.462)
+            -------------
+            Alignment: -
+            Content Direction: LeftToRight
+            Line Clamp: -
+            Line Clamp Ellipsis: -
+            Paragraph Spacing: 0
+            Paragraph First Line Indentation: 0
+            Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 49.853, Height: 259.362)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 49.853, Height: 259.362)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 43.853, Height: 253.362)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 97.418, Height: 259.362)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 97.418, Height: 259.362)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 91.418, Height: 253.362)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 36.520, Height: 259.362)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 36.520, Height: 259.362)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 30.520, Height: 253.362)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 106.914, Height: 259.362)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 106.914, Height: 259.362)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 100.914, Height: 253.362)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 46.658, Height: 259.362)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 46.658, Height: 259.362)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 40.658, Height: 253.362)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 87.162, Height: 259.362)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 87.162, Height: 259.362)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 81.162, Height: 253.362)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 20.000, Height: 259.362)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 20.000, Height: 259.362)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 14.000, Height: 253.362)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 45.215, Height: 259.362)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 45.215, Height: 259.362)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 39.215, Height: 253.362)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 88.799, Height: 259.362)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 88.799, Height: 259.362)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 82.799, Height: 253.362)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 49.853, Height: 241.900)
+   Space Plan: FullRender (Width: 39.000, Height: 28.924)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 49.853, Height: 241.900)
+      Space Plan: FullRender (Width: 39.000, Height: 28.924)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 43.853, Height: 235.900)
+         Space Plan: FullRender (Width: 33.000, Height: 22.924)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 申请医生：
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 97.418, Height: 241.900)
+   Space Plan: FullRender (Width: 91.916, Height: 28.924)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 97.418, Height: 241.900)
+      Space Plan: FullRender (Width: 91.916, Height: 28.924)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 91.418, Height: 235.900)
+         Space Plan: FullRender (Width: 85.916, Height: 22.924)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: {{Report.SubmittingPhysician}}
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 36.520, Height: 241.900)
+   Space Plan: FullRender (Width: 28.000, Height: 40.386)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 36.520, Height: 241.900)
+      Space Plan: FullRender (Width: 28.000, Height: 40.386)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 30.520, Height: 235.900)
+         Space Plan: FullRender (Width: 22.000, Height: 34.386)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 报告日期：
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 106.914, Height: 241.900)
+   Space Plan: FullRender (Width: 106.418, Height: 28.924)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 106.914, Height: 241.900)
+      Space Plan: FullRender (Width: 106.418, Height: 28.924)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 100.914, Height: 235.900)
+         Space Plan: FullRender (Width: 100.418, Height: 22.924)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: {{Report.ReportDateTime}}
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 46.658, Height: 241.900)
+   Space Plan: FullRender (Width: 28.000, Height: 28.924)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 46.658, Height: 241.900)
+      Space Plan: FullRender (Width: 28.000, Height: 28.924)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 40.658, Height: 235.900)
+         Space Plan: FullRender (Width: 22.000, Height: 22.924)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 检验者：
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 87.162, Height: 241.900)
+   Space Plan: FullRender (Width: 84.998, Height: 28.924)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 87.162, Height: 241.900)
+      Space Plan: FullRender (Width: 84.998, Height: 28.924)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 81.162, Height: 235.900)
+         Space Plan: FullRender (Width: 78.998, Height: 22.924)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: {{Report.Technician}}
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 20.000, Height: 241.900)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 20.000, Height: 241.900)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 14.000, Height: 235.900)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 45.215, Height: 241.900)
+   Space Plan: FullRender (Width: 28.000, Height: 28.924)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 45.215, Height: 241.900)
+      Space Plan: FullRender (Width: 28.000, Height: 28.924)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 39.215, Height: 235.900)
+         Space Plan: FullRender (Width: 22.000, Height: 22.924)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 审核者：
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 88.799, Height: 241.900)
+   Space Plan: FullRender (Width: 85.498, Height: 28.924)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 88.799, Height: 241.900)
+      Space Plan: FullRender (Width: 85.498, Height: 28.924)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 82.799, Height: 235.900)
+         Space Plan: FullRender (Width: 79.498, Height: 22.924)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: {{Report.RecheckPhysician}}
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 49.853, Height: 201.514)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 49.853, Height: 201.514)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 43.853, Height: 195.514)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 97.418, Height: 201.514)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 97.418, Height: 201.514)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 91.418, Height: 195.514)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 36.520, Height: 201.514)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 36.520, Height: 201.514)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 30.520, Height: 195.514)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 106.914, Height: 201.514)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 106.914, Height: 201.514)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 100.914, Height: 195.514)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 46.658, Height: 201.514)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 46.658, Height: 201.514)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 40.658, Height: 195.514)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 87.162, Height: 201.514)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 87.162, Height: 201.514)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 81.162, Height: 195.514)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 20.000, Height: 201.514)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 20.000, Height: 201.514)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 14.000, Height: 195.514)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 45.215, Height: 201.514)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 45.215, Height: 201.514)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 39.215, Height: 195.514)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 88.799, Height: 201.514)
+   Space Plan: FullRender (Width: 6.000, Height: 17.462)
+   -------------
+   Vertical: Bottom
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 88.799, Height: 201.514)
+      Space Plan: FullRender (Width: 6.000, Height: 17.462)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 82.799, Height: 195.514)
+         Space Plan: FullRender (Width: 0.000, Height: 11.462)
+         -------------
+         Alignment: -
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 
+
+
+   🟢 Alignment
+   =============
+   Available Space: (Width: 578.538, Height: 184.052)
+   Space Plan: FullRender (Width: 512.591, Height: 40.386)
+   -------------
+   Vertical: Top
+   Horizontal: Left
+
+
+      🟢 Padding
+      ===========
+      Available Space: (Width: 578.538, Height: 184.052)
+      Space Plan: FullRender (Width: 512.591, Height: 40.386)
+      -----------
+      Top: 3
+      Right: 3
+      Bottom: 3
+      Left: 3
+
+
+         🟢 TextBlock
+         =============
+         Available Space: (Width: 572.538, Height: 178.052)
+         Space Plan: FullRender (Width: 506.591, Height: 34.386)
+         -------------
+         Alignment: Start
+         Content Direction: LeftToRight
+         Line Clamp: -
+         Line Clamp Ellipsis: -
+         Paragraph Spacing: 0
+         Paragraph First Line Indentation: 0
+         Text: 此报告仅对本样本负责，仅供临床医师参考，如有异议请在报告发出后72小时内与我科联系。咨询电话：
+以上参考上设置依据卫生部行业标准2013年8月(WSS/T405-2012)
+全省已实行三级医院检查结果互认制度，如有重复检查，请拒绝。
+
+
+Legend: 
+🚨 - Element that is likely the root cause of the layout issue based on library heuristics and prediction. 
+🔴 - Element that cannot be drawn due to the provided layout constraints. This element likely causes the layout issue, or one of its descendant children is responsible for the problem. 
+🟡 - Element that can be partially drawn on the page and will also be rendered on the consecutive page. In more complex layouts, this element may also cause issues or contain a child that is the actual root cause.
+🟢 - Element that is successfully and completely drawn on the page.
+⚪️ - Element that has not been drawn on the faulty page. Its children are omitted.
+
+
+This detailed information is generated because you run the application with a debugger attached or with the QuestPDF.Settings.EnableDebugging flag set to true. 

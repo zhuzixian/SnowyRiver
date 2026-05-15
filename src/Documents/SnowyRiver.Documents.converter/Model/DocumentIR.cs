@@ -15,6 +15,12 @@ public sealed class IrRun
     public bool Bold { get; set; }
     public bool Italic { get; set; }
     public bool Underline { get; set; }
+    /// <summary>删除线（中划线）。对应 Excel 字体 Strikethrough / Word w:strike。</summary>
+    public bool Strikethrough { get; set; }
+    /// <summary>上标（如 x²）。与 <see cref="Subscript"/> 互斥。</summary>
+    public bool Superscript { get; set; }
+    /// <summary>下标（如 H₂O）。与 <see cref="Superscript"/> 互斥。</summary>
+    public bool Subscript { get; set; }
     public string? ColorHex { get; set; }
     /// <summary>该 Run 表示当前页码字段（PAGE）；渲染器应替换为动态页码。</summary>
     public bool IsPageNumberField { get; set; }
@@ -157,6 +163,16 @@ public sealed class IrCellStyle
     public bool Italic { get; set; }
     public string? FontColorHex { get; set; }
     public bool WrapText { get; set; } = true;
+    /// <summary>字体下划线（任意非 None 的 Excel underline 都映射为 true）。</summary>
+    public bool Underline { get; set; }
+    /// <summary>字体删除线。</summary>
+    public bool Strikethrough { get; set; }
+    /// <summary>Excel 左缩进级别（0~250）。一级约等于 3 个字符宽度，按 ~7pt 折算。</summary>
+    public int IndentLevel { get; set; }
+    /// <summary>Excel ShrinkToFit：当文本宽于列时按比例缩小字号显示，不换行。</summary>
+    public bool ShrinkToFit { get; set; }
+    /// <summary>Excel 文本旋转角度（°，-90~90；255 表示竖排堆叠）。</summary>
+    public int TextRotation { get; set; }
     /// <summary>条件格式 IconSet 推断出的图标占位字符（如 ▲▶▼）；渲染器在文本前拼接。</summary>
     public string? IconPrefix { get; set; }
     /// <summary>四边边框，独立设置；为 null 时回退到 <see cref="BorderThickness"/>+<see cref="BorderHex"/>。</summary>
@@ -306,6 +322,14 @@ public sealed class IrSectionProperties
     public List<int> VerticalPageBreaks { get; } = new();
     /// <summary>Excel: 是否打印网格线。</summary>
     public bool? PrintGridlines { get; set; }
+    /// <summary>Excel: 打印时水平居中。</summary>
+    public bool CenterHorizontally { get; set; }
+    /// <summary>Excel: 打印时垂直居中。</summary>
+    public bool CenterVertically { get; set; }
+    /// <summary>Excel: 页眉与页面顶部的距离（点 pt）。</summary>
+    public double? HeaderMarginPt { get; set; }
+    /// <summary>Excel: 页脚与页面底部的距离（点 pt）。</summary>
+    public double? FooterMarginPt { get; set; }
     /// <summary>分栏数（Word w:cols/@num）；&lt;=1 表示单列。</summary>
     public int ColumnCount { get; set; } = 1;
     /// <summary>分栏间距（点 pt）。</summary>
@@ -350,6 +374,9 @@ public sealed class IrDocument
     public double PageHeightPt { get; set; } = 842;
     /// <summary>页面四周边距（点 pt）。</summary>
     public double MarginPt { get; set; } = 36;
+    /// <summary>文档默认字号（点 pt）；为 null 时由渲染层使用其内置默认值。
+    /// Excel 工作簿一般为 10pt 或 11pt，从 <c>XLWorkbook.Style.Font.FontSize</c> 读取。</summary>
+    public double? DefaultFontSizePt { get; set; }
     public List<IrBlock> Blocks { get; } = new();
     /// <summary>脚注表（按字段引用 ID 索引）。</summary>
     public Dictionary<string, IrFootnote> Footnotes { get; } = new();

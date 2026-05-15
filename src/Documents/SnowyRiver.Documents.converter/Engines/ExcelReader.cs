@@ -48,6 +48,16 @@ internal static class ExcelReader
         {
             using var workbook = new XLWorkbook(wbStream);
 
+            // 工作簿默认字号（pt）。Excel 默认通常是 10 或 11；用作 PDF 页面的 DefaultTextStyle，
+            // 避免渲染端写死 11pt 导致整张表行高偏离原文档。
+            try
+            {
+                var defSize = workbook.Style?.Font?.FontSize;
+                if (defSize.HasValue && defSize.Value > 0)
+                    ir.DefaultFontSizePt = defSize.Value;
+            }
+            catch { /* 个别 xlsx 无显式默认字号 */ }
+
             // 公式重算回退：xlsx 缓存值缺失时，调用 ClosedXML 内置计算引擎补齐。
             // 失败时静默忽略，避免影响整体导出。
             if (NeedsFormulaRecalc(workbook))
@@ -63,6 +73,7 @@ internal static class ExcelReader
 
             bool first = true;
             int sheetIndex = 0;
+            int visibleSheetCount = workbook.Worksheets.Count(s => s.Visibility == XLWorksheetVisibility.Visible);
             foreach (var ws in workbook.Worksheets)
             {
                 if (ws.Visibility != XLWorksheetVisibility.Visible) continue;
@@ -115,13 +126,17 @@ internal static class ExcelReader
                     ir.Blocks.Add(IrBlock.Of(sec));
                 }
 
-                ir.Blocks.Add(IrBlock.Of(new IrParagraph
+                // 仅在存在多个可见工作表时插入工作表名作为标题；单 sheet 时与 Excel 原始输出一致，不额外加标题。
+                if (visibleSheetCount > 1)
                 {
-                    IsHeading = true,
-                    HeadingLevel = 1,
-                    AnchorId = MakeSheetAnchor(sheetIndex, ws.Name),
-                    Runs = { new IrRun { Text = ws.Name, Bold = true, FontSize = 14 } },
-                }));
+                    ir.Blocks.Add(IrBlock.Of(new IrParagraph
+                    {
+                        IsHeading = true,
+                        HeadingLevel = 1,
+                        AnchorId = MakeSheetAnchor(sheetIndex, ws.Name),
+                        Runs = { new IrRun { Text = ws.Name, Bold = true, FontSize = 14 } },
+                    }));
+                }
 
                 var used = ws.RangeUsed();
                 if (used != null)
@@ -132,6 +147,39 @@ internal static class ExcelReader
                     int toRow = lastAddr.RowNumber;
                     int fromCol = firstAddr.ColumnNumber;
                     int toCol = lastAddr.ColumnNumber;
+
+                    // 打印区域（Print_Area）：若设置了打印区域，则将输出范围裁剪到打印区域与 used 的交集。
+                    // 多个不连续的打印区域取其外接矩形作为简化处理。
+                    try
+                    {
+                        var printAreas = ws.PageSetup?.PrintAreas;
+                        if (printAreas != null)
+                        {
+                            int paFromRow = int.MaxValue, paFromCol = int.MaxValue;
+                            int paToRow = int.MinValue, paToCol = int.MinValue;
+                            bool hasPa = false;
+                            foreach (var pa in printAreas)
+                            {
+                                var fa = pa.RangeAddress.FirstAddress;
+                                var la = pa.RangeAddress.LastAddress;
+                                if (fa.RowNumber < paFromRow) paFromRow = fa.RowNumber;
+                                if (fa.ColumnNumber < paFromCol) paFromCol = fa.ColumnNumber;
+                                if (la.RowNumber > paToRow) paToRow = la.RowNumber;
+                                if (la.ColumnNumber > paToCol) paToCol = la.ColumnNumber;
+                                hasPa = true;
+                            }
+                            if (hasPa)
+                            {
+                                fromRow = Math.Max(fromRow, paFromRow);
+                                fromCol = Math.Max(fromCol, paFromCol);
+                                toRow = Math.Min(toRow, paToRow);
+                                toCol = Math.Min(toCol, paToCol);
+                            }
+                        }
+                    }
+                    catch (Exception ex) { log?.LogDebug(ex, "Apply PrintAreas failed for sheet '{Sheet}'.", ws.Name); }
+
+                    if (fromRow > toRow || fromCol > toCol) continue;
 
                     var table = new IrTable();
                     // 表头重复改在 used 区扫描完毕后由 PrintTitleRows 同步逻辑统一处理。
@@ -172,12 +220,13 @@ internal static class ExcelReader
                         visibleRows.Add(r);
                         var row = new IrRow();
                         var rh = ws.Row(r).Height;
+                        if (rh <= 0) rh = workbook.RowHeight;
                         if (rh > 0) row.HeightPt = rh;
 
                         foreach (var c in visibleCols)
                         {
                             var xc = ws.Cell(r, c);
-                            var formatted = xc.GetFormattedString() ?? string.Empty;
+                            var formatted = xc.GetFormattedString(System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty;
                             var cell = new IrCell { Text = formatted };
                             if (options.EnableExcelNumberFormat) cell.FormattedText = formatted;
                             if (suppressed.Contains((r, c))) cell.Suppressed = true;
@@ -190,10 +239,11 @@ internal static class ExcelReader
                             var st = xc.Style;
                             cell.Style = new IrCellStyle
                             {
-                                BackgroundHex = ColorToHex(st.Fill.BackgroundColor),
+                                BackgroundHex = ExtractFillColor(st.Fill),
                                 BorderHex = ExtractBorderColor(st.Border),
                                 BorderThickness = HasAnyBorder(st.Border) ? 0.5 : 0,
-                                HAlign = MapH(st.Alignment.Horizontal),
+                                Borders = ExtractBorders(st.Border),
+                                HAlign = MapH(st.Alignment.Horizontal, xc),
                                 VAlign = MapV(st.Alignment.Vertical),
                                 FontFamily = string.IsNullOrEmpty(st.Font.FontName) ? null : st.Font.FontName,
                                 FontSize = st.Font.FontSize > 0 ? st.Font.FontSize : null,
@@ -201,8 +251,64 @@ internal static class ExcelReader
                                 Italic = st.Font.Italic,
                                 FontColorHex = ColorToHex(st.Font.FontColor),
                                 WrapText = st.Alignment.WrapText,
+                                Underline = st.Font.Underline != XLFontUnderlineValues.None,
+                                Strikethrough = st.Font.Strikethrough,
+                                IndentLevel = st.Alignment.Indent,
+                                ShrinkToFit = st.Alignment.ShrinkToFit,
+                                TextRotation = st.Alignment.TextRotation,
                             };
                             ApplyConditionalFormats(ws, xc, cell.Style);
+
+                            // 富文本：单元格内多个 Run 具有不同字体/字号/颜色/粗体等。
+                            // 优先于多行拆分，因为 IXLRichString 自身可能包含 \n。
+                            bool richHandled = false;
+                            try
+                            {
+                                if (xc.HasRichText && xc.GetRichText() is { } rt && rt.Count > 0)
+                                {
+                                    var para = new IrParagraph();
+                                    bool sawNewline = false;
+                                    foreach (var rs in rt)
+                                    {
+                                        var text = rs.Text ?? string.Empty;
+                                        if (text.IndexOf('\n') >= 0 || text.IndexOf('\r') >= 0) sawNewline = true;
+                                        para.Runs.Add(new IrRun
+                                        {
+                                            Text = text,
+                                            FontFamily = string.IsNullOrEmpty(rs.FontName) ? null : rs.FontName,
+                                            FontSize = rs.FontSize > 0 ? rs.FontSize : null,
+                                            Bold = rs.Bold,
+                                            Italic = rs.Italic,
+                                            Underline = rs.Underline != XLFontUnderlineValues.None,
+                                            Strikethrough = rs.Strikethrough,
+                                            Superscript = rs.VerticalAlignment == XLFontVerticalTextAlignmentValues.Superscript,
+                                            Subscript = rs.VerticalAlignment == XLFontVerticalTextAlignmentValues.Subscript,
+                                            ColorHex = ColorToHex(rs.FontColor),
+                                        });
+                                    }
+                                    cell.Paragraphs.Add(para);
+                                    if (sawNewline) cell.Style.WrapText = true;
+                                    richHandled = true;
+                                }
+                            }
+                            catch { /* 富文本访问异常时回退到普通文本 */ }
+
+                            // 多行文本（Alt+Enter 产生的 \n 或 \r\n）：拆分到 Paragraphs，使 PdfRenderer 走多行分支
+                            // 自然换行；Excel 中含 \n 的文本默认就是按行显示的（即使未显式开启 WrapText）。
+                            if (!richHandled && !string.IsNullOrEmpty(formatted) && (formatted.IndexOf('\n') >= 0 || formatted.IndexOf('\r') >= 0))
+                            {
+                                var lines = formatted.Replace("\r\n", "\n").Replace('\r', '\n').Split('\n');
+                                if (lines.Length > 1)
+                                {
+                                    foreach (var line in lines)
+                                    {
+                                        var para = new IrParagraph();
+                                        para.Runs.Add(new IrRun { Text = line });
+                                        cell.Paragraphs.Add(para);
+                                    }
+                                    cell.Style.WrapText = true;
+                                }
+                            }
 
                             // 单元格超链接（外部 URL）
                             try
@@ -650,7 +756,27 @@ internal static class ExcelReader
             ?? ColorToHex(b.BottomBorderColor)
             ?? ColorToHex(b.LeftBorderColor)
             ?? ColorToHex(b.RightBorderColor)
-            ?? "#666666";
+            ?? "#000000";
+    }
+
+    /// <summary>
+    /// 提取单元格填充颜色：仅当 PatternType 为非 None 时返回有效值。
+    /// Solid 模式下颜色实际取自 BackgroundColor；其他图案模式 (Gray/DarkHorizontal 等)
+    /// 在 PDF 中没有原生支持，按 PatternColor 与 BackgroundColor 的简单混合近似。
+    /// 这避免了"无填充"单元格仍被强制写入 #FFFFFF 背景导致覆盖页面底色的问题。
+    /// </summary>
+    private static string? ExtractFillColor(IXLFill fill)
+    {
+        if (fill == null) return null;
+        try
+        {
+            if (fill.PatternType == XLFillPatternValues.None) return null;
+            if (fill.PatternType == XLFillPatternValues.Solid)
+                return ColorToHex(fill.BackgroundColor);
+            // 其他图案：取 PatternColor，回退到 BackgroundColor。
+            return ColorToHex(fill.PatternColor) ?? ColorToHex(fill.BackgroundColor);
+        }
+        catch { return null; }
     }
 
     private static bool HasAnyBorder(IXLBorder b)
@@ -662,19 +788,73 @@ internal static class ExcelReader
             || b.RightBorder != XLBorderStyleValues.None;
     }
 
-    private static HorizontalAlign MapH(XLAlignmentHorizontalValues h) => h switch
+    /// <summary>将 Excel 边框样式映射到磅值厚度（用于 QuestPDF Border*）。</summary>
+    private static double MapBorderThickness(XLBorderStyleValues s) => s switch
+    {
+        XLBorderStyleValues.None => 0,
+        XLBorderStyleValues.Hair => 0.25,
+        XLBorderStyleValues.Thin => 0.5,
+        XLBorderStyleValues.Dotted => 0.5,
+        XLBorderStyleValues.Dashed => 0.5,
+        XLBorderStyleValues.DashDot => 0.5,
+        XLBorderStyleValues.DashDotDot => 0.5,
+        XLBorderStyleValues.Medium => 1.0,
+        XLBorderStyleValues.MediumDashed => 1.0,
+        XLBorderStyleValues.MediumDashDot => 1.0,
+        XLBorderStyleValues.MediumDashDotDot => 1.0,
+        XLBorderStyleValues.SlantDashDot => 1.0,
+        XLBorderStyleValues.Thick => 1.75,
+        XLBorderStyleValues.Double => 1.5,
+        _ => 0.5,
+    };
+
+    private static IrBorders? ExtractBorders(IXLBorder b)
+    {
+        if (b == null) return null;
+        if (b.TopBorder == XLBorderStyleValues.None
+            && b.RightBorder == XLBorderStyleValues.None
+            && b.BottomBorder == XLBorderStyleValues.None
+            && b.LeftBorder == XLBorderStyleValues.None) return null;
+
+        IrBorder? Make(XLBorderStyleValues s, XLColor color)
+        {
+            var t = MapBorderThickness(s);
+            if (t <= 0) return null;
+            // Excel 边框默认颜色为 Auto（黑色），未取到具体颜色时回退到 #000000，
+            // 而不是更浅的 #666666，否则边框会看起来偏灰，与 Excel 视觉不符。
+            return new IrBorder { Thickness = t, ColorHex = ColorToHex(color) ?? "#000000" };
+        }
+
+        return new IrBorders
+        {
+            Top = Make(b.TopBorder, b.TopBorderColor),
+            Right = Make(b.RightBorder, b.RightBorderColor),
+            Bottom = Make(b.BottomBorder, b.BottomBorderColor),
+            Left = Make(b.LeftBorder, b.LeftBorderColor),
+        };
+    }
+
+    private static HorizontalAlign MapH(XLAlignmentHorizontalValues h, IXLCell? cell = null) => h switch
     {
         XLAlignmentHorizontalValues.Center or XLAlignmentHorizontalValues.CenterContinuous => HorizontalAlign.Center,
         XLAlignmentHorizontalValues.Right => HorizontalAlign.Right,
         XLAlignmentHorizontalValues.Justify or XLAlignmentHorizontalValues.Distributed => HorizontalAlign.Justify,
-        _ => HorizontalAlign.Left,
+        XLAlignmentHorizontalValues.Left => HorizontalAlign.Left,
+        // General 默认：Excel 对数字/日期/时间右对齐、布尔居中、其余左对齐。
+        _ => cell == null ? HorizontalAlign.Left : (cell.DataType switch
+        {
+            XLDataType.Number or XLDataType.DateTime or XLDataType.TimeSpan => HorizontalAlign.Right,
+            XLDataType.Boolean => HorizontalAlign.Center,
+            _ => HorizontalAlign.Left,
+        }),
     };
 
     private static VerticalAlign MapV(XLAlignmentVerticalValues v) => v switch
     {
         XLAlignmentVerticalValues.Center => VerticalAlign.Middle,
-        XLAlignmentVerticalValues.Bottom => VerticalAlign.Bottom,
-        _ => VerticalAlign.Top,
+        XLAlignmentVerticalValues.Top => VerticalAlign.Top,
+        // Excel 默认垂直对齐为 Bottom。
+        _ => VerticalAlign.Bottom,
     };
 
     private static string MakeSheetAnchor(int index, string name)
@@ -703,10 +883,15 @@ internal static class ExcelReader
                 MarginBottomPt = ps.Margins?.Bottom * 72,
                 MarginLeftPt = ps.Margins?.Left * 72,
                 MarginRightPt = ps.Margins?.Right * 72,
+                HeaderMarginPt = ps.Margins?.Header * 72,
+                FooterMarginPt = ps.Margins?.Footer * 72,
                 Scale = ps.Scale > 0 ? ps.Scale : (int?)null,
                 FitToPagesWide = ps.PagesWide > 0 ? ps.PagesWide : (int?)null,
                 FitToPagesTall = ps.PagesTall > 0 ? ps.PagesTall : (int?)null,
             };
+
+            try { sec.CenterHorizontally = ps.CenterHorizontally; } catch { }
+            try { sec.CenterVertically = ps.CenterVertically; } catch { }
 
             // 简化的常见纸张尺寸映射（pt）。未识别时不设，沿用 IR 默认。
             (double w, double h)? size = ps.PaperSize switch
@@ -862,18 +1047,34 @@ internal static class ExcelReader
 
     /// <summary>
     /// 估算工作簿默认字体下数字 '0' 的最大像素宽度（96 DPI）。
-    /// 由于运行时不一定可用 GDI/SkiaSharp 字体度量，这里采用与 Excel 行为接近的经验值：
-    /// Calibri 11pt 约 7px；其他常见字体回退到 7px。
-    /// 用户可通过 ConversionOptions（未来扩展）自定义。
+    /// 优先用 SkiaSharp 实测：以默认字体加载 SKFont，按 96DPI 度量数字 '0' 的宽度；
+    /// 失败时回退到经验系数（与 Excel 常见字体接近）。
     /// </summary>
     private static double MeasureMaxDigitWidthPx(XLWorkbook wb)
     {
+        var font = wb.Style?.Font;
+        double size = font?.FontSize > 0 ? font.FontSize : 11.0;
+        string name = string.IsNullOrEmpty(font?.FontName) ? "Calibri" : font!.FontName;
+
+        // SkiaSharp 实测路径：尝试匹配字体并按字体度量数字 '0' 的宽度（已含 96DPI 转换）。
         try
         {
-            var font = wb.Style?.Font;
-            double size = font?.FontSize > 0 ? font.FontSize : 11.0;
-            string name = string.IsNullOrEmpty(font?.FontName) ? "Calibri" : font!.FontName;
+            using var typeface = SkiaSharp.SKTypeface.FromFamilyName(name) ?? SkiaSharp.SKTypeface.Default;
+            if (typeface != null)
+            {
+                using var skFont = new SkiaSharp.SKFont(typeface, (float)(size * 96.0 / 72.0));
+                float w = skFont.MeasureText("0");
+                if (w > 0)
+                {
+                    // Excel 习惯将 MDW 向下取整为整数像素
+                    return Math.Max(1.0, Math.Floor(w));
+                }
+            }
+        }
+        catch { /* 回退到经验值 */ }
 
+        try
+        {
             // 常见字体的 '0' 字符在 96DPI 下约为：fontSize * factor 像素。
             double factor = name switch
             {
@@ -884,9 +1085,7 @@ internal static class ExcelReader
                 "宋体" or "SimSun" => 0.50,
                 _ => 0.55,
             };
-            // pt -> px @ 96DPI: px = pt * 96/72
             double px = size * 96.0 / 72.0 * factor;
-            // Excel 把 MDW 向下取整为整数像素
             return Math.Max(1.0, Math.Floor(px));
         }
         catch

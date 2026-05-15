@@ -46,7 +46,15 @@ public class ExcelToPdfTests
             sheet.Range("A1:C1").Style.Fill.BackgroundColor = XLColor.LightGray;
             wb.SaveAs(ms);
         }
+
         ms.Position = 0;
         return ms;
+    }
+
+    [Fact]
+    public void Convert_SimpleXlsx_To_Pdf()
+    {
+        var converter = new DocumentConverter();
+        converter.Convert("Asserts/1.xlsx", "1.pdf");
     }
 }

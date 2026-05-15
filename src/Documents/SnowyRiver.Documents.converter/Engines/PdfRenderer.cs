@@ -18,6 +18,7 @@ internal static class PdfRenderer
     static PdfRenderer()
     {
         QuestPDF.Settings.License = LicenseType.Community;
+        QuestPDF.Settings.EnableDebugging = true;
     }
 
     private static IContainer ApplySemanticHeader(IContainer c, int level) => level switch
@@ -67,7 +68,7 @@ internal static class PdfRenderer
                 {
                     page.Size((float)ir.PageWidthPt, (float)ir.PageHeightPt, Unit.Point);
                     page.Margin((float)ir.MarginPt, Unit.Point);
-                    page.DefaultTextStyle(t => t.FontFamily(options.DefaultFontFamily).FontSize(11));
+                    page.DefaultTextStyle(t => t.FontFamily(options.DefaultFontFamily).FontSize((float)(ir.DefaultFontSizePt ?? 11)));
                     page.Content().Column(col =>
                     {
                         col.Spacing(6);
@@ -102,10 +103,20 @@ internal static class PdfRenderer
                     var mb = (float)(props?.MarginBottomPt ?? ir.MarginPt);
                     var ml = (float)(props?.MarginLeftPt ?? ir.MarginPt);
                     var mr = (float)(props?.MarginRightPt ?? ir.MarginPt);
-                    page.MarginTop(mt, Unit.Point);
-                    page.MarginBottom(mb, Unit.Point);
+                    // Excel: HeaderMargin/FooterMargin 是页眉/页脚到页边的距离（< MarginTop/Bottom）。
+                    // 因为 QuestPDF 的 page.Header() 紧贴 page margin 内边缘，这里把 page margin 设为
+                    // 页眉/页脚边距，再通过 Content 上下 padding 补足到 MarginTop/MarginBottom，
+                    // 使页眉到页顶、正文到页眉的距离都贴近 Excel 的设置。
+                    var headerMargin = (float)(props?.HeaderMarginPt ?? mt);
+                    var footerMargin = (float)(props?.FooterMarginPt ?? mb);
+                    if (headerMargin <= 0 || headerMargin > mt) headerMargin = mt;
+                    if (footerMargin <= 0 || footerMargin > mb) footerMargin = mb;
+                    page.MarginTop(headerMargin, Unit.Point);
+                    page.MarginBottom(footerMargin, Unit.Point);
                     page.MarginLeft(ml, Unit.Point);
                     page.MarginRight(mr, Unit.Point);
+                    float contentPadTop = Math.Max(0, mt - headerMargin);
+                    float contentPadBottom = Math.Max(0, mb - footerMargin);
 
                     page.DefaultTextStyle(t =>
                     {
@@ -118,7 +129,7 @@ internal static class PdfRenderer
                                 if (!string.IsNullOrWhiteSpace(fam) && !families.Contains(fam))
                                     families.Add(fam);
                         }
-                        return t.FontFamily(families.ToArray()).FontSize(11);
+                        return t.FontFamily(families.ToArray()).FontSize((float)(ir.DefaultFontSizePt ?? 11));
                     });
 
                     if (!string.IsNullOrWhiteSpace(options.WatermarkText))
@@ -181,7 +192,18 @@ internal static class PdfRenderer
                         }
                     }
 
-                    page.Content().Column(col =>
+                    var contentRoot = page.Content();
+                    if (contentPadTop > 0) contentRoot = contentRoot.PaddingTop(contentPadTop);
+                    if (contentPadBottom > 0) contentRoot = contentRoot.PaddingBottom(contentPadBottom);
+                    // Excel 打印垂直居中：把整体内容 AlignMiddle。
+                    // 注意：仅当只有一节、且没有强制分页（多页时居中没有意义）时启用，
+                    // 多页内容居中只会让首页底部空白、其他页正常，反而显得不一致。
+                    bool centerV = props?.CenterVertically == true && sec.Blocks.Count > 0;
+                    if (centerV)
+                    {
+                        contentRoot = contentRoot.AlignMiddle();
+                    }
+                    contentRoot.Column(col =>
                     {
                         col.Spacing(6);
                         int colCount = Math.Max(1, props?.ColumnCount ?? 1);
@@ -443,7 +465,7 @@ internal static class PdfRenderer
         {
             page.Size((float)ir.PageWidthPt, (float)ir.PageHeightPt, Unit.Point);
             page.Margin((float)ir.MarginPt, Unit.Point);
-            page.DefaultTextStyle(t => t.FontFamily(options.DefaultFontFamily).FontSize(10));
+            page.DefaultTextStyle(t => t.FontFamily(options.DefaultFontFamily).FontSize((float)(ir.DefaultFontSizePt ?? 10)));
             page.Content().Column(col =>
             {
                 col.Spacing(4);
@@ -475,7 +497,7 @@ internal static class PdfRenderer
         {
             page.Size((float)ir.PageWidthPt, (float)ir.PageHeightPt, Unit.Point);
             page.Margin((float)ir.MarginPt, Unit.Point);
-            page.DefaultTextStyle(t => t.FontFamily(options.DefaultFontFamily).FontSize(10));
+            page.DefaultTextStyle(t => t.FontFamily(options.DefaultFontFamily).FontSize((float)(ir.DefaultFontSizePt ?? 10)));
             page.Content().Column(col =>
             {
                 col.Spacing(4);
@@ -521,6 +543,12 @@ internal static class PdfRenderer
             // 第九轮：按 Excel Scale / FitToPagesWide 缩放表格列宽以贴近打印效果。
             var table = TableLayoutHelper.ApplyExcelScaling(block.Table, sectionProps, contentWidthPt);
 
+            // Excel 打印居中：水平居中将整张表放在内容宽度居中位置。
+            // 仅当所有列宽已知且总宽小于内容宽度时才能视觉上居中（否则表会撑满）。
+            bool centerH = sectionProps?.CenterHorizontally == true
+                           && table.ColumnWidthsPt.All(w => w.HasValue)
+                           && table.ColumnWidthsPt.Sum(w => w!.Value) < contentWidthPt;
+
             var hBreaks = table.HorizontalPageBreakRowIndices
                 .Where(i => i > 0 && i < table.Rows.Count)
                 .Distinct().OrderBy(i => i).ToList();
@@ -529,7 +557,10 @@ internal static class PdfRenderer
 
             if (hBreaks.Count == 0 && vBreaks.Count == 0)
             {
-                col.Item().Element(c => RenderTable(c, table, options));
+                if (centerH)
+                    col.Item().AlignCenter().Element(c => RenderTable(c, table, options, contentWidthPt));
+                else
+                    col.Item().Element(c => RenderTable(c, table, options, contentWidthPt));
             }
             else
             {
@@ -549,7 +580,10 @@ internal static class PdfRenderer
                             rowSlices[rs].start, rowSlices[rs].end,
                             colSlices[cs].start, colSlices[cs].end,
                             titleRows, titleCols);
-                        col.Item().Element(c => RenderTable(c, sliced, options));
+                        if (centerH)
+                            col.Item().AlignCenter().Element(c => RenderTable(c, sliced, options, contentWidthPt));
+                        else
+                            col.Item().Element(c => RenderTable(c, sliced, options, contentWidthPt));
                     }
                 }
             }
@@ -819,7 +853,9 @@ internal static class PdfRenderer
                 if (r.Bold) sd = sd.Bold();
                 if (r.Italic) sd = sd.Italic();
                 if (r.Underline) sd = sd.Underline();
-                if (r.IsDeletion) sd = sd.Strikethrough();
+                if (r.Strikethrough || r.IsDeletion) sd = sd.Strikethrough();
+                if (r.Superscript) sd = sd.Superscript();
+                else if (r.Subscript) sd = sd.Subscript();
                 if (r.IsInsertion)
                 {
                     sd = sd.Underline();
@@ -886,10 +922,31 @@ internal static class PdfRenderer
         }
     }
 
-    private static void RenderTable(IContainer container, IrTable table, ConversionOptions options)
+    /// <summary>
+    /// 单元格固定列宽下限（pt）。低于该值时 QuestPDF 因扣除 padding 后空间不足以渲染单字符而抛
+    /// DocumentLayoutException(Wrap)，从而导致整张表格无法布局。设置一个安全下限可避免极端窄列触发的崩溃。
+    /// 取 8pt 以尽量保留 Excel 原始列宽比例；过高会把原本很窄的列抬高，进而挤压其他列。
+    /// </summary>
+    internal const float MinTableColumnWidthPt = 16f;
+
+    private static void RenderTable(IContainer container, IrTable table, ConversionOptions options, double contentWidthPt = 0)
     {
         if (table.Rows.Count == 0) return;
         int colCount = Math.Max(1, table.Rows.Max(r => r.Cells.Count));
+
+        // 仅当抬高 MinTableColumnWidthPt 下限会显著放大总宽（>5%）时才回退到 RelativeColumn，
+        // 否则继续使用 Excel 原始列宽（ConstantColumn）保持与原文档一致的视觉排版。
+        // 另外：若 ConstantColumn 模式下被 MinTableColumnWidthPt 抬高后的总宽超出页面可用宽度，
+        // 也必须回退到 RelativeColumn，否则 QuestPDF 会因横向放不下而抛 DocumentLayoutException(Wrap)。
+        bool useRelativeFallback = false;
+        if (table.ColumnWidthsPt.Count > 0 && table.ColumnWidthsPt.Any(w => w.HasValue))
+        {
+            var known = table.ColumnWidthsPt.Where(w => w.HasValue).Select(w => w!.Value).ToList();
+            double rawSum = known.Sum();
+            double clampedSum = known.Sum(w => Math.Max((double)MinTableColumnWidthPt, w));
+            if (rawSum > 0 && clampedSum > rawSum * 1.05) useRelativeFallback = true;
+            if (contentWidthPt > 0 && clampedSum > contentWidthPt) useRelativeFallback = true;
+        }
 
         container.Table(t =>
         {
@@ -897,9 +954,18 @@ internal static class PdfRenderer
             {
                 for (int i = 0; i < colCount; i++)
                 {
-                    if (i < table.ColumnWidthsPt.Count && table.ColumnWidthsPt[i].HasValue)
+                    if (!useRelativeFallback && i < table.ColumnWidthsPt.Count && table.ColumnWidthsPt[i].HasValue)
                     {
-                        c.ConstantColumn((float)table.ColumnWidthsPt[i]!.Value);
+                        var widthPt = (float)table.ColumnWidthsPt[i]!.Value;
+                        if (widthPt < MinTableColumnWidthPt) widthPt = MinTableColumnWidthPt;
+                        c.ConstantColumn(widthPt);
+                    }
+                    else if (useRelativeFallback && i < table.ColumnWidthsPt.Count && table.ColumnWidthsPt[i].HasValue)
+                    {
+                        // 用原始宽度作为相对权重，保持列宽比例；但每列权重不得低于 MinTableColumnWidthPt，
+                        // 否则按比例分配后，极窄列在大表中仍会被压到 4~8pt，导致 QuestPDF 无法渲染单字符（Wrap）。
+                        var weight = Math.Max(MinTableColumnWidthPt, (float)table.ColumnWidthsPt[i]!.Value);
+                        c.RelativeColumn(weight);
                     }
                     else
                     {
@@ -915,19 +981,25 @@ internal static class PdfRenderer
                 t.Header(h =>
                 {
                     for (int ri = 0; ri < headerCount; ri++)
-                        RenderTableRow(h.Cell, table.Rows[ri], options, table.PrintGridlines);
+                        RenderTableRow(h.Cell, table.Rows[ri], options, table.PrintGridlines, table, ri);
                 });
             }
 
             for (int ri = headerCount; ri < table.Rows.Count; ri++)
-                RenderTableRow(t.Cell, table.Rows[ri], options, table.PrintGridlines);
+                RenderTableRow(t.Cell, table.Rows[ri], options, table.PrintGridlines, table, ri);
         });
     }
 
-    private static void RenderTableRow(System.Func<QuestPDF.Elements.Table.ITableCellContainer> cellFactory, IrRow row, ConversionOptions options, bool gridlines = false)
+    private static void RenderTableRow(System.Func<QuestPDF.Elements.Table.ITableCellContainer> cellFactory, IrRow row, ConversionOptions options, bool gridlines, IrTable table, int rowIndex)
     {
+        // 不为普通（非合并）单元格强制 MinHeight：Excel 中许多行被设为偏大的显示高度（供表格留白），
+        // 在 PDF 中以 11pt 字体渲染本只需 ~14pt，被 MinHeight 抬到 20pt+ 会使整张表明显变高。
+        // 仅在 RowSpan>1 的锚定单元格上设置 MinHeight，以保证合并区能跨越多行。
+
         foreach (var cell in row.Cells)
         {
+            // 被合并区域覆盖的从属位置不渲染：QuestPDF Table 的 RowSpan/ColSpan 会自动跳过被锚定单元格
+            // 覆盖的网格槽，如果再为 suppressed 位置 emit 占位 cell，会导致 auto-flow 错位。
             if (cell.Suppressed) continue;
 
             var c = cellFactory();
@@ -935,6 +1007,30 @@ internal static class PdfRenderer
             if (cell.ColSpan > 1) c = c.ColumnSpan((uint)cell.ColSpan);
 
             IContainer box = c;
+
+            // 合并行（RowSpan>1）的最小高度 = 跨越的 Excel 行高之和，保证合并块的物理高度与原表一致，
+            // 避免“合并 3 行变成 1 行”：QuestPDF 默认按内容计算 RowSpan 高度，不会从被覆盖的源行继承高度。
+            // 不过 Excel 行高包含较多上下留白，QuestPDF 的字体行距 (~1.2) 已自带行间留白，
+            // 直接相加会让合并块视觉上明显偏高。这里乘以一个收缩因子（按工作簿默认字号微调）以尽量贴近原视觉高度。
+            if (cell.RowSpan > 1)
+            {
+                double spanned = 0;
+                int end = Math.Min(table.Rows.Count, rowIndex + cell.RowSpan);
+                for (int k = rowIndex; k < end; k++)
+                {
+                    var rh = table.Rows[k].HeightPt;
+                    if (rh is > 0) spanned += rh.Value;
+                }
+                if (spanned > 0)
+                {
+                    // 经验系数：Excel 行高 (~15pt @ 11pt 字体) ≈ 字号 * 1.36；
+                    // QuestPDF 自身行距 ≈ 字号 * 1.2，再加上 cell 的 padding，约多出 12~18% 留白。
+                    // 收缩到 0.85 以补偿，既保留合并块跨多行的物理感，又避免整体明显变高。
+                    const double mergedRowShrink = 0.85;
+                    box = box.MinHeight((float)(spanned * mergedRowShrink));
+                }
+            }
+
             var bs = cell.Style.Borders;
             bool hasAny = (bs != null && (bs.Top?.Thickness > 0 || bs.Right?.Thickness > 0 || bs.Bottom?.Thickness > 0 || bs.Left?.Thickness > 0))
                           || cell.Style.BorderThickness > 0;
@@ -957,7 +1053,8 @@ internal static class PdfRenderer
             }
             if (gridlines && !hasAny)
             {
-                box = box.Border(0.25f).BorderColor(Colors.Grey.Lighten1);
+                // Excel 打印网格线：实际打印为浅灰但比 QuestPDF 的 Lighten1 更深，约 #BFBFBF。
+                box = box.Border(0.25f).BorderColor("#BFBFBF");
             }
 
             if (!string.IsNullOrEmpty(cell.Style.BackgroundHex))
@@ -978,7 +1075,34 @@ internal static class PdfRenderer
                 _ => box.AlignLeft(),
             };
 
-            var content = box.Padding(3);
+            // Excel 单元格默认内边距：水平 1.5pt、垂直 0.5pt。
+            // 垂直 padding 过大会叠加到 QuestPDF 的行距上，导致整张表明显伸高，压到 0.5pt 后
+            // 与 Excel 打印状态下的行高最接近。
+            var content = box.PaddingHorizontal(1.5f).PaddingVertical(0.5f);
+            // Excel 左缩进：每一级约 7pt（近似 3 个字符宽，与 Excel UI 一致）。
+            if (cell.Style.IndentLevel > 0)
+            {
+                content = content.PaddingLeft(cell.Style.IndentLevel * 7f);
+            }
+            // Excel 文本旋转：正角度=逆时针（向上读），负角度=顺时针（向下读），255=竖排堆叠。
+            // QuestPDF 仅支持 90° 步进，因此把任意角度按方向折算到 ±90°。
+            if (cell.Style.TextRotation != 0)
+            {
+                int rot = cell.Style.TextRotation;
+                if (rot == 255)
+                {
+                    // 竖排堆叠近似为向上读（左旋 90°）。
+                    content = content.RotateLeft();
+                }
+                else if (rot > 0)
+                {
+                    content = content.RotateLeft();
+                }
+                else
+                {
+                    content = content.RotateRight();
+                }
+            }
             if (!string.IsNullOrEmpty(cell.Hyperlink) && options.PreserveHyperlinks)
             {
                 content = content.Hyperlink(cell.Hyperlink!);
@@ -986,11 +1110,60 @@ internal static class PdfRenderer
 
             if (cell.Paragraphs.Count > 0)
             {
-                content.Column(col =>
+                // WrapText=false：与单段路径一致，强制单行裁剪——把所有段落 Run 拼成一行渲染，
+                // 否则多段会自然换行，造成“显示不下被换行”的视觉差异。
+                // 合并单元格同样遵守 WrapText 语义。
+                if (!cell.Style.WrapText)
                 {
-                    foreach (var p in cell.Paragraphs)
-                        col.Item().Element(e => RenderParagraph(e, p, options));
-                });
+                    content.Text(span =>
+                    {
+                        span.DefaultTextStyle(s => s.LineHeight(1.0f));
+                        span.ClampLines(1);
+                        if (!string.IsNullOrEmpty(cell.Style.IconPrefix))
+                            span.Span(cell.Style.IconPrefix + " ");
+                        bool firstPara = true;
+                        foreach (var p in cell.Paragraphs)
+                        {
+                            if (!firstPara) span.Span(" ");
+                            firstPara = false;
+                            foreach (var r in p.Runs)
+                            {
+                                if (string.IsNullOrEmpty(r.Text)) continue;
+                                var sd = span.Span(r.Text!).FontFamily(BuildFontFamilyChain(r.FontFamily ?? cell.Style.FontFamily, options));
+                                if (r.FontSize.HasValue) sd = sd.FontSize((float)r.FontSize.Value);
+                                else if (cell.Style.FontSize.HasValue) sd = sd.FontSize((float)cell.Style.FontSize.Value);
+                                if (r.Bold || cell.Style.Bold) sd = sd.Bold();
+                                if (r.Italic || cell.Style.Italic) sd = sd.Italic();
+                                if (r.Underline || cell.Style.Underline) sd = sd.Underline();
+                                if (r.Strikethrough || cell.Style.Strikethrough) sd = sd.Strikethrough();
+                                if (r.Superscript) sd = sd.Superscript();
+                                else if (r.Subscript) sd = sd.Subscript();
+                                if (!string.IsNullOrEmpty(r.ColorHex)) sd = sd.FontColor(r.ColorHex!);
+                                else if (!string.IsNullOrEmpty(cell.Style.FontColorHex)) sd = sd.FontColor(cell.Style.FontColorHex!);
+                            }
+                        }
+                        if (!string.IsNullOrEmpty(cell.Comment))
+                            span.Span(" *").FontColor(Colors.Red.Medium).Bold();
+                    });
+                }
+                else
+                {
+                    content.Column(col =>
+                    {
+                        // 条件格式 IconSet 前缀：与单段文本分支保持一致，作为首段前缀显示。
+                        if (!string.IsNullOrEmpty(cell.Style.IconPrefix))
+                        {
+                            col.Item().Text(cell.Style.IconPrefix!);
+                        }
+                        foreach (var p in cell.Paragraphs)
+                            col.Item().Element(e => RenderParagraph(e, p, options));
+                        // 批注存在标记：在多段路径上同样附加一个红色 *，使其在所有路径上视觉一致。
+                        if (!string.IsNullOrEmpty(cell.Comment))
+                        {
+                            col.Item().Text("*").FontColor(Colors.Red.Medium).Bold();
+                        }
+                    });
+                }
             }
             else
             {
@@ -999,11 +1172,23 @@ internal static class PdfRenderer
                     displayText = cell.Style.IconPrefix + " " + displayText;
                 content.Text(span =>
                 {
+                    // Excel 单元格默认使用单倍行距；QuestPDF 默认约 1.2，会使表格明显变高。
+                    span.DefaultTextStyle(s => s.LineHeight(1.0f));
+                    // Excel 语义：WrapText=false 时单元格内容超出可用宽度不换行也不撑高，
+                    // 超出部分直接裁剪不显示（QuestPDF 通过 ClampLines(1) 实现）。
+                    // 合并单元格（ColSpan/RowSpan > 1）本身占用多列宽度，仍应遵守同一语义，
+                    // 否则“检验意见”这类横向合并的标签会以自然换行出现于多行。
+                    if (!cell.Style.WrapText)
+                    {
+                        span.ClampLines(1);
+                    }
                     var s = span.Span(displayText)
                         .FontFamily(BuildFontFamilyChain(cell.Style.FontFamily, options));
                     if (cell.Style.FontSize.HasValue) s = s.FontSize((float)cell.Style.FontSize.Value);
                     if (cell.Style.Bold) s = s.Bold();
                     if (cell.Style.Italic) s = s.Italic();
+                    if (cell.Style.Underline) s = s.Underline();
+                    if (cell.Style.Strikethrough) s = s.Strikethrough();
                     if (!string.IsNullOrEmpty(cell.Style.FontColorHex)) s = s.FontColor(cell.Style.FontColorHex!);
                     if (!string.IsNullOrEmpty(cell.Hyperlink) && options.PreserveHyperlinks && string.IsNullOrEmpty(cell.Style.FontColorHex))
                         s.FontColor(Colors.Blue.Medium).Underline();

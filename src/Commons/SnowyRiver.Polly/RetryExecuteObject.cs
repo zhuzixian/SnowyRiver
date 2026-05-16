@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 namespace SnowyRiver.Polly;
 public class RetryExecuteObject(AsyncRetryPolicy retryPolicy)
 {
-    private static readonly AsyncLock AsyncLocker = new();
+    private readonly AsyncLock _asyncLocker = new();
 
     protected async Task ExecuteAsync(Func<Task> action, CancellationToken cancellationToken = default)
     {
-        await Executor.ExecuteAsync(retryPolicy, AsyncLocker, action, cancellationToken);
+        await Executor.ExecuteAsync(retryPolicy, _asyncLocker, action, cancellationToken);
     }
 
     protected async Task<TResult> ExecuteAsync<TResult>(Func<Task<TResult>> task,
         CancellationToken cancellationToken = default)
     {
-        return await Executor.ExecuteAsync(retryPolicy, AsyncLocker, task, cancellationToken);
+        return await Executor.ExecuteAsync(retryPolicy, _asyncLocker, task, cancellationToken);
     }
 }

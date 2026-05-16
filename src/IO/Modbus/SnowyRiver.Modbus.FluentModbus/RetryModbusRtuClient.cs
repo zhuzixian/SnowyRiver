@@ -30,8 +30,11 @@ public class RetryModbusRtuClient(
 
     public void Connect(ModbusRtuSerialPort port)
     {
-        _serialPort = port;
-        Initialize(port, options.Endian);
+        using (AsyncLocker.Lock())
+        {
+            _serialPort = port;
+            Initialize(port, options.Endian);
+        }
     }
 
     public void Initialize(IModbusRtuSerialPort serialPort, ModbusEndianness endianness)

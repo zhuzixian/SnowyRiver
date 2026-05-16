@@ -21,8 +21,11 @@ public class RetryModbusRtuOverTcpClient(
 
     protected override void Connect(IPEndPoint remoteEndpoint, ModbusEndianness endianness)
     {
-        try { modbusOverTcpClient.Disconnect(); } catch { /* ignore*/ }
-        var tcpClient = CreateTcpClient(modbusOverTcpClient.ConnectTimeout, remoteEndpoint);
-        modbusOverTcpClient.Initialize(tcpClient, endianness);
+        using (AsyncLocker.Lock())
+        {
+            try { modbusOverTcpClient.Disconnect(); } catch { /* ignore*/ }
+            var tcpClient = CreateTcpClient(modbusOverTcpClient.ConnectTimeout, remoteEndpoint);
+            modbusOverTcpClient.Initialize(tcpClient, endianness);
+        }
     }
 }

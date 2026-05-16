@@ -31,16 +31,27 @@ public abstract class RetryModbusTcpClientBase(
 
     protected TcpClient CreateTcpClient(int connectTimeout, IPEndPoint remoteEndpoint)
     {
-        _tcpClient?.Dispose();
-        _tcpClient = new TcpClient();
-        if (!_tcpClient.ConnectAsync(remoteEndpoint.Address, remoteEndpoint.Port)
-                .Wait(connectTimeout))
-        {
-            throw new TimeoutException($"Failed to connect to the Modbus server at {
-                remoteEndpoint} within the specified timeout of {connectTimeout} milliseconds.");
-        }
+        var oldClient = _tcpClient;
+        var newClient = new TcpClient();
 
-        return _tcpClient;
+        try
+        {
+            if (!newClient.ConnectAsync(remoteEndpoint.Address, remoteEndpoint.Port)
+                    .Wait(connectTimeout))
+            {
+                throw new TimeoutException($"Failed to connect to the Modbus server at {
+                    remoteEndpoint} within the specified timeout of {connectTimeout} milliseconds.");
+            }
+
+            _tcpClient = newClient;
+            oldClient?.Dispose();
+            return _tcpClient;
+        }
+        catch
+        {
+            newClient.Dispose();
+            throw;
+        }
     }
 
     public override void Close()

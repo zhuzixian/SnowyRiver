@@ -14,7 +14,7 @@ public abstract class RetryModbusClient(
 
     public TimeSpan MinAccessIntervalTime { get; set; } = TimeSpan.MinValue;
 
-    protected AsyncLock AsyncLocker = new();
+    protected readonly AsyncLock AsyncLocker = new();
 
     public Task ExecuteAsync(Func<CancellationToken, Task> action, 
         bool isUpdateLastAccessTime = false,

@@ -64,6 +64,7 @@
   </Folder>
   <Folder Name="/Demo/WPF/Tests/" />
   <Folder Name="/Documents/">
+    <Project Path="Documents/SnowyRiver.Documents.ClosedXML.Extensions/SnowyRiver.Documents.ClosedXML.Extensions.csproj" Id="b7c703df-931e-4809-bf34-e34345d737ca" />
     <Project Path="Documents/SnowyRiver.Documents.Converter/SnowyRiver.Documents.Converter.csproj" />
     <Project Path="Documents/SnowyRiver.Documents.Xps/SnowyRiver.Documents.Xps.csproj" />
   </Folder>

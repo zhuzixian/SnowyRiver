@@ -11,6 +11,10 @@ public class SerialPort : System.IO.Ports.SerialPort, ISerialPort
     private readonly int _readTimeoutMs;
     private readonly int _writeTimeoutMs;
 
+    // 串口属于半双工的访问语义,且共享同一底层句柄,读写共用同一把锁,任意时刻只允许一个 IO 操作
+    private readonly SemaphoreSlim _ioLock = new(1, 1);
+    private bool _disposed;
+
     public SerialPort()
     { }
 
@@ -58,24 +62,33 @@ public class SerialPort : System.IO.Ports.SerialPort, ISerialPort
         }
         try
         {
-            await WaitToReadAsync(1, cts.Token);
-            if (BytesToRead < count)
+            // 获取 IO 锁,串口不允许读写并发
+            await _ioLock.WaitAsync(cts.Token).ConfigureAwait(false);
+            try
             {
-                // 贪心法，等待后续数据到达一并读取
-                try
+                await WaitToReadAsync(1, cts.Token).ConfigureAwait(false);
+                if (BytesToRead < count)
                 {
-                    await Task.Delay(TimeSpan.FromMilliseconds(10), cts.Token).ConfigureAwait(false);
+                    // 贪心法，等待后续数据到达一并读取
+                    try
+                    {
+                        await Task.Delay(TimeSpan.FromMilliseconds(10), cts.Token).ConfigureAwait(false);
+                    }
+                    catch (OperationCanceledException) when (hasTimeout && !cancellationToken.IsCancellationRequested)
+                    {
+                        // 等数据时正好超时:按当前缓冲读出
+                    }
                 }
-                catch (OperationCanceledException) when (hasTimeout && !cancellationToken.IsCancellationRequested)
-                {
-                    // 等数据时正好超时:按当前缓冲读出
-                }
+
+                var readCount = Math.Min(BytesToRead, count);
+                if (readCount <= 0) throw new TimeoutException(ReadTimeoutMessage);
+
+                return await BaseStream.ReadAsync(buffer, offset, readCount, cancellationToken).ConfigureAwait(false);
             }
-
-            var readCount = Math.Min(BytesToRead, count);
-            if (readCount <= 0) throw new TimeoutException(ReadTimeoutMessage);
-
-            return await BaseStream.ReadAsync(buffer, offset, readCount, cancellationToken).ConfigureAwait(false);
+            finally
+            {
+                _ioLock.Release();
+            }
         }
         catch (OperationCanceledException) when (hasTimeout && !cancellationToken.IsCancellationRequested)
         {
@@ -143,7 +156,16 @@ public class SerialPort : System.IO.Ports.SerialPort, ISerialPort
 
         try
         {
-            await BaseStream.WriteAsync(buffer, offset, count, cts.Token).ConfigureAwait(false);
+            // 获取 IO 锁,串口不允许读写并发
+            await _ioLock.WaitAsync(cts.Token).ConfigureAwait(false);
+            try
+            {
+                await BaseStream.WriteAsync(buffer, offset, count, cts.Token).ConfigureAwait(false);
+            }
+            finally
+            {
+                _ioLock.Release();
+            }
         }
         catch (OperationCanceledException) when (hasTimeout && !cancellationToken.IsCancellationRequested)
         {
@@ -181,5 +203,18 @@ public class SerialPort : System.IO.Ports.SerialPort, ISerialPort
             await Task.Delay(1, cancellationToken).ConfigureAwait(false);
         }
         if (!IsOpen) throw new InvalidOperationException("Serial port is not open.");
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        if (!_disposed)
+        {
+            if (disposing)
+            {
+                _ioLock.Dispose();
+            }
+            _disposed = true;
+        }
+        base.Dispose(disposing);
     }
 }

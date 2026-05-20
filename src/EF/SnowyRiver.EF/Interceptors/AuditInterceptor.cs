@@ -82,7 +82,7 @@ public class AuditInterceptor(ICurrentUserServices currentUserServices): SaveCha
             if (entry.State == EntityState.Modified)
             {
                 entry.Entity.LastModifierUserId = currentUserServices.UserId;
-                entry.Entity.LastModifierTeamId = currentUserServices.UserId;
+                entry.Entity.LastModifierTeamId = currentUserServices.TeamId;
             }
         }
     }

@@ -2,8 +2,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:SnowyRiver.WPF.MaterialDesignInPrism.Controls"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <materialDesign:NotConverter x:Key="NotConverter" />
 
     <Style TargetType="{x:Type controls:TextFieldEditor}">
@@ -118,7 +117,7 @@
                             Margin="4,0"
                             VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                             DisplayMemberPath="{TemplateBinding DisplayMemberPath}"
-                            IsEnabled="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource InverseBooleanConverter}}"
+                            IsEnabled="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NotConverter}}"
                             ItemsSource="{TemplateBinding ItemsSource}"
                             SelectedItem="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             SelectedValue="{Binding SelectedValue, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"

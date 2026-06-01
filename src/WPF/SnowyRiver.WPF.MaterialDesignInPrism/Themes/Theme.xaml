@@ -4,7 +4,7 @@
     xmlns:markup="http://schemas.microsoft.com/winfx/2006/xaml">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/SnowyRiver.WPF.MaterialDesignInPrism;component/Themes/TextBlock.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/SnowyRiver.WPF.MaterialDesignInPrism;component/Themes/Combox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/SnowyRiver.WPF.MaterialDesignInPrism;component/Themes/ComboBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/SnowyRiver.WPF.MaterialDesignInPrism;component/Themes/DataGrid.xaml" />
         <ResourceDictionary Source="pack://application:,,,/SnowyRiver.WPF.MaterialDesignInPrism;component/Themes/FieldEditor.xaml" />
         <ResourceDictionary Source="pack://application:,,,/SnowyRiver.WPF.MaterialDesignInPrism;component/Themes/Dilalog.xaml" />

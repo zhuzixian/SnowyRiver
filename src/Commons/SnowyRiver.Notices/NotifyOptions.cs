@@ -7,4 +7,5 @@ public static class NotifyOptions
     public const string TryAgain = "重试";
     public const string Resume = "继续";
     public const string Ignore = "忽略";
+    public const string Skip = "跳过";
 }

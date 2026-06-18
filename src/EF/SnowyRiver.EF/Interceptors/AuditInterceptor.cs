@@ -41,7 +41,7 @@ public class AuditInterceptor(ICurrentUserServices currentUserServices): SaveCha
         {
             if (entry.State == EntityState.Added)
             {
-                entry.Entity.CreationTime = DateTime.UtcNow;
+                entry.Entity.CreationTime = DateTime.Now;
             }
         }
 
@@ -50,7 +50,7 @@ public class AuditInterceptor(ICurrentUserServices currentUserServices): SaveCha
         {
             if (entry.State == EntityState.Modified)
             {
-                entry.Entity.LastModificationTime = DateTime.UtcNow;
+                entry.Entity.LastModificationTime = DateTime.Now;
             }
         }
 

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using FluentValidation;
@@ -112,6 +112,7 @@ public abstract class ValidatableNotifyPropertyChangedObject<T> : TrackedNotifyP
     protected virtual async Task ValidatePropertyAsync([CallerMemberName]string? propertyName = null)
     {
         if(Validator == null) return;
+        if (propertyName == null) return;
 
         var validationResult = await Validator.ValidateAsync(this as T,
             options => options.IncludeProperties(propertyName));
@@ -126,6 +127,7 @@ public abstract class ValidatableNotifyPropertyChangedObject<T> : TrackedNotifyP
     protected virtual void ValidateProperty([CallerMemberName]string? propertyName = null)
     {
         if (Validator == null) return;
+        if (propertyName == null) return;
 
         var validationResult = Validator.Validate(this as T,
             options => options.IncludeProperties(propertyName));

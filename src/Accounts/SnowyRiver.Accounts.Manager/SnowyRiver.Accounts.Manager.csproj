@@ -23,6 +23,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" />
     <PackageReference Include="NLog.Extensions.Logging" />
     <PackageReference Include="Prism.DryIoc" />
+    <PackageReference Include="SQLitePCLRaw.lib.e_sqlite3" />
     <PackageReference Include="WPFLocalizeExtension" />
   </ItemGroup>
   <ItemGroup>

@@ -80,7 +80,7 @@ public class AuthenticationService<TTeam, TRole, TUser, TPermission,
         get;
         protected set
         {
-            if (Set(ref field, value))
+            if (SetProperty(ref field, value))
             {
                 RaisePropertyChanged(nameof(IsAuthenticated));
             }
@@ -90,7 +90,7 @@ public class AuthenticationService<TTeam, TRole, TUser, TPermission,
     public TTeam? Team
     {
         get;
-        protected set => Set(ref field, value);
+        protected set => SetProperty(ref field, value);
     }
 
     public Guid? TeamId => Team?.Id;

@@ -8,54 +8,54 @@ public class SerialPortOptions : JsonConfiguration
     public bool IsMock
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 
     public string PortName
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     } = string.Empty;
 
     public int BaudRate
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     } = 115200;
 
     public Parity Parity
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     } = Parity.None;
 
     public int DataBits
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     } = 8;
 
     public StopBits StopBits
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     } = StopBits.One;
 
     public int ReadTimeout
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     } = 1000;
 
     public int WriteTimeout
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     } = 1000;
 
     public string NewLine
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     } = "\r\n";
 }

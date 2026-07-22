@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 
@@ -36,11 +36,6 @@ public class NotifyPropertyChangedObject : INotifyPropertyChanged
 
         var property = GetType().GetProperty(propertyName);
         return property?.CanRead == true ? property.GetValue(this) : null;
-    }
-
-    protected virtual bool Set<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
-    {
-        return SetProperty(ref field, value, propertyName);
     }
 
     /// <summary>

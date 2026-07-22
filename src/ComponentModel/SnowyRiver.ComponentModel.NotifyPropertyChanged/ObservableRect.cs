@@ -1,4 +1,4 @@
-﻿namespace SnowyRiver.ComponentModel.NotifyPropertyChanged;
+namespace SnowyRiver.ComponentModel.NotifyPropertyChanged;
 
 public class ObservableRect : ObservableRect<int>
 {
@@ -30,12 +30,12 @@ public class ObservableRect<T> : ObservableSize<T>
     public T X
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 
     public T Y
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 }

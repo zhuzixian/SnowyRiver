@@ -12,48 +12,48 @@ public class WorkFlow<TKey, TState, TStepKey, TStep, TStepState>
     public TKey Id
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 
     [TrackHistory]
     public string Name
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     } = string.Empty;
 
     [TrackHistory]
     public ObservableCollection<TStep> Steps
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     } = [];
 
     [TrackHistory]
     public bool Enable
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     } = true;
 
     [JsonIgnore]
     public DateTime? StartTime
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 
     [JsonIgnore]
     public DateTime? EndTime
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 
     [JsonIgnore]
     public TState? State
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 }

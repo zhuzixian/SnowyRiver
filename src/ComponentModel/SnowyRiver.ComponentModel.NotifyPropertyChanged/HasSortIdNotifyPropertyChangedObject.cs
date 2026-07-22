@@ -6,6 +6,6 @@ public class HasSortIdNotifyPropertyChangedObject : NotifyPropertyChangedObject,
     public int SortId
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 }

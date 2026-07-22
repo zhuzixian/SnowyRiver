@@ -9,7 +9,7 @@ public class EntityModel : NotifyPropertyChangedObject,IHasSortId
     public DateTime CreationTime
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     } = DateTime.Now;
 
     public int SortId

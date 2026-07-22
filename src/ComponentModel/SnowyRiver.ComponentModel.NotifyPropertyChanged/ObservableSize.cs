@@ -26,12 +26,12 @@ public class ObservableSize<T> : NotifyPropertyChangedObject
     public T Width
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 
     public T Height
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 }

@@ -19,13 +19,13 @@ public class Role<TUser, TRole, TTeam, TPermission> : EntityModel
     public ObservableCollection<TUser> Users
     {
         get => _users; 
-        set => Set(ref _users, value);
+        set => SetProperty(ref _users, value);
     }
 
     private PermissionsScope _scope;
     public PermissionsScope Scope
     {
         get => _scope; 
-        set => Set(ref _scope, value);
+        set => SetProperty(ref _scope, value);
     }
 }

@@ -14,6 +14,6 @@ public class ObservableVector3<T> : ObservableVector2<T>
     public T? Z
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 }

@@ -16,6 +16,6 @@ public class ValueProvider<T> : NotifyPropertyChangedObject, IValueProvider<T>
     public T? Value
     {
         get; 
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 }

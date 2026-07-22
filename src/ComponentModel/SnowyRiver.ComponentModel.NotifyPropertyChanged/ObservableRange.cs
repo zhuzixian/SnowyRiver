@@ -15,12 +15,12 @@ public class ObservableRange<T>:NotifyPropertyChangedObject
     public T? Max
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 
     public T? Min
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 }

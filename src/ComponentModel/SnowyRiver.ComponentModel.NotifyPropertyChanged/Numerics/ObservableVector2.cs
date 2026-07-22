@@ -15,12 +15,12 @@ public class ObservableVector2<T> : NotifyPropertyChangedObject
     public T? X
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 
     public T? Y
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 }

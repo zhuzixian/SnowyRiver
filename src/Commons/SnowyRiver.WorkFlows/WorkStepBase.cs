@@ -8,49 +8,49 @@ public class WorkStep<TKey, TSate>: ValidatableNotifyPropertyChangedObject<WorkS
     public TKey Id
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 
     [TrackHistory]
     public int SortId
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 
     [TrackHistory]
     public bool Enable
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 
     [TrackHistory]
     public string Name
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     } = string.Empty;
 
     [JsonIgnore]
     public TSate? State
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 
     [JsonIgnore]
     public DateTime? StartTime
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 
     [JsonIgnore]
     public DateTime? EndTime
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 
     /// <summary>
@@ -60,7 +60,7 @@ public class WorkStep<TKey, TSate>: ValidatableNotifyPropertyChangedObject<WorkS
     public int CycleCount
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     } = 1;
 
     /// <summary>
@@ -70,6 +70,6 @@ public class WorkStep<TKey, TSate>: ValidatableNotifyPropertyChangedObject<WorkS
     public int CycleIndex
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 }

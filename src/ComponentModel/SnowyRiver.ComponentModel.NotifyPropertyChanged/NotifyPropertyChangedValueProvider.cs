@@ -1,4 +1,4 @@
-﻿using SnowyRiver.Commons.Abstractions;
+using SnowyRiver.Commons.Abstractions;
 
 namespace SnowyRiver.ComponentModel.NotifyPropertyChanged;
 
@@ -7,6 +7,6 @@ public class NotifyPropertyChangedValueProvider<T> : NotifyPropertyChangedObject
     public T? Value
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 }

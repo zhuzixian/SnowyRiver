@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 
 namespace SnowyRiver.ComponentModel.NotifyPropertyChanged;
 public class PagedObservableCollection<T> : NotifyPropertyChangedObject
@@ -21,49 +21,49 @@ public class PagedObservableCollection<T> : NotifyPropertyChangedObject
     public int? PageIndex
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 
     public int? PageSize
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 
     public int Count
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 
     public int TotalCount
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 
     public int TotalPages
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 
 
     public bool HasPreviousPage
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 
     public bool HasNextPage
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 
     public ObservableCollection<T> Items
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     } = [];
 }

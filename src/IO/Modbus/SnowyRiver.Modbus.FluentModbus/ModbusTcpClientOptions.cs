@@ -7,25 +7,25 @@ public class ModbusTcpClientOptions:JsonConfiguration, ITimeoutProvider
     public bool IsMock
     {
         get; 
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 
 
     public string? RemoteEndpoint
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 
     public ModbusEndianness Endian
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     } = ModbusEndianness.LittleEndian;
 
     public TimeSpan Timeout
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     } = System.Threading.Timeout.InfiniteTimeSpan;
 }

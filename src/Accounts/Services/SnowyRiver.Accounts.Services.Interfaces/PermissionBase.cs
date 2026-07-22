@@ -10,13 +10,13 @@ public class Permission<TUser, TRole, TTeam, TPermission> : EntityModel
     public ObservableCollection<TRole> Roles
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     } = [];
 
     public string? Code
     {
         get;
-        set => Set(ref field, value);
+        set => SetProperty(ref field, value);
     }
 
     public string? Alias

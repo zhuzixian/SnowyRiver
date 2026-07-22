@@ -1,4 +1,4 @@
-﻿using Prism.Navigation.Regions;
+using Prism.Navigation.Regions;
 using System;
 
 namespace SnowyRiver.WPF.Modules.Splash.ViewModels;
@@ -8,6 +8,7 @@ public class WelcomeViewModel(IRegionManager regionManager) : SplashContentViewM
     {
         base.OnNavigatedTo(navigationContext);
 
+        ProgressMessage = "正在启动...";
         RegionManager.RequestNavigate(RegionNames.WelcomeContentRegion, ViewNames.ProductInfoView);
         if (!string.IsNullOrWhiteSpace(NextView))
         {

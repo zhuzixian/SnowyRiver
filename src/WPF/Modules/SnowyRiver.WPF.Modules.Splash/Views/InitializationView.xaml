@@ -12,12 +12,14 @@
         </Grid.RowDefinitions>
         <ContentControl prism:RegionManager.RegionName="{x:Static splash:RegionNames.InitializationViewProductInfosRegion}"/>
         <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Bottom">
-            <TextBlock Text="{Binding Device.Notices[0].Message}"
-                           Style="{StaticResource MaterialDesignBody2TextBlock}"
-                           Foreground="{DynamicResource MaterialDesign.Brush.Primary}"
-                           HorizontalAlignment="Center"/>
-            <ProgressBar IsIndeterminate="True" 
-                             Margin="0, 6, 0, 0"/>
+            <TextBlock Text="{Binding ProgressMessage}"
+                       Style="{StaticResource MaterialDesignBody2TextBlock}"
+                       Foreground="{DynamicResource MaterialDesign.Brush.Primary}"
+                       HorizontalAlignment="Center"/>
+            <ProgressBar IsIndeterminate="{Binding IsProgressIndeterminate}"
+                         Value="{Binding ProgressValue}"
+                         Maximum="{Binding ProgressMaximum}"
+                         Margin="0, 6, 0, 0"/>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -4,5 +4,21 @@
              xmlns:prism="http://prismlibrary.com/"
              xmlns:splash="clr-namespace:SnowyRiver.WPF.Modules.Splash"
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <ContentControl prism:RegionManager.RegionName="{x:Static splash:RegionNames.WelcomeContentRegion}"/>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ContentControl prism:RegionManager.RegionName="{x:Static splash:RegionNames.WelcomeContentRegion}"/>
+        <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Bottom">
+            <TextBlock Text="{Binding ProgressMessage}"
+                       Style="{StaticResource MaterialDesignBody2TextBlock}"
+                       Foreground="{DynamicResource MaterialDesign.Brush.Primary}"
+                       HorizontalAlignment="Center"/>
+            <ProgressBar IsIndeterminate="{Binding IsProgressIndeterminate}"
+                         Value="{Binding ProgressValue}"
+                         Maximum="{Binding ProgressMaximum}"
+                         Margin="0, 6, 0, 0"/>
+        </StackPanel>
+    </Grid>
 </UserControl>

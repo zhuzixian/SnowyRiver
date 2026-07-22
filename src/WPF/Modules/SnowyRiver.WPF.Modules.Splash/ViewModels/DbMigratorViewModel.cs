@@ -1,4 +1,4 @@
-﻿using System.Threading;
+using System.Threading;
 using System.Threading.Tasks;
 using Prism.Navigation;
 using Prism.Navigation.Regions;
@@ -10,7 +10,7 @@ public class DbMigratorViewModel(IRegionManager regionManager) : SplashContentVi
     public override async void OnNavigatedTo(NavigationContext navigationContext)
     {
         base.OnNavigatedTo(navigationContext);
-        RegionManager.RequestNavigate(RegionNames.InitializationViewProductInfosRegion, ViewNames.ProductInfoView);
+        RegionManager.RequestNavigate(RegionNames.DbMigratorViewProductInfosRegion, ViewNames.ProductInfoView);
         try
         {
             await MigrateAsync();

@@ -12,10 +12,17 @@ public class ProductInfosViewModel: RegionViewModelBase
     {
         ProductInfo = productInfo;
 
-        var logoFileInfo = new FileInfo("./Resources/logo.png");
-        if (logoFileInfo.Exists)
+        try
         {
-            Logo = new BitmapImage(new Uri(logoFileInfo.FullName));
+            var logoFileInfo = new FileInfo("./Resources/logo.png");
+            if (logoFileInfo.Exists)
+            {
+                Logo = new BitmapImage(new Uri(logoFileInfo.FullName));
+            }
+        }
+        catch
+        {
+            // Logo 加载失败时静默降级，不阻断闪屏流程
         }
     }
 

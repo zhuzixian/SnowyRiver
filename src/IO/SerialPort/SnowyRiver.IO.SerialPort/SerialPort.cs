@@ -25,6 +25,14 @@ public class SerialPort : System.IO.Ports.SerialPort, ISerialPort
     // ReadLineAsync 每次读取的字节块大小
     private const int ReadLineChunkSize = 64;
 
+    /// <summary>
+    /// 静态构造：确保非 Unicode 编码（如 GB2312）在首次使用 SerialPort 前已注册。
+    /// </summary>
+    static SerialPort()
+    {
+        System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+    }
+
     public SerialPort()
     {
         InitializeDefaults();

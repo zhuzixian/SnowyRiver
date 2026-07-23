@@ -67,5 +67,50 @@ public class SerialPortOptions : JsonConfiguration
     {
         get;
         set => SetProperty(ref field, value);
-    } = "utf-8";
+    } = "ascii";
+
+    /// <summary>
+    /// 串口握手协议。默认 None。
+    /// </summary>
+    public Handshake Handshake
+    {
+        get;
+        set => SetProperty(ref field, value);
+    } = Handshake.None;
+
+    /// <summary>
+    /// 是否启用 RTS（请求发送）信号。默认 false。
+    /// </summary>
+    public bool RtsEnable
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
+    /// <summary>
+    /// 是否启用 DTR（数据终端就绪）信号。默认 false。
+    /// </summary>
+    public bool DtrEnable
+    {
+        get;
+        set => SetProperty(ref field, value);
+    }
+
+    /// <summary>
+    /// 接收缓冲区大小（字节）。默认 4096。
+    /// </summary>
+    public int ReadBufferSize
+    {
+        get;
+        set => SetProperty(ref field, value);
+    } = 4096;
+
+    /// <summary>
+    /// 发送缓冲区大小（字节）。默认 2048。
+    /// </summary>
+    public int WriteBufferSize
+    {
+        get;
+        set => SetProperty(ref field, value);
+    } = 2048;
 }

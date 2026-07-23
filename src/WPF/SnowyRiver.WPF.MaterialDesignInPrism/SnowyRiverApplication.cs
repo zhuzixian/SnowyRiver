@@ -1,8 +1,10 @@
-﻿using DryIoc.Microsoft.DependencyInjection;
+using DryIoc.Microsoft.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using SnowyRiver.WPF.MaterialDesignInPrism.Core.Dialogs;
 using SnowyRiver.WPF.MaterialDesignInPrism.Service;
+using System.Text;
 using System.Diagnostics;
+using System.Text;
 using System.Windows;
 using Container = DryIoc.Container;
 
@@ -11,6 +13,9 @@ public abstract class SnowyRiverApplication : PrismApplication
 {
     protected override void OnStartup(StartupEventArgs e)
     {
+        // 注册非 Unicode 编码支持（如 GB2312），供串口通信等场景使用
+        System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+
         if (!IsSupportMultiProcess)
         {
             var thisIsOnlyProcess = GetCurrentIsOnlyProcess();

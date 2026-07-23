@@ -1,4 +1,4 @@
-using System.Buffers;
+﻿using System.Buffers;
 using System.Text;
 
 namespace SnowyRiver.IO.SerialPort;
@@ -8,28 +8,58 @@ public class SerialPort : System.IO.Ports.SerialPort, ISerialPort
     private const string ReadTimeoutMessage = "The read operation timed out.";
     private const string WriteTimeoutMessage = "The write operation timed out.";
 
-    private readonly int _readTimeoutMs;
-    private readonly int _writeTimeoutMs;
+    private int _readTimeoutMs;
+    private int _writeTimeoutMs;
 
     // 串口属于半双工的访问语义,且共享同一底层句柄,读写共用同一把锁,任意时刻只允许一个 IO 操作
     private readonly SemaphoreSlim _ioLock = new(1, 1);
     private bool _disposed;
 
+    // 非 Options 构造函数的默认超时值（毫秒）
+    private const int DefaultReadTimeoutMs = 1000;
+    private const int DefaultWriteTimeoutMs = 1000;
+    // 贪心读取等待延迟（毫秒），用于等待后续数据到达一并读取
+    private const int GreedyReadDelayMs = 10;
+    // 轮询等待间隔（毫秒）
+    private const int PollingIntervalMs = 1;
+    // ReadLineAsync 每次读取的字节块大小
+    private const int ReadLineChunkSize = 64;
+
     public SerialPort()
-    { }
+    {
+        InitializeDefaults();
+    }
 
-    public SerialPort(System.ComponentModel.IContainer container) : base(container) { }
+    public SerialPort(System.ComponentModel.IContainer container) : base(container)
+    {
+        InitializeDefaults();
+    }
 
-    public SerialPort(string portName) : base(portName) { }
+    public SerialPort(string portName) : base(portName)
+    {
+        InitializeDefaults();
+    }
 
-    public SerialPort(string portName, int baudRate) : base(portName, baudRate) { }
+    public SerialPort(string portName, int baudRate) : base(portName, baudRate)
+    {
+        InitializeDefaults();
+    }
 
-    public SerialPort(string portName, int baudRate, System.IO.Ports.Parity parity) : base(portName, baudRate, parity) { }
+    public SerialPort(string portName, int baudRate, System.IO.Ports.Parity parity) : base(portName, baudRate, parity)
+    {
+        InitializeDefaults();
+    }
 
-    public SerialPort(string portName, int baudRate, System.IO.Ports.Parity parity, int dataBits) : base(portName, baudRate, parity, dataBits) { }
+    public SerialPort(string portName, int baudRate, System.IO.Ports.Parity parity, int dataBits) : base(portName, baudRate, parity, dataBits)
+    {
+        InitializeDefaults();
+    }
 
     public SerialPort(string portName, int baudRate, System.IO.Ports.Parity parity, int dataBits, System.IO.Ports.StopBits stopBits)
-        : base(portName, baudRate, parity, dataBits, stopBits) { }
+        : base(portName, baudRate, parity, dataBits, stopBits)
+    {
+        InitializeDefaults();
+    }
 
     public SerialPort(SerialPortOptions options)
         : base(options.PortName, options.BaudRate, options.Parity, options.DataBits, options.StopBits)
@@ -45,12 +75,12 @@ public class SerialPort : System.IO.Ports.SerialPort, ISerialPort
         NewLine = options.NewLine;
         if (!string.IsNullOrEmpty(options.Encoding))
             Encoding = System.Text.Encoding.GetEncoding(options.Encoding);
-        // 如 SerialPortOptions 包含以下属性,一并应用(按需取消注释)
-        // Handshake = options.Handshake;
-        // RtsEnable = options.RtsEnable;
-        // DtrEnable = options.DtrEnable;
-        // if (options.ReadBufferSize  > 0) ReadBufferSize  = options.ReadBufferSize;
-        // if (options.WriteBufferSize > 0) WriteBufferSize = options.WriteBufferSize;
+        // 应用 SerialPortOptions 中的扩展配置
+        Handshake = options.Handshake;
+        RtsEnable = options.RtsEnable;
+        DtrEnable = options.DtrEnable;
+        if (options.ReadBufferSize > 0) ReadBufferSize = options.ReadBufferSize;
+        if (options.WriteBufferSize > 0) WriteBufferSize = options.WriteBufferSize;
     }
 
     public async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken = default)
@@ -73,7 +103,7 @@ public class SerialPort : System.IO.Ports.SerialPort, ISerialPort
                     // 贪心法，等待后续数据到达一并读取
                     try
                     {
-                        await Task.Delay(TimeSpan.FromMilliseconds(10), cts.Token).ConfigureAwait(false);
+                        await Task.Delay(TimeSpan.FromMilliseconds(GreedyReadDelayMs), cts.Token).ConfigureAwait(false);
                     }
                     catch (OperationCanceledException) when (hasTimeout && !cancellationToken.IsCancellationRequested)
                     {
@@ -84,7 +114,7 @@ public class SerialPort : System.IO.Ports.SerialPort, ISerialPort
                 var readCount = Math.Min(BytesToRead, count);
                 if (readCount <= 0) throw new TimeoutException(ReadTimeoutMessage);
 
-                return await BaseStream.ReadAsync(buffer, offset, readCount, cancellationToken).ConfigureAwait(false);
+                return await BaseStream.ReadAsync(buffer, offset, readCount, cts.Token).ConfigureAwait(false);
             }
             finally
             {
@@ -103,19 +133,18 @@ public class SerialPort : System.IO.Ports.SerialPort, ISerialPort
 
     public async Task<string> ReadLineAsync(CancellationToken cancellationToken = default)
     {
-        const int chunkSize = 64;
         var newLine = NewLine;
         var decoder = Encoding.GetDecoder();
         var result = new StringBuilder();
 
-        var byteBuffer = ArrayPool<byte>.Shared.Rent(chunkSize);
-        var charBuffer = ArrayPool<char>.Shared.Rent(Encoding.GetMaxCharCount(chunkSize));
+        var byteBuffer = ArrayPool<byte>.Shared.Rent(ReadLineChunkSize);
+        var charBuffer = ArrayPool<char>.Shared.Rent(Encoding.GetMaxCharCount(ReadLineChunkSize));
 
         try
         {
             while (true)
             {
-                var bytesRead = await ReadAsync(byteBuffer, 0, chunkSize, cancellationToken).ConfigureAwait(false);
+                var bytesRead = await ReadAsync(byteBuffer, 0, ReadLineChunkSize, cancellationToken).ConfigureAwait(false);
                 if (bytesRead == 0) continue;
 
                 var charsDecoded = decoder.GetChars(byteBuffer, 0, bytesRead, charBuffer, 0, flush: false);
@@ -144,6 +173,248 @@ public class SerialPort : System.IO.Ports.SerialPort, ISerialPort
                 if (sb[start + i] != suffix[i]) return false;
             }
             return true;
+        }
+    }
+
+    // ===== 以下同步方法均使用 _ioLock 保护，确保与异步操作互斥 =====
+
+    /// <summary>
+    /// [线程安全] 读取指定数量的字节到缓冲区，与异步读写操作互斥。
+    /// </summary>
+    public new int Read(byte[] buffer, int offset, int count)
+    {
+        _ioLock.Wait();
+        try
+        {
+            return base.Read(buffer, offset, count);
+        }
+        finally
+        {
+            _ioLock.Release();
+        }
+    }
+
+    /// <summary>
+    /// [线程安全] 读取指定数量的字符到缓冲区，与异步读写操作互斥。
+    /// </summary>
+    public new int Read(char[] buffer, int offset, int count)
+    {
+        _ioLock.Wait();
+        try
+        {
+            return base.Read(buffer, offset, count);
+        }
+        finally
+        {
+            _ioLock.Release();
+        }
+    }
+
+    /// <summary>
+    /// [线程安全] 读取一个字节，与异步读写操作互斥。
+    /// </summary>
+    public new int ReadByte()
+    {
+        _ioLock.Wait();
+        try
+        {
+            return base.ReadByte();
+        }
+        finally
+        {
+            _ioLock.Release();
+        }
+    }
+
+    /// <summary>
+    /// [线程安全] 读取一个字符，与异步读写操作互斥。
+    /// </summary>
+    public new int ReadChar()
+    {
+        _ioLock.Wait();
+        try
+        {
+            return base.ReadChar();
+        }
+        finally
+        {
+            _ioLock.Release();
+        }
+    }
+
+    /// <summary>
+    /// [线程安全] 读取当前缓冲区中所有可用的数据，与异步读写操作互斥。
+    /// </summary>
+    public new string ReadExisting()
+    {
+        _ioLock.Wait();
+        try
+        {
+            return base.ReadExisting();
+        }
+        finally
+        {
+            _ioLock.Release();
+        }
+    }
+
+    /// <summary>
+    /// [线程安全] 读取一行（直到 NewLine），与异步读写操作互斥。
+    /// </summary>
+    public new string ReadLine()
+    {
+        _ioLock.Wait();
+        try
+        {
+            return base.ReadLine();
+        }
+        finally
+        {
+            _ioLock.Release();
+        }
+    }
+
+    /// <summary>
+    /// [线程安全] 读取直到指定分隔符，与异步读写操作互斥。
+    /// </summary>
+    public new string ReadTo(string value)
+    {
+        _ioLock.Wait();
+        try
+        {
+            return base.ReadTo(value);
+        }
+        finally
+        {
+            _ioLock.Release();
+        }
+    }
+
+    /// <summary>
+    /// [线程安全] 写入字节数组，与异步读写操作互斥。
+    /// </summary>
+    public new void Write(byte[] buffer, int offset, int count)
+    {
+        _ioLock.Wait();
+        try
+        {
+            base.Write(buffer, offset, count);
+        }
+        finally
+        {
+            _ioLock.Release();
+        }
+    }
+
+    /// <summary>
+    /// [线程安全] 写入字符串，与异步读写操作互斥。
+    /// </summary>
+    public new void Write(string text)
+    {
+        _ioLock.Wait();
+        try
+        {
+            base.Write(text);
+        }
+        finally
+        {
+            _ioLock.Release();
+        }
+    }
+
+    /// <summary>
+    /// [线程安全] 写入字符数组，与异步读写操作互斥。
+    /// </summary>
+    public new void Write(char[] buffer, int offset, int count)
+    {
+        _ioLock.Wait();
+        try
+        {
+            base.Write(buffer, offset, count);
+        }
+        finally
+        {
+            _ioLock.Release();
+        }
+    }
+
+    /// <summary>
+    /// [线程安全] 写入一行（附加 NewLine），与异步读写操作互斥。
+    /// </summary>
+    public new void WriteLine(string text)
+    {
+        _ioLock.Wait();
+        try
+        {
+            base.WriteLine(text);
+        }
+        finally
+        {
+            _ioLock.Release();
+        }
+    }
+
+    /// <summary>
+    /// [线程安全] 清空接收缓冲区，与异步读写操作互斥。
+    /// </summary>
+    public new void DiscardInBuffer()
+    {
+        _ioLock.Wait();
+        try
+        {
+            base.DiscardInBuffer();
+        }
+        finally
+        {
+            _ioLock.Release();
+        }
+    }
+
+    /// <summary>
+    /// [线程安全] 清空发送缓冲区，与异步读写操作互斥。
+    /// </summary>
+    public new void DiscardOutBuffer()
+    {
+        _ioLock.Wait();
+        try
+        {
+            base.DiscardOutBuffer();
+        }
+        finally
+        {
+            _ioLock.Release();
+        }
+    }
+
+    /// <summary>
+    /// [线程安全] 打开串口连接，与异步读写操作互斥。
+    /// </summary>
+    public new void Open()
+    {
+        _ioLock.Wait();
+        try
+        {
+            base.Open();
+        }
+        finally
+        {
+            _ioLock.Release();
+        }
+    }
+
+    /// <summary>
+    /// [线程安全] 关闭串口连接，与异步读写操作互斥。
+    /// </summary>
+    public new void Close()
+    {
+        _ioLock.Wait();
+        try
+        {
+            base.Close();
+        }
+        finally
+        {
+            _ioLock.Release();
         }
     }
 
@@ -201,9 +472,20 @@ public class SerialPort : System.IO.Ports.SerialPort, ISerialPort
         while (BytesToRead < count && IsOpen)
         {
             cancellationToken.ThrowIfCancellationRequested();
-            await Task.Delay(1, cancellationToken).ConfigureAwait(false);
+            await Task.Delay(PollingIntervalMs, cancellationToken).ConfigureAwait(false);
         }
         if (!IsOpen) throw new InvalidOperationException("Serial port is not open.");
+    }
+
+    /// <summary>
+    /// 为非 Options 构造函数设置默认超时值，确保 ReadAsync/WriteAsync 超时机制正常工作。
+    /// </summary>
+    private void InitializeDefaults()
+    {
+        ReadTimeout = InfiniteTimeout;
+        WriteTimeout = InfiniteTimeout;
+        _readTimeoutMs = DefaultReadTimeoutMs;
+        _writeTimeoutMs = DefaultWriteTimeoutMs;
     }
 
     protected override void Dispose(bool disposing)

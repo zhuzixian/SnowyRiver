@@ -1,4 +1,4 @@
-﻿using System.IO.Ports;
+using System.IO.Ports;
 using SnowyRiver.Configuration;
 
 namespace SnowyRiver.IO.SerialPort;
@@ -58,4 +58,14 @@ public class SerialPortOptions : JsonConfiguration
         get;
         set => SetProperty(ref field, value);
     } = "\r\n";
+
+    /// <summary>
+    /// 串口通信编码方式名称（如 "utf-8"、"ascii"、"gb2312"）。
+    /// 默认为 "utf-8"。
+    /// </summary>
+    public string Encoding
+    {
+        get;
+        set => SetProperty(ref field, value);
+    } = "utf-8";
 }

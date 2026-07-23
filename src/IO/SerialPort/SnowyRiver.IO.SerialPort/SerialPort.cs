@@ -1,4 +1,4 @@
-﻿using System.Buffers;
+using System.Buffers;
 using System.Text;
 
 namespace SnowyRiver.IO.SerialPort;
@@ -43,11 +43,12 @@ public class SerialPort : System.IO.Ports.SerialPort, ISerialPort
         _writeTimeoutMs = options.WriteTimeout;
 
         NewLine = options.NewLine;
+        if (!string.IsNullOrEmpty(options.Encoding))
+            Encoding = System.Text.Encoding.GetEncoding(options.Encoding);
         // 如 SerialPortOptions 包含以下属性,一并应用(按需取消注释)
         // Handshake = options.Handshake;
         // RtsEnable = options.RtsEnable;
         // DtrEnable = options.DtrEnable;
-        // if (options.Encoding is not null) Encoding = options.Encoding;
         // if (options.ReadBufferSize  > 0) ReadBufferSize  = options.ReadBufferSize;
         // if (options.WriteBufferSize > 0) WriteBufferSize = options.WriteBufferSize;
     }

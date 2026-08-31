@@ -24,6 +24,7 @@
     <PackageReference Include="NLog.Extensions.Logging" />
     <PackageReference Include="Prism.DryIoc" />
     <PackageReference Include="SQLitePCLRaw.lib.e_sqlite3" />
+    <PackageReference Include="System.Reactive" />
     <PackageReference Include="WPFLocalizeExtension" />
   </ItemGroup>
   <ItemGroup>

@@ -3,22 +3,21 @@
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                    xmlns:prism="http://prismlibrary.com/"
                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-                   xmlns:windows="clr-namespace:SnowyRiver.WPF.MaterialDesignInPrism.Windows;assembly=SnowyRiver.WPF.MaterialDesignInPrism"
                    xmlns:splash="clr-namespace:SnowyRiver.WPF.Modules.Splash"
                    prism:ViewModelLocator.AutoWireViewModel="True" 
                    prism:RegionManager.RegionManager="{Binding RegionManager}">
-    <prism:Dialog.WindowStyle>
-        <Style TargetType="windows:MaterialDesignMetroDialogWindow">
-            <Setter Property="ShowTitleBar" Value="false"/>
-            <Setter Property="Width" Value="600"/>
-            <Setter Property="Height" Value="371"/>
-            <Setter Property="ShowMinButton" Value="False"/>
-            <Setter Property="ShowCloseButton" Value="False"/>
-            <Setter Property="ShowMaxRestoreButton" Value="False"/>
-            <Setter Property="Topmost" Value="True"/>
-        </Style>
-    </prism:Dialog.WindowStyle>
     <materialDesign:DialogHost Identifier="Root">
-        <ContentControl prism:RegionManager.RegionName="{x:Static splash:RegionNames.SplashContentRegion}"/>
+        <!-- SplashView 由独立对话框窗口改为区域内导航后，不再有窗口外壳约束尺寸。
+             这里用居中的限宽卡片承载各阶段内容（欢迎/迁移/登录/初始化），
+             使其在任意宿主（主窗口内容区）中保持接近原对话框（600x371 居中）的观感。 -->
+        <Grid>
+            <Border
+                Width="600"
+                Height="371"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <ContentControl prism:RegionManager.RegionName="{x:Static splash:RegionNames.SplashContentRegion}"/>
+            </Border>
+        </Grid>
     </materialDesign:DialogHost>
 </UserControl>

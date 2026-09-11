@@ -12,8 +12,7 @@
                            lex:LocalizeDictionary.DesignCulture="zh-CN"
                            lex:ResxLocalizationProvider.DefaultAssembly="SnowyRiver.Accounts.Manager"
                            lex:ResxLocalizationProvider.DefaultDictionary="Resources"
-                           Title="{lex:Loc ProductName}" Height="350" Width="525" 
-                           WindowState="Maximized">
+                           Title="{lex:Loc ProductName}" Height="350" Width="525"> 
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Loaded">
             <b:InvokeCommandAction Command="{Binding HandleLoadedCommand}" />

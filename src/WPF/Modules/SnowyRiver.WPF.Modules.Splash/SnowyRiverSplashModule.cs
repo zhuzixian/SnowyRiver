@@ -13,7 +13,7 @@ namespace SnowyRiver.WPF.Modules.Splash
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterDialog<SplashView>(ViewNames.SplashView);
+            containerRegistry.RegisterForNavigation<SplashView>(ViewNames.SplashView);
         }
     }
 }

@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
-using Prism.Dialogs;
 using Prism.Ioc;
 using Prism.Modularity;
 using SnowyRiver.Accounts.Manager.EntityFramework;
@@ -69,9 +68,6 @@ namespace SnowyRiver.Accounts.Manager
                         Environment.Exit(0);
                     }
                 }
-
-                var dialogService = ContainerLocator.Container.Resolve<IDialogService>();
-                dialogService.ShowDialog(WPF.Modules.Splash.ViewNames.SplashView);
 
                 base.OnInitialized();
             }
